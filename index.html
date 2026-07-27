@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,6 +34,25 @@
   :focus-visible{outline:3px solid var(--red); outline-offset:2px;}
 
   .tamil{font-family:'Noto Sans Tamil', sans-serif;}
+
+  /* ---------- Language toggle ---------- */
+  [data-lang="en"] .t-ta{display:none;}
+  [data-lang="ta"] .t-en{display:none;}
+  .t-en{font-family:'Inter', sans-serif !important;}
+  .t-ta{font-family:'Noto Sans Tamil', sans-serif !important;}
+  .lang-toggle{
+    position:absolute; top:14px; right:14px; z-index:3;
+    background:rgba(255,255,255,0.16);
+    border:1.5px solid rgba(255,255,255,0.55);
+    color:var(--white);
+    font-family:'Noto Sans Tamil', sans-serif;
+    font-weight:600;
+    font-size:12.5px;
+    padding:7px 14px;
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .lang-toggle:active{ background:rgba(255,255,255,0.3); }
 
   /* ---------- Hero ---------- */
   .hero{
@@ -224,10 +243,14 @@
 <body>
 
 <section class="hero">
+  <button id="langToggle" class="lang-toggle" type="button" aria-label="மொழியை மாற்று / Switch language" onclick="toggleLang()">தமிழ்</button>
   <div class="cross-mark"><span class="dot"></span></div>
   <div class="name-ta tamil">ஹுதா மருந்தகம்</div>
   <div class="name-en">Huda Medicals</div>
-  <p class="tagline tamil">வீட்டிற்கே விரைவான மருந்து டெலிவரி &amp; 24×7 மருத்துவ ஆலோசனை</p>
+  <p class="tagline">
+    <span class="t-en">Fast home delivery of medicines &amp; 24×7 medical advice</span>
+    <span class="t-ta">வீட்டிற்கே விரைவான மருந்து டெலிவரி &amp; 24×7 மருத்துவ ஆலோசனை</span>
+  </p>
 
   <svg class="pulse-line" viewBox="0 0 400 46" preserveAspectRatio="none" aria-hidden="true">
     <polyline points="0,30 60,30 80,10 100,42 120,30 400,30" fill="none" stroke="white" stroke-width="2"/>
@@ -239,21 +262,24 @@
     <span class="ic" aria-hidden="true">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.19-3 .79.8-2.92-.2-.3A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.4-5.9c-.24-.12-1.43-.7-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4-.14 0-.3-.02-.46-.02s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
     </span>
-    <span>WhatsApp-ல் ஆர்டர் செய்யுங்கள்<span class="sub">Order on WhatsApp — instant reply</span></span>
+    <span>
+      <span class="t-en">Order on WhatsApp</span><span class="t-ta">WhatsApp-ல் ஆர்டர் செய்யுங்கள்</span>
+      <span class="sub"><span class="t-en">Instant reply, no waiting</span><span class="t-ta">உடனடி பதில் கிடைக்கும்</span></span>
+    </span>
   </a>
 
   <a class="cta cta-call" href="tel:+919962269992">
     <span class="ic" aria-hidden="true">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B5B5D" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
     </span>
-    <span>அழையுங்கள்<span class="sub">9962 269 992</span></span>
+    <span><span class="t-en">Call Now</span><span class="t-ta">அழையுங்கள்</span><span class="sub">9962 269 992</span></span>
   </a>
 
   <a class="cta cta-mail" href="mailto:hudamedicals.sevenwells@gmail.com">
     <span class="ic" aria-hidden="true">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C1272D" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="m22 6-10 7L2 6" stroke-linejoin="round"/></svg>
     </span>
-    <span>மின்னஞ்சல்<span class="sub">hudamedicals.sevenwells@gmail.com</span></span>
+    <span><span class="t-en">Email Us</span><span class="t-ta">மின்னஞ்சல்</span><span class="sub">hudamedicals.sevenwells@gmail.com</span></span>
   </a>
 </div>
 
@@ -263,8 +289,27 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3.5L22 13v4h-6z"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>
     </span>
     <div>
-      <h3>Home Delivery</h3>
-      <p class="tamil">உங்கள் வீட்டிற்கே விரைவான &amp; பாதுகாப்பான மருந்து டெலிவரி</p>
+      <h3><span class="t-en">Home Delivery</span><span class="t-ta">வீட்டு டெலிவரி</span></h3>
+      <p>
+        <span class="t-en">Fast delivery to Seven Wells &amp; nearby areas</span>
+        <span class="t-ta">Seven Wells &amp; அருகிலுள்ள பகுதிகளுக்கு விரைவான டெலிவரி</span>
+      </p>
+      <p style="margin-top:6px; font-size:12.5px; color:#5C7676;">
+        <span class="t-en">Payment: UPI · Cash</span><span class="t-ta">பணம் செலுத்த: UPI · பணம்</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <span class="ic" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    </span>
+    <div>
+      <h3><span class="t-en">Working Hours</span><span class="t-ta">வேலை நேரம்</span></h3>
+      <p style="color:#3E5757;">
+        <span class="t-en">6:00 AM – 11:00 PM, all days</span>
+        <span class="t-ta">காலை 6:00 – இரவு 11:00, தினமும்</span>
+      </p>
     </div>
   </div>
 
@@ -273,8 +318,11 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5z"/></svg>
     </span>
     <div>
-      <h3>24×7 Tele-Counseling</h3>
-      <p class="tamil">எந்த நேரமும் மருந்தாளர் ஆலோசனை பெறலாம்</p>
+      <h3>24×7 <span class="t-en">Tele-Counseling</span><span class="t-ta">மருத்துவ ஆலோசனை</span></h3>
+      <p>
+        <span class="t-en">Talk to our pharmacist, anytime</span>
+        <span class="t-ta">எந்த நேரமும் மருந்தாளர் ஆலோசனை பெறலாம்</span>
+      </p>
     </div>
   </div>
 
@@ -283,9 +331,9 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
     </span>
     <div>
-      <h3>Location</h3>
+      <h3><span class="t-en">Location</span><span class="t-ta">இடம்</span></h3>
       <p>109(52), St. Xavier St., Seven Wells, George Town, Chennai – 600001</p>
-      <p><a href="https://maps.app.goo.gl/MUbMRhBBVutyp8mb8" target="_blank" rel="noopener" style="color:var(--teal-deep); font-weight:600; font-family:'Poppins',sans-serif; font-size:13px; text-decoration:underline;">Get Directions →</a></p>
+      <p><a href="https://maps.app.goo.gl/MUbMRhBBVutyp8mb8" target="_blank" rel="noopener" style="color:var(--teal-deep); font-weight:600; font-family:'Poppins',sans-serif; font-size:13px; text-decoration:underline;"><span class="t-en">Get Directions →</span><span class="t-ta">வழி காட்டவும் →</span></a></p>
     </div>
   </div>
 
@@ -294,8 +342,14 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>
     </span>
     <div>
-      <h3>Offers &amp; Products <span class="badge">LAUNCHING SOON</span></h3>
-      <p class="tamil">சலுகைகள் மற்றும் பொருட்கள் பட்டியல் விரைவில் இங்கே சேர்க்கப்படும்</p>
+      <h3>
+        <span class="t-en">Offers &amp; Products</span><span class="t-ta">சலுகைகள் &amp; பொருட்கள்</span>
+        <span class="badge"><span class="t-en">LAUNCHING SOON</span><span class="t-ta">விரைவில்</span></span>
+      </h3>
+      <p>
+        <span class="t-en">Offers and product list will be added here soon</span>
+        <span class="t-ta">சலுகைகள் மற்றும் பொருட்கள் பட்டியல் விரைவில் இங்கே சேர்க்கப்படும்</span>
+      </p>
     </div>
   </div>
 </div>
@@ -303,7 +357,22 @@
 <footer>
   <div class="brand">Huda Medicals</div>
   <p>ஹுதா மருந்தகம் · ஹுதா மெடிக்கல்ஸ்</p>
+  <p style="margin-top:14px; font-size:10.5px; color:#8AA3A3; line-height:1.6; max-width:340px; margin-left:auto; margin-right:auto;">
+    Licence No. TN/Z01/20/00923 — Retail sale of drugs other than Schedules C, C(1) &amp; X<br>
+    Licence No. TN/Z01/21/00923 — Retail sale of drugs under Schedules C &amp; C(1), excluding Schedule X
+  </p>
 </footer>
 
+<script>
+  function setLang(lang){
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.lang = lang;
+    document.getElementById('langToggle').textContent = (lang === 'en') ? 'தமிழ்' : 'English';
+  }
+  function toggleLang(){
+    var cur = document.documentElement.getAttribute('data-lang');
+    setLang(cur === 'en' ? 'ta' : 'en');
+  }
+</script>
 </body>
 </html>
