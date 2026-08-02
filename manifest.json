@@ -1,0 +1,15 @@
+{
+  "name": "Huda Medicals",
+  "short_name": "Huda Medicals",
+  "description": "Fast home delivery of medicines & 24×7 medical advice — Seven Wells, Chennai",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5FBFA",
+  "theme_color": "#0F8B8D",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
