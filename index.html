@@ -111,172 +111,159 @@
       radial-gradient(120% 100% at 50% -10%, rgba(255,255,255,0.16), transparent 55%),
       linear-gradient(160deg, var(--teal-deep) 0%, var(--teal) 55%, var(--teal-bright) 100%);
     color:var(--white);
-    padding:44px 22px 56px;
+    padding:26px 22px 34px;
     position:relative;
     text-align:center;
     overflow:hidden;
   }
   .pulse-line{
-    position:absolute; left:0; right:0; bottom:0; height:46px;
-    opacity:0.35;
+    position:absolute; left:0; right:0; bottom:0; height:32px;
+    opacity:0.3;
   }
-  .cross-mark{
-    width:74px; height:74px;
-    margin:0 auto 18px;
-    position:relative;
-    animation:riseIn 700ms ease-out both;
+  .logo-badge{
+    width:60px; height:60px;
+    margin:0 auto 12px;
+    border-radius:50%;
+    background:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 18px -6px rgba(0,0,0,0.3);
+    animation:riseIn 600ms ease-out both;
   }
-  .cross-mark::before, .cross-mark::after{
-    content:""; position:absolute; background:var(--white); border-radius:8px;
-  }
-  .cross-mark::before{ left:28px; top:0; width:18px; height:74px; }
-  .cross-mark::after{ top:28px; left:0; width:74px; height:18px; }
-  .cross-mark .dot{
-    position:absolute; width:14px; height:14px; border-radius:50%;
-    background:var(--red); top:30px; left:30px;
-    animation:pulseDot 2.6s ease-in-out infinite;
-  }
-  @keyframes pulseDot{
-    0%,100%{ transform:scale(1); opacity:1; }
-    50%{ transform:scale(1.35); opacity:0.7; }
-  }
+  .logo-badge img{ width:40px; height:auto; display:block; }
   @keyframes riseIn{
-    from{ opacity:0; transform:translateY(10px); }
+    from{ opacity:0; transform:translateY(8px); }
     to{ opacity:1; transform:translateY(0); }
   }
   .name-ta{
     font-family:'Noto Sans Tamil', sans-serif;
     font-weight:800;
-    font-size:clamp(30px, 8vw, 44px);
+    font-size:clamp(24px, 6.4vw, 32px);
     line-height:1.15;
-    animation:riseIn 700ms ease-out 80ms both;
+    animation:riseIn 600ms ease-out 60ms both;
   }
   .name-en{
     font-family:'Poppins', sans-serif;
     font-weight:600;
-    font-size:clamp(15px, 4vw, 18px);
+    font-size:clamp(12.5px, 3.4vw, 14px);
     letter-spacing:0.14em;
     text-transform:uppercase;
-    opacity:0.92;
-    margin-top:6px;
-    animation:riseIn 700ms ease-out 160ms both;
+    opacity:0.9;
+    margin-top:4px;
+    animation:riseIn 600ms ease-out 120ms both;
   }
   .tagline{
-    margin-top:16px;
-    font-size:clamp(14px, 3.6vw, 16px);
+    margin-top:10px;
+    font-size:clamp(12.5px, 3.2vw, 14px);
     font-family:'Noto Sans Tamil', sans-serif;
-    opacity:0.95;
-    max-width:420px;
+    opacity:0.92;
+    max-width:380px;
     margin-left:auto; margin-right:auto;
-    animation:riseIn 700ms ease-out 220ms both;
+    animation:riseIn 600ms ease-out 180ms both;
   }
 
-  /* ---------- CTA row ---------- */
-  .cta-wrap{
+  /* ---------- Featured action ---------- */
+  .featured-wrap{
     max-width:480px;
-    margin:-30px auto 0;
+    margin:-22px auto 0;
     padding:0 18px;
     position:relative;
     z-index:2;
-    display:grid;
-    gap:12px;
   }
-  .cta{
+  .cta-featured{
     display:flex;
     align-items:center;
-    gap:14px;
-    padding:16px 18px;
-    border-radius:16px;
-    font-family:'Poppins', sans-serif;
-    font-weight:600;
-    font-size:16px;
-    box-shadow:0 10px 24px -10px rgba(11,35,35,0.35);
-  }
-  .cta .ic{
-    width:38px; height:38px; flex:0 0 38px;
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    background:rgba(255,255,255,0.22);
-  }
-  .cta .sub{
-    display:block; font-family:'Inter',sans-serif; font-weight:400; font-size:12.5px; opacity:0.85; margin-top:2px;
-  }
-  .cta-whatsapp{
+    justify-content:center;
+    gap:12px;
     background:#1EA05A;
     color:var(--white);
+    padding:15px 18px;
+    border-radius:18px;
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:15.5px;
+    box-shadow:0 10px 24px -10px rgba(11,35,35,0.35);
     animation:softPulse 3s ease-in-out infinite;
+    transition:transform 120ms ease;
   }
+  .cta-featured:active{ transform:scale(0.97); }
   @keyframes softPulse{
     0%,100%{ box-shadow:0 10px 24px -10px rgba(30,160,90,0.4); }
     50%{ box-shadow:0 10px 30px -6px rgba(30,160,90,0.65); }
   }
-  .cta-call{
-    background:var(--white);
-    color:var(--teal-deep);
-    border:1.5px solid rgba(11,91,93,0.15);
+  .cta-featured .ic{
+    width:34px; height:34px; flex:0 0 34px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.22);
   }
-  .cta-call .ic{ background:rgba(11,91,93,0.08); }
-  .cta-mail{
-    background:var(--white);
-    color:var(--ink);
-    border:1.5px solid rgba(11,35,35,0.1);
+  .cta-featured .sub{
+    display:block; font-family:'Inter',sans-serif; font-weight:400; font-size:11.5px; opacity:0.85; margin-top:1px;
   }
-  .cta-mail .ic{ background:rgba(193,39,45,0.08); }
-  .cta-contact{
-    background:linear-gradient(135deg, var(--teal-deep), var(--teal-bright));
-    color:var(--white);
-  }
-  .cta-contact .ic{ background:rgba(255,255,255,0.22); }
 
-  /* ---------- Info cards ---------- */
-  .info{
+  /* ---------- App grid ---------- */
+  .grid-wrap{
     max-width:480px;
-    margin:34px auto 0;
+    margin:14px auto 0;
     padding:0 18px;
-    display:grid;
-    gap:12px;
   }
-  .info-card{
-    background:var(--white);
-    border-radius:16px;
-    padding:16px 18px;
+  .tile-grid{
     display:flex;
-    gap:14px;
-    align-items:flex-start;
-    border:1px solid rgba(11,35,35,0.06);
+    flex-wrap:wrap;
+    gap:10px;
   }
-  .info-card .ic{
-    width:36px; height:36px; flex:0 0 36px; border-radius:10px;
+  .tile{
+    background:var(--white);
+    width:calc(50% - 5px);
+    border-radius:18px;
+    padding:14px 10px 13px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    border:1px solid rgba(11,35,35,0.07);
+    box-shadow:0 6px 16px -10px rgba(11,35,35,0.2);
+    transition:transform 120ms ease, box-shadow 120ms ease;
+    box-sizing:border-box;
+  }
+  a.tile:active{
+    transform:scale(0.96);
+    box-shadow:0 3px 10px -6px rgba(11,35,35,0.25);
+  }
+  .tile .ic{
+    width:38px; height:38px; border-radius:12px;
     display:flex; align-items:center; justify-content:center;
     background:rgba(15,139,141,0.1);
     color:var(--teal-deep);
+    margin-bottom:8px;
   }
-  .info-card h3{
+  .tile.red .ic{ background:rgba(193,39,45,0.09); }
+  .tile.brand .ic{ background:linear-gradient(135deg, var(--teal-deep), var(--teal-bright)); }
+  .tile h3{
     font-family:'Poppins', sans-serif;
-    font-size:15px; font-weight:600; color:var(--ink);
+    font-size:13.5px; font-weight:600; color:var(--ink);
+    line-height:1.25;
   }
-  .info-card p{
+  .tile p{
     font-family:'Noto Sans Tamil', sans-serif;
-    font-size:13.5px; color:#3E5757; margin-top:3px; line-height:1.5;
+    font-size:11px; color:#5C7676; margin-top:3px; line-height:1.4;
   }
-  .info-card.soon{
+  .tile.soon{
     background:repeating-linear-gradient(135deg, #F0F6F5, #F0F6F5 10px, #E9F1F0 10px, #E9F1F0 20px);
     border:1.5px dashed rgba(11,91,93,0.25);
   }
-  .info-card.soon .ic{
-    background:rgba(11,35,35,0.06);
-    color:#7C9494;
-  }
-  .info-card.soon h3{ color:#557171; display:flex; align-items:center; gap:8px; }
-  .info-card.soon .badge{
+  .tile.soon .ic{ background:rgba(11,35,35,0.06); color:#7C9494; }
+  .tile.soon h3{ color:#557171; }
+  .tile.soon p{ color:#7C9494; }
+  .tile .badge{
+    display:inline-block; margin-top:4px;
     font-family:'Inter', sans-serif;
-    font-size:10px; font-weight:600; letter-spacing:0.04em;
+    font-size:9.5px; font-weight:600; letter-spacing:0.04em;
     color:var(--teal-deep);
     background:rgba(15,139,141,0.14);
     padding:2px 8px; border-radius:20px;
   }
-  .info-card.soon p{ color:#7C9494; }
 
+  /* ---------- Footer ---------- */
   /* ---------- Footer ---------- */
   footer{
     margin-top:40px;
@@ -300,7 +287,7 @@
 
 <section class="hero">
   <button id="langToggle" class="lang-toggle" type="button" aria-label="மொழியை மாற்று / Switch language" onclick="toggleLang()">தமிழ்</button>
-  <div class="cross-mark"><span class="dot"></span></div>
+  <div class="logo-badge"><img src="logo-mark.png" alt="Huda Medicals"></div>
   <div class="name-ta tamil">ஹுதா மருந்தகம்</div>
   <div class="name-en">Huda Medicals</div>
   <p class="tagline">
@@ -308,121 +295,95 @@
     <span class="t-ta">வீட்டிற்கே விரைவான மருந்து டெலிவரி &amp; 24×7 மருத்துவ ஆலோசனை</span>
   </p>
 
-  <svg class="pulse-line" viewBox="0 0 400 46" preserveAspectRatio="none" aria-hidden="true">
-    <polyline points="0,30 60,30 80,10 100,42 120,30 400,30" fill="none" stroke="white" stroke-width="2"/>
+  <svg class="pulse-line" viewBox="0 0 400 32" preserveAspectRatio="none" aria-hidden="true">
+    <polyline points="0,20 60,20 80,6 100,28 120,20 400,20" fill="none" stroke="white" stroke-width="2"/>
   </svg>
 </section>
 
-<div class="cta-wrap">
-  <a class="cta cta-whatsapp" href="https://wa.me/919962269992?text=Hi%2C%20I%27d%20like%20to%20order%20medicines" target="_blank" rel="noopener">
+<div class="featured-wrap">
+  <a class="cta-featured" href="https://wa.me/919962269992?text=Hi%2C%20I%27d%20like%20to%20order%20medicines" target="_blank" rel="noopener">
     <span class="ic" aria-hidden="true">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.19-3 .79.8-2.92-.2-.3A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.4-5.9c-.24-.12-1.43-.7-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4-.14 0-.3-.02-.46-.02s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.19-3 .79.8-2.92-.2-.3A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.4-5.9c-.24-.12-1.43-.7-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4-.14 0-.3-.02-.46-.02s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
     </span>
     <span>
-      <span class="t-en">Order on WhatsApp</span><span class="t-ta">WhatsApp-ல் ஆர்டர் செய்யுங்கள்</span>
+      <span class="t-en">Order on WhatsApp</span><span class="t-ta">WhatsApp-ல் ஆர்டர்</span>
       <span class="sub"><span class="t-en">Instant reply, no waiting</span><span class="t-ta">உடனடி பதில் கிடைக்கும்</span></span>
-    </span>
-  </a>
-
-  <a class="cta cta-call" href="tel:+919962269992">
-    <span class="ic" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B5B5D" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
-    </span>
-    <span><span class="t-en">Call Now</span><span class="t-ta">அழையுங்கள்</span><span class="sub">9962 269 992</span></span>
-  </a>
-
-  <a class="cta cta-mail" href="mailto:hudamedicals.sevenwells@gmail.com">
-    <span class="ic" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C1272D" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="m22 6-10 7L2 6" stroke-linejoin="round"/></svg>
-    </span>
-    <span><span class="t-en">Email Us</span><span class="t-ta">மின்னஞ்சல்</span><span class="sub">hudamedicals.sevenwells@gmail.com</span></span>
-  </a>
-
-  <a class="cta cta-contact" href="huda-medicals.vcf">
-    <span class="ic" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6" stroke-linecap="round"/></svg>
-    </span>
-    <span>
-      <span class="t-en">Save Contact</span><span class="t-ta">தொடர்பைச் சேமிக்கவும்</span>
-      <span class="sub"><span class="t-en">Adds us to your phone contacts</span><span class="t-ta">உங்கள் தொடர்புகளில் சேர்க்கும்</span></span>
     </span>
   </a>
 </div>
 
-<div class="info">
-  <div class="info-card">
-    <span class="ic" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3.5L22 13v4h-6z"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>
-    </span>
-    <div>
-      <h3><span class="t-en">Home Delivery</span><span class="t-ta">வீட்டு டெலிவரி</span></h3>
-      <p>
-        <span class="t-en">Fast delivery to Seven Wells &amp; nearby areas</span>
-        <span class="t-ta">Seven Wells &amp; அருகிலுள்ள பகுதிகளுக்கு விரைவான டெலிவரி</span>
-      </p>
-      <p style="margin-top:6px; font-size:12.5px; color:#5C7676;">
-        <span class="t-en">Payment: UPI · Cash</span><span class="t-ta">பணம் செலுத்த: UPI · பணம்</span>
-      </p>
-    </div>
-  </div>
+<div class="grid-wrap">
+  <div class="tile-grid">
 
-  <div class="info-card">
-    <span class="ic" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-    </span>
-    <div>
+    <a class="tile" href="tel:+919962269992">
+      <span class="ic" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
+      </span>
+      <h3><span class="t-en">Call Now</span><span class="t-ta">அழையுங்கள்</span></h3>
+      <p>9962 269 992</p>
+    </a>
+
+    <a class="tile brand" href="huda-medicals.vcf">
+      <span class="ic" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6" stroke-linecap="round"/></svg>
+      </span>
+      <h3><span class="t-en">Save Contact</span><span class="t-ta">தொடர்பைச் சேமிக்கவும்</span></h3>
+    </a>
+
+    <a class="tile" href="https://maps.app.goo.gl/MUbMRhBBVutyp8mb8" target="_blank" rel="noopener">
+      <span class="ic" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      </span>
+      <h3><span class="t-en">Directions</span><span class="t-ta">வழி காட்டவும்</span></h3>
+      <p>Seven Wells, Chennai</p>
+    </a>
+
+    <a class="tile red" href="mailto:hudamedicals.sevenwells@gmail.com">
+      <span class="ic" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="m22 6-10 7L2 6" stroke-linejoin="round"/></svg>
+      </span>
+      <h3><span class="t-en">Email Us</span><span class="t-ta">மின்னஞ்சல்</span></h3>
+    </a>
+
+    <div class="tile">
+      <span class="ic" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </span>
       <h3><span class="t-en">Working Hours</span><span class="t-ta">வேலை நேரம்</span></h3>
-      <p style="color:#3E5757;">
-        <span class="t-en">6:00 AM – 11:00 PM, all days</span>
-        <span class="t-ta">காலை 6:00 – இரவு 11:00, தினமும்</span>
-      </p>
+      <p><span class="t-en">6 AM – 11 PM daily</span><span class="t-ta">காலை 6 – இரவு 11</span></p>
     </div>
-  </div>
 
-  <div class="info-card">
-    <span class="ic" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5z"/></svg>
-    </span>
-    <div>
-      <h3>24×7 <span class="t-en">Tele-Counseling</span><span class="t-ta">மருத்துவ ஆலோசனை</span></h3>
-      <p>
-        <span class="t-en">Talk to our pharmacist, anytime</span>
-        <span class="t-ta">எந்த நேரமும் மருந்தாளர் ஆலோசனை பெறலாம்</span>
-      </p>
+    <div class="tile">
+      <span class="ic" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3.5L22 13v4h-6z"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>
+      </span>
+      <h3><span class="t-en">Home Delivery</span><span class="t-ta">வீட்டு டெலிவரி</span></h3>
+      <p><span class="t-en">Seven Wells &amp; nearby</span><span class="t-ta">அருகிலுள்ள பகுதிகள்</span></p>
     </div>
-  </div>
 
-  <div class="info-card">
-    <span class="ic" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-    </span>
-    <div>
-      <h3><span class="t-en">Location</span><span class="t-ta">இடம்</span></h3>
-      <p>109(52), St. Xavier St., Seven Wells, George Town, Chennai – 600001</p>
-      <p><a href="https://maps.app.goo.gl/MUbMRhBBVutyp8mb8" target="_blank" rel="noopener" style="color:var(--teal-deep); font-weight:600; font-family:'Poppins',sans-serif; font-size:13px; text-decoration:underline;"><span class="t-en">Get Directions →</span><span class="t-ta">வழி காட்டவும் →</span></a></p>
+    <div class="tile">
+      <span class="ic" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5z"/></svg>
+      </span>
+      <h3><span class="t-en">Tele-Counseling</span><span class="t-ta">மருத்துவ ஆலோசனை</span></h3>
+      <p><span class="t-en">24×7 pharmacist advice</span><span class="t-ta">எந்த நேரமும் ஆலோசனை</span></p>
     </div>
-  </div>
 
-  <div class="info-card soon" aria-disabled="true">
-    <span class="ic" aria-hidden="true">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>
-    </span>
-    <div>
-      <h3>
-        <span class="t-en">Offers &amp; Products</span><span class="t-ta">சலுகைகள் &amp; பொருட்கள்</span>
-        <span class="badge"><span class="t-en">LAUNCHING SOON</span><span class="t-ta">விரைவில்</span></span>
-      </h3>
-      <p>
-        <span class="t-en">Offers and product list will be added here soon</span>
-        <span class="t-ta">சலுகைகள் மற்றும் பொருட்கள் பட்டியல் விரைவில் இங்கே சேர்க்கப்படும்</span>
-      </p>
+    <div class="tile soon" aria-disabled="true">
+      <span class="ic" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>
+      </span>
+      <h3><span class="t-en">Offers</span><span class="t-ta">சலுகைகள்</span></h3>
+      <span class="badge"><span class="t-en">SOON</span><span class="t-ta">விரைவில்</span></span>
     </div>
+
   </div>
 </div>
 
 <footer>
   <div class="brand">Huda Medicals</div>
   <p>ஹுதா மருந்தகம் · ஹுதா மெடிக்கல்ஸ்</p>
+  <p style="margin-top:8px; font-size:11px; color:#5C7676;">109(52), St. Xavier St., Seven Wells, George Town, Chennai – 600001</p>
   <p style="margin-top:14px; font-size:10.5px; color:#8AA3A3; line-height:1.6; max-width:340px; margin-left:auto; margin-right:auto;">
     Licence No. TN/Z01/20/00923 — Retail sale of drugs other than Schedules C, C(1) &amp; X<br>
     Licence No. TN/Z01/21/00923 — Retail sale of drugs under Schedules C &amp; C(1), excluding Schedule X
