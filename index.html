@@ -315,6 +315,14 @@
 <div class="grid-wrap">
   <div class="tile-grid">
 
+    <a class="tile brand" href="#" id="installTile" style="display:none;" onclick="handleInstallTap(event)">
+      <span class="ic" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>
+      </span>
+      <h3><span class="t-en">Install App</span><span class="t-ta">Install App</span></h3>
+      <p><span class="t-en">Add to your home screen</span><span class="t-ta">Add to your home screen</span></p>
+    </a>
+
     <a class="tile" href="tel:+919962269992">
       <span class="ic" aria-hidden="true">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
@@ -397,6 +405,21 @@
   </p>
 </footer>
 
+<div id="iosInstallOverlay" style="display:none; position:fixed; inset:0; background:rgba(11,35,35,0.55); z-index:200; align-items:flex-end; justify-content:center;">
+  <div style="background:var(--white); width:100%; max-width:480px; border-radius:20px 20px 0 0; padding:24px 22px 30px; text-align:center; font-family:'Inter',sans-serif;">
+    <p style="font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; color:var(--ink); margin-bottom:10px;">Add Huda Medicals to your Home Screen</p>
+    <p style="font-size:13px; color:#5C7676; line-height:1.6; margin-bottom:6px;">
+      1. Tap the <strong>Share</strong> icon
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0B5B5D" stroke-width="2" style="vertical-align:-2px;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg>
+      at the bottom of your browser
+    </p>
+    <p style="font-size:13px; color:#5C7676; line-height:1.6; margin-bottom:18px;">
+      2. Scroll down and tap <strong>"Add to Home Screen"</strong>
+    </p>
+    <button onclick="document.getElementById('iosInstallOverlay').style.display='none';" style="background:var(--teal-deep); color:white; border:none; padding:13px 28px; border-radius:14px; font-family:'Poppins',sans-serif; font-weight:600; font-size:13.5px; cursor:pointer;">Got it</button>
+  </div>
+</div>
+
 <script>
   function setLang(lang){
     document.documentElement.setAttribute('data-lang', lang);
@@ -406,6 +429,46 @@
   function toggleLang(){
     var cur = document.documentElement.getAttribute('data-lang');
     setLang(cur === 'en' ? 'ta' : 'en');
+  }
+
+  // ---- Install App tile ----
+  // Android/Chrome: real one-tap install via the browser's native prompt.
+  // iOS (all browsers - Apple restricts this platform-wide, not just Safari):
+  // no code can trigger the native prompt, so we show a short visual guide instead.
+  var deferredInstallPrompt = null;
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    document.getElementById('installTile').style.display = '';
+  });
+
+  window.addEventListener('appinstalled', function(){
+    document.getElementById('installTile').style.display = 'none';
+    deferredInstallPrompt = null;
+  });
+
+  if (isIOS) {
+    // iOS never fires beforeinstallprompt, so show the tile immediately
+    // pointing to the manual guide - only if not already installed.
+    if (!window.navigator.standalone) {
+      document.getElementById('installTile').style.display = '';
+    }
+  }
+
+  function handleInstallTap(e){
+    e.preventDefault();
+    if (deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      deferredInstallPrompt.userChoice.then(function(){ deferredInstallPrompt = null; });
+    } else if (isIOS) {
+      document.getElementById('iosInstallOverlay').style.display = 'flex';
+    }
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(function(){});
   }
 </script>
 </body>
