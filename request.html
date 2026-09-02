@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Product — Huda Medicals</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Noto+Sans+Tamil:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-deep:#0B5B5D;
+    --teal:#0F8B8D;
+    --teal-bright:#108485;
+    --paper:#F5FBFA;
+    --ink:#0B2323;
+    --red:#C1272D;
+    --white:#FFFFFF;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    background:var(--paper); color:var(--ink); font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+  .header{
+    background:linear-gradient(160deg, var(--teal-deep) 0%, var(--teal) 55%, var(--teal-bright) 100%);
+    color:var(--white); padding:20px 18px 24px; text-align:center;
+  }
+  .back-link{
+    display:inline-block; color:rgba(255,255,255,0.9); font-size:12.5px;
+    font-family:'Poppins',sans-serif; font-weight:600; text-decoration:none; margin-bottom:10px;
+  }
+  .header h1{ font-family:'Poppins',sans-serif; font-weight:700; font-size:21px; }
+  .header p{ font-size:12.5px; opacity:0.92; margin-top:6px; line-height:1.5; max-width:340px; margin-left:auto; margin-right:auto; }
+
+  .wrap{ max-width:480px; margin:0 auto; padding:18px; }
+
+  .info-box{
+    background:var(--white); border:1px solid rgba(11,35,55,0.08); border-radius:14px;
+    padding:13px 15px; font-size:12px; color:#5C7676; line-height:1.55; margin-bottom:16px;
+  }
+
+  .add-card{
+    background:var(--white); border-radius:16px; padding:16px; border:1px solid rgba(11,35,35,0.07);
+  }
+  .field-label{
+    font-family:'Poppins',sans-serif; font-size:12px; font-weight:600; color:var(--ink); margin-bottom:6px; display:block;
+  }
+  .field-input{
+    width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid rgba(11,35,35,0.12);
+    font-family:'Inter',sans-serif; font-size:14px; background:var(--paper); margin-bottom:12px;
+  }
+  .field-input:focus{ outline:2px solid var(--teal); outline-offset:1px; }
+  .add-btn{
+    width:100%; padding:13px; border-radius:12px; border:none; background:var(--teal-deep); color:white;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:13.5px; cursor:pointer;
+  }
+  .add-btn:active{ background:var(--teal); }
+
+  .search-wrap{ position:relative; }
+  .suggest-box{
+    display:none; position:absolute; left:0; right:0; top:100%; margin-top:-8px; z-index:20;
+    background:var(--white); border:1.5px solid rgba(11,35,35,0.12); border-top:none;
+    border-radius:0 0 12px 12px; max-height:280px; overflow-y:auto;
+    box-shadow:0 8px 18px -6px rgba(11,35,35,0.18);
+  }
+  .suggest-box.show{ display:block; }
+  .suggest-row{
+    padding:10px 14px; border-bottom:1px solid rgba(11,35,35,0.06); cursor:pointer;
+  }
+  .suggest-row:last-child{ border-bottom:none; }
+  .suggest-row:active{ background:var(--paper); }
+  .suggest-row .sname{ font-size:13px; font-weight:600; color:var(--ink); }
+  .suggest-row .scomp{ font-size:11px; color:#1B7A43; margin-top:2px; }
+  .suggest-row .smeta{ font-size:10.5px; color:#5F7878; margin-top:2px; }
+  .suggest-empty{ padding:12px 14px; font-size:12px; color:#5F7878; }
+  .selected-tag{
+    display:none; align-items:center; justify-content:space-between; gap:8px;
+    background:rgba(30,160,90,0.08); border:1px solid rgba(30,160,90,0.25); border-radius:10px;
+    padding:8px 11px; margin-bottom:12px; font-size:11.5px;
+  }
+  .selected-tag.show{ display:flex; }
+  .selected-tag button{ background:none; border:none; color:var(--red); font-weight:700; font-size:11px; cursor:pointer; }
+  .ci-composition{ font-size:11px; color:#1B7A43; margin-top:2px; }
+  .ci-mfr{ font-size:11px; color:#5F7878; margin-top:1px; }
+
+  .list-wrap{ margin-top:18px; }
+  .list-wrap h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:10px; }
+  .req-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:12px;
+    padding:11px 13px; margin-bottom:8px;
+  }
+  .req-row .rname{ font-size:13px; font-weight:600; }
+  .req-row .rpack{ font-size:11.5px; color:#5C7676; margin-top:2px; }
+  .req-row button{
+    flex:0 0 auto; background:rgba(193,39,45,0.08); color:var(--red); border:none;
+    padding:7px 12px; border-radius:9px; font-size:11.5px; font-weight:700; cursor:pointer;
+  }
+  .empty-note{ text-align:center; color:#5F7878; font-size:12.5px; padding:14px 0; }
+
+  .send-bar{
+    display:none; position:fixed; left:18px; right:18px; bottom:16px; max-width:444px; margin:0 auto;
+    background:#19874C; color:white; border-radius:16px; padding:14px 18px; border:none;
+    align-items:center; justify-content:center; gap:8px; font-family:'Poppins',sans-serif;
+    font-weight:700; font-size:14px; box-shadow:0 10px 28px -8px rgba(11,35,35,0.4); cursor:pointer;
+    width:calc(100% - 36px);
+  }
+  .send-bar.show{ display:flex; }
+
+  .loc-card{
+    background:var(--white); border-radius:16px; padding:16px; border:1px solid rgba(11,35,35,0.07);
+    margin-top:16px;
+  }
+  .loc-card h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:4px; }
+  .loc-card .loc-sub{ font-size:12px; color:#5C7676; margin-bottom:12px; line-height:1.5; }
+  .loc-btn{
+    width:100%; padding:12px; border-radius:12px; border:1.5px solid var(--teal-deep); background:var(--white);
+    color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:7px;
+  }
+  .loc-btn:active{ background:var(--paper); }
+  .loc-confirmed{
+    display:none; border:1.5px solid rgba(30,160,90,0.3); border-radius:12px; overflow:hidden;
+  }
+  .loc-confirmed.show{ display:block; }
+  .loc-confirmed iframe{ width:100%; height:150px; border:none; display:block; }
+  .loc-confirmed .loc-status{
+    display:flex; align-items:center; justify-content:space-between; padding:10px 12px;
+    background:rgba(30,160,90,0.06); font-size:12px; font-weight:600; color:#1B7A43;
+  }
+  .loc-confirmed .loc-status button{
+    background:none; border:none; color:var(--red); font-size:11px; font-weight:700; cursor:pointer;
+  }
+  .loc-error{
+    font-size:12px; color:#6B5B10; background:#FFF3CD; border:1px solid #F0D98A; border-radius:10px;
+    padding:10px 12px; margin-top:10px; line-height:1.5; display:none;
+  }
+  .loc-error.show{ display:block; }
+
+  .footer-note{
+    text-align:center; font-size:11px; color:#5F7878; padding:24px 18px 90px; line-height:1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="back-link" href="index.html">&larr; Back to Huda Medicals</a>
+  <h1>Request a Product</h1>
+  <p>Tell us what you need — we'll check availability and message you back with pricing before anything is confirmed.</p>
+</div>
+
+<div class="wrap">
+  <div class="info-box">
+    Start typing and we'll suggest matching products with their composition and manufacturer, if we recognize them. Can't find it in suggestions? Just type it anyway — you don't need to know if we stock it, that's what we'll check for you. Any price shown while searching is a reference price, not a confirmed quote — we'll confirm the real price when we check.
+  </div>
+
+  <div class="add-card">
+    <label class="field-label" for="prodName">Product name</label>
+    <div class="search-wrap">
+      <input type="text" id="prodName" class="field-input" placeholder="Start typing to search..." autocomplete="off">
+      <div class="suggest-box" id="suggestBox"></div>
+    </div>
+    <div class="selected-tag" id="selectedTag">
+      <span>&#10003; <span id="selectedTagText"></span></span>
+      <button onclick="clearSelection()">Change</button>
+    </div>
+    <label class="field-label" for="prodPack">Packing / strength (if you know it)</label>
+    <input type="text" id="prodPack" class="field-input" placeholder="e.g. strip of 10, 100ml bottle — optional">
+    <button class="add-btn" onclick="addRequest()">Add to my list</button>
+  </div>
+
+  <div class="list-wrap">
+    <h2>Your request list</h2>
+    <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
+  </div>
+
+  <div class="loc-card">
+    <h2>Delivery Location <span style="font-weight:500; color:#8AA3A3;">(optional)</span></h2>
+    <p class="loc-sub">Share your location so we deliver to the right place — or skip this and just tell us your address in the chat.</p>
+    <button class="loc-btn" id="locBtn" onclick="requestLocation()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      Share My Location
+    </button>
+    <div class="loc-confirmed" id="locConfirmed">
+      <iframe id="locMap" loading="lazy"></iframe>
+      <div class="loc-status">
+        <span>&#10003; Location shared</span>
+        <button onclick="clearLocation()">Remove</button>
+      </div>
+    </div>
+    <p class="loc-error" id="locError"></p>
+  </div>
+</div>
+
+<button class="send-bar" id="sendBar" onclick="sendRequest()">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+  Send Request via WhatsApp
+</button>
+
+<p class="footer-note">
+  We'll reply on WhatsApp once we've checked stock and pricing — nothing is charged or confirmed until you agree.<br>
+  Huda Medicals · Seven Wells, Chennai
+</p>
+
+<script>
+  const WHATSAPP_NUMBER = "919962269992";
+  const items = [];
+  let selectedProduct = null;
+  let catalog = [];
+
+  fetch('reference-catalog.json')
+    .then(r => r.ok ? r.json() : [])
+    .then(data => { catalog = data; })
+    .catch(() => { catalog = []; });
+
+  function escapeHTML(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function fmt(n){ return '\u20b9' + Number(n).toLocaleString('en-IN'); }
+
+  let searchDebounce = null;
+  document.getElementById('prodName').addEventListener('input', function(){
+    clearTimeout(searchDebounce);
+    const q = this.value.trim().toLowerCase();
+    if (selectedProduct) clearSelection(false);
+    if (q.length < 2 || !catalog.length) { hideSuggestions(); return; }
+    searchDebounce = setTimeout(() => renderSuggestions(q), 150);
+  });
+
+  function renderSuggestions(q){
+    const matches = catalog.filter(r => r.n.toLowerCase().includes(q)).slice(0, 8);
+    const box = document.getElementById('suggestBox');
+    if (!matches.length) {
+      box.innerHTML = '<div class="suggest-empty">No matches in our reference list \u2014 you can still type it in and request it.</div>';
+    } else {
+      box.innerHTML = matches.map(r => `
+        <div class="suggest-row" onclick="selectSuggestion(${catalog.indexOf(r)})">
+          <div class="sname">${escapeHTML(r.n)}</div>
+          ${r.c ? `<div class="scomp">Contains: ${escapeHTML(r.c)}</div>` : ''}
+          <div class="smeta">${r.m ? escapeHTML(r.m) + ' \u00b7 ' : ''}${r.u ? escapeHTML(r.u) + ' \u00b7 ' : ''}${r.p ? 'ref. ' + fmt(r.p) : ''}</div>
+        </div>`).join('');
+    }
+    box.classList.add('show');
+  }
+
+  function hideSuggestions(){
+    document.getElementById('suggestBox').classList.remove('show');
+  }
+
+  function selectSuggestion(idx){
+    const r = catalog[idx];
+    selectedProduct = r;
+    document.getElementById('prodName').value = r.n;
+    document.getElementById('prodPack').value = r.u || '';
+    hideSuggestions();
+    const tag = document.getElementById('selectedTag');
+    document.getElementById('selectedTagText').textContent = r.c ? `Matched: ${r.c}` : 'Matched from our reference list';
+    tag.classList.add('show');
+  }
+
+  function clearSelection(refocus){
+    selectedProduct = null;
+    document.getElementById('selectedTag').classList.remove('show');
+    if (refocus !== false) document.getElementById('prodName').focus();
+  }
+
+  function addRequest(){
+    const nameEl = document.getElementById('prodName');
+    const packEl = document.getElementById('prodPack');
+    const name = nameEl.value.trim();
+    const pack = packEl.value.trim();
+    if (!name) { nameEl.focus(); return; }
+    const item = { name, pack };
+    if (selectedProduct) {
+      if (selectedProduct.c) item.composition = selectedProduct.c;
+      if (selectedProduct.m) item.manufacturer = selectedProduct.m;
+    }
+    items.push(item);
+    nameEl.value = '';
+    packEl.value = '';
+    clearSelection(false);
+    hideSuggestions();
+    nameEl.focus();
+    render();
+  }
+
+  function removeRequest(i){
+    items.splice(i, 1);
+    render();
+  }
+
+  // ---- Delivery location (optional) ----
+  let capturedLocation = null; // { lat, lng }
+
+  function requestLocation(){
+    const errEl = document.getElementById('locError');
+    errEl.classList.remove('show');
+    const btn = document.getElementById('locBtn');
+
+    if (!navigator.geolocation) {
+      errEl.textContent = "Your browser doesn't support location sharing. You can share your address in the chat instead.";
+      errEl.classList.add('show');
+      return;
+    }
+    btn.textContent = 'Getting your location...';
+    navigator.geolocation.getCurrentPosition(
+      function(pos){
+        capturedLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        showLocationConfirmed();
+      },
+      function(err){
+        btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg> Share My Location';
+        if (err.code === 1) {
+          errEl.textContent = "Location access was declined. That's fine — just share your address when you message us on WhatsApp.";
+        } else {
+          errEl.textContent = "Couldn't get your location right now. You can share your address in the chat instead.";
+        }
+        errEl.classList.add('show');
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+    );
+  }
+
+  function showLocationConfirmed(){
+    const { lat, lng } = capturedLocation;
+    const d = 0.006;
+    const bbox = [lng-d, lat-d, lng+d, lat+d].join(',');
+    document.getElementById('locMap').src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&marker=${lat},${lng}`;
+    document.getElementById('locConfirmed').classList.add('show');
+    document.getElementById('locBtn').style.display = 'none';
+  }
+
+  function clearLocation(){
+    capturedLocation = null;
+    document.getElementById('locConfirmed').classList.remove('show');
+    document.getElementById('locBtn').style.display = 'flex';
+    document.getElementById('locBtn').innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg> Share My Location';
+  }
+
+  function render(){
+    const wrap = document.getElementById('listWrap');
+    if (!items.length) {
+      wrap.innerHTML = '<p class="empty-note">Nothing added yet.</p>';
+    } else {
+      wrap.innerHTML = items.map((it, i) => `
+        <div class="req-row">
+          <div>
+            <div class="rname">${escapeHTML(it.name)}</div>
+            ${it.pack ? `<div class="rpack">${escapeHTML(it.pack)}</div>` : ''}
+            ${it.composition ? `<div class="ci-composition">Contains: ${escapeHTML(it.composition)}</div>` : ''}
+            ${it.manufacturer ? `<div class="ci-mfr">${escapeHTML(it.manufacturer)}</div>` : ''}
+          </div>
+          <button onclick="removeRequest(${i})">Remove</button>
+        </div>`).join('');
+    }
+    document.getElementById('sendBar').classList.toggle('show', items.length > 0);
+  }
+
+  function sendRequest(){
+    if (!items.length) return;
+    const lines = items.map(it => {
+      let line = `- ${it.name}${it.pack ? ' (' + it.pack + ')' : ''}`;
+      if (it.composition) line += `\n  Contains: ${it.composition}`;
+      return line;
+    });
+    let text = `Hi, I'd like to request the following:\n${lines.join('\n')}\n\nCould you check availability and let me know the price?`;
+    if (capturedLocation) {
+      text += `\n\nDelivery location: https://www.google.com/maps?q=${capturedLocation.lat},${capturedLocation.lng}`;
+    }
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+    items.length = 0;
+    clearLocation();
+    render();
+  }
+
+  document.getElementById('prodName').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') { e.preventDefault(); addRequest(); }
+  });
+
+  render();
+</script>
+</body>
+</html>
