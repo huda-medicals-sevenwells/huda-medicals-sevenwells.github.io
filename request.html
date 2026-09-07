@@ -62,6 +62,21 @@
   }
   .add-btn:active{ background:var(--teal); }
 
+  .qty-row{
+    display:flex; align-items:center; gap:14px; margin-bottom:12px;
+    background:var(--paper); border-radius:12px; padding:8px 10px; width:fit-content;
+  }
+  .qty-btn{
+    width:32px; height:32px; border-radius:9px; border:none; background:var(--teal-deep);
+    color:white; font-size:18px; font-weight:700; cursor:pointer; line-height:1;
+  }
+  .qty-display{ font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; min-width:20px; text-align:center; }
+  .form-badge{
+    display:inline-block; font-family:'Inter',sans-serif; font-size:9.5px; font-weight:700;
+    letter-spacing:0.03em; color:var(--teal-deep); background:rgba(15,139,141,0.12);
+    padding:2px 7px; border-radius:8px; margin-left:6px; text-transform:uppercase; vertical-align:middle;
+  }
+
   .search-wrap{ position:relative; }
   .suggest-box{
     display:none; position:absolute; left:0; right:0; top:100%; margin-top:-8px; z-index:20;
@@ -171,8 +186,14 @@
       <span>&#10003; <span id="selectedTagText"></span></span>
       <button onclick="clearSelection()">Change</button>
     </div>
-    <label class="field-label" for="prodPack">Packing / strength (if you know it)</label>
-    <input type="text" id="prodPack" class="field-input" placeholder="e.g. strip of 10, 100ml bottle — optional">
+    <label class="field-label">Quantity</label>
+    <div class="qty-row">
+      <button type="button" class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease quantity">&minus;</button>
+      <span class="qty-display" id="qtyDisplay">1</span>
+      <button type="button" class="qty-btn" onclick="changeQty(1)" aria-label="Increase quantity">+</button>
+    </div>
+    <label class="field-label" for="prodPack">Anything specific we should know? <span style="font-weight:500; color:#8AA3A3;">(optional)</span></label>
+    <input type="text" id="prodPack" class="field-input" placeholder="e.g. strip of 10, sugar-free, specific brand only...">
     <button class="add-btn" onclick="addRequest()">Add to my list</button>
   </div>
 
@@ -214,6 +235,7 @@
   const items = [];
   let selectedProduct = null;
   let catalog = [];
+  let currentQty = 1;
 
   fetch('reference-catalog.json')
     .then(r => r.ok ? r.json() : [])
@@ -225,27 +247,63 @@
   }
   function fmt(n){ return '\u20b9' + Number(n).toLocaleString('en-IN'); }
 
+  function changeQty(delta){
+    currentQty = Math.max(1, currentQty + delta);
+    document.getElementById('qtyDisplay').textContent = currentQty;
+  }
+
+  // ---- Search matching: tolerant of spacing/case differences ("dolo650" should find "Dolo 650") ----
+  function normalize(s){ return String(s).toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function tokenize(s){ return String(s).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean); }
+  function queryMatches(query, name){
+    const normName = normalize(name);
+    if (normName.includes(normalize(query))) return true;
+    const qTokens = tokenize(query);
+    return qTokens.length > 1 && qTokens.every(t => normName.includes(t));
+  }
+
+  // ---- Form/type badge (Tablet, Syrup, etc.) - extracted from name since neither
+  // source file has a clean "form" column ----
+  const FORM_KEYWORDS = [
+    ['SYRUP','Syrup'], ['SYP','Syrup'], ['TABLET','Tablet'], ['TABLETS','Tablet'], ['TAB','Tablet'], ['TABS','Tablet'],
+    ['CAPSULE','Capsule'], ['CAPSULES','Capsule'], ['CAP','Capsule'], ['CAPS','Capsule'],
+    ['INJECTION','Injection'], ['INJ','Injection'], ['CREAM','Cream'], ['OINTMENT','Ointment'], ['OINT','Ointment'],
+    ['DROPS','Drops'], ['DROP','Drops'], ['GEL','Gel'], ['LOTION','Lotion'],
+    ['SUSPENSION','Suspension'], ['SUSP','Suspension'], ['POWDER','Powder'], ['SACHET','Sachet'],
+    ['SOAP','Soap'], ['SHAMPOO','Shampoo'],
+  ];
+  function extractForm(name, unit){
+    const hay = (String(name) + ' ' + String(unit||'')).toUpperCase();
+    for (const [kw, label] of FORM_KEYWORDS) {
+      if (new RegExp('\\b' + kw + '\\b').test(hay)) return label;
+    }
+    return null;
+  }
+
   let searchDebounce = null;
   document.getElementById('prodName').addEventListener('input', function(){
     clearTimeout(searchDebounce);
-    const q = this.value.trim().toLowerCase();
+    const q = this.value.trim();
     if (selectedProduct) clearSelection(false);
     if (q.length < 2 || !catalog.length) { hideSuggestions(); return; }
     searchDebounce = setTimeout(() => renderSuggestions(q), 150);
   });
 
   function renderSuggestions(q){
-    const matches = catalog.filter(r => r.n.toLowerCase().includes(q)).slice(0, 8);
+    const matches = catalog.filter(r => queryMatches(q, r.n)).slice(0, 8);
     const box = document.getElementById('suggestBox');
     if (!matches.length) {
       box.innerHTML = '<div class="suggest-empty">No matches in our reference list \u2014 you can still type it in and request it.</div>';
     } else {
-      box.innerHTML = matches.map(r => `
+      box.innerHTML = matches.map(r => {
+        const form = extractForm(r.n, r.u);
+        return `
         <div class="suggest-row" onclick="selectSuggestion(${catalog.indexOf(r)})">
-          <div class="sname">${escapeHTML(r.n)}</div>
+          <div class="sname">${escapeHTML(r.n)}${form ? `<span class="form-badge">${form}</span>` : ''}</div>
           ${r.c ? `<div class="scomp">Contains: ${escapeHTML(r.c)}</div>` : ''}
           <div class="smeta">${r.m ? escapeHTML(r.m) + ' \u00b7 ' : ''}${r.u ? escapeHTML(r.u) + ' \u00b7 ' : ''}${r.p ? 'ref. ' + fmt(r.p) : ''}</div>
-        </div>`).join('');
+        </div>`;
+      }).join('');
     }
     box.classList.add('show');
   }
@@ -277,7 +335,7 @@
     const name = nameEl.value.trim();
     const pack = packEl.value.trim();
     if (!name) { nameEl.focus(); return; }
-    const item = { name, pack };
+    const item = { name, pack, qty: currentQty };
     if (selectedProduct) {
       if (selectedProduct.c) item.composition = selectedProduct.c;
       if (selectedProduct.m) item.manufacturer = selectedProduct.m;
@@ -285,6 +343,8 @@
     items.push(item);
     nameEl.value = '';
     packEl.value = '';
+    currentQty = 1;
+    document.getElementById('qtyDisplay').textContent = '1';
     clearSelection(false);
     hideSuggestions();
     nameEl.focus();
@@ -352,7 +412,7 @@
       wrap.innerHTML = items.map((it, i) => `
         <div class="req-row">
           <div>
-            <div class="rname">${escapeHTML(it.name)}</div>
+            <div class="rname">${escapeHTML(it.name)} <span style="color:#5C7676; font-weight:600;">&times;${it.qty || 1}</span></div>
             ${it.pack ? `<div class="rpack">${escapeHTML(it.pack)}</div>` : ''}
             ${it.composition ? `<div class="ci-composition">Contains: ${escapeHTML(it.composition)}</div>` : ''}
             ${it.manufacturer ? `<div class="ci-mfr">${escapeHTML(it.manufacturer)}</div>` : ''}
@@ -366,7 +426,7 @@
   function sendRequest(){
     if (!items.length) return;
     const lines = items.map(it => {
-      let line = `- ${it.name}${it.pack ? ' (' + it.pack + ')' : ''}`;
+      let line = `- ${it.name} x${it.qty || 1}${it.pack ? ' (' + it.pack + ')' : ''}`;
       if (it.composition) line += `\n  Contains: ${it.composition}`;
       return line;
     });
