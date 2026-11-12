@@ -237,6 +237,7 @@
     margin-bottom:8px;
   }
   .tile.red .ic{ background:rgba(193,39,45,0.09); }
+  .tile.green .ic{ background:rgba(25,135,76,0.12); color:#19874C; }
   .tile.brand .ic{ background:linear-gradient(135deg, var(--teal-deep), var(--teal-bright)); }
   .tile h3{
     font-family:'Poppins', sans-serif;
@@ -281,6 +282,42 @@
   }
 
   svg{ display:block; }
+
+/* ---------- iPhone install guide ---------- */
+  .ios-overlay{ display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(11,35,35,0.55); z-index:200; align-items:flex-end; justify-content:center; }
+  .ios-sheet{ background:var(--white); width:100%; max-width:480px; border-radius:20px 20px 0 0; padding:22px 20px calc(24px + env(safe-area-inset-bottom, 0px)); font-family:'Inter',sans-serif; max-height:88vh; overflow-y:auto; }
+  .ios-sheet h2{ font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; color:var(--ink); text-align:center; margin-bottom:14px; }
+  .ios-step{ display:flex; gap:11px; align-items:flex-start; margin-bottom:12px; font-size:13px; line-height:1.55; color:var(--ink); text-align:left; }
+  .ios-step .n{ flex:0 0 24px; height:24px; border-radius:50%; background:var(--teal-deep); color:#fff; font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; }
+  .ios-step svg{ display:inline-block; vertical-align:-3px; margin:0 2px; }
+  .ios-sub{ font-size:11.5px; color:#5C7676; }
+  .ios-note{ background:#FFF3CD; border:1px solid #F0D98A; border-radius:12px; padding:10px 12px; font-size:12px; color:#6B5B10; line-height:1.5; margin-bottom:12px; text-align:left; }
+  .ios-actions{ display:flex; gap:10px; margin-top:14px; }
+  .ios-btn{ flex:1; padding:13px; border-radius:14px; font-family:'Poppins',sans-serif; font-weight:600; font-size:13.5px; cursor:pointer; border:none; }
+  .ios-btn.primary{ background:var(--teal-deep); color:#fff; }
+  .ios-btn.secondary{ background:var(--white); color:var(--teal-deep); border:1.5px solid var(--teal-deep); }
+
+  /* ---------- Promo cards ---------- */
+  .promo-wrap{ max-width:480px; margin:12px auto 0; padding:0 18px; display:flex; flex-direction:column; gap:10px; }
+  .promo-card{ display:flex; align-items:center; gap:12px; background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:18px; padding:13px 15px; text-decoration:none; color:var(--ink); box-shadow:0 6px 16px -10px rgba(11,35,35,0.2); transition:transform 120ms ease; }
+  .promo-card:active{ transform:scale(0.98); }
+  .promo-card .pc-ic{ flex:0 0 40px; width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:rgba(15,139,141,0.1); color:var(--teal-deep); }
+  .promo-card .pc-ic.gold{ background:rgba(184,134,11,0.12); }
+  .promo-card h3{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:600; color:var(--ink); }
+  .promo-card p{ font-family:'Noto Sans Tamil','Inter',sans-serif; font-size:11.5px; color:#5C7676; margin-top:2px; line-height:1.4; }
+  .promo-card .chev{ margin-left:auto; color:#5C7676; flex:0 0 auto; }
+
+  /* ---------- One language at a time for the shop name ---------- */
+  [data-lang="en"] .only-ta{ display:none; }
+  [data-lang="ta"] .only-en{ display:none; }
+  .only-ta{ font-family:'Noto Sans Tamil', sans-serif; }
+  [data-lang="en"] .name-ta{ display:none; }
+  [data-lang="ta"] .name-en{ display:none; }
+  /* English mode: the English name becomes the main heading */
+  [data-lang="en"] .name-en{
+    font-size:clamp(26px, 7vw, 34px); font-weight:700; letter-spacing:0.01em;
+    text-transform:none; opacity:1; margin-top:0; line-height:1.15;
+  }
 </style>
 </head>
 <body>
@@ -338,6 +375,14 @@
       <h3><span class="t-en">Save Contact</span><span class="t-ta">தொடர்பைச் சேமிக்கவும்</span></h3>
     </a>
 
+    <a class="tile green" href="https://whatsapp.com/channel/0029VbDvf8f2phHOg4wji82i" target="_blank" rel="noopener">
+      <span class="ic" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.19-3 .79.8-2.92-.2-.3A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.4-5.9c-.24-.12-1.43-.7-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4-.14 0-.3-.02-.46-.02s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
+      </span>
+      <h3><span class="t-en">WhatsApp Channel</span><span class="t-ta">WhatsApp Channel</span></h3>
+      <p><span class="t-en">Follow for updates</span><span class="t-ta">Follow for updates</span></p>
+    </a>
+
     <a class="tile" href="https://maps.app.goo.gl/MUbMRhBBVutyp8mb8" target="_blank" rel="noopener">
       <span class="ic" aria-hidden="true">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -388,9 +433,21 @@
   </div>
 </div>
 
+<div class="promo-wrap">
+  <a class="promo-card" href="https://g.page/r/CaUdogdMEBtbECE/review" target="_blank" rel="noopener">
+    <span class="pc-ic gold" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#B8860B" stroke="#B8860B" stroke-width="1.5" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </span>
+    <div class="pc-text">
+      <h3><span class="t-en">Rate us on Google</span><span class="t-ta">Rate us on Google</span></h3>
+      <p><span class="t-en">Your review helps others find us</span><span class="t-ta">Your review helps others find us</span></p>
+    </div>
+    <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+  </a>
+</div>
+
 <footer>
-  <div class="brand">Huda Medicals</div>
-  <p>ஹுதா மருந்தகம் · ஹுதா மெடிக்கல்ஸ்</p>
+  <div class="brand"><span class="only-en">Huda Medicals</span><span class="only-ta">ஹுதா மருந்தகம்</span></div>
   <p style="margin-top:8px; font-size:11px; color:#5C7676;">109(52), St. Xavier St., Seven Wells, George Town, Chennai – 600001</p>
   <div style="margin:18px auto 0; max-width:300px; padding-top:16px; border-top:1px solid rgba(11,91,93,0.12);">
     <p style="font-family:'Noto Sans Tamil', serif; font-style:italic; font-size:12.5px; color:#3D5C5C; line-height:1.55;">
@@ -405,18 +462,11 @@
   </p>
 </footer>
 
-<div id="iosInstallOverlay" style="display:none; position:fixed; inset:0; background:rgba(11,35,35,0.55); z-index:200; align-items:flex-end; justify-content:center;">
-  <div style="background:var(--white); width:100%; max-width:480px; border-radius:20px 20px 0 0; padding:24px 22px 30px; text-align:center; font-family:'Inter',sans-serif;">
-    <p style="font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; color:var(--ink); margin-bottom:10px;">Add Huda Medicals to your Home Screen</p>
-    <p style="font-size:13px; color:#5C7676; line-height:1.6; margin-bottom:6px;">
-      1. Tap the <strong>Share</strong> icon
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0B5B5D" stroke-width="2" style="vertical-align:-2px;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg>
-      at the bottom of your browser
-    </p>
-    <p style="font-size:13px; color:#5C7676; line-height:1.6; margin-bottom:18px;">
-      2. Scroll down and tap <strong>"Add to Home Screen"</strong>
-    </p>
-    <button onclick="document.getElementById('iosInstallOverlay').style.display='none';" style="background:var(--teal-deep); color:white; border:none; padding:13px 28px; border-radius:14px; font-family:'Poppins',sans-serif; font-weight:600; font-size:13.5px; cursor:pointer;">Got it</button>
+<div id="iosInstallOverlay" class="ios-overlay" role="dialog" aria-modal="true" aria-labelledby="iosGuideTitle" onclick="if(event.target===this)closeIOSGuide();">
+  <div class="ios-sheet">
+    <h2 id="iosGuideTitle">Add Huda Medicals to your Home Screen</h2>
+    <div id="iosGuideBody"></div>
+    <div class="ios-actions" id="iosGuideActions"></div>
   </div>
 </div>
 
@@ -432,29 +482,81 @@
   }
 
   // ---- Install App tile ----
-  // Android/Chrome: real one-tap install via the browser's native prompt.
-  // iOS (all browsers - Apple restricts this platform-wide, not just Safari):
-  // no code can trigger the native prompt, so we show a short visual guide instead.
+  // Android/Chrome: real one-tap install through the browser's own prompt.
+  // iPhone/iPad (every browser - Apple lets no website trigger this): a short guide that matches
+  // the browser and iOS layout the customer is actually using.
   var deferredInstallPrompt = null;
-  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua) || navigator.platform === 'iPhone' || navigator.platform === 'iPad' ||
+              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isStandalone = window.navigator.standalone === true ||
+              !!(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+  var iosBrowser = 'safari';
+  if (isIOS) {
+    if (/FBAN|FBAV|Instagram|Line\/|MicroMessenger|Snapchat|Twitter|GSA\/|WhatsApp/i.test(ua) || !/Safari\//.test(ua)) iosBrowser = 'inapp';
+    else if (/CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo|Brave/i.test(ua)) iosBrowser = 'other';
+  }
+
+  function showInstallTile(){ document.getElementById('installTile').style.display = ''; }
+  function hideInstallTile(){ document.getElementById('installTile').style.display = 'none'; }
 
   window.addEventListener('beforeinstallprompt', function(e){
     e.preventDefault();
     deferredInstallPrompt = e;
-    document.getElementById('installTile').style.display = '';
+    if (!isStandalone) showInstallTile();
   });
-
   window.addEventListener('appinstalled', function(){
-    document.getElementById('installTile').style.display = 'none';
+    hideInstallTile();
     deferredInstallPrompt = null;
   });
+  if (isIOS && !isStandalone) showInstallTile();
 
-  if (isIOS) {
-    // iOS never fires beforeinstallprompt, so show the tile immediately
-    // pointing to the manual guide - only if not already installed.
-    if (!window.navigator.standalone) {
-      document.getElementById('installTile').style.display = '';
+  var SHARE_SVG = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0B5B5D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg>';
+  var ADD_SVG = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0B5B5D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>';
+  var DOTS = '<b>&bull;&bull;&bull;</b>';
+  function iosStep(n, inner){ return '<div class="ios-step"><span class="n">' + n + '</span><div>' + inner + '</div></div>'; }
+
+  function showIOSGuide(){
+    var title = 'Add Huda Medicals to your Home Screen';
+    var body = '';
+    var copyBtn = '<button type="button" class="ios-btn secondary" onclick="copyPageLink(this)">Copy link</button>';
+    var okBtn = '<button type="button" class="ios-btn primary" onclick="closeIOSGuide()">Got it</button>';
+    var actions = okBtn;
+    if (iosBrowser === 'inapp') {
+      title = 'Open this page in Safari first';
+      body = '<div class="ios-note">You\'re viewing this inside another app (like WhatsApp). Those apps can\'t add websites to your Home Screen &mdash; Safari can.</div>' +
+        iosStep(1, 'Look for <b>Open in Safari</b> &mdash; usually under the Share icon ' + SHARE_SVG + ', the compass icon, or the ' + DOTS + ' menu') +
+        iosStep(2, 'In Safari, tap <b>Install App</b> again for the next steps');
+      actions = copyBtn + okBtn;
+    } else if (iosBrowser === 'other') {
+      body = iosStep(1, 'Tap the <b>Share</b> icon ' + SHARE_SVG + ' or the ' + DOTS + ' menu in your browser') +
+        iosStep(2, 'Choose <b>Add to Home Screen</b> ' + ADD_SVG + ', then tap <b>Add</b>') +
+        '<div class="ios-note">Can\'t find it? Open this page in <b>Safari</b> and try again &mdash; it\'s always available there.</div>';
+      actions = copyBtn + okBtn;
+    } else {
+      body = iosStep(1, 'Tap the <b>Share</b> icon ' + SHARE_SVG + ' in Safari\'s toolbar<br><span class="ios-sub">Don\'t see it? Tap the ' + DOTS + ' menu next to the address bar first, then choose Share.</span>') +
+        iosStep(2, 'Scroll down and tap <b>Add to Home Screen</b> ' + ADD_SVG) +
+        iosStep(3, 'Tap <b>Add</b> at the top right');
     }
+    document.getElementById('iosGuideTitle').textContent = title;
+    document.getElementById('iosGuideBody').innerHTML = body;
+    document.getElementById('iosGuideActions').innerHTML = actions;
+    document.getElementById('iosInstallOverlay').style.display = 'flex';
+  }
+  function closeIOSGuide(){ document.getElementById('iosInstallOverlay').style.display = 'none'; }
+
+  function copyPageLink(btn){
+    var url = location.href.split('#')[0];
+    function done(){ btn.textContent = 'Link copied \u2713'; }
+    function fallback(){
+      var ta = document.createElement('textarea');
+      ta.value = url; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (err) { window.prompt('Copy this link:', url); }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, fallback);
+    else fallback();
   }
 
   function handleInstallTap(e){
@@ -463,7 +565,7 @@
       deferredInstallPrompt.prompt();
       deferredInstallPrompt.userChoice.then(function(){ deferredInstallPrompt = null; });
     } else if (isIOS) {
-      document.getElementById('iosInstallOverlay').style.display = 'flex';
+      showIOSGuide();
     }
   }
 

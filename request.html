@@ -70,7 +70,13 @@
     width:32px; height:32px; border-radius:9px; border:none; background:var(--teal-deep);
     color:white; font-size:18px; font-weight:700; cursor:pointer; line-height:1;
   }
-  .qty-display{ font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; min-width:20px; text-align:center; }
+  .qty-display{
+    font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; width:64px; text-align:center;
+    border:1.5px solid rgba(11,35,35,0.12); border-radius:9px; background:var(--white); color:var(--ink);
+    padding:6px 4px; -moz-appearance:textfield; appearance:textfield;
+  }
+  .qty-display::-webkit-outer-spin-button, .qty-display::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+  .qty-display:focus{ outline:2px solid var(--teal); outline-offset:1px; }
   .form-badge{
     display:inline-block; font-family:'Inter',sans-serif; font-size:9.5px; font-weight:700;
     letter-spacing:0.03em; color:var(--teal-deep); background:rgba(15,139,141,0.12);
@@ -93,6 +99,8 @@
   .suggest-row .sname{ font-size:13px; font-weight:600; color:var(--ink); }
   .suggest-row .scomp{ font-size:11px; color:#1B7A43; margin-top:2px; }
   .suggest-row .smeta{ font-size:10.5px; color:#5F7878; margin-top:2px; }
+  .suggest-note{ padding:8px 14px; font-size:11.5px; color:#5C7676; background:var(--paper); border-bottom:1px solid rgba(11,35,35,0.06); }
+  .suggest-note b{ color:var(--ink); }
   .suggest-empty{ padding:12px 14px; font-size:12px; color:#5F7878; }
   .selected-tag{
     display:none; align-items:center; justify-content:space-between; gap:8px;
@@ -136,19 +144,9 @@
   }
   .photo-card h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:4px; }
   .photo-sub{ font-size:12px; color:#5C7676; margin-bottom:12px; line-height:1.5; }
-  .photo-btn{
-    width:100%; padding:12px; border-radius:12px; border:1.5px solid var(--teal-deep); background:var(--white);
-    color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; cursor:pointer;
-    display:flex; align-items:center; justify-content:center; gap:7px;
-  }
-  .photo-btn:active{ background:var(--paper); }
-  .photo-preview{ margin-top:10px; }
-  .photo-preview img{
-    max-width:100%; max-height:180px; border-radius:12px; display:block; border:1px solid rgba(11,35,35,0.1);
-  }
-  .photo-preview .pv-row{ display:flex; align-items:center; justify-content:space-between; margin-top:6px; }
-  .photo-preview .pv-row button{ background:none; border:none; color:var(--red); font-size:11px; font-weight:700; cursor:pointer; }
-  .photo-note{ font-size:11px; color:#5F7878; margin-top:10px; line-height:1.5; }
+  .photo-check{ display:flex; align-items:center; gap:9px; cursor:pointer; }
+  .photo-check input{ width:18px; height:18px; accent-color:var(--teal-deep); flex:0 0 18px; }
+  .photo-check span{ font-size:12.5px; font-weight:600; color:var(--ink); }
 
   .loc-card{
     background:var(--white); border-radius:16px; padding:16px; border:1px solid rgba(11,35,35,0.07);
@@ -208,10 +206,10 @@
     <label class="field-label">Quantity</label>
     <div class="qty-row">
       <button type="button" class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease quantity">&minus;</button>
-      <span class="qty-display" id="qtyDisplay">1</span>
+      <input type="number" class="qty-display" id="qtyDisplay" value="1" min="1" max="999" step="1" inputmode="numeric" aria-label="Quantity" oninput="setQty(this.value)" onchange="normalizeQty()" onblur="normalizeQty()">
       <button type="button" class="qty-btn" onclick="changeQty(1)" aria-label="Increase quantity">+</button>
     </div>
-    <label class="field-label" for="prodPack">Anything specific we should know? <span style="font-weight:500; color:#8AA3A3;">(optional)</span></label>
+    <label class="field-label" for="prodPack">Anything specific we should know? <span style="font-weight:500; color:#5F7878;">(optional)</span></label>
     <input type="text" id="prodPack" class="field-input" placeholder="e.g. strip of 10, sugar-free, specific brand only...">
     <button class="add-btn" onclick="addRequest()">Add to my list</button>
   </div>
@@ -222,19 +220,16 @@
   </div>
 
   <div class="photo-card">
-    <h2>Product Photo or Prescription <span style="font-weight:500; color:#8AA3A3;">(optional)</span></h2>
-    <p class="photo-sub">Have a photo of the product or your prescription? It helps our pharmacist confirm exactly what you need.</p>
-    <input type="file" id="photoInput" accept="image/*" style="display:none;" onchange="handlePhotoSelect(event)">
-    <button class="photo-btn" id="photoBtn" onclick="document.getElementById('photoInput').click()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-      Choose Photo
-    </button>
-    <div class="photo-preview" id="photoPreview"></div>
-    <p class="photo-note" id="photoNote">Selecting a photo here doesn't send it yet — after you tap "Send Request," WhatsApp opens with your message. Attach this same photo there using the &#128206; icon before sending.</p>
+    <h2>Product Photo or Prescription <span style="font-weight:500; color:#5F7878;">(optional)</span></h2>
+    <p class="photo-sub">If a photo helps us confirm what you need, attach it directly in the WhatsApp chat after you send your request &mdash; just use the &#128206; icon there. Nothing to select here.</p>
+    <label class="photo-check">
+      <input type="checkbox" id="photoCheck" onchange="setPhotoFlag(this.checked)">
+      <span>I'll be attaching a photo or prescription</span>
+    </label>
   </div>
 
   <div class="loc-card">
-    <h2>Delivery Location <span style="font-weight:500; color:#8AA3A3;">(optional)</span></h2>
+    <h2>Delivery Location <span style="font-weight:500; color:#5F7878;">(optional)</span></h2>
     <p class="loc-sub">Share your location so we deliver to the right place — or skip this and just tell us your address in the chat.</p>
     <button class="loc-btn" id="locBtn" onclick="requestLocation()">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -274,7 +269,12 @@
 
   fetch('reference-catalog.json')
     .then(r => r.ok ? r.json() : [])
-    .then(data => { catalog = data; })
+    .then(data => {
+      // normalise once, so each keystroke only does cheap comparisons across ~44,000 items
+      data.forEach(r => { r._n = normalize(r.n); r._c = r.c ? normalize(r.c) : ''; });
+      catalog = data;
+      setTimeout(buildVocab, 50);   // word list for spelling correction
+    })
     .catch(() => { catalog = []; });
 
   function escapeHTML(s){
@@ -282,44 +282,33 @@
   }
   function fmt(n){ return '\u20b9' + Number(n).toLocaleString('en-IN'); }
 
+  function readQty(){
+    var n = parseInt(document.getElementById('qtyDisplay').value, 10);
+    if (isNaN(n) || n < 1) return 1;
+    return Math.min(n, 999);
+  }
   function changeQty(delta){
-    currentQty = Math.max(1, currentQty + delta);
-    document.getElementById('qtyDisplay').textContent = currentQty;
+    currentQty = Math.max(1, Math.min(999, readQty() + delta));
+    document.getElementById('qtyDisplay').value = currentQty;
+  }
+  // typing: leave the customer's keystrokes alone, just remember a valid value
+  function setQty(val){
+    var n = parseInt(val, 10);
+    if (!isNaN(n) && n >= 1) currentQty = Math.min(n, 999);
+  }
+  // leaving the field: tidy up blanks, zero and decimals
+  function normalizeQty(){
+    currentQty = readQty();
+    document.getElementById('qtyDisplay').value = currentQty;
   }
 
-  // ---- Photo/prescription (preview only - see photo-note for why it can't upload) ----
+  // ---- Photo/prescription: just a flag - the photo itself gets attached inside WhatsApp ----
   let hasPhotoSelected = false;
-  function handlePhotoSelect(event){
-    const file = event.target.files[0];
-    if (!file) return;
-    hasPhotoSelected = true;
-    const url = URL.createObjectURL(file);
-    document.getElementById('photoPreview').innerHTML = `
-      <img src="${url}" alt="Selected photo preview">
-      <div class="pv-row">
-        <span style="font-size:11px; color:#1B7A43; font-weight:600;">&#10003; ${escapeHTML(file.name)}</span>
-        <button onclick="clearPhoto()">Remove</button>
-      </div>`;
-    document.getElementById('photoBtn').textContent = 'Choose a Different Photo';
-  }
-  function clearPhoto(){
-    hasPhotoSelected = false;
-    document.getElementById('photoInput').value = '';
-    document.getElementById('photoPreview').innerHTML = '';
-    document.getElementById('photoBtn').innerHTML = `
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-      Choose Photo`;
-  }
+  function setPhotoFlag(v){ hasPhotoSelected = !!v; }
 
   // ---- Search matching: tolerant of spacing/case differences ("dolo650" should find "Dolo 650") ----
   function normalize(s){ return String(s).toLowerCase().replace(/[^a-z0-9]/g, ''); }
   function tokenize(s){ return String(s).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean); }
-  function queryMatches(query, name, composition){
-    const hay = normalize(name) + ' ' + normalize(composition || '');
-    if (hay.includes(normalize(query))) return true;
-    const qTokens = tokenize(query);
-    return qTokens.length > 1 && qTokens.every(t => hay.includes(t));
-  }
 
   // ---- Form/type badge (Tablet, Syrup, etc.) - extracted from name since neither
   // source file has a clean "form" column ----
@@ -348,19 +337,157 @@
     searchDebounce = setTimeout(() => renderSuggestions(q), 150);
   });
 
+  // ---- Spelling correction ("did you mean"), for typos like "paracetmol" or "patcetmal" ----
+  let vocab = [], vocabMap = new Map();
+  function skel(w){ return w.charAt(0) + w.slice(1).replace(/[aeiouy]/g, '').replace(/(.)\1+/g, '$1'); }
+  function buildVocab(){
+    const m = new Map();
+    for (const r of catalog) {
+      const words = ((r.n || '') + ' ' + (r.c || '')).toLowerCase().match(/[a-z]{4,}/g);
+      if (!words) continue;
+      for (const w of new Set(words)) m.set(w, (m.get(w) || 0) + 1);
+    }
+    const v = [];
+    m.forEach((c, w) => v.push({ w: w, c: c, sk: skel(w) }));
+    vocab = v; vocabMap = m;
+  }
+  const _r0 = new Int16Array(64), _r1 = new Int16Array(64), _r2 = new Int16Array(64);
+  // edit distance where swapping two neighbouring letters counts as one slip; gives up early past `max`
+  function dl(a, b, max){
+    const la = a.length, lb = b.length;
+    if (la > 40 || lb > 40 || Math.abs(la - lb) > max) return max + 1;
+    let prev2 = _r0, prev = _r1, cur = _r2;
+    for (let j = 0; j <= lb; j++) prev[j] = j;
+    for (let i = 1; i <= la; i++) {
+      cur[0] = i; let rowMin = i;
+      const ai = a.charCodeAt(i - 1);
+      for (let j = 1; j <= lb; j++) {
+        const bj = b.charCodeAt(j - 1);
+        let v = prev[j - 1] + (ai === bj ? 0 : 1);
+        const del = prev[j] + 1; if (del < v) v = del;
+        const ins = cur[j - 1] + 1; if (ins < v) v = ins;
+        if (i > 1 && j > 1 && ai === b.charCodeAt(j - 2) && a.charCodeAt(i - 2) === bj) { const t = prev2[j - 2] + 1; if (t < v) v = t; }
+        cur[j] = v; if (v < rowMin) rowMin = v;
+      }
+      if (rowMin > max) return max + 1;
+      const tmp = prev2; prev2 = prev; prev = cur; cur = tmp;
+    }
+    return prev[lb];
+  }
+  function isKnownWord(t){
+    for (let k = 0; k < vocab.length; k++) if (vocab[k].w.startsWith(t)) return true;
+    return false;
+  }
+  function bestWord(t){
+    const L = t.length;
+    const maxD = L <= 5 ? 1 : (L <= 8 ? 2 : 3);
+    const maxS = L <= 6 ? 1 : 2;
+    const limit = Math.floor(0.46 * L);   // a consonant match only counts if the whole word is also reasonably close
+    const tsk = skel(t);
+    let best = null, bestScore = -1e9;
+    for (let k = 0; k < vocab.length; k++) {
+      const v = vocab[k];
+      const d = dl(t, v.w, maxD);                                              // ordinary typo
+      let dp = 99; if (v.w.length > L && d > maxD) { const x = dl(t, v.w.slice(0, L), 1); if (x <= 1) dp = x + 1; }   // typo inside a half-typed word
+      let ds = 99;                                                             // same consonants, wrong vowels/letters
+      if (t.charCodeAt(0) === v.w.charCodeAt(0)) { ds = dl(tsk, v.sk, maxS); if (ds <= maxS && dl(t, v.w, limit) > limit) ds = 99; }
+      if (!(d <= maxD || dp <= maxD || ds <= maxS)) continue;
+      const e = Math.min(d, dp, ds + 0.5);
+      const score = 100 - e * 18 + Math.log(v.c + 1) * 4 - Math.abs(v.w.length - L) * 0.8;
+      if (score > bestScore) { bestScore = score; best = v.w; }
+    }
+    return best;
+  }
+  function correctQuery(q){
+    if (!vocab.length) return null;
+    const parts = q.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+    let changed = false;
+    const fixed = parts.map(p => {
+      if (!/^[a-z]{4,}$/.test(p) || isKnownWord(p)) return p;
+      const b = bestWord(p);
+      if (b && b !== p) { changed = true; return b; }
+      return p;
+    });
+    return changed ? fixed.join(' ') : null;
+  }
+
+  // Some common misspellings exist in the source lists themselves (e.g. "cetrizine"), so they look like valid words.
+  // If a much more common word is exactly one slip away, search that spelling too.
+  function altSpelling(q){
+    const parts = q.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+    let changed = false;
+    const out = parts.map(p => {
+      const cnt = vocabMap.get(p) || 0;
+      if (p.length < 5 || !/^[a-z]+$/.test(p) || !cnt || cnt > 40) return p;
+      let best = null, bc = 0;
+      for (let k = 0; k < vocab.length; k++) {
+        const v = vocab[k];
+        if (v.c < 6 || v.c < cnt * 4 || v.c <= bc || Math.abs(v.w.length - p.length) > 1) continue;
+        if (dl(p, v.w, 1) <= 1) { best = v.w; bc = v.c; }
+      }
+      if (best) { changed = true; return best; }
+      return p;
+    });
+    return changed ? out.join(' ') : null;
+  }
+
+  // Ranked search: names starting with what was typed first, then names containing it,
+  // then matches found only in the composition; shorter names break ties.
+  function searchCatalog(q){
+    const qn = normalize(q);
+    if (!qn) return [];
+    const toks = tokenize(q);
+    const hits = [];
+    for (let i = 0; i < catalog.length; i++) {
+      const r = catalog[i];
+      let s = -1;
+      if (r._n.startsWith(qn)) s = 100;
+      else if (r._n.includes(qn)) s = 70;
+      else if (r._c && r._c.includes(qn)) s = 40;
+      else if (toks.length > 1 && toks.every(t => r._n.includes(t) || (r._c && r._c.includes(t)))) s = 20;
+      if (s < 0) continue;
+      if (r.c) s += 3;
+      hits.push([s - r._n.length * 0.01, i]);
+    }
+    hits.sort((a, b) => b[0] - a[0]);
+    return hits.slice(0, 8).map(x => x[1]);
+  }
+
   function renderSuggestions(q){
-    const matches = catalog.filter(r => queryMatches(q, r.n, r.c)).slice(0, 8);
+    let idxs = searchCatalog(q), note = '', noteLabel = 'Showing results for';
+    const alt = vocab.length ? altSpelling(q) : null;
+    if (alt) {
+      const b = searchCatalog(alt).filter(i => !idxs.includes(i));
+      if (b.length) {
+        const merged = [];
+        for (let k = 0; k < 8 && merged.length < 8; k++) {      // exact spelling first, the common spelling right after
+          if (idxs[k] !== undefined) merged.push(idxs[k]);
+          if (b[k] !== undefined && merged.length < 8) merged.push(b[k]);
+        }
+        idxs = merged; note = alt; noteLabel = 'Also showing results for';
+      }
+    }
+    if (idxs.length < 3 && !note) {
+      const fixed = correctQuery(q);
+      if (fixed) {
+        const extra = searchCatalog(fixed).filter(i => !idxs.includes(i));
+        if (extra.length) { idxs = idxs.concat(extra).slice(0, 8); note = fixed; }
+      }
+    }
     const box = document.getElementById('suggestBox');
-    if (!matches.length) {
+    if (!idxs.length) {
       box.innerHTML = '<div class="suggest-empty">No matches in our reference list \u2014 you can still type it in and request it.</div>';
     } else {
-      box.innerHTML = matches.map(r => {
-        const form = extractForm(r.n, r.u);
+      box.innerHTML = (note ? `<div class="suggest-note">${noteLabel} <b>${escapeHTML(note)}</b></div>` : '') + idxs.map(i => {
+        const r = catalog[i];
+        const form = r.f || extractForm(r.n, r.u);
+        const meta = [r.m, r.u, r.g].filter(Boolean).map(escapeHTML);
+        if (r.p) meta.push('ref. ' + fmt(r.p));
         return `
-        <div class="suggest-row" onclick="selectSuggestion(${catalog.indexOf(r)})">
-          <div class="sname">${escapeHTML(r.n)}${form ? `<span class="form-badge">${form}</span>` : ''}</div>
+        <div class="suggest-row" onclick="selectSuggestion(${i})">
+          <div class="sname">${escapeHTML(r.n)}${form ? `<span class="form-badge">${escapeHTML(form)}</span>` : ''}</div>
           ${r.c ? `<div class="scomp">Contains: ${escapeHTML(r.c)}</div>` : ''}
-          <div class="smeta">${r.m ? escapeHTML(r.m) + ' \u00b7 ' : ''}${r.u ? escapeHTML(r.u) + ' \u00b7 ' : ''}${r.p ? 'ref. ' + fmt(r.p) : ''}</div>
+          <div class="smeta">${meta.join(' \u00b7 ')}</div>
         </div>`;
       }).join('');
     }
@@ -394,7 +521,7 @@
     const name = nameEl.value.trim();
     const pack = packEl.value.trim();
     if (!name) { nameEl.focus(); return; }
-    const item = { name, pack, qty: currentQty };
+    const item = { name, pack, qty: readQty() };
     if (selectedProduct) {
       if (selectedProduct.c) item.composition = selectedProduct.c;
       if (selectedProduct.m) item.manufacturer = selectedProduct.m;
@@ -403,7 +530,7 @@
     nameEl.value = '';
     packEl.value = '';
     currentQty = 1;
-    document.getElementById('qtyDisplay').textContent = '1';
+    document.getElementById('qtyDisplay').value = '1';
     clearSelection(false);
     hideSuggestions();
     nameEl.focus();
@@ -499,7 +626,8 @@
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     items.length = 0;
     clearLocation();
-    clearPhoto();
+    setPhotoFlag(false);
+    var pc = document.getElementById('photoCheck'); if (pc) pc.checked = false;
     render();
   }
 
