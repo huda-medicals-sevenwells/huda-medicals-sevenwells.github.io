@@ -1,0 +1,218 @@
+[
+ {
+  "id": "eno-regular",
+  "name": "Eno Regular Sachet",
+  "cat": "Digestion",
+  "ref": "ENO REGULAR SACHET",
+  "freq": true
+ },
+ {
+  "id": "eno-lemon",
+  "name": "Eno Lemon Sachet",
+  "cat": "Digestion",
+  "ref": "ENO LEMON SACHET"
+ },
+ {
+  "id": "digene-gel-mint",
+  "name": "Digene Gel Mint 200 ml",
+  "cat": "Digestion",
+  "ref": "DIGENE GEL [MINT] 200ML",
+  "freq": true
+ },
+ {
+  "id": "digene-pudina",
+  "name": "Digene Pudina Pearls",
+  "cat": "Digestion",
+  "ref": "DIGENE PUDINA PEARLS"
+ },
+ {
+  "id": "gelusil-mps",
+  "name": "Gelusil MPS Tablet",
+  "cat": "Digestion",
+  "ref": "GELUSIL MPS TAB"
+ },
+ {
+  "id": "hajmola-130",
+  "name": "Hajmola 130's",
+  "cat": "Digestion",
+  "ref": "HAJMOLA 130'S"
+ },
+ {
+  "id": "electral-orange",
+  "name": "Electral ORS Orange 21.8 g",
+  "cat": "Digestion",
+  "ref": "ELECTRAL 21.8GM ORANGE"
+ },
+ {
+  "id": "dolo-650",
+  "name": "Dolo 650",
+  "cat": "Fever & pain",
+  "ref": "DOLO 650MG",
+  "freq": true
+ },
+ {
+  "id": "dolo-500",
+  "name": "Dolo 500",
+  "cat": "Fever & pain",
+  "ref": "DOLO 500MG"
+ },
+ {
+  "id": "dolo-syrup-60",
+  "name": "Dolo Syrup 60 ml",
+  "cat": "Fever & pain",
+  "ref": "DOLO 60ML SYP"
+ },
+ {
+  "id": "calpol-650",
+  "name": "Calpol 650",
+  "cat": "Fever & pain",
+  "ref": "CALPOL 650MG",
+  "freq": true
+ },
+ {
+  "id": "calpol-drops",
+  "name": "Calpol Drops 15 ml",
+  "cat": "Fever & pain",
+  "ref": "CALPOL DROPS 15ML"
+ },
+ {
+  "id": "crocin-650",
+  "name": "Crocin 650",
+  "cat": "Fever & pain",
+  "ref": "CROCIN 650MG"
+ },
+ {
+  "id": "volini-gel-30",
+  "name": "Volini Gel 30 g",
+  "cat": "Fever & pain",
+  "ref": "VOLINI GEL 30GM"
+ },
+ {
+  "id": "moov-30",
+  "name": "Moov 30 g",
+  "cat": "Fever & pain",
+  "ref": "MOOV 30GM"
+ },
+ {
+  "id": "zandu-balm-30",
+  "name": "Zandu Balm 30 g",
+  "cat": "Fever & pain",
+  "ref": "ZANDU BALM 30GM"
+ },
+ {
+  "id": "karvol-plus",
+  "name": "Karvol Plus",
+  "cat": "Cold & cough",
+  "ref": "KARVOL PLUS",
+  "freq": true
+ },
+ {
+  "id": "strepsils-orange",
+  "name": "Strepsils Orange",
+  "cat": "Cold & cough",
+  "ref": "STREPSILS {ORANGE}"
+ },
+ {
+  "id": "strepsils-ginger-lemon",
+  "name": "Strepsils Ginger & Lemon",
+  "cat": "Cold & cough",
+  "ref": "STREPSILS {GINGER&LEMON}"
+ },
+ {
+  "id": "sinarest",
+  "name": "Sinarest",
+  "cat": "Cold & cough",
+  "ref": "SINAREST"
+ },
+ {
+  "id": "vicks-steam-pods",
+  "name": "Vicks Steam Pods 10's",
+  "cat": "Cold & cough",
+  "ref": "VICKS STEAM PODS 10'S"
+ },
+ {
+  "id": "pampers-active-l-18",
+  "name": "Pampers Active Baby Large 18's",
+  "cat": "Baby care",
+  "ref": "PAMPERS ACTIVE BABY LARGE 18'S",
+  "freq": true
+ },
+ {
+  "id": "pampers-pants-l-40",
+  "name": "Pampers Large Pants 40's",
+  "cat": "Baby care",
+  "ref": "PAMPERS LARGE PANTS 40'S"
+ },
+ {
+  "id": "pampers-pants-xl-32",
+  "name": "Pampers XL Pants 32's",
+  "cat": "Baby care",
+  "ref": "PAMPERS XL PANTS 32'S"
+ },
+ {
+  "id": "cerelac-multigrain-fruit",
+  "name": "Cerelac Multigrain Fruit",
+  "cat": "Baby care",
+  "ref": "CERELAC MULTIGRAIN FRUIT"
+ },
+ {
+  "id": "johnsons-top-to-toe-100",
+  "name": "Johnson's Top to Toe Wash 100 ml",
+  "cat": "Baby care",
+  "ref": "JOHNSON'S TOP TO TOE WASH 100ML"
+ },
+ {
+  "id": "himalaya-baby-soap",
+  "name": "Himalaya Gentle Baby Soap 125 g",
+  "cat": "Baby care",
+  "ref": "HIMALAYA GENTLE BABY SOAP 125GM"
+ },
+ {
+  "id": "vicks-babyrub",
+  "name": "Vicks Baby Rub 50 ml",
+  "cat": "Baby care",
+  "ref": "VICKS BABYRUB 50ML"
+ },
+ {
+  "id": "dettol-125",
+  "name": "Dettol 125 ml",
+  "cat": "Skin & first aid",
+  "ref": "DETTOL 125ML"
+ },
+ {
+  "id": "savlon-200",
+  "name": "Savlon 200 ml",
+  "cat": "Skin & first aid",
+  "ref": "SAVLON 200ML"
+ },
+ {
+  "id": "betadine-oint-20",
+  "name": "Betadine Ointment 20 g",
+  "cat": "Skin & first aid",
+  "ref": "BETADINE 20GM OINTMENT"
+ },
+ {
+  "id": "odomos-liquid-45",
+  "name": "Odomos Liquid 45 ml",
+  "cat": "Skin & first aid",
+  "ref": "ODOMOS LIQUID 45ML"
+ },
+ {
+  "id": "glucon-d-orange",
+  "name": "Glucon-D Orange 22 g",
+  "cat": "Wellness",
+  "ref": "GLUCON D 22GM ORANGE"
+ },
+ {
+  "id": "zincovit-tabs",
+  "name": "Zincovit Tablet",
+  "cat": "Wellness",
+  "ref": "ZINCOVIT TABS"
+ },
+ {
+  "id": "revital-30",
+  "name": "Revital 30's",
+  "cat": "Wellness",
+  "ref": "REVITAL 30'S"
+ }
+]

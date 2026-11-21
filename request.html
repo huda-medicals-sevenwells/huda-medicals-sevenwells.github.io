@@ -181,6 +181,46 @@
   .footer-note{
     text-align:center; font-size:11px; color:#5F7878; padding:24px 18px 90px; line-height:1.6;
   }
+
+  /* ---- Quick add shop (category tiles, frequently bought, product cards) ---- */
+  .shop{ display:none; margin-top:18px; }
+  .shop h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:2px; }
+  .shop h3{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; margin:16px 0 8px; }
+  .shop-sub{ font-size:12px; color:#5C7676; margin:2px 0 12px; line-height:1.5; }
+  .tiles{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tile{
+    width:calc(33.333% - 6px); background:var(--white); border:1.5px solid rgba(11,35,35,0.08); border-radius:14px;
+    padding:10px 4px 8px; text-align:center; cursor:pointer; font-family:'Inter',sans-serif;
+    -webkit-appearance:none; appearance:none;
+  }
+  .tile .ti{ display:block; font-size:24px; line-height:1.25; }
+  .tile .tl{ display:block; font-size:11px; font-weight:600; color:var(--ink); margin-top:3px; line-height:1.3; }
+  .tile.on{ background:var(--teal-deep); border-color:var(--teal-deep); }
+  .tile.on .tl{ color:#FFFFFF; }
+  .hrow{ display:flex; overflow-x:auto; gap:10px; padding:2px 2px 10px; -webkit-overflow-scrolling:touch; }
+  .hrow .pcard{ flex:0 0 138px; }
+  .pgrid{ display:flex; flex-wrap:wrap; gap:10px; }
+  .pgrid .pcard{ width:calc(50% - 5px); }
+  .pcard{
+    background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:14px; padding:8px;
+    display:flex; flex-direction:column;
+  }
+  .pimg{ position:relative; width:100%; padding-top:100%; background:#E9F5F4; border-radius:10px; overflow:hidden; margin-bottom:8px; }
+  .pimg .ph, .pimg img{ position:absolute; top:0; left:0; width:100%; height:100%; }
+  .pimg .ph{ display:flex; align-items:center; justify-content:center; font-size:36px; }
+  .pimg img{ object-fit:contain; background:#FFFFFF; }
+  .pname{ font-size:12.5px; font-weight:600; color:var(--ink); line-height:1.35; min-height:34px; }
+  .pcomp{ font-size:10.5px; color:#1B7A43; margin-top:2px; line-height:1.35; max-height:28px; overflow:hidden; }
+  .pprice{ font-size:11.5px; font-weight:600; color:var(--teal-deep); margin-top:3px; }
+  .pctl{ margin-top:auto; padding-top:8px; }
+  .padd{
+    width:100%; padding:8px; border-radius:10px; border:1.5px solid var(--teal-deep); background:var(--white);
+    color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer;
+  }
+  .padd:active{ background:var(--paper); }
+  .pstep{ display:flex; align-items:center; justify-content:space-between; background:var(--teal-deep); border-radius:10px; padding:3px; }
+  .pstep button{ width:32px; height:30px; border:none; border-radius:8px; background:transparent; color:#FFFFFF; font-size:18px; font-weight:700; cursor:pointer; }
+  .pstep span{ color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; }
 </style>
 </head>
 <body>
@@ -219,6 +259,15 @@
     <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
   </div>
 
+  <div class="shop" id="shop">
+    <h2>Quick add &mdash; popular items</h2>
+    <p class="shop-sub">Tap Add to put an item on your request list. We'll check availability and confirm the price on WhatsApp. Prices shown are reference prices, not a confirmed quote.</p>
+    <div class="tiles" id="shopTiles"></div>
+    <div id="freqWrap"><h3>Frequently bought</h3><div class="hrow" id="freqRow"></div></div>
+    <h3 id="gridTitle">All items</h3>
+    <div class="pgrid" id="shopGrid"></div>
+  </div>
+
   <div class="photo-card">
     <h2>Product Photo or Prescription <span style="font-weight:500; color:#5F7878;">(optional)</span></h2>
     <p class="photo-sub">If a photo helps us confirm what you need, attach it directly in the WhatsApp chat after you send your request &mdash; just use the &#128206; icon there. Nothing to select here.</p>
@@ -252,7 +301,7 @@
 
 <button class="send-bar" id="sendBar" onclick="sendRequest()">
   <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
-  Send Request via WhatsApp
+  Send Request via WhatsApp<span id="sendCount"></span>
 </button>
 
 <p class="footer-note">
@@ -273,6 +322,7 @@
       // normalise once, so each keystroke only does cheap comparisons across ~44,000 items
       data.forEach(r => { r._n = normalize(r.n); r._c = r.c ? normalize(r.c) : ''; });
       catalog = data;
+      shopAttach();
       setTimeout(buildVocab, 50);   // word list for spelling correction
     })
     .catch(() => { catalog = []; });
@@ -607,6 +657,8 @@
         </div>`).join('');
     }
     document.getElementById('sendBar').classList.toggle('show', items.length > 0);
+    document.getElementById('sendCount').textContent = items.length ? ' (' + items.length + ')' : '';
+    shopSync();
   }
 
   function sendRequest(){
@@ -634,6 +686,102 @@
   document.getElementById('prodName').addEventListener('keydown', function(e){
     if (e.key === 'Enter') { e.preventDefault(); addRequest(); }
   });
+
+  // ---- Quick add shop: products come from shop-products.json; price/composition come from the same catalog the search uses ----
+  const SHOP_CATS = [['Digestion','\uD83C\uDF4B'],['Fever & pain','\uD83C\uDF21\uFE0F'],['Cold & cough','\uD83E\uDD27'],['Baby care','\uD83D\uDC76'],['Skin & first aid','\uD83E\uDE79'],['Wellness','\u26A1']];
+  let shopProducts = [], shopCat = '';
+
+  fetch('shop-products.json')
+    .then(r => r.ok ? r.json() : [])
+    .then(d => { shopProducts = Array.isArray(d) ? d : []; shopAttach(); })
+    .catch(() => { shopProducts = []; });
+
+  // Once both files have loaded, copy price, composition and maker from the catalog entry named in "ref"
+  function shopAttach(){
+    if (!shopProducts.length) return;
+    if (catalog.length) {
+      const byName = {};
+      catalog.forEach(r => { if (!byName[r.n] || (!byName[r.n].p && r.p)) byName[r.n] = r; });
+      shopProducts.forEach(p => {
+        const r = byName[p.ref];
+        if (!r) return;
+        if (r.p > 0) p._p = r.p;
+        if (r.c) p._c = r.c;
+        if (r.m) p._m = r.m;
+      });
+    }
+    renderShop();
+  }
+
+  function shopEmoji(cat){ for (const c of SHOP_CATS) if (c[0] === cat) return c[1]; return '\uD83D\uDED2'; }
+
+  function shopCard(p){
+    return '<div class="pcard">'
+      + '<div class="pimg"><div class="ph" aria-hidden="true">' + shopEmoji(p.cat) + '</div>'
+      + '<img src="images/shop/' + escapeHTML(p.id) + '.jpg" data-id="' + escapeHTML(p.id) + '" alt="' + escapeHTML(p.name) + '" loading="lazy" onerror="shopImgFail(this)"></div>'
+      + '<div class="pname">' + escapeHTML(p.name) + '</div>'
+      + (p._c ? '<div class="pcomp">' + escapeHTML(p._c) + '</div>' : '')
+      + (p._p ? '<div class="pprice">ref. ' + fmt(p._p) + '</div>' : '')
+      + '<div class="pctl" data-ctl="' + escapeHTML(p.id) + '"></div></div>';
+  }
+
+  // No photo uploaded yet: try .png once, then drop the broken image so the placeholder tile stays
+  function shopImgFail(el){
+    if (!el.getAttribute('data-tried')) { el.setAttribute('data-tried', '1'); el.src = 'images/shop/' + el.getAttribute('data-id') + '.png'; }
+    else if (el.parentNode) el.parentNode.removeChild(el);
+  }
+
+  function setShopCat(name){
+    shopCat = (shopCat === name) ? '' : name;
+    renderShop();
+    const t = document.getElementById('gridTitle');
+    if (shopCat && t.scrollIntoView) t.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  }
+
+  function renderShop(){
+    const sec = document.getElementById('shop');
+    if (!shopProducts.length) { sec.style.display = 'none'; return; }
+    sec.style.display = 'block';
+    document.getElementById('shopTiles').innerHTML = SHOP_CATS.map(c =>
+      '<button type="button" class="tile' + (shopCat === c[0] ? ' on' : '') + '" aria-pressed="' + (shopCat === c[0]) + '" onclick="setShopCat(\'' + c[0].replace(/'/g, "\\'") + '\')">'
+      + '<span class="ti" aria-hidden="true">' + c[1] + '</span><span class="tl">' + escapeHTML(c[0]) + '</span></button>').join('');
+    const freq = shopProducts.filter(p => p.freq);
+    document.getElementById('freqWrap').style.display = freq.length ? 'block' : 'none';
+    document.getElementById('freqRow').innerHTML = freq.map(shopCard).join('');
+    const list = shopCat ? shopProducts.filter(p => p.cat === shopCat) : shopProducts;
+    document.getElementById('gridTitle').textContent = shopCat ? shopCat + ' (' + list.length + ')' : 'All items (' + list.length + ')';
+    document.getElementById('shopGrid').innerHTML = list.map(shopCard).join('');
+    shopSync();
+  }
+
+  // Show "Add" or a - 1 + stepper on every card, matching what is on the request list
+  function shopSync(){
+    const els = document.querySelectorAll('[data-ctl]');
+    for (let k = 0; k < els.length; k++) {
+      const id = els[k].getAttribute('data-ctl');
+      const it = items.find(x => x.shopId === id);
+      els[k].innerHTML = it
+        ? '<div class="pstep"><button type="button" onclick="shopQty(\'' + id + '\',-1)" aria-label="One less">&minus;</button><span>' + (it.qty || 1) + '</span><button type="button" onclick="shopQty(\'' + id + '\',1)" aria-label="One more">+</button></div>'
+        : '<button type="button" class="padd" onclick="shopQty(\'' + id + '\',1)">Add</button>';
+    }
+  }
+
+  function shopQty(id, d){
+    const p = shopProducts.find(x => x.id === id);
+    if (!p) return;
+    const i = items.findIndex(x => x.shopId === id);
+    if (i < 0) {
+      if (d < 0) return;
+      const it = { name: p.name, pack: '', qty: 1, shopId: id };
+      if (p._c) it.composition = p._c;
+      if (p._m) it.manufacturer = p._m;
+      items.push(it);
+    } else {
+      items[i].qty = Math.min(999, (items[i].qty || 1) + d);
+      if (items[i].qty < 1) items.splice(i, 1);
+    }
+    render();
+  }
 
   render();
 </script>
