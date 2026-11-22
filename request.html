@@ -57,6 +57,29 @@
   .tab svg{ width:19px; height:19px; flex:0 0 19px; }
   .tab[aria-selected="true"]{ color:var(--teal-deep); border-bottom-color:var(--teal-deep); }
   .tab:focus-visible{ outline:2px solid var(--teal); outline-offset:-3px; }
+  .loc-row{ display:flex; align-items:center; gap:6px; margin-top:6px; font-size:12px; line-height:1.35; }
+  .loc-row svg{ flex:0 0 13px; }
+  .loc-row #locText{ min-width:0; }
+  .loc-link{
+    flex:0 0 auto; background:none; border:none; color:#FFFFFF; font-family:'Poppins',sans-serif;
+    font-weight:700; font-size:12px; text-decoration:underline; cursor:pointer; padding:4px 2px;
+  }
+  .loc-link:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
+
+  /* ---- Frequent tab ---- */
+  .freq-note{ font-size:12px; color:#5C7676; margin:0 0 10px; line-height:1.5; }
+  .freq-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--white);
+    border:1px solid rgba(11,35,35,0.07); border-radius:12px; padding:11px 13px; margin-bottom:8px;
+  }
+  .freq-info{ min-width:0; flex:1 1 auto; }
+  .freq-row .rname{ font-size:13px; font-weight:600; }
+  .freq-row .rpack{ font-size:11.5px; color:#5C7676; margin-top:2px; }
+  .freq-ctl{ flex:0 0 104px; }
+  .freq-clear{
+    display:block; margin:6px auto 0; background:none; border:none; color:#4F6868; font-size:12px;
+    font-weight:600; text-decoration:underline; cursor:pointer; padding:8px;
+  }
   .tabpanel{ display:none; }
   .tabpanel.on{ display:block; }
   .tabpanel > :first-child{ margin-top:0; }
@@ -181,36 +204,6 @@
   .photo-check input{ width:18px; height:18px; accent-color:var(--teal-deep); flex:0 0 18px; }
   .photo-check span{ font-size:12.5px; font-weight:600; color:var(--ink); }
 
-  .loc-card{
-    background:var(--white); border-radius:16px; padding:16px; border:1px solid rgba(11,35,35,0.07);
-    margin-top:16px;
-  }
-  .loc-card h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:4px; }
-  .loc-card .loc-sub{ font-size:12px; color:#5C7676; margin-bottom:12px; line-height:1.5; }
-  .loc-btn{
-    width:100%; padding:12px; border-radius:12px; border:1.5px solid var(--teal-deep); background:var(--white);
-    color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; cursor:pointer;
-    display:flex; align-items:center; justify-content:center; gap:7px;
-  }
-  .loc-btn:active{ background:var(--paper); }
-  .loc-confirmed{
-    display:none; border:1.5px solid rgba(30,160,90,0.3); border-radius:12px; overflow:hidden;
-  }
-  .loc-confirmed.show{ display:block; }
-  .loc-confirmed iframe{ width:100%; height:150px; border:none; display:block; }
-  .loc-confirmed .loc-status{
-    display:flex; align-items:center; justify-content:space-between; padding:10px 12px;
-    background:rgba(30,160,90,0.06); font-size:12px; font-weight:600; color:#1B7A43;
-  }
-  .loc-confirmed .loc-status button{
-    background:none; border:none; color:var(--red); font-size:11px; font-weight:700; cursor:pointer;
-  }
-  .loc-error{
-    font-size:12px; color:#6B5B10; background:#FFF3CD; border:1px solid #F0D98A; border-radius:10px;
-    padding:10px 12px; margin-top:10px; line-height:1.5; display:none;
-  }
-  .loc-error.show{ display:block; }
-
   .footer-note{
     text-align:center; font-size:11px; color:#5F7878; padding:24px 18px 90px; line-height:1.6;
   }
@@ -265,6 +258,11 @@
   <div class="header-text">
     <h1>Request a Product</h1>
     <p>We'll check availability and reply on WhatsApp.</p>
+    <div class="loc-row" id="locRow" data-state="asking">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span id="locText" aria-live="polite">Checking your location&hellip;</span>
+      <button type="button" class="loc-link" id="locAction" onclick="locAction()" style="display:none">Share</button>
+    </div>
   </div>
 </div>
 
@@ -326,9 +324,10 @@
   </div>
   </section>
   <section class="tabpanel" id="panel-freq" role="tabpanel" aria-labelledby="tab-freq">
-  <div class="add-card">
-    <p class="empty-note" id="freqEmpty">Your previous orders will show here, saved only on your phone.</p>
-  </div>
+  <p class="freq-note" id="freqNote">Your own earlier orders, saved only on this phone. Tap Add to put one on your request list.</p>
+  <div id="freqList"></div>
+  <div class="add-card" id="freqEmptyCard"><p class="empty-note" id="freqEmpty"></p></div>
+  <button type="button" class="freq-clear" id="freqClear" onclick="clearHistory()">Clear saved orders</button>
   </section>
 
   <div class="list-wrap" id="listSec">
@@ -336,26 +335,10 @@
     <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
   </div>
 
-  <div class="loc-card">
-    <h2>Delivery Location <span style="font-weight:500; color:#5F7878;">(optional)</span></h2>
-    <p class="loc-sub">Share your location so we deliver to the right place — or skip this and just tell us your address in the chat.</p>
-    <button class="loc-btn" id="locBtn" onclick="requestLocation()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-      Share My Location
-    </button>
-    <div class="loc-confirmed" id="locConfirmed">
-      <iframe id="locMap" loading="lazy"></iframe>
-      <div class="loc-status">
-        <span>&#10003; Location shared</span>
-        <button onclick="clearLocation()">Remove</button>
-      </div>
-    </div>
-    <p class="loc-error" id="locError"></p>
-  </div>
 </div>
 
 <div class="send-bar" id="sendBar">
-  <button type="button" class="send-count" onclick="scrollToList()" aria-label="View your request list">
+  <button type="button" class="send-count" id="sendCountBtn" onclick="scrollToList()" aria-label="View your request list">
     <span id="sendCount"></span>
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
   </button>
@@ -415,7 +398,7 @@
 
   // ---- Photo/prescription: just a flag - the photo itself gets attached inside WhatsApp ----
   let hasPhotoSelected = false;
-  function setPhotoFlag(v){ hasPhotoSelected = !!v; }
+  function setPhotoFlag(v){ hasPhotoSelected = !!v; render(); }
 
   // ---- Search matching: tolerant of spacing/case differences ("dolo650" should find "Dolo 650") ----
   function normalize(s){ return String(s).toLowerCase().replace(/[^a-z0-9]/g, ''); }
@@ -653,53 +636,27 @@
     render();
   }
 
-  // ---- Delivery location (optional) ----
+  // ---- Delivery location: asked once when the page opens. Kept only in memory; it goes into the WhatsApp message only while shared. ----
   let capturedLocation = null; // { lat, lng }
-
+  function setLoc(state){
+    const t = document.getElementById('locText'), b = document.getElementById('locAction');
+    document.getElementById('locRow').setAttribute('data-state', state);
+    if (state === 'asking') { t.textContent = 'Checking your location\u2026'; b.style.display = 'none'; }
+    else if (state === 'shared') { t.textContent = 'Delivery location shared'; b.textContent = 'Remove'; b.style.display = ''; }
+    else if (state === 'unsupported') { t.textContent = "Location sharing isn't available here. Share your address in the chat."; b.style.display = 'none'; }
+    else { t.textContent = 'Location not shared. Share your address in the chat.'; b.textContent = 'Share'; b.style.display = ''; }
+  }
   function requestLocation(){
-    const errEl = document.getElementById('locError');
-    errEl.classList.remove('show');
-    const btn = document.getElementById('locBtn');
-
-    if (!navigator.geolocation) {
-      errEl.textContent = "Your browser doesn't support location sharing. You can share your address in the chat instead.";
-      errEl.classList.add('show');
-      return;
-    }
-    btn.textContent = 'Getting your location...';
+    if (!navigator.geolocation) { setLoc('unsupported'); return; }
+    setLoc('asking');
     navigator.geolocation.getCurrentPosition(
-      function(pos){
-        capturedLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        showLocationConfirmed();
-      },
-      function(err){
-        btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg> Share My Location';
-        if (err.code === 1) {
-          errEl.textContent = "Location access was declined. That's fine — just share your address when you message us on WhatsApp.";
-        } else {
-          errEl.textContent = "Couldn't get your location right now. You can share your address in the chat instead.";
-        }
-        errEl.classList.add('show');
-      },
+      function(pos){ capturedLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude }; setLoc('shared'); },
+      function(){ capturedLocation = null; setLoc('off'); },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
     );
   }
-
-  function showLocationConfirmed(){
-    const { lat, lng } = capturedLocation;
-    const d = 0.006;
-    const bbox = [lng-d, lat-d, lng+d, lat+d].join(',');
-    document.getElementById('locMap').src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&marker=${lat},${lng}`;
-    document.getElementById('locConfirmed').classList.add('show');
-    document.getElementById('locBtn').style.display = 'none';
-  }
-
-  function clearLocation(){
-    capturedLocation = null;
-    document.getElementById('locConfirmed').classList.remove('show');
-    document.getElementById('locBtn').style.display = 'flex';
-    document.getElementById('locBtn').innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg> Share My Location';
-  }
+  function clearLocation(){ capturedLocation = null; setLoc('off'); }
+  function locAction(){ if (capturedLocation) clearLocation(); else requestLocation(); }
 
   function render(){
     const wrap = document.getElementById('listWrap');
@@ -717,29 +674,36 @@
           <button onclick="removeRequest(${i})">Remove</button>
         </div>`).join('');
     }
-    document.getElementById('sendBar').classList.toggle('show', items.length > 0);
+    document.getElementById('sendBar').classList.toggle('show', items.length > 0 || hasPhotoSelected);
+    document.getElementById('sendCountBtn').style.display = items.length ? '' : 'none';
     document.getElementById('sendCount').textContent = items.length + (items.length === 1 ? ' item' : ' items');
     shopSync();
+    renderFreq();
   }
 
   function sendRequest(){
-    if (!items.length) return;
-    const lines = items.map(it => {
-      let line = `- ${it.name} x${it.qty || 1}${it.pack ? ' (' + it.pack + ')' : ''}`;
-      if (it.composition) line += `\n  Contains: ${it.composition}`;
-      return line;
-    });
-    let text = `Hi, I'd like to request the following:\n${lines.join('\n')}\n\nCould you check availability and let me know the price?`;
+    if (!items.length && !hasPhotoSelected) return;
+    let text;
+    if (items.length) {
+      const lines = items.map(it => {
+        let line = `- ${it.name} x${it.qty || 1}${it.pack ? ' (' + it.pack + ')' : ''}`;
+        if (it.composition) line += `\n  Contains: ${it.composition}`;
+        return line;
+      });
+      text = `Hi, I'd like to request the following:\n${lines.join('\n')}\n\nCould you check availability and let me know the price?`;
+    } else {
+      text = `Hi, I have a prescription to share. Could you check availability and let me know the price?`;
+    }
     if (hasPhotoSelected) {
       text += `\n\n(I have a photo of the product/prescription to attach here in the chat)`;
     }
     if (capturedLocation) {
       text += `\n\nDelivery location: https://www.google.com/maps?q=${capturedLocation.lat},${capturedLocation.lng}`;
     }
+    saveOrder(items);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     items.length = 0;
-    clearLocation();
-    setPhotoFlag(false);
+    hasPhotoSelected = false;
     var pc = document.getElementById('photoCheck'); if (pc) pc.checked = false;
     render();
   }
@@ -872,7 +836,84 @@
     if (el && el.scrollIntoView) el.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }
 
+  // ---- Frequent tab: this customer's own earlier orders. Stored only in this phone's browser (localStorage); never sent anywhere. ----
+  const HIST_KEY = 'huda_prev_orders_v1';
+  let history = [], histOK = true;
+  function itemKey(it){ return it.shopId ? 's:' + it.shopId : 'n:' + String(it.name).toLowerCase().trim() + '|' + String(it.pack || '').toLowerCase().trim(); }
+  function loadHistory(){
+    try {
+      const raw = window.localStorage.getItem(HIST_KEY);
+      const d = raw ? JSON.parse(raw) : [];
+      history = Array.isArray(d) ? d.filter(x => x && x.name && x.k) : [];
+    } catch (e) { history = []; histOK = false; }
+  }
+  function persistHistory(){
+    try { window.localStorage.setItem(HIST_KEY, JSON.stringify(history)); histOK = true; } catch (e) { histOK = false; }
+  }
+  // called when a request is sent: most-ordered first, then most recent; keeps the latest 30
+  function saveOrder(list){
+    if (!list.length) return;
+    const now = Date.now();
+    list.forEach(it => {
+      const k = itemKey(it);
+      let x = history.find(y => y.k === k);
+      if (!x) { x = { k: k, name: it.name, pack: it.pack || '', n: 0 }; history.push(x); }
+      x.n += 1; x.qty = it.qty || 1; x.t = now;
+      if (it.shopId) x.shopId = it.shopId;
+      if (it.composition) x.composition = it.composition;
+      if (it.manufacturer) x.manufacturer = it.manufacturer;
+    });
+    history.sort((a, b) => (b.n - a.n) || (b.t - a.t));
+    if (history.length > 30) history.length = 30;
+    persistHistory();
+  }
+  function freqQty(i, d){
+    const x = history[i];
+    if (!x) return;
+    const j = items.findIndex(y => itemKey(y) === x.k);
+    if (j < 0) {
+      if (d < 0) return;
+      const it = { name: x.name, pack: x.pack || '', qty: x.qty || 1 };
+      if (x.shopId) it.shopId = x.shopId;
+      if (x.composition) it.composition = x.composition;
+      if (x.manufacturer) it.manufacturer = x.manufacturer;
+      items.push(it);
+    } else {
+      items[j].qty = Math.min(999, (items[j].qty || 1) + d);
+      if (items[j].qty < 1) items.splice(j, 1);
+    }
+    render();
+  }
+  function clearHistory(){
+    if (!window.confirm('Remove all saved orders from this phone?')) return;
+    history = [];
+    try { window.localStorage.removeItem(HIST_KEY); } catch (e) {}
+    renderFreq();
+  }
+  function renderFreq(){
+    const has = history.length > 0;
+    document.getElementById('freqNote').style.display = has ? 'block' : 'none';
+    document.getElementById('freqClear').style.display = has ? 'block' : 'none';
+    document.getElementById('freqEmptyCard').style.display = has ? 'none' : 'block';
+    document.getElementById('freqEmpty').textContent = histOK
+      ? 'Your previous orders will show here, saved only on your phone.'
+      : "This browser can't save previous orders, so nothing will show here.";
+    document.getElementById('freqList').innerHTML = history.map((x, i) => {
+      const inList = items.some(y => itemKey(y) === x.k);
+      const q = inList ? (items.find(y => itemKey(y) === x.k).qty || 1) : 0;
+      const ctl = inList
+        ? '<div class="pstep"><button type="button" onclick="freqQty(' + i + ',-1)" aria-label="One less">&minus;</button><span>' + q + '</span><button type="button" onclick="freqQty(' + i + ',1)" aria-label="One more">+</button></div>'
+        : '<button type="button" class="padd" onclick="freqQty(' + i + ',1)">Add</button>';
+      return '<div class="freq-row"><div class="freq-info"><div class="rname">' + escapeHTML(x.name) + '</div>'
+        + (x.pack ? '<div class="rpack">' + escapeHTML(x.pack) + '</div>' : '')
+        + '<div class="rpack">Ordered ' + x.n + (x.n === 1 ? ' time' : ' times') + ' &middot; last &times;' + (x.qty || 1) + '</div></div>'
+        + '<div class="freq-ctl">' + ctl + '</div></div>';
+    }).join('');
+  }
+
+  loadHistory();
   render();
+  requestLocation();   // asked once, when the page opens
 </script>
 </body>
 </html>
