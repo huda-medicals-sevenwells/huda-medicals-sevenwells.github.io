@@ -291,8 +291,8 @@
 
 <div class="tabs" id="tabsBar">
   <div class="tabs-in" id="tabs" role="tablist" aria-label="Request sections">
-    <button type="button" class="tab" id="tab-cat" role="tab" aria-selected="false" aria-controls="panel-cat" tabindex="-1" onclick="showTab('cat')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Categories</span></button>
-    <button type="button" class="tab" id="tab-search" role="tab" aria-selected="true" aria-controls="panel-search" tabindex="0" onclick="showTab('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search</span></button>
+    <button type="button" class="tab" id="tab-cat" role="tab" aria-selected="true" aria-controls="panel-cat" tabindex="0" onclick="showTab('cat')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Categories</span></button>
+    <button type="button" class="tab" id="tab-search" role="tab" aria-selected="false" aria-controls="panel-search" tabindex="-1" onclick="showTab('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search</span></button>
     <button type="button" class="tab" id="tab-rx" role="tab" aria-selected="false" aria-controls="panel-rx" tabindex="-1" onclick="showTab('rx')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><span>Upload Rx</span></button>
     <button type="button" class="tab" id="tab-freq" role="tab" aria-selected="false" aria-controls="panel-freq" tabindex="-1" onclick="showTab('freq')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Frequent</span></button>
   </div>
@@ -300,7 +300,7 @@
 </div>
 
 <div class="wrap">
-  <section class="tabpanel" id="panel-cat" role="tabpanel" aria-labelledby="tab-cat">
+  <section class="tabpanel on" id="panel-cat" role="tabpanel" aria-labelledby="tab-cat">
   <div class="shop" id="shop">
     <h2>Quick add &mdash; popular items</h2>
     <p class="shop-sub">Tap Add to put an item on your request list. We'll check availability and confirm the price on WhatsApp. Prices shown are reference prices, not a confirmed quote.</p>
@@ -308,7 +308,7 @@
     <div class="pgrid" id="shopGrid"></div>
   </div>
   </section>
-  <section class="tabpanel on" id="panel-search" role="tabpanel" aria-labelledby="tab-search">
+  <section class="tabpanel" id="panel-search" role="tabpanel" aria-labelledby="tab-search">
   <div class="add-card">
     <label class="field-label" for="prodName">Product name</label>
     <p class="quick-hint">Search below — if you're not sure we stock it, type it anyway and we'll check.</p>
@@ -754,8 +754,10 @@
 
   fetch('shop-products.json')
     .then(r => r.ok ? r.json() : [])
-    .then(d => { shopProducts = Array.isArray(d) ? d : []; shopAttach(); })
-    .catch(() => { shopProducts = []; });
+    .then(d => { shopProducts = Array.isArray(d) ? d : []; if (!shopProducts.length) shopFallback(); shopAttach(); })
+    .catch(() => { shopProducts = []; shopFallback(); });
+  // if the shop list can't load, don't leave the customer on an empty Categories tab (unless they already chose a tab)
+  function shopFallback(){ if (curTab === 'cat' && !tabTouched) showTab('search', false, true); }
 
   // Once both files have loaded, copy price, composition and maker from the catalog entry named in "ref"
   function shopAttach(){
@@ -857,15 +859,16 @@
 
   // ---- Tabs: panels stay in the page and are only shown/hidden, so the search box, notes and list are never cleared ----
   const TAB_IDS = ['cat', 'search', 'rx', 'freq'];
-  let curTab = 'search';
+  let curTab = 'cat', tabTouched = false;   // the page opens on Categories
   function syncSubTabs(){
     const sub = document.getElementById('subTabs');
     sub.classList.toggle('on', curTab === 'cat' && sub.childNodes.length > 0);
     document.documentElement.style.setProperty('--stick', (document.getElementById('tabsBar').offsetHeight + 8) + 'px');
   }
   window.addEventListener('resize', syncSubTabs);
-  function showTab(id, focusTab){
+  function showTab(id, focusTab, auto){
     curTab = id;
+    if (!auto) tabTouched = true;
     TAB_IDS.forEach(t => {
       const on = (t === id);
       const b = document.getElementById('tab-' + t);
