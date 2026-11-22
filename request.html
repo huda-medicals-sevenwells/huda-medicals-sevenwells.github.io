@@ -103,6 +103,26 @@
   .chip:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
   .sec-h{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; margin:16px 0 8px; }
   #freqWrap{ display:none; }
+  .rx-mark{
+    display:inline-block; margin-left:6px; padding:0 5px; border:1px solid var(--red); border-radius:4px; color:var(--red);
+    font-family:'Poppins',sans-serif; font-size:10px; font-weight:700; line-height:1.5; vertical-align:middle;
+  }
+  .rx-note{
+    background:var(--white); border:1px solid rgba(193,39,45,0.3); border-radius:12px; padding:11px 13px;
+    font-size:12.5px; line-height:1.5; color:var(--ink); margin-bottom:12px;
+  }
+  .alt-box{ display:none; margin:10px 0 2px; padding:10px 12px; background:#F0F9F8; border:1px solid rgba(15,139,141,0.25); border-radius:12px; }
+  .alt-box.show{ display:block; }
+  .alt-h{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; }
+  .alt-sub{ font-size:11.5px; color:#4F6868; margin:1px 0 8px; line-height:1.45; }
+  .alt-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 0; border-top:1px solid rgba(11,35,35,0.08); }
+  .alt-info{ min-width:0; flex:1 1 auto; }
+  .alt-name{ font-size:13px; font-weight:600; line-height:1.35; }
+  .alt-meta{ font-size:11.5px; color:#4F6868; margin-top:2px; line-height:1.4; }
+  .alt-pick{
+    flex:0 0 auto; background:var(--white); color:var(--teal-deep); border:1.5px solid var(--teal-deep); border-radius:9px;
+    padding:7px 12px; font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer;
+  }
   .tabpanel{ display:none; }
   .tabpanel.on{ display:block; }
   .tabpanel > :first-child{ margin-top:0; }
@@ -320,6 +340,7 @@
       <span>&#10003; <span id="selectedTagText"></span></span>
       <button onclick="clearSelection()">Change</button>
     </div>
+    <div class="alt-box" id="altBox"></div>
     <label class="field-label">Quantity</label>
     <div class="qty-row">
       <button type="button" class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease quantity">&minus;</button>
@@ -336,6 +357,7 @@
   </div>
   </section>
   <section class="tabpanel" id="panel-rx" role="tabpanel" aria-labelledby="tab-rx">
+  <p class="rx-note">Valid prescription required for some medicines. WhatsApp it to us so the correct medicine is ready for home delivery or store pickup.</p>
   <div class="photo-card">
     <h2>Product Photo or Prescription <span style="font-weight:500; color:#5F7878;">(optional)</span></h2>
     <p class="photo-sub">If a photo helps us confirm what you need, attach it directly in the WhatsApp chat after you send your request &mdash; just use the &#128206; icon there. Nothing to select here.</p>
@@ -374,6 +396,7 @@
 </div>
 
 <p class="footer-note">
+  Rx: valid prescription required. WhatsApp it to us so the correct medicine is ready for home delivery or store pickup.<br>
   We'll reply on WhatsApp once we've checked stock and pricing — nothing is charged or confirmed until you agree.<br>
   Huda Medicals · Seven Wells, Chennai
 </p>
@@ -391,6 +414,7 @@
       // normalise once, so each keystroke only does cheap comparisons across ~44,000 items
       data.forEach(r => { r._n = normalize(r.n); r._c = r.c ? normalize(r.c) : ''; });
       catalog = data;
+      buildAltIndex();
       shopAttach();
       setTimeout(buildVocab, 50);   // word list for spelling correction
     })
@@ -572,6 +596,60 @@
     return hits.slice(0, 8).map(x => x[1]);
   }
 
+  // ---- Rx mark: shown when the catalog record has r (from the schedule export) or a shop product has rx: true ----
+  const RX_MARK = '<span class="rx-mark" title="Valid prescription required">Rx</span>';
+  function isRxRec(r){ return !!(r && (r.r || r.rx)); }
+  function isRxItem(it){
+    if (it.rx) return true;
+    if (it.shopId) { const p = shopProducts.find(x => x.id === it.shopId); return !!(p && (p.rx || p._r)); }
+    return false;
+  }
+
+  // ---- Cheaper alternatives: same composition and strength, same pack unit, no clashing form, lower listed price ----
+  let altIndex = new Map();
+  function unitKey(u){ return normalize(u).replace(/^(tab|cap|bot)s$/, '$1'); }
+  function altKey(r){ return (r._c && /\d/.test(r.c) && r.u) ? r._c + '|' + unitKey(r.u) : ''; }
+  function buildAltIndex(){
+    altIndex = new Map();
+    catalog.forEach((r, i) => {
+      if (!(r.p > 0)) return;
+      const k = altKey(r);
+      if (!k) return;
+      if (!altIndex.has(k)) altIndex.set(k, []);
+      altIndex.get(k).push(i);
+    });
+    altIndex.forEach(list => list.sort((a, b) => catalog[a].p - catalog[b].p));
+  }
+  function cheaperOptions(r){
+    if (!(r.p > 0)) return [];
+    const list = altIndex.get(altKey(r));
+    if (!list) return [];
+    const out = [];
+    for (let k = 0; k < list.length && out.length < 3; k++) {
+      const x = catalog[list[k]];
+      if (x === r || !(x.p < r.p)) continue;
+      if (r.f && x.f && r.f !== x.f) continue;
+      out.push(list[k]);
+    }
+    return out;
+  }
+  function renderAlts(r){
+    const box = document.getElementById('altBox');
+    const opts = cheaperOptions(r);
+    if (!opts.length) { box.classList.remove('show'); box.innerHTML = ''; return; }
+    box.innerHTML = '<div class="alt-h">Same contents, lower price</div>'
+      + '<div class="alt-sub">Reference price, we will confirm. Pack size may differ.</div>'
+      + opts.map(i => {
+          const x = catalog[i];
+          const meta = [x.m, x.u].filter(Boolean).map(escapeHTML);
+          meta.push('ref. ' + fmt(x.p));
+          return '<div class="alt-row"><div class="alt-info"><div class="alt-name">' + escapeHTML(x.n) + (isRxRec(x) ? RX_MARK : '') + '</div>'
+            + '<div class="alt-meta">' + meta.join(' \u00b7 ') + '</div></div>'
+            + '<button type="button" class="alt-pick" onclick="selectSuggestion(' + i + ')">Choose</button></div>';
+        }).join('');
+    box.classList.add('show');
+  }
+
   function renderSuggestions(q){
     let idxs = searchCatalog(q), note = '', noteLabel = 'Showing results for';
     const alt = vocab.length ? altSpelling(q) : null;
@@ -604,7 +682,7 @@
         if (r.p) meta.push('ref. ' + fmt(r.p));
         return `
         <div class="suggest-row" onclick="selectSuggestion(${i})">
-          <div class="sname">${escapeHTML(r.n)}${form ? `<span class="form-badge">${escapeHTML(form)}</span>` : ''}</div>
+          <div class="sname">${escapeHTML(r.n)}${isRxRec(r) ? RX_MARK : ''}${form ? `<span class="form-badge">${escapeHTML(form)}</span>` : ''}</div>
           ${r.c ? `<div class="scomp">Contains: ${escapeHTML(r.c)}</div>` : ''}
           <div class="smeta">${meta.join(' \u00b7 ')}</div>
         </div>`;
@@ -624,13 +702,15 @@
     document.getElementById('prodPack').value = r.u || '';
     hideSuggestions();
     const tag = document.getElementById('selectedTag');
-    document.getElementById('selectedTagText').textContent = r.c ? `Matched: ${r.c}` : 'Matched from our reference list';
+    document.getElementById('selectedTagText').textContent = (r.c ? `Matched: ${r.c}` : 'Matched from our reference list') + (isRxRec(r) ? ' \u00b7 Rx: valid prescription required' : '');
+    renderAlts(r);
     tag.classList.add('show');
   }
 
   function clearSelection(refocus){
     selectedProduct = null;
     document.getElementById('selectedTag').classList.remove('show');
+    const ab = document.getElementById('altBox'); ab.classList.remove('show'); ab.innerHTML = '';
     if (refocus !== false) document.getElementById('prodName').focus();
   }
 
@@ -644,6 +724,7 @@
     if (selectedProduct) {
       if (selectedProduct.c) item.composition = selectedProduct.c;
       if (selectedProduct.m) item.manufacturer = selectedProduct.m;
+      if (isRxRec(selectedProduct)) item.rx = true;
     }
     items.push(item);
     nameEl.value = '';
@@ -700,7 +781,7 @@
       wrap.innerHTML = items.map((it, i) => `
         <div class="req-row">
           <div>
-            <div class="rname">${escapeHTML(it.name)} <span style="color:#5C7676; font-weight:600;">&times;${it.qty || 1}</span></div>
+            <div class="rname">${escapeHTML(it.name)}${isRxItem(it) ? RX_MARK : ''} <span style="color:#5C7676; font-weight:600;">&times;${it.qty || 1}</span></div>
             ${it.pack ? `<div class="rpack">${escapeHTML(it.pack)}</div>` : ''}
             ${it.composition ? `<div class="ci-composition">Contains: ${escapeHTML(it.composition)}</div>` : ''}
             ${it.manufacturer ? `<div class="ci-mfr">${escapeHTML(it.manufacturer)}</div>` : ''}
@@ -722,7 +803,7 @@
     let text;
     if (items.length) {
       const lines = items.map(it => {
-        let line = `- ${it.name} x${it.qty || 1}${it.pack ? ' (' + it.pack + ')' : ''}`;
+        let line = `- ${it.name}${isRxItem(it) ? ' [Rx]' : ''} x${it.qty || 1}${it.pack ? ' (' + it.pack + ')' : ''}`;
         if (it.composition) line += `\n  Contains: ${it.composition}`;
         return line;
       });
@@ -771,6 +852,7 @@
         if (r.p > 0) p._p = r.p;
         if (r.c) p._c = r.c;
         if (r.m) p._m = r.m;
+        if (r.r) p._r = 1;
       });
     }
     renderShop();
@@ -782,7 +864,7 @@
     return '<div class="pcard">'
       + '<div class="pimg"><div class="ph" aria-hidden="true">' + shopEmoji(p.cat) + '</div>'
       + '<img src="images/shop/' + escapeHTML(p.id) + '.jpg" data-id="' + escapeHTML(p.id) + '" alt="' + escapeHTML(p.name) + '" loading="lazy" onerror="shopImgFail(this)"></div>'
-      + '<div class="pname">' + escapeHTML(p.name) + '</div>'
+      + '<div class="pname">' + escapeHTML(p.name) + ((p.rx || p._r) ? RX_MARK : '') + '</div>'
       + (p._c ? '<div class="pcomp">' + escapeHTML(p._c) + '</div>' : '')
       + (p._p ? '<div class="pprice">ref. ' + fmt(p._p) + '</div>' : '')
       + '<div class="pctl" data-ctl="' + escapeHTML(p.id) + '"></div></div>';
@@ -921,6 +1003,7 @@
       if (it.shopId) x.shopId = it.shopId;
       if (it.composition) x.composition = it.composition;
       if (it.manufacturer) x.manufacturer = it.manufacturer;
+      if (isRxItem(it)) x.rx = true;
     });
     history.sort((a, b) => (b.n - a.n) || (b.t - a.t));
     if (history.length > 30) history.length = 30;
@@ -936,6 +1019,7 @@
       if (x.shopId) it.shopId = x.shopId;
       if (x.composition) it.composition = x.composition;
       if (x.manufacturer) it.manufacturer = x.manufacturer;
+      if (x.rx) it.rx = true;
       items.push(it);
     } else {
       items[j].qty = Math.min(999, (items[j].qty || 1) + d);
@@ -963,7 +1047,7 @@
       const ctl = inList
         ? '<div class="pstep"><button type="button" onclick="freqQty(' + i + ',-1)" aria-label="One less">&minus;</button><span>' + q + '</span><button type="button" onclick="freqQty(' + i + ',1)" aria-label="One more">+</button></div>'
         : '<button type="button" class="padd" onclick="freqQty(' + i + ',1)">Add</button>';
-      return '<div class="freq-row"><div class="freq-info"><div class="rname">' + escapeHTML(x.name) + '</div>'
+      return '<div class="freq-row"><div class="freq-info"><div class="rname">' + escapeHTML(x.name) + (x.rx ? RX_MARK : '') + '</div>'
         + (x.pack ? '<div class="rpack">' + escapeHTML(x.pack) + '</div>' : '')
         + '<div class="rpack">Ordered ' + x.n + (x.n === 1 ? ' time' : ' times') + ' &middot; last &times;' + (x.qty || 1) + '</div></div>'
         + '<div class="freq-ctl">' + ctl + '</div></div>';
