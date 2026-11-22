@@ -27,20 +27,27 @@
   }
   @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
 
+  .sr-only{ position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   .header{
     background:linear-gradient(160deg, var(--teal-deep) 0%, #0D7072 100%);
-    color:var(--white); padding:12px 14px 14px; display:flex; align-items:center; gap:12px;
+    color:var(--white); padding:10px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px;
   }
-  .home-btn{
+  .loc-btn{
+    flex:1 1 auto; min-width:0; display:block; background:none; border:none; color:var(--white); text-align:left;
+    cursor:pointer; padding:4px 6px 4px 0; border-radius:8px; font-family:inherit; -webkit-appearance:none; appearance:none;
+  }
+  .loc-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
+  .loc-top{ display:flex; align-items:center; gap:5px; }
+  .loc-top svg{ flex:0 0 auto; }
+  .loc-label{ font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+  .loc-addr{ display:block; font-size:12px; line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .profile-btn{
     flex:0 0 40px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.18);
     color:var(--white); display:flex; align-items:center; justify-content:center; text-decoration:none;
     border:1.5px solid rgba(255,255,255,0.55);
   }
-  .home-btn:active{ background:rgba(255,255,255,0.3); }
-  .home-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
-  .header-text{ min-width:0; }
-  .header h1{ font-family:'Poppins',sans-serif; font-weight:700; font-size:18px; line-height:1.25; }
-  .header p{ font-size:12px; margin-top:2px; line-height:1.4; }
+  .profile-btn:active{ background:rgba(255,255,255,0.3); }
+  .profile-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
 
   /* ---- four fixed tabs ---- */
   .tabs{
@@ -57,14 +64,6 @@
   .tab svg{ width:19px; height:19px; flex:0 0 19px; }
   .tab[aria-selected="true"]{ color:var(--teal-deep); border-bottom-color:var(--teal-deep); }
   .tab:focus-visible{ outline:2px solid var(--teal); outline-offset:-3px; }
-  .loc-row{ display:flex; align-items:center; gap:6px; margin-top:6px; font-size:12px; line-height:1.35; }
-  .loc-row svg{ flex:0 0 13px; }
-  .loc-row #locText{ min-width:0; }
-  .loc-link{
-    flex:0 0 auto; background:none; border:none; color:#FFFFFF; font-family:'Poppins',sans-serif;
-    font-weight:700; font-size:12px; text-decoration:underline; cursor:pointer; padding:4px 2px;
-  }
-  .loc-link:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
 
   /* ---- Frequent tab ---- */
   .freq-note{ font-size:12px; color:#5C7676; margin:0 0 10px; line-height:1.5; }
@@ -290,23 +289,69 @@
   .pstep{ display:flex; align-items:center; justify-content:space-between; background:var(--teal-deep); border-radius:10px; padding:3px; }
   .pstep button{ width:32px; height:30px; border:none; border-radius:8px; background:transparent; color:#FFFFFF; font-size:18px; font-weight:700; cursor:pointer; }
   .pstep span{ color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; }
+
+  /* ---- Select Your Location page ---- */
+  .locpage{ position:fixed; top:0; right:0; bottom:0; left:0; z-index:100; background:var(--paper); display:none; overflow-y:auto; overscroll-behavior:contain; }
+  .locpage.on{ display:block; }
+  .lp-view{ display:none; max-width:480px; margin:0 auto; }
+  .lp-view.on{ display:block; }
+  .lp-bar{ display:flex; align-items:center; gap:8px; padding:10px 12px; background:var(--white); border-bottom:1px solid rgba(11,35,35,0.1); position:-webkit-sticky; position:sticky; top:0; z-index:2; }
+  .lp-back{ flex:0 0 40px; width:40px; height:40px; border-radius:50%; border:none; background:transparent; color:var(--ink); display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .lp-back:focus-visible, .addr-dots:focus-visible, .lp-act:focus-visible, .addr-pick:focus-visible{ outline:2px solid var(--teal); outline-offset:-2px; }
+  .lp-title{ font-family:'Poppins',sans-serif; font-weight:600; font-size:17px; }
+  .lp-body{ padding:14px 16px 28px; }
+  .lp-search{ position:relative; }
+  .lp-search svg{ position:absolute; left:13px; top:14px; color:#4F6868; }
+  .lp-search input, .fm-input{ width:100%; border:1.5px solid #7A9090; border-radius:12px; font-size:16px; font-family:'Inter',sans-serif; background:var(--white); color:var(--ink); }
+  .lp-search input{ height:46px; padding:0 14px 0 40px; }
+  .fm-input{ padding:12px 14px; line-height:1.45; }
+  textarea.fm-input{ min-height:104px; resize:vertical; }
+  .lp-actions{ background:var(--white); border:1px solid rgba(11,35,35,0.08); border-radius:14px; margin-top:14px; overflow:hidden; }
+  .lp-row{ display:flex; align-items:center; border-top:1px solid rgba(11,35,35,0.08); }
+  .lp-row:first-child{ border-top:none; }
+  .lp-act{ flex:1 1 auto; min-width:0; display:flex; align-items:center; gap:12px; padding:13px 14px; background:var(--white); border:none; text-align:left; cursor:pointer; font-family:inherit; color:var(--ink); -webkit-appearance:none; appearance:none; }
+  .lp-act .ic, .addr-pin{ flex:0 0 36px; width:36px; height:36px; border-radius:50%; background:#E3F3F1; color:var(--teal-deep); display:flex; align-items:center; justify-content:center; }
+  .lp-act .tx{ flex:1 1 auto; min-width:0; }
+  .lp-act .tt{ display:block; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; }
+  .lp-act .st{ display:block; font-size:12px; color:#5F7878; margin-top:2px; line-height:1.4; }
+  .lp-act .chev{ flex:0 0 auto; color:#5F7878; }
+  .lp-rm{ flex:0 0 auto; margin-right:12px; background:none; border:none; color:var(--red); font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer; padding:8px; }
+  .lp-h{ font-family:'Poppins',sans-serif; font-size:11.5px; font-weight:600; letter-spacing:.06em; color:#4F6868; margin:20px 2px 8px; text-transform:uppercase; }
+  .lp-note{ font-size:12px; color:#4F6868; margin:6px 2px 0; line-height:1.5; }
+  .addr-card{ background:var(--white); border:1.5px solid rgba(11,35,35,0.08); border-radius:14px; margin-bottom:10px; overflow:hidden; }
+  .addr-card.sel{ border-color:var(--teal-deep); }
+  .addr-main{ display:flex; align-items:flex-start; padding:13px 4px 13px 14px; }
+  .addr-pick{ flex:1 1 auto; min-width:0; display:flex; align-items:flex-start; gap:12px; background:none; border:none; text-align:left; cursor:pointer; font-family:inherit; color:var(--ink); padding:0; }
+  .addr-name{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; }
+  .addr-tag{ background:var(--teal-deep); color:#FFFFFF; font-family:'Inter',sans-serif; font-size:10.5px; font-weight:700; border-radius:6px; padding:1px 7px; }
+  .addr-text{ display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; font-size:12.5px; color:#4F6868; margin-top:3px; line-height:1.45; white-space:pre-line; word-break:break-word; }
+  .addr-dots{ flex:0 0 40px; width:40px; height:40px; background:none; border:none; color:var(--ink); display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .addr-menu{ display:none; border-top:1px solid rgba(11,35,35,0.08); }
+  .addr-menu.on{ display:flex; }
+  .addr-menu button{ flex:1 1 0; padding:11px; border:none; background:none; font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; cursor:pointer; color:var(--teal-deep); }
+  .addr-menu button + button{ border-left:1px solid rgba(11,35,35,0.08); color:var(--red); }
+  .fm-lbl{ display:block; font-family:'Poppins',sans-serif; font-size:12px; font-weight:600; margin:16px 0 6px; }
+  .fm-chips{ display:flex; gap:8px; margin-top:8px; }
+  .fm-chip{ padding:8px 16px; border-radius:999px; border:1.5px solid #7A9090; background:var(--white); color:var(--ink); font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; cursor:pointer; }
+  .fm-err{ display:none; color:var(--red); font-size:12.5px; margin-top:6px; }
+  .fm-save{ width:100%; margin-top:20px; padding:14px; border:none; border-radius:12px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; }
 </style>
 </head>
 <body>
 
 <div class="header" id="hdr">
-  <a class="home-btn" href="home.html" aria-label="Back to Huda Medicals home">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+  <h1 class="sr-only">Huda Medicals: Request a Product</h1>
+  <button type="button" class="loc-btn" id="locBtn" aria-haspopup="dialog" onclick="openLoc()" aria-label="Choose delivery location">
+    <span class="loc-top">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span class="loc-label" id="locLabel">Select location</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </span>
+    <span class="loc-addr" id="locAddr" aria-live="polite">Tap to add your delivery address</span>
+  </button>
+  <a class="profile-btn" href="home.html" aria-label="About Huda Medicals">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
   </a>
-  <div class="header-text">
-    <h1>Request a Product</h1>
-    <p>We'll check availability and reply on WhatsApp.</p>
-    <div class="loc-row" id="locRow" data-state="asking">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span id="locText" aria-live="polite">Checking your location&hellip;</span>
-      <button type="button" class="loc-link" id="locAction" onclick="locAction()" style="display:none">Share</button>
-    </div>
-  </div>
 </div>
 
 <div class="tabs" id="tabsBar">
@@ -400,6 +445,37 @@
   We'll reply on WhatsApp once we've checked stock and pricing — nothing is charged or confirmed until you agree.<br>
   Huda Medicals · Seven Wells, Chennai
 </p>
+
+<div class="locpage" id="locPage" role="dialog" aria-modal="true" aria-label="Select Your Location" aria-hidden="true">
+  <div class="lp-view" id="lpList">
+    <div class="lp-bar"><button type="button" class="lp-back" onclick="closeLoc()" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">Select Your Location</h2></div>
+    <div class="lp-body">
+      <div class="lp-search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="search" id="lpSearch" placeholder="Search an area or address" aria-label="Search an area or address" autocomplete="off" oninput="renderPage()"></div>
+      <div class="lp-actions" id="lpActions">
+        <div class="lp-row"><button type="button" class="lp-act" onclick="useCurrent()"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg></span><span class="tx"><span class="tt">Use Current Location</span><span class="st" id="gpsSub">Share your live position</span></span><span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></button><button type="button" class="lp-rm" id="gpsRm" onclick="removeCurrent()" style="display:none">Remove</button></div>
+        <div class="lp-row"><button type="button" class="lp-act" onclick="openForm()"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="tx"><span class="tt">Add New Address</span><span class="st" id="addSub">Type it once, saved on this phone</span></span><span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></button></div>
+        <div class="lp-row"><button type="button" class="lp-act" onclick="requestAddress()"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></span><span class="tx"><span class="tt">Request Address</span><span class="st">Send your address on WhatsApp</span></span><span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></button></div>
+      </div>
+      <div id="lpFind"></div>
+      <h3 class="lp-h">Saved addresses</h3>
+      <div id="lpSaved"></div>
+      <p class="lp-note" id="lpNote"></p>
+    </div>
+  </div>
+  <div class="lp-view" id="lpForm">
+    <div class="lp-bar"><button type="button" class="lp-back" onclick="showView('list')" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title" id="fmTitle">Add New Address</h2></div>
+    <div class="lp-body">
+      <label class="fm-lbl" for="fmText" style="margin-top:0">Address</label>
+      <textarea class="fm-input" id="fmText" maxlength="250" placeholder="House or flat no., street, area, landmark" autocomplete="street-address"></textarea>
+      <div class="fm-err" id="fmErr" role="alert">Please type your full address.</div>
+      <label class="fm-lbl" for="fmLabel">Save as</label>
+      <input type="text" class="fm-input" id="fmLabel" maxlength="24" value="Home" autocomplete="off">
+      <div class="fm-chips"><button type="button" class="fm-chip" onclick="setLabel('Home')">Home</button><button type="button" class="fm-chip" onclick="setLabel('Work')">Work</button><button type="button" class="fm-chip" onclick="setLabel('Other')">Other</button></div>
+      <button type="button" class="fm-save" onclick="saveForm()">Save address</button>
+      <p class="lp-note">Saved only on this phone. It is added to your WhatsApp message when selected.</p>
+    </div>
+  </div>
+</div>
 
 <script>
   const WHATSAPP_NUMBER = "919962269992";
@@ -742,27 +818,147 @@
     render();
   }
 
-  // ---- Delivery location: asked once when the page opens. Kept only in memory; it goes into the WhatsApp message only while shared. ----
-  let capturedLocation = null; // { lat, lng }
-  function setLoc(state){
-    const t = document.getElementById('locText'), b = document.getElementById('locAction');
-    document.getElementById('locRow').setAttribute('data-state', state);
-    if (state === 'asking') { t.textContent = 'Checking your location\u2026'; b.style.display = 'none'; }
-    else if (state === 'shared') { t.textContent = 'Delivery location shared'; b.textContent = 'Remove'; b.style.display = ''; }
-    else if (state === 'unsupported') { t.textContent = "Location sharing isn't available here. Share your address in the chat."; b.style.display = 'none'; }
-    else { t.textContent = 'Location not shared. Share your address in the chat.'; b.textContent = 'Share'; b.style.display = ''; }
+  // ---- Delivery location. Saved addresses: typed once, kept only in this phone's browser (localStorage), never sent anywhere except in the WhatsApp message while selected. Live position: memory only. ----
+  const ADDR_KEY = 'huda_addresses_v1', ADDR_MAX = 10;
+  const PIN_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+  const DOTS_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="12" cy="19" r="1.9"/></svg>';
+  let addrs = [], addrSel = null, addrOK = true;       // addrSel = id of the chosen saved address
+  let capturedLocation = null, useGps = false, gpsState = 'idle', gpsTok = 0;   // gpsState: idle | asking | shared | off | unsupported
+  let locOpen = false, closing = false, lastFocus = null, menuId = null, editId = null;
+  const oneLine = s => String(s).replace(/\s+/g, ' ').trim();
+  function loadAddrs(){
+    try {
+      const raw = window.localStorage.getItem(ADDR_KEY), d = raw ? JSON.parse(raw) : {};
+      addrs = Array.isArray(d.list) ? d.list.filter(a => a && a.id && a.text) : [];
+      addrSel = addrs.some(a => a.id === d.sel) ? d.sel : null;
+    } catch (e) { addrs = []; addrSel = null; addrOK = false; }
   }
-  function requestLocation(){
-    if (!navigator.geolocation) { setLoc('unsupported'); return; }
-    setLoc('asking');
+  function persistAddrs(){
+    try { window.localStorage.setItem(ADDR_KEY, JSON.stringify({ sel: addrSel, list: addrs })); addrOK = true; } catch (e) { addrOK = false; }
+  }
+  function chosenAddr(){ return (!useGps && addrSel) ? (addrs.find(a => a.id === addrSel) || null) : null; }
+  function renderHeader(){
+    const lab = document.getElementById('locLabel'), ad = document.getElementById('locAddr'), a = chosenAddr();
+    if (useGps && capturedLocation) { lab.textContent = 'Current location'; ad.textContent = 'Position shared with this request'; }
+    else if (a) { lab.textContent = a.label; ad.textContent = oneLine(a.text); }
+    else if (gpsState === 'asking') { lab.textContent = 'Locating\u2026'; ad.textContent = 'Checking your location'; }
+    else { lab.textContent = 'Select location'; ad.textContent = 'Tap to add your delivery address'; }
+  }
+  function renderLoc(){ renderHeader(); if (locOpen) renderPage(); }
+
+  function requestLocation(closeAfter){
+    if (!navigator.geolocation) { gpsState = 'unsupported'; renderLoc(); return; }
+    const tok = ++gpsTok; gpsState = 'asking'; renderLoc();
     navigator.geolocation.getCurrentPosition(
-      function(pos){ capturedLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude }; setLoc('shared'); },
-      function(){ capturedLocation = null; setLoc('off'); },
+      function(pos){ if (tok !== gpsTok) return; capturedLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude }; gpsState = 'shared'; useGps = true; renderLoc(); if (closeAfter && locOpen) closeLoc(); },
+      function(){ if (tok !== gpsTok) return; capturedLocation = null; gpsState = 'off'; useGps = false; renderLoc(); },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
     );
   }
-  function clearLocation(){ capturedLocation = null; setLoc('off'); }
-  function locAction(){ if (capturedLocation) clearLocation(); else requestLocation(); }
+  function useCurrent(){ if (gpsState === 'shared' && useGps) { closeLoc(); return; } requestLocation(true); }
+  function removeCurrent(){ gpsTok++; capturedLocation = null; useGps = false; gpsState = 'idle'; renderLoc(); }
+  function chooseAddr(id){ gpsTok++; capturedLocation = null; useGps = false; gpsState = 'idle'; addrSel = id; persistAddrs(); renderLoc(); closeLoc(); }
+  function requestAddress(){
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent('Hi, this is my delivery address:\n'), '_blank', 'noopener');
+  }
+
+  function renderPage(){
+    const raw = oneLine(document.getElementById('lpSearch').value), q = raw.toLowerCase();
+    const GPS_SUB = { idle: 'Share your live position', asking: 'Checking your location\u2026', shared: 'Position shared with this request',
+      off: "Couldn't get your location. Allow it in browser settings, or add an address.", unsupported: 'Not available in this browser. Add an address instead.' };
+    document.getElementById('gpsSub').textContent = GPS_SUB[gpsState];
+    document.getElementById('gpsRm').style.display = (gpsState === 'shared') ? '' : 'none';
+    document.getElementById('addSub').textContent = addrs.length >= ADDR_MAX ? 'You can save up to ' + ADDR_MAX + '. Delete one first.' : 'Type it once, saved on this phone';
+    document.getElementById('lpActions').style.display = q ? 'none' : '';
+    document.getElementById('lpFind').innerHTML = q
+      ? '<div class="lp-actions"><div class="lp-row"><button type="button" class="lp-act" onclick="openForm(null, document.getElementById(\'lpSearch\').value)"><span class="ic">+</span><span class="tx"><span class="tt">Add \u201c' + escapeHTML(raw) + '\u201d as a new address</span></span></button></div></div>' : '';
+    const list = addrs.filter(a => !q || (a.label + ' ' + a.text).toLowerCase().indexOf(q) !== -1);
+    document.getElementById('lpSaved').innerHTML = list.map(function(a){
+      const sel = (!useGps && a.id === addrSel), open = (menuId === a.id);
+      return '<div class="addr-card' + (sel ? ' sel' : '') + '" data-id="' + a.id + '"><div class="addr-main">'
+        + '<button type="button" class="addr-pick" data-act="pick"><span class="addr-pin">' + PIN_SVG + '</span><span><span class="addr-name">' + escapeHTML(a.label) + (sel ? '<span class="addr-tag">Selected</span>' : '') + '</span><span class="addr-text">' + escapeHTML(a.text) + '</span></span></button>'
+        + '<button type="button" class="addr-dots" data-act="menu" aria-expanded="' + open + '" aria-label="Options for ' + escapeHTML(a.label) + '">' + DOTS_SVG + '</button></div>'
+        + '<div class="addr-menu' + (open ? ' on' : '') + '"><button type="button" data-act="edit">Edit</button><button type="button" data-act="del">Delete</button></div></div>';
+    }).join('');
+    document.getElementById('lpNote').textContent = !addrOK ? "This browser can't save addresses, so they are forgotten when you close the page."
+      : (addrs.length ? 'Saved only on this phone.' : 'No saved addresses yet. Addresses you add are saved only on this phone.');
+  }
+  document.getElementById('lpSaved').addEventListener('click', function(e){
+    const b = e.target.closest('button[data-act]'); if (!b) return;
+    const id = b.closest('.addr-card').getAttribute('data-id'), act = b.getAttribute('data-act');
+    if (act === 'pick') chooseAddr(id);
+    else if (act === 'menu') { menuId = (menuId === id) ? null : id; renderPage(); }
+    else if (act === 'edit') openForm(id);
+    else if (act === 'del' && window.confirm('Delete this address?')) {
+      addrs = addrs.filter(a => a.id !== id); if (addrSel === id) addrSel = null; menuId = null; persistAddrs(); renderLoc();
+    }
+  });
+
+  function showView(v){
+    document.getElementById('lpList').classList.toggle('on', v === 'list');
+    document.getElementById('lpForm').classList.toggle('on', v === 'form');
+    document.getElementById('locPage').scrollTop = 0;
+    if (v === 'list') renderPage();
+  }
+  function setLabel(t){ document.getElementById('fmLabel').value = t; }
+  function openForm(id, prefill){
+    if (!id && addrs.length >= ADDR_MAX) return;
+    const a = id ? addrs.find(x => x.id === id) : null;
+    editId = a ? a.id : null;
+    document.getElementById('fmTitle').textContent = a ? 'Edit Address' : 'Add New Address';
+    document.getElementById('fmText').value = a ? a.text : (prefill ? oneLine(prefill) : '');
+    document.getElementById('fmLabel').value = a ? a.label : 'Home';
+    document.getElementById('fmErr').style.display = 'none';
+    showView('form');
+    document.getElementById('fmText').focus();
+  }
+  function saveForm(){
+    const text = document.getElementById('fmText').value.replace(/[ \t]+/g, ' ').replace(/\s*\n\s*/g, '\n').trim();
+    if (text.length < 5) { document.getElementById('fmErr').style.display = 'block'; document.getElementById('fmText').focus(); return; }
+    const label = oneLine(document.getElementById('fmLabel').value).slice(0, 24) || 'Other';
+    if (editId) {
+      const a = addrs.find(x => x.id === editId); if (a) { a.label = label; a.text = text; }
+      persistAddrs(); renderLoc(); showView('list');
+    } else {
+      const a = { id: 'a' + Date.now().toString(36) + Math.floor(Math.random() * 1296).toString(36), label: label, text: text };
+      addrs.unshift(a); gpsTok++; capturedLocation = null; useGps = false; gpsState = 'idle'; addrSel = a.id;
+      persistAddrs(); renderLoc(); closeLoc();
+    }
+  }
+
+  // open / close; the phone's Back button closes the page instead of leaving the site
+  function setBackground(on){
+    Array.prototype.forEach.call(document.body.children, function(el){
+      if (el.id === 'locPage' || el.tagName === 'SCRIPT') return;
+      if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert');
+    });
+    document.body.style.overflow = on ? 'hidden' : '';
+  }
+  function openLoc(){
+    if (locOpen) return;
+    lastFocus = document.activeElement; locOpen = true; menuId = null;
+    document.getElementById('lpSearch').value = '';
+    const pg = document.getElementById('locPage'); pg.classList.add('on'); pg.setAttribute('aria-hidden', 'false');
+    setBackground(true); showView('list');
+    try { history.pushState({ hudaLoc: 1 }, ''); } catch (e) {}
+    document.querySelector('#lpList .lp-back').focus();
+  }
+  function hideLoc(){
+    if (!locOpen) return;
+    locOpen = false; closing = false;
+    const pg = document.getElementById('locPage'); pg.classList.remove('on'); pg.setAttribute('aria-hidden', 'true');
+    setBackground(false);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function closeLoc(){
+    if (!locOpen || closing) return;
+    if (history.state && history.state.hudaLoc) { closing = true; history.back(); } else hideLoc();
+  }
+  window.addEventListener('popstate', hideLoc);
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape' || !locOpen) return;
+    if (document.getElementById('lpForm').classList.contains('on')) showView('list'); else closeLoc();
+  });
 
   // small round photos of the latest items for the cart bar (newest first); falls back to .png, then to an emoji
   function thumbHTML(it){
@@ -814,8 +1010,11 @@
     if (hasPhotoSelected) {
       text += `\n\n(I have a photo of the product/prescription to attach here in the chat)`;
     }
-    if (capturedLocation) {
+    const dest = chosenAddr();
+    if (useGps && capturedLocation) {
       text += `\n\nDelivery location: https://www.google.com/maps?q=${capturedLocation.lat},${capturedLocation.lng}`;
+    } else if (dest) {
+      text += `\n\nDelivery address (${dest.label}):\n${dest.text}`;
     }
     saveOrder(items);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
@@ -1071,7 +1270,9 @@
   loadHistory();
   render();
   syncSubTabs();
-  requestLocation();   // asked once, when the page opens
+  loadAddrs();
+  renderHeader();
+  if (!addrSel) requestLocation(false);   // asked once, when the page opens, only if no address is saved
 </script>
 </body>
 </html>
