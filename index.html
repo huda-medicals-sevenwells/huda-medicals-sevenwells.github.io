@@ -1,60 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huda Medicals — ஹுதா மருந்தகம்</title>
-<meta name="description" content="Huda Medicals — Quick home delivery, WhatsApp orders, 24x7 tele-counseling.">
-
-<!-- Social share preview -->
-<meta property="og:title" content="Huda Medicals — ஹுதா மருந்தகம்">
-<meta property="og:description" content="Fast home delivery of medicines & 24×7 medical advice — Seven Wells, Chennai">
-<meta property="og:image" content="https://huda-medicals-sevenwells.github.io/og-image.png">
-<meta property="og:url" content="https://huda-medicals-sevenwells.github.io">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0F8B8D">
-
-<!-- Favicons -->
+<title>Request a Product — Huda Medicals</title>
+<meta name="robots" content="noindex">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-
-<!-- Add to Home Screen -->
-<link rel="manifest" href="manifest.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Huda Medicals">
-
-<!-- Structured data for search engines -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Pharmacy",
-  "name": "Huda Medicals",
-  "alternateName": "ஹுதா மருந்தகம்",
-  "image": "https://huda-medicals-sevenwells.github.io/og-image.png",
-  "logo": "https://huda-medicals-sevenwells.github.io/icon-512.png",
-  "url": "https://huda-medicals-sevenwells.github.io",
-  "telephone": "+919962269992",
-  "email": "hudamedicals.sevenwells@gmail.com",
-  "hasMap": "https://maps.app.goo.gl/MUbMRhBBVutyp8mb8",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "109(52), St. Xavier Street, Seven Wells, George Town",
-    "addressLocality": "Chennai",
-    "addressRegion": "Tamil Nadu",
-    "postalCode": "600001",
-    "addressCountry": "IN"
-  },
-  "areaServed": "Seven Wells and nearby areas, Chennai",
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-    "opens": "06:00",
-    "closes": "23:00"
-  }
-}
-</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,509 +20,1058 @@
     --red:#C1272D;
     --white:#FFFFFF;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  *{ box-sizing:border-box; margin:0; padding:0; }
   body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter', 'Noto Sans Tamil', sans-serif;
+    background:var(--paper); color:var(--ink); font-family:'Inter', sans-serif;
     -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
   }
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+  .header{
+    background:linear-gradient(160deg, var(--teal-deep) 0%, #0D7072 100%);
+    color:var(--white); padding:12px 14px 14px; display:flex; align-items:center; gap:12px;
   }
-  a{color:inherit; text-decoration:none;}
-  :focus-visible{outline:3px solid var(--red); outline-offset:2px;}
-
-  .tamil{font-family:'Noto Sans Tamil', sans-serif;}
-
-  /* ---------- Language toggle ---------- */
-  [data-lang="en"] .t-ta{display:none;}
-  [data-lang="ta"] .t-en{display:none;}
-  .t-en{font-family:'Inter', sans-serif !important;}
-  .t-ta{font-family:'Noto Sans Tamil', sans-serif !important;}
-  .lang-toggle{
-    position:absolute; top:14px; right:14px; z-index:3;
-    background:rgba(255,255,255,0.16);
+  .home-btn{
+    flex:0 0 40px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.18);
+    color:var(--white); display:flex; align-items:center; justify-content:center; text-decoration:none;
     border:1.5px solid rgba(255,255,255,0.55);
-    color:var(--white);
-    font-family:'Noto Sans Tamil', sans-serif;
-    font-weight:600;
-    font-size:12.5px;
-    padding:7px 14px;
-    border-radius:20px;
-    cursor:pointer;
   }
-  .lang-toggle:active{ background:rgba(255,255,255,0.3); }
+  .home-btn:active{ background:rgba(255,255,255,0.3); }
+  .home-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
+  .header-text{ min-width:0; }
+  .header h1{ font-family:'Poppins',sans-serif; font-weight:700; font-size:18px; line-height:1.25; }
+  .header p{ font-size:12px; margin-top:2px; line-height:1.4; }
 
-  /* ---------- Hero ---------- */
-  .hero{
-    background:
-      radial-gradient(120% 100% at 50% -10%, rgba(255,255,255,0.16), transparent 55%),
-      linear-gradient(160deg, var(--teal-deep) 0%, var(--teal) 55%, var(--teal-bright) 100%);
-    color:var(--white);
-    padding:26px 22px 34px;
-    position:relative;
-    text-align:center;
-    overflow:hidden;
+  /* ---- four fixed tabs ---- */
+  .tabs{
+    position:-webkit-sticky; position:sticky; top:0; z-index:30; background:var(--white);
+    border-bottom:1px solid rgba(11,35,35,0.1); box-shadow:0 3px 8px -5px rgba(11,35,35,0.25);
   }
-  .pulse-line{
-    position:absolute; left:0; right:0; bottom:0; height:32px;
-    opacity:0.3;
+  .tabs-in{ display:flex; max-width:480px; margin:0 auto; }
+  .tab{
+    flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;
+    padding:8px 2px 6px; border:none; border-bottom:3px solid transparent; background:transparent;
+    color:#5F7878; font-family:'Poppins',sans-serif; font-weight:600; font-size:11px; line-height:1.2;
+    white-space:nowrap; cursor:pointer; -webkit-appearance:none; appearance:none;
   }
-  .logo-badge{
-    width:60px; height:60px;
-    margin:0 auto 12px;
-    border-radius:50%;
-    background:var(--white);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 8px 18px -6px rgba(0,0,0,0.3);
-    animation:riseIn 600ms ease-out both;
+  .tab svg{ width:19px; height:19px; flex:0 0 19px; }
+  .tab[aria-selected="true"]{ color:var(--teal-deep); border-bottom-color:var(--teal-deep); }
+  .tab:focus-visible{ outline:2px solid var(--teal); outline-offset:-3px; }
+  .loc-row{ display:flex; align-items:center; gap:6px; margin-top:6px; font-size:12px; line-height:1.35; }
+  .loc-row svg{ flex:0 0 13px; }
+  .loc-row #locText{ min-width:0; }
+  .loc-link{
+    flex:0 0 auto; background:none; border:none; color:#FFFFFF; font-family:'Poppins',sans-serif;
+    font-weight:700; font-size:12px; text-decoration:underline; cursor:pointer; padding:4px 2px;
   }
-  .logo-badge img{ width:40px; height:auto; display:block; }
-  @keyframes riseIn{
-    from{ opacity:0; transform:translateY(8px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
-  .name-ta{
-    font-family:'Noto Sans Tamil', sans-serif;
-    font-weight:800;
-    font-size:clamp(24px, 6.4vw, 32px);
-    line-height:1.15;
-    animation:riseIn 600ms ease-out 60ms both;
-  }
-  .name-en{
-    font-family:'Poppins', sans-serif;
-    font-weight:600;
-    font-size:clamp(12.5px, 3.4vw, 14px);
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    opacity:0.9;
-    margin-top:4px;
-    animation:riseIn 600ms ease-out 120ms both;
-  }
-  .tagline{
-    margin-top:10px;
-    font-size:clamp(12.5px, 3.2vw, 14px);
-    font-family:'Noto Sans Tamil', sans-serif;
-    opacity:0.92;
-    max-width:380px;
-    margin-left:auto; margin-right:auto;
-    animation:riseIn 600ms ease-out 180ms both;
-  }
+  .loc-link:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
 
-  /* ---------- Featured action ---------- */
-  .featured-wrap{
-    max-width:480px;
-    margin:-22px auto 0;
-    padding:0 18px;
-    position:relative;
-    z-index:2;
+  /* ---- Frequent tab ---- */
+  .freq-note{ font-size:12px; color:#5C7676; margin:0 0 10px; line-height:1.5; }
+  .freq-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--white);
+    border:1px solid rgba(11,35,35,0.07); border-radius:12px; padding:11px 13px; margin-bottom:8px;
   }
-  .cta-featured{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-    background:#19874C;
-    color:var(--white);
-    padding:15px 18px;
-    border-radius:18px;
-    font-family:'Poppins', sans-serif;
-    font-weight:600;
-    font-size:15.5px;
-    box-shadow:0 10px 24px -10px rgba(11,35,35,0.35);
-    animation:softPulse 3s ease-in-out infinite;
-    transition:transform 120ms ease;
+  .freq-info{ min-width:0; flex:1 1 auto; }
+  .freq-row .rname{ font-size:13px; font-weight:600; }
+  .freq-row .rpack{ font-size:11.5px; color:#5C7676; margin-top:2px; }
+  .freq-ctl{ flex:0 0 104px; }
+  .freq-clear{
+    display:block; margin:6px auto 0; background:none; border:none; color:#4F6868; font-size:12px;
+    font-weight:600; text-decoration:underline; cursor:pointer; padding:8px;
   }
-  .cta-featured:active{ transform:scale(0.97); }
-  @keyframes softPulse{
-    0%,100%{ box-shadow:0 10px 24px -10px rgba(25,135,76,0.4); }
-    50%{ box-shadow:0 10px 30px -6px rgba(25,135,76,0.65); }
+  .subtabs{
+    display:none; position:relative; max-width:480px; margin:0 auto; overflow-x:auto; white-space:nowrap;
+    padding:8px 14px 4px; border-top:1px solid rgba(11,35,35,0.06); -webkit-overflow-scrolling:touch; scrollbar-width:none;
   }
-  .cta-featured .ic{
-    width:34px; height:34px; flex:0 0 34px;
-    border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    background:rgba(255,255,255,0.22);
+  .subtabs::-webkit-scrollbar{ display:none; }
+  .subtabs.on{ display:block; }
+  .chip{
+    display:inline-flex; flex-direction:column; align-items:center; gap:4px; min-width:56px; margin-right:8px; padding:0 4px 4px;
+    border:none; border-bottom:3px solid transparent; background:transparent; color:var(--ink); vertical-align:top;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:11px; line-height:1.3; white-space:nowrap; cursor:pointer;
   }
-  .cta-featured .sub{
-    display:block; font-family:'Inter',sans-serif; font-weight:400; font-size:11.5px; opacity:0.85; margin-top:1px;
+  .chip .ci{
+    position:relative; width:40px; height:40px; box-sizing:border-box; border-radius:50%; background:#E9F5F4;
+    border:1px solid rgba(11,35,35,0.15); overflow:hidden;
+  }
+  .chip .e{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:19px; }
+  .chip .ci img{ position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; background:#FFFFFF; }
+  .chip:last-child{ margin-right:14px; }
+  .chip.on{ border-bottom-color:var(--teal-deep); color:var(--teal-deep); font-weight:700; }
+  .chip.on .ci{ border:2px solid var(--teal-deep); }
+  .chip:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
+  .sec-h{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; margin:16px 0 8px; }
+  #freqWrap{ display:none; }
+  .rx-mark{
+    display:inline-block; margin-left:6px; padding:0 5px; border:1px solid var(--red); border-radius:4px; color:var(--red);
+    font-family:'Poppins',sans-serif; font-size:10px; font-weight:700; line-height:1.5; vertical-align:middle;
+  }
+  .rx-note{
+    background:var(--white); border:1px solid rgba(193,39,45,0.3); border-radius:12px; padding:11px 13px;
+    font-size:12.5px; line-height:1.5; color:var(--ink); margin-bottom:12px;
+  }
+  .alt-box{ display:none; margin:10px 0 2px; padding:10px 12px; background:#F0F9F8; border:1px solid rgba(15,139,141,0.25); border-radius:12px; }
+  .alt-box.show{ display:block; }
+  .alt-h{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; }
+  .alt-sub{ font-size:11.5px; color:#4F6868; margin:1px 0 8px; line-height:1.45; }
+  .alt-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 0; border-top:1px solid rgba(11,35,35,0.08); }
+  .alt-info{ min-width:0; flex:1 1 auto; }
+  .alt-name{ font-size:13px; font-weight:600; line-height:1.35; }
+  .alt-meta{ font-size:11.5px; color:#4F6868; margin-top:2px; line-height:1.4; }
+  .alt-pick{
+    flex:0 0 auto; background:var(--white); color:var(--teal-deep); border:1.5px solid var(--teal-deep); border-radius:9px;
+    padding:7px 12px; font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer;
+  }
+  .tabpanel{ display:none; }
+  .tabpanel.on{ display:block; }
+  .tabpanel > :first-child{ margin-top:0; }
+  .tabpanel .info-box{ margin:16px 0 0; }
+  .list-wrap, #gridTitle{ scroll-margin-top:var(--stick, 68px); }
+
+  .wrap{ max-width:480px; margin:0 auto; padding:18px; }
+
+  .info-box{
+    background:var(--white); border:1px solid rgba(11,35,55,0.08); border-radius:14px;
+    padding:13px 15px; font-size:12px; color:#5C7676; line-height:1.55; margin-bottom:16px;
   }
 
-  /* ---------- App grid ---------- */
-  .grid-wrap{
-    max-width:480px;
-    margin:14px auto 0;
-    padding:0 18px;
+  .add-card{
+    background:var(--white); border-radius:16px; padding:16px; border:1px solid rgba(11,35,35,0.07);
   }
-  .tile-grid{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
+  .field-label{
+    font-family:'Poppins',sans-serif; font-size:12px; font-weight:600; color:var(--ink); margin-bottom:6px; display:block;
   }
-  .tile{
-    background:var(--white);
-    width:calc(50% - 5px);
-    border-radius:18px;
-    padding:14px 10px 13px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    border:1px solid rgba(11,35,35,0.07);
-    box-shadow:0 6px 16px -10px rgba(11,35,35,0.2);
-    transition:transform 120ms ease, box-shadow 120ms ease;
-    box-sizing:border-box;
+  .field-input{
+    width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid rgba(11,35,35,0.12);
+    font-family:'Inter',sans-serif; font-size:14px; background:var(--paper); margin-bottom:12px;
   }
-  a.tile:active{
-    transform:scale(0.96);
-    box-shadow:0 3px 10px -6px rgba(11,35,35,0.25);
+  .field-input:focus{ outline:2px solid var(--teal); outline-offset:1px; }
+  .add-btn{
+    width:100%; padding:13px; border-radius:12px; border:none; background:var(--teal-deep); color:white;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:13.5px; cursor:pointer;
   }
-  .tile .ic{
-    width:38px; height:38px; border-radius:12px;
-    display:flex; align-items:center; justify-content:center;
-    background:rgba(15,139,141,0.1);
-    color:var(--teal-deep);
-    margin-bottom:8px;
+  .add-btn:active{ background:var(--teal); }
+
+  .qty-row{
+    display:flex; align-items:center; gap:14px; margin-bottom:12px;
+    background:var(--paper); border-radius:12px; padding:8px 10px; width:fit-content;
   }
-  .tile.red .ic{ background:rgba(193,39,45,0.09); }
-  .tile.green .ic{ background:rgba(25,135,76,0.12); color:#19874C; }
-  .tile.brand .ic{ background:linear-gradient(135deg, var(--teal-deep), var(--teal-bright)); }
-  .tile h3{
-    font-family:'Poppins', sans-serif;
-    font-size:13.5px; font-weight:600; color:var(--ink);
-    line-height:1.25;
+  .qty-btn{
+    width:32px; height:32px; border-radius:9px; border:none; background:var(--teal-deep);
+    color:white; font-size:18px; font-weight:700; cursor:pointer; line-height:1;
   }
-  .tile p{
-    font-family:'Noto Sans Tamil', sans-serif;
-    font-size:11px; color:#5C7676; margin-top:3px; line-height:1.4;
+  .qty-display{
+    font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; width:64px; text-align:center;
+    border:1.5px solid rgba(11,35,35,0.12); border-radius:9px; background:var(--white); color:var(--ink);
+    padding:6px 4px; -moz-appearance:textfield; appearance:textfield;
   }
-  .tile.soon{
-    background:repeating-linear-gradient(135deg, #F0F6F5, #F0F6F5 10px, #E9F1F0 10px, #E9F1F0 20px);
-    border:1.5px dashed rgba(11,91,93,0.25);
-  }
-  .tile.soon .ic{ background:rgba(11,35,35,0.06); color:#7C9494; }
-  .tile.soon h3{ color:#557171; }
-  .tile.soon p{ color:#7C9494; }
-  .tile .badge{
-    display:inline-block; margin-top:4px;
-    font-family:'Inter', sans-serif;
-    font-size:9.5px; font-weight:600; letter-spacing:0.04em;
-    color:var(--teal-deep);
-    background:rgba(15,139,141,0.14);
-    padding:2px 8px; border-radius:20px;
+  .qty-display::-webkit-outer-spin-button, .qty-display::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+  .qty-display:focus{ outline:2px solid var(--teal); outline-offset:1px; }
+  .form-badge{
+    display:inline-block; font-family:'Inter',sans-serif; font-size:9.5px; font-weight:700;
+    letter-spacing:0.03em; color:var(--teal-deep); background:rgba(15,139,141,0.12);
+    padding:2px 7px; border-radius:8px; margin-left:6px; text-transform:uppercase; vertical-align:middle;
   }
 
-  /* ---------- Footer ---------- */
-  /* ---------- Footer ---------- */
-  footer{
-    margin-top:40px;
-    padding:26px 18px 34px;
-    text-align:center;
-    color:#5C7676;
-    font-size:12px;
+  .search-wrap{ position:relative; }
+  .suggest-box{
+    display:none; position:absolute; left:0; right:0; top:100%; margin-top:-8px; z-index:20;
+    background:var(--white); border:1.5px solid rgba(11,35,35,0.12); border-top:none;
+    border-radius:0 0 12px 12px; max-height:280px; overflow-y:auto;
+    box-shadow:0 8px 18px -6px rgba(11,35,35,0.18);
   }
-  footer .brand{
-    font-family:'Poppins', sans-serif;
-    font-weight:600;
-    color:var(--teal-deep);
-    font-size:13px;
-    margin-bottom:4px;
+  .suggest-box.show{ display:block; }
+  .suggest-row{
+    padding:10px 14px; border-bottom:1px solid rgba(11,35,35,0.06); cursor:pointer;
+  }
+  .suggest-row:last-child{ border-bottom:none; }
+  .suggest-row:active{ background:var(--paper); }
+  .suggest-row .sname{ font-size:13px; font-weight:600; color:var(--ink); }
+  .suggest-row .scomp{ font-size:11px; color:#1B7A43; margin-top:2px; }
+  .suggest-row .smeta{ font-size:10.5px; color:#5F7878; margin-top:2px; }
+  .suggest-note{ padding:8px 14px; font-size:11.5px; color:#5C7676; background:var(--paper); border-bottom:1px solid rgba(11,35,35,0.06); }
+  .suggest-note b{ color:var(--ink); }
+  .suggest-empty{ padding:12px 14px; font-size:12px; color:#5F7878; }
+  .selected-tag{
+    display:none; align-items:center; justify-content:space-between; gap:8px;
+    background:rgba(30,160,90,0.08); border:1px solid rgba(30,160,90,0.25); border-radius:10px;
+    padding:8px 11px; margin-bottom:12px; font-size:11.5px;
+  }
+  .selected-tag.show{ display:flex; }
+  .selected-tag button{ background:none; border:none; color:var(--red); font-weight:700; font-size:11px; cursor:pointer; }
+  .ci-composition{ font-size:11px; color:#1B7A43; margin-top:2px; }
+  .ci-mfr{ font-size:11px; color:#5F7878; margin-top:1px; }
+
+  .list-wrap{ margin-top:18px; }
+  .list-wrap h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:10px; }
+  .req-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:12px;
+    padding:11px 13px; margin-bottom:8px;
+  }
+  .req-row .rname{ font-size:13px; font-weight:600; }
+  .req-row .rpack{ font-size:11.5px; color:#5C7676; margin-top:2px; }
+  .req-row button{
+    flex:0 0 auto; background:rgba(193,39,45,0.08); color:var(--red); border:none;
+    padding:7px 12px; border-radius:9px; font-size:11.5px; font-weight:700; cursor:pointer;
+  }
+  .empty-note{ text-align:center; color:#5F7878; font-size:12.5px; padding:14px 0; }
+
+  .send-bar{
+    display:none; position:fixed; left:18px; right:18px; bottom:16px; max-width:444px; margin:0 auto;
+    background:#19874C; border-radius:16px; padding:6px; align-items:stretch; gap:6px;
+    box-shadow:0 10px 28px -8px rgba(11,35,35,0.4); width:calc(100% - 36px);
+  }
+  .send-bar.show{ display:flex; }
+  .send-count{
+    flex:0 0 auto; display:flex; align-items:center; gap:5px; background:#0E5C33; color:#FFFFFF;
+    border:none; border-radius:11px; padding:0 12px; font-family:'Poppins',sans-serif; font-weight:700;
+    font-size:13px; white-space:nowrap; cursor:pointer;
+  }
+  .send-thumbs{ display:inline-flex; align-items:center; }
+  .send-thumbs .th{
+    position:relative; flex:0 0 28px; width:28px; height:28px; box-sizing:border-box; border-radius:50%;
+    background:#E9F5F4; border:2px solid #0E5C33; overflow:hidden; margin-left:-10px;
+  }
+  .send-thumbs .th:nth-child(1){ margin-left:0; z-index:3; }
+  .send-thumbs .th:nth-child(2){ z-index:2; }
+  .send-thumbs .th:nth-child(3){ z-index:1; }
+  .send-thumbs .e{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:13px; }
+  .send-thumbs img{ position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; background:#FFFFFF; }
+  @media (max-width:399px){ .send-thumbs .th:nth-child(3){ display:none; } }
+  @media (max-width:339px){ .send-thumbs{ display:none; } }
+  .send-go{
+    flex:1 1 auto; display:flex; align-items:center; justify-content:center; gap:8px; background:transparent;
+    color:#FFFFFF; border:none; padding:10px 8px; font-family:'Poppins',sans-serif; font-weight:700;
+    font-size:14px; cursor:pointer;
   }
 
-  svg{ display:block; }
+  .quick-hint{ font-size:11.5px; color:#5C7676; margin:-6px 0 12px; line-height:1.5; }
 
-/* ---------- iPhone install guide ---------- */
-  .ios-overlay{ display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(11,35,35,0.55); z-index:200; align-items:flex-end; justify-content:center; }
-  .ios-sheet{ background:var(--white); width:100%; max-width:480px; border-radius:20px 20px 0 0; padding:22px 20px calc(24px + env(safe-area-inset-bottom, 0px)); font-family:'Inter',sans-serif; max-height:88vh; overflow-y:auto; }
-  .ios-sheet h2{ font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; color:var(--ink); text-align:center; margin-bottom:14px; }
-  .ios-step{ display:flex; gap:11px; align-items:flex-start; margin-bottom:12px; font-size:13px; line-height:1.55; color:var(--ink); text-align:left; }
-  .ios-step .n{ flex:0 0 24px; height:24px; border-radius:50%; background:var(--teal-deep); color:#fff; font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center; }
-  .ios-step svg{ display:inline-block; vertical-align:-3px; margin:0 2px; }
-  .ios-sub{ font-size:11.5px; color:#5C7676; }
-  .ios-note{ background:#FFF3CD; border:1px solid #F0D98A; border-radius:12px; padding:10px 12px; font-size:12px; color:#6B5B10; line-height:1.5; margin-bottom:12px; text-align:left; }
-  .ios-actions{ display:flex; gap:10px; margin-top:14px; }
-  .ios-btn{ flex:1; padding:13px; border-radius:14px; font-family:'Poppins',sans-serif; font-weight:600; font-size:13.5px; cursor:pointer; border:none; }
-  .ios-btn.primary{ background:var(--teal-deep); color:#fff; }
-  .ios-btn.secondary{ background:var(--white); color:var(--teal-deep); border:1.5px solid var(--teal-deep); }
-
-  /* ---------- Promo cards ---------- */
-  .promo-wrap{ max-width:480px; margin:12px auto 0; padding:0 18px; display:flex; flex-direction:column; gap:10px; }
-  .promo-card{ display:flex; align-items:center; gap:12px; background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:18px; padding:13px 15px; text-decoration:none; color:var(--ink); box-shadow:0 6px 16px -10px rgba(11,35,35,0.2); transition:transform 120ms ease; }
-  .promo-card:active{ transform:scale(0.98); }
-  .promo-card .pc-ic{ flex:0 0 40px; width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:rgba(15,139,141,0.1); color:var(--teal-deep); }
-  .promo-card .pc-ic.gold{ background:rgba(184,134,11,0.12); }
-  .promo-card h3{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:600; color:var(--ink); }
-  .promo-card p{ font-family:'Noto Sans Tamil','Inter',sans-serif; font-size:11.5px; color:#5C7676; margin-top:2px; line-height:1.4; }
-  .promo-card .chev{ margin-left:auto; color:#5C7676; flex:0 0 auto; }
-
-  /* ---------- One language at a time for the shop name ---------- */
-  [data-lang="en"] .only-ta{ display:none; }
-  [data-lang="ta"] .only-en{ display:none; }
-  .only-ta{ font-family:'Noto Sans Tamil', sans-serif; }
-  [data-lang="en"] .name-ta{ display:none; }
-  [data-lang="ta"] .name-en{ display:none; }
-  /* English mode: the English name becomes the main heading */
-  [data-lang="en"] .name-en{
-    font-size:clamp(26px, 7vw, 34px); font-weight:700; letter-spacing:0.01em;
-    text-transform:none; opacity:1; margin-top:0; line-height:1.15;
+  .photo-card{
+    background:var(--white); border-radius:16px; padding:16px; border:1px solid rgba(11,35,35,0.07);
+    margin-top:16px;
   }
+  .photo-card h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:4px; }
+  .photo-sub{ font-size:12px; color:#5C7676; margin-bottom:12px; line-height:1.5; }
+  .photo-check{ display:flex; align-items:center; gap:9px; cursor:pointer; }
+  .photo-check input{ width:18px; height:18px; accent-color:var(--teal-deep); flex:0 0 18px; }
+  .photo-check span{ font-size:12.5px; font-weight:600; color:var(--ink); }
+
+  .footer-note{
+    text-align:center; font-size:11px; color:#5F7878; padding:24px 18px 90px; line-height:1.6;
+  }
+
+  /* ---- Quick add shop (category tiles, frequently bought, product cards) ---- */
+  .shop{ display:none; margin-top:18px; }
+  .shop h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:2px; }
+  .shop h3{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; margin:16px 0 8px; }
+  .shop-sub{ font-size:12px; color:#5C7676; margin:2px 0 12px; line-height:1.5; }
+  .pgrid{ display:flex; flex-wrap:wrap; gap:10px; }
+  .pgrid .pcard{ width:calc(50% - 5px); }
+  .pcard{
+    background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:14px; padding:8px;
+    display:flex; flex-direction:column;
+  }
+  .pimg{ position:relative; width:100%; padding-top:100%; background:#E9F5F4; border-radius:10px; overflow:hidden; margin-bottom:8px; }
+  .pimg .ph, .pimg img{ position:absolute; top:0; left:0; width:100%; height:100%; }
+  .pimg .ph{ display:flex; align-items:center; justify-content:center; font-size:36px; }
+  .pimg img{ object-fit:contain; background:#FFFFFF; }
+  .pname{ font-size:12.5px; font-weight:600; color:var(--ink); line-height:1.35; min-height:34px; }
+  .pcomp{ font-size:10.5px; color:#1B7A43; margin-top:2px; line-height:1.35; max-height:28px; overflow:hidden; }
+  .pprice{ font-size:11.5px; font-weight:600; color:var(--teal-deep); margin-top:3px; }
+  .pctl{ margin-top:auto; padding-top:8px; }
+  .padd{
+    width:100%; padding:8px; border-radius:10px; border:1.5px solid var(--teal-deep); background:var(--white);
+    color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer;
+  }
+  .padd:active{ background:var(--paper); }
+  .pstep{ display:flex; align-items:center; justify-content:space-between; background:var(--teal-deep); border-radius:10px; padding:3px; }
+  .pstep button{ width:32px; height:30px; border:none; border-radius:8px; background:transparent; color:#FFFFFF; font-size:18px; font-weight:700; cursor:pointer; }
+  .pstep span{ color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; }
 </style>
 </head>
 <body>
 
-<section class="hero">
-  <button id="langToggle" class="lang-toggle" type="button" aria-label="மொழியை மாற்று / Switch language" onclick="toggleLang()">தமிழ்</button>
-  <div class="logo-badge"><img src="logo-mark.png" alt="Huda Medicals"></div>
-  <div class="name-ta tamil">ஹுதா மருந்தகம்</div>
-  <div class="name-en">Huda Medicals</div>
-  <p class="tagline">
-    <span class="t-en">Fast home delivery of medicines &amp; 24×7 medical advice</span>
-    <span class="t-ta">வீட்டிற்கே விரைவான மருந்து டெலிவரி &amp; 24×7 மருத்துவ ஆலோசனை</span>
-  </p>
-
-  <svg class="pulse-line" viewBox="0 0 400 32" preserveAspectRatio="none" aria-hidden="true">
-    <polyline points="0,20 60,20 80,6 100,28 120,20 400,20" fill="none" stroke="white" stroke-width="2"/>
-  </svg>
-</section>
-
-<div class="featured-wrap">
-  <a class="cta-featured" href="request.html">
-    <span class="ic" aria-hidden="true">
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.19-3 .79.8-2.92-.2-.3A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.4-5.9c-.24-.12-1.43-.7-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4-.14 0-.3-.02-.46-.02s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
-    </span>
-    <span>
-      <span class="t-en">Order on WhatsApp</span><span class="t-ta">WhatsApp-ல் ஆர்டர்</span>
-      <span class="sub"><span class="t-en">Instant reply, no waiting</span><span class="t-ta">உடனடி பதில் கிடைக்கும்</span></span>
-    </span>
+<div class="header" id="hdr">
+  <a class="home-btn" href="home.html" aria-label="Back to Huda Medicals home">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
   </a>
-</div>
-
-<div class="grid-wrap">
-  <div class="tile-grid">
-
-    <a class="tile brand" href="#" id="installTile" style="display:none;" onclick="handleInstallTap(event)">
-      <span class="ic" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>
-      </span>
-      <h3><span class="t-en">Install App</span><span class="t-ta">Install App</span></h3>
-      <p><span class="t-en">Add to your home screen</span><span class="t-ta">Add to your home screen</span></p>
-    </a>
-
-    <a class="tile" href="tel:+919962269992">
-      <span class="ic" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
-      </span>
-      <h3><span class="t-en">Call Now</span><span class="t-ta">அழையுங்கள்</span></h3>
-      <p>9962 269 992</p>
-    </a>
-
-    <a class="tile brand" href="huda-medicals.vcf">
-      <span class="ic" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6" stroke-linecap="round"/></svg>
-      </span>
-      <h3><span class="t-en">Save Contact</span><span class="t-ta">தொடர்பைச் சேமிக்கவும்</span></h3>
-    </a>
-
-    <a class="tile green" href="https://whatsapp.com/channel/0029VbDvf8f2phHOg4wji82i" target="_blank" rel="noopener">
-      <span class="ic" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.44-4.38-1.2l-.31-.19-3 .79.8-2.92-.2-.3A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8zm4.4-5.9c-.24-.12-1.43-.7-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.4-.14 0-.3-.02-.46-.02s-.42.06-.64.3c-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
-      </span>
-      <h3><span class="t-en">WhatsApp Channel</span><span class="t-ta">WhatsApp Channel</span></h3>
-      <p><span class="t-en">Follow for updates</span><span class="t-ta">Follow for updates</span></p>
-    </a>
-
-    <a class="tile" href="https://maps.app.goo.gl/MUbMRhBBVutyp8mb8" target="_blank" rel="noopener">
-      <span class="ic" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-      </span>
-      <h3><span class="t-en">Directions</span><span class="t-ta">வழி காட்டவும்</span></h3>
-      <p>Seven Wells, Chennai</p>
-    </a>
-
-    <a class="tile red" href="mailto:hudamedicals.sevenwells@gmail.com">
-      <span class="ic" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="m22 6-10 7L2 6" stroke-linejoin="round"/></svg>
-      </span>
-      <h3><span class="t-en">Email Us</span><span class="t-ta">மின்னஞ்சல்</span></h3>
-    </a>
-
-    <div class="tile">
-      <span class="ic" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      </span>
-      <h3><span class="t-en">Working Hours</span><span class="t-ta">வேலை நேரம்</span></h3>
-      <p><span class="t-en">6 AM – 11 PM daily</span><span class="t-ta">காலை 6 – இரவு 11</span></p>
+  <div class="header-text">
+    <h1>Request a Product</h1>
+    <p>We'll check availability and reply on WhatsApp.</p>
+    <div class="loc-row" id="locRow" data-state="asking">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span id="locText" aria-live="polite">Checking your location&hellip;</span>
+      <button type="button" class="loc-link" id="locAction" onclick="locAction()" style="display:none">Share</button>
     </div>
-
-    <div class="tile">
-      <span class="ic" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h3.5L22 13v4h-6z"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>
-      </span>
-      <h3><span class="t-en">Home Delivery</span><span class="t-ta">வீட்டு டெலிவரி</span></h3>
-      <p><span class="t-en">Seven Wells &amp; nearby</span><span class="t-ta">அருகிலுள்ள பகுதிகள்</span></p>
-    </div>
-
-    <div class="tile">
-      <span class="ic" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 12l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5z"/></svg>
-      </span>
-      <h3><span class="t-en">Tele-Counseling</span><span class="t-ta">மருத்துவ ஆலோசனை</span></h3>
-      <p><span class="t-en">24×7 pharmacist advice</span><span class="t-ta">எந்த நேரமும் ஆலோசனை</span></p>
-    </div>
-
-    <div class="tile soon" aria-disabled="true">
-      <span class="ic" aria-hidden="true">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>
-      </span>
-      <h3><span class="t-en">Offers</span><span class="t-ta">சலுகைகள்</span></h3>
-      <span class="badge"><span class="t-en">SOON</span><span class="t-ta">விரைவில்</span></span>
-    </div>
-
   </div>
 </div>
 
-<div class="promo-wrap">
-  <a class="promo-card" href="https://g.page/r/CaUdogdMEBtbECE/review" target="_blank" rel="noopener">
-    <span class="pc-ic gold" aria-hidden="true">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="#B8860B" stroke="#B8860B" stroke-width="1.5" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-    </span>
-    <div class="pc-text">
-      <h3><span class="t-en">Rate us on Google</span><span class="t-ta">Rate us on Google</span></h3>
-      <p><span class="t-en">Your review helps others find us</span><span class="t-ta">Your review helps others find us</span></p>
+<div class="tabs" id="tabsBar">
+  <div class="tabs-in" id="tabs" role="tablist" aria-label="Request sections">
+    <button type="button" class="tab" id="tab-cat" role="tab" aria-selected="true" aria-controls="panel-cat" tabindex="0" onclick="showTab('cat')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Categories</span></button>
+    <button type="button" class="tab" id="tab-search" role="tab" aria-selected="false" aria-controls="panel-search" tabindex="-1" onclick="showTab('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search</span></button>
+    <button type="button" class="tab" id="tab-rx" role="tab" aria-selected="false" aria-controls="panel-rx" tabindex="-1" onclick="showTab('rx')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><span>Upload Rx</span></button>
+    <button type="button" class="tab" id="tab-freq" role="tab" aria-selected="false" aria-controls="panel-freq" tabindex="-1" onclick="showTab('freq')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Frequent</span></button>
+  </div>
+  <div class="subtabs" id="subTabs" role="group" aria-label="Categories"></div>
+</div>
+
+<div class="wrap">
+  <section class="tabpanel on" id="panel-cat" role="tabpanel" aria-labelledby="tab-cat">
+  <div class="shop" id="shop">
+    <h2>Quick add &mdash; popular items</h2>
+    <p class="shop-sub">Tap Add to put an item on your request list. We'll check availability and confirm the price on WhatsApp. Prices shown are reference prices, not a confirmed quote.</p>
+    <h3 id="gridTitle">All items</h3>
+    <div class="pgrid" id="shopGrid"></div>
+  </div>
+  </section>
+  <section class="tabpanel" id="panel-search" role="tabpanel" aria-labelledby="tab-search">
+  <div class="add-card">
+    <label class="field-label" for="prodName">Product name</label>
+    <p class="quick-hint">Search below — if you're not sure we stock it, type it anyway and we'll check.</p>
+    <div class="search-wrap">
+      <input type="text" id="prodName" class="field-input" placeholder="Start typing to search..." autocomplete="off">
+      <div class="suggest-box" id="suggestBox"></div>
     </div>
-    <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-  </a>
-</div>
-
-<footer>
-  <div class="brand"><span class="only-en">Huda Medicals</span><span class="only-ta">ஹுதா மருந்தகம்</span></div>
-  <p style="margin-top:8px; font-size:11px; color:#5C7676;">109(52), St. Xavier St., Seven Wells, George Town, Chennai – 600001</p>
-  <div style="margin:18px auto 0; max-width:300px; padding-top:16px; border-top:1px solid rgba(11,91,93,0.12);">
-    <p style="font-family:'Noto Sans Tamil', serif; font-style:italic; font-size:12.5px; color:#3D5C5C; line-height:1.55;">
-      &ldquo;And when I am ill, it is He who cures me.&rdquo;
-    </p>
-    <p style="font-size:10.5px; color:#5F7878; margin-top:4px; letter-spacing:0.03em;">&mdash; Qur'an 26:80</p>
+    <div class="selected-tag" id="selectedTag">
+      <span>&#10003; <span id="selectedTagText"></span></span>
+      <button onclick="clearSelection()">Change</button>
+    </div>
+    <div class="alt-box" id="altBox"></div>
+    <label class="field-label">Quantity</label>
+    <div class="qty-row">
+      <button type="button" class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease quantity">&minus;</button>
+      <input type="number" class="qty-display" id="qtyDisplay" value="1" min="1" max="999" step="1" inputmode="numeric" aria-label="Quantity" oninput="setQty(this.value)" onchange="normalizeQty()" onblur="normalizeQty()">
+      <button type="button" class="qty-btn" onclick="changeQty(1)" aria-label="Increase quantity">+</button>
+    </div>
+    <label class="field-label" for="prodPack">Anything specific we should know? <span style="font-weight:500; color:#5F7878;">(optional)</span></label>
+    <input type="text" id="prodPack" class="field-input" placeholder="e.g. strip of 10, sugar-free, specific brand only...">
+    <button class="add-btn" onclick="addRequest()">Add to my list</button>
   </div>
 
-  <p style="margin-top:14px; font-size:10.5px; color:#5F7878; line-height:1.6; max-width:340px; margin-left:auto; margin-right:auto;">
-    Licence No. TN/Z01/20/00923 — Retail sale of drugs other than Schedules C, C(1) &amp; X<br>
-    Licence No. TN/Z01/21/00923 — Retail sale of drugs under Schedules C &amp; C(1), excluding Schedule X
-  </p>
-</footer>
-
-<div id="iosInstallOverlay" class="ios-overlay" role="dialog" aria-modal="true" aria-labelledby="iosGuideTitle" onclick="if(event.target===this)closeIOSGuide();">
-  <div class="ios-sheet">
-    <h2 id="iosGuideTitle">Add Huda Medicals to your Home Screen</h2>
-    <div id="iosGuideBody"></div>
-    <div class="ios-actions" id="iosGuideActions"></div>
+  <div class="info-box">
+    Start typing and we'll suggest matching products with their composition and manufacturer, if we recognize them. Can't find it in suggestions? Just type it anyway — you don't need to know if we stock it, that's what we'll check for you. Any price shown while searching is a reference price, not a confirmed quote — we'll confirm the real price when we check.
   </div>
+  </section>
+  <section class="tabpanel" id="panel-rx" role="tabpanel" aria-labelledby="tab-rx">
+  <p class="rx-note">Valid prescription required for some medicines. WhatsApp it to us so the correct medicine is ready for home delivery or store pickup.</p>
+  <div class="photo-card">
+    <h2>Product Photo or Prescription <span style="font-weight:500; color:#5F7878;">(optional)</span></h2>
+    <p class="photo-sub">If a photo helps us confirm what you need, attach it directly in the WhatsApp chat after you send your request &mdash; just use the &#128206; icon there. Nothing to select here.</p>
+    <label class="photo-check">
+      <input type="checkbox" id="photoCheck" onchange="setPhotoFlag(this.checked)">
+      <span>I'll be attaching a photo or prescription</span>
+    </label>
+  </div>
+  </section>
+  <section class="tabpanel" id="panel-freq" role="tabpanel" aria-labelledby="tab-freq">
+  <h3 class="sec-h" id="freqMineH">Your previous orders</h3>
+  <p class="freq-note" id="freqNote">Your own earlier orders, saved only on this phone. Tap Add to put one on your request list.</p>
+  <div id="freqList"></div>
+  <div class="add-card" id="freqEmptyCard"><p class="empty-note" id="freqEmpty"></p></div>
+  <button type="button" class="freq-clear" id="freqClear" onclick="clearHistory()">Clear saved orders</button>
+  <div id="freqWrap"><h3 class="sec-h">Frequently bought</h3><div class="pgrid" id="freqRow"></div></div>
+  </section>
+
+  <div class="list-wrap" id="listSec">
+    <h2>Your request list</h2>
+    <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
+  </div>
+
 </div>
+
+<div class="send-bar" id="sendBar">
+  <button type="button" class="send-count" id="sendCountBtn" onclick="scrollToList()" aria-label="View your request list">
+    <span class="send-thumbs" id="sendThumbs" aria-hidden="true"></span>
+    <span id="sendCount"></span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+  <button type="button" class="send-go" onclick="sendRequest()">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+    Send via WhatsApp
+  </button>
+</div>
+
+<p class="footer-note">
+  Rx: valid prescription required. WhatsApp it to us so the correct medicine is ready for home delivery or store pickup.<br>
+  We'll reply on WhatsApp once we've checked stock and pricing — nothing is charged or confirmed until you agree.<br>
+  Huda Medicals · Seven Wells, Chennai
+</p>
 
 <script>
-  function setLang(lang){
-    document.documentElement.setAttribute('data-lang', lang);
-    document.documentElement.lang = lang;
-    document.getElementById('langToggle').textContent = (lang === 'en') ? 'தமிழ்' : 'English';
+  const WHATSAPP_NUMBER = "919962269992";
+  const items = [];
+  let selectedProduct = null;
+  let catalog = [];
+  let currentQty = 1;
+
+  fetch('reference-catalog.json')
+    .then(r => r.ok ? r.json() : [])
+    .then(data => {
+      // normalise once, so each keystroke only does cheap comparisons across ~44,000 items
+      data.forEach(r => { r._n = normalize(r.n); r._c = r.c ? normalize(r.c) : ''; });
+      catalog = data;
+      buildAltIndex();
+      shopAttach();
+      setTimeout(buildVocab, 50);   // word list for spelling correction
+    })
+    .catch(() => { catalog = []; });
+
+  function escapeHTML(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-  function toggleLang(){
-    var cur = document.documentElement.getAttribute('data-lang');
-    setLang(cur === 'en' ? 'ta' : 'en');
+  function fmt(n){ return '\u20b9' + Number(n).toLocaleString('en-IN'); }
+
+  function readQty(){
+    var n = parseInt(document.getElementById('qtyDisplay').value, 10);
+    if (isNaN(n) || n < 1) return 1;
+    return Math.min(n, 999);
+  }
+  function changeQty(delta){
+    currentQty = Math.max(1, Math.min(999, readQty() + delta));
+    document.getElementById('qtyDisplay').value = currentQty;
+  }
+  // typing: leave the customer's keystrokes alone, just remember a valid value
+  function setQty(val){
+    var n = parseInt(val, 10);
+    if (!isNaN(n) && n >= 1) currentQty = Math.min(n, 999);
+  }
+  // leaving the field: tidy up blanks, zero and decimals
+  function normalizeQty(){
+    currentQty = readQty();
+    document.getElementById('qtyDisplay').value = currentQty;
   }
 
-  // ---- Install App tile ----
-  // Android/Chrome: real one-tap install through the browser's own prompt.
-  // iPhone/iPad (every browser - Apple lets no website trigger this): a short guide that matches
-  // the browser and iOS layout the customer is actually using.
-  var deferredInstallPrompt = null;
-  var ua = navigator.userAgent || '';
-  var isIOS = /iPad|iPhone|iPod/.test(ua) || navigator.platform === 'iPhone' || navigator.platform === 'iPad' ||
-              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  var isStandalone = window.navigator.standalone === true ||
-              !!(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
-  var iosBrowser = 'safari';
-  if (isIOS) {
-    if (/FBAN|FBAV|Instagram|Line\/|MicroMessenger|Snapchat|Twitter|GSA\/|WhatsApp/i.test(ua) || !/Safari\//.test(ua)) iosBrowser = 'inapp';
-    else if (/CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo|Brave/i.test(ua)) iosBrowser = 'other';
+  // ---- Photo/prescription: just a flag - the photo itself gets attached inside WhatsApp ----
+  let hasPhotoSelected = false;
+  function setPhotoFlag(v){ hasPhotoSelected = !!v; render(); }
+
+  // ---- Search matching: tolerant of spacing/case differences ("dolo650" should find "Dolo 650") ----
+  function normalize(s){ return String(s).toLowerCase().replace(/[^a-z0-9]/g, ''); }
+  function tokenize(s){ return String(s).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean); }
+
+  // ---- Form/type badge (Tablet, Syrup, etc.) - extracted from name since neither
+  // source file has a clean "form" column ----
+  const FORM_KEYWORDS = [
+    ['SYRUP','Syrup'], ['SYP','Syrup'], ['TABLET','Tablet'], ['TABLETS','Tablet'], ['TAB','Tablet'], ['TABS','Tablet'],
+    ['CAPSULE','Capsule'], ['CAPSULES','Capsule'], ['CAP','Capsule'], ['CAPS','Capsule'],
+    ['INJECTION','Injection'], ['INJ','Injection'], ['CREAM','Cream'], ['OINTMENT','Ointment'], ['OINT','Ointment'],
+    ['DROPS','Drops'], ['DROP','Drops'], ['GEL','Gel'], ['LOTION','Lotion'],
+    ['SUSPENSION','Suspension'], ['SUSP','Suspension'], ['POWDER','Powder'], ['SACHET','Sachet'],
+    ['SOAP','Soap'], ['SHAMPOO','Shampoo'],
+  ];
+  function extractForm(name, unit){
+    const hay = (String(name) + ' ' + String(unit||'')).toUpperCase();
+    for (const [kw, label] of FORM_KEYWORDS) {
+      if (new RegExp('\\b' + kw + '\\b').test(hay)) return label;
+    }
+    return null;
   }
 
-  function showInstallTile(){ document.getElementById('installTile').style.display = ''; }
-  function hideInstallTile(){ document.getElementById('installTile').style.display = 'none'; }
-
-  window.addEventListener('beforeinstallprompt', function(e){
-    e.preventDefault();
-    deferredInstallPrompt = e;
-    if (!isStandalone) showInstallTile();
+  let searchDebounce = null;
+  document.getElementById('prodName').addEventListener('input', function(){
+    clearTimeout(searchDebounce);
+    const q = this.value.trim();
+    if (selectedProduct) clearSelection(false);
+    if (q.length < 2 || !catalog.length) { hideSuggestions(); return; }
+    searchDebounce = setTimeout(() => renderSuggestions(q), 150);
   });
-  window.addEventListener('appinstalled', function(){
-    hideInstallTile();
-    deferredInstallPrompt = null;
-  });
-  if (isIOS && !isStandalone) showInstallTile();
 
-  var SHARE_SVG = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0B5B5D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg>';
-  var ADD_SVG = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0B5B5D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>';
-  var DOTS = '<b>&bull;&bull;&bull;</b>';
-  function iosStep(n, inner){ return '<div class="ios-step"><span class="n">' + n + '</span><div>' + inner + '</div></div>'; }
+  // ---- Spelling correction ("did you mean"), for typos like "paracetmol" or "patcetmal" ----
+  let vocab = [], vocabMap = new Map();
+  function skel(w){ return w.charAt(0) + w.slice(1).replace(/[aeiouy]/g, '').replace(/(.)\1+/g, '$1'); }
+  function buildVocab(){
+    const m = new Map();
+    for (const r of catalog) {
+      const words = ((r.n || '') + ' ' + (r.c || '')).toLowerCase().match(/[a-z]{4,}/g);
+      if (!words) continue;
+      for (const w of new Set(words)) m.set(w, (m.get(w) || 0) + 1);
+    }
+    const v = [];
+    m.forEach((c, w) => v.push({ w: w, c: c, sk: skel(w) }));
+    vocab = v; vocabMap = m;
+  }
+  const _r0 = new Int16Array(64), _r1 = new Int16Array(64), _r2 = new Int16Array(64);
+  // edit distance where swapping two neighbouring letters counts as one slip; gives up early past `max`
+  function dl(a, b, max){
+    const la = a.length, lb = b.length;
+    if (la > 40 || lb > 40 || Math.abs(la - lb) > max) return max + 1;
+    let prev2 = _r0, prev = _r1, cur = _r2;
+    for (let j = 0; j <= lb; j++) prev[j] = j;
+    for (let i = 1; i <= la; i++) {
+      cur[0] = i; let rowMin = i;
+      const ai = a.charCodeAt(i - 1);
+      for (let j = 1; j <= lb; j++) {
+        const bj = b.charCodeAt(j - 1);
+        let v = prev[j - 1] + (ai === bj ? 0 : 1);
+        const del = prev[j] + 1; if (del < v) v = del;
+        const ins = cur[j - 1] + 1; if (ins < v) v = ins;
+        if (i > 1 && j > 1 && ai === b.charCodeAt(j - 2) && a.charCodeAt(i - 2) === bj) { const t = prev2[j - 2] + 1; if (t < v) v = t; }
+        cur[j] = v; if (v < rowMin) rowMin = v;
+      }
+      if (rowMin > max) return max + 1;
+      const tmp = prev2; prev2 = prev; prev = cur; cur = tmp;
+    }
+    return prev[lb];
+  }
+  function isKnownWord(t){
+    for (let k = 0; k < vocab.length; k++) if (vocab[k].w.startsWith(t)) return true;
+    return false;
+  }
+  function bestWord(t){
+    const L = t.length;
+    const maxD = L <= 5 ? 1 : (L <= 8 ? 2 : 3);
+    const maxS = L <= 6 ? 1 : 2;
+    const limit = Math.floor(0.46 * L);   // a consonant match only counts if the whole word is also reasonably close
+    const tsk = skel(t);
+    let best = null, bestScore = -1e9;
+    for (let k = 0; k < vocab.length; k++) {
+      const v = vocab[k];
+      const d = dl(t, v.w, maxD);                                              // ordinary typo
+      let dp = 99; if (v.w.length > L && d > maxD) { const x = dl(t, v.w.slice(0, L), 1); if (x <= 1) dp = x + 1; }   // typo inside a half-typed word
+      let ds = 99;                                                             // same consonants, wrong vowels/letters
+      if (t.charCodeAt(0) === v.w.charCodeAt(0)) { ds = dl(tsk, v.sk, maxS); if (ds <= maxS && dl(t, v.w, limit) > limit) ds = 99; }
+      if (!(d <= maxD || dp <= maxD || ds <= maxS)) continue;
+      const e = Math.min(d, dp, ds + 0.5);
+      const score = 100 - e * 18 + Math.log(v.c + 1) * 4 - Math.abs(v.w.length - L) * 0.8;
+      if (score > bestScore) { bestScore = score; best = v.w; }
+    }
+    return best;
+  }
+  function correctQuery(q){
+    if (!vocab.length) return null;
+    const parts = q.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+    let changed = false;
+    const fixed = parts.map(p => {
+      if (!/^[a-z]{4,}$/.test(p) || isKnownWord(p)) return p;
+      const b = bestWord(p);
+      if (b && b !== p) { changed = true; return b; }
+      return p;
+    });
+    return changed ? fixed.join(' ') : null;
+  }
 
-  function showIOSGuide(){
-    var title = 'Add Huda Medicals to your Home Screen';
-    var body = '';
-    var copyBtn = '<button type="button" class="ios-btn secondary" onclick="copyPageLink(this)">Copy link</button>';
-    var okBtn = '<button type="button" class="ios-btn primary" onclick="closeIOSGuide()">Got it</button>';
-    var actions = okBtn;
-    if (iosBrowser === 'inapp') {
-      title = 'Open this page in Safari first';
-      body = '<div class="ios-note">You\'re viewing this inside another app (like WhatsApp). Those apps can\'t add websites to your Home Screen &mdash; Safari can.</div>' +
-        iosStep(1, 'Look for <b>Open in Safari</b> &mdash; usually under the Share icon ' + SHARE_SVG + ', the compass icon, or the ' + DOTS + ' menu') +
-        iosStep(2, 'In Safari, tap <b>Install App</b> again for the next steps');
-      actions = copyBtn + okBtn;
-    } else if (iosBrowser === 'other') {
-      body = iosStep(1, 'Tap the <b>Share</b> icon ' + SHARE_SVG + ' or the ' + DOTS + ' menu in your browser') +
-        iosStep(2, 'Choose <b>Add to Home Screen</b> ' + ADD_SVG + ', then tap <b>Add</b>') +
-        '<div class="ios-note">Can\'t find it? Open this page in <b>Safari</b> and try again &mdash; it\'s always available there.</div>';
-      actions = copyBtn + okBtn;
+  // Some common misspellings exist in the source lists themselves (e.g. "cetrizine"), so they look like valid words.
+  // If a much more common word is exactly one slip away, search that spelling too.
+  function altSpelling(q){
+    const parts = q.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+    let changed = false;
+    const out = parts.map(p => {
+      const cnt = vocabMap.get(p) || 0;
+      if (p.length < 5 || !/^[a-z]+$/.test(p) || !cnt || cnt > 40) return p;
+      let best = null, bc = 0;
+      for (let k = 0; k < vocab.length; k++) {
+        const v = vocab[k];
+        if (v.c < 6 || v.c < cnt * 4 || v.c <= bc || Math.abs(v.w.length - p.length) > 1) continue;
+        if (dl(p, v.w, 1) <= 1) { best = v.w; bc = v.c; }
+      }
+      if (best) { changed = true; return best; }
+      return p;
+    });
+    return changed ? out.join(' ') : null;
+  }
+
+  // Ranked search: names starting with what was typed first, then names containing it,
+  // then matches found only in the composition; shorter names break ties.
+  function searchCatalog(q){
+    const qn = normalize(q);
+    if (!qn) return [];
+    const toks = tokenize(q);
+    const hits = [];
+    for (let i = 0; i < catalog.length; i++) {
+      const r = catalog[i];
+      let s = -1;
+      if (r._n.startsWith(qn)) s = 100;
+      else if (r._n.includes(qn)) s = 70;
+      else if (r._c && r._c.includes(qn)) s = 40;
+      else if (toks.length > 1 && toks.every(t => r._n.includes(t) || (r._c && r._c.includes(t)))) s = 20;
+      if (s < 0) continue;
+      if (r.c) s += 3;
+      hits.push([s - r._n.length * 0.01, i]);
+    }
+    hits.sort((a, b) => b[0] - a[0]);
+    return hits.slice(0, 8).map(x => x[1]);
+  }
+
+  // ---- Rx mark: shown when the catalog record has r (from the schedule export) or a shop product has rx: true ----
+  const RX_MARK = '<span class="rx-mark" title="Valid prescription required">Rx</span>';
+  function isRxRec(r){ return !!(r && (r.r || r.rx)); }
+  function isRxItem(it){
+    if (it.rx) return true;
+    if (it.shopId) { const p = shopProducts.find(x => x.id === it.shopId); return !!(p && (p.rx || p._r)); }
+    return false;
+  }
+
+  // ---- Cheaper alternatives: same composition and strength, same pack unit, no clashing form, lower listed price ----
+  let altIndex = new Map();
+  function unitKey(u){ return normalize(u).replace(/^(tab|cap|bot)s$/, '$1'); }
+  function altKey(r){ return (r._c && /\d/.test(r.c) && r.u) ? r._c + '|' + unitKey(r.u) : ''; }
+  function buildAltIndex(){
+    altIndex = new Map();
+    catalog.forEach((r, i) => {
+      if (!(r.p > 0)) return;
+      const k = altKey(r);
+      if (!k) return;
+      if (!altIndex.has(k)) altIndex.set(k, []);
+      altIndex.get(k).push(i);
+    });
+    altIndex.forEach(list => list.sort((a, b) => catalog[a].p - catalog[b].p));
+  }
+  function cheaperOptions(r){
+    if (!(r.p > 0)) return [];
+    const list = altIndex.get(altKey(r));
+    if (!list) return [];
+    const out = [];
+    for (let k = 0; k < list.length && out.length < 3; k++) {
+      const x = catalog[list[k]];
+      if (x === r || !(x.p < r.p)) continue;
+      if (r.f && x.f && r.f !== x.f) continue;
+      out.push(list[k]);
+    }
+    return out;
+  }
+  function renderAlts(r){
+    const box = document.getElementById('altBox');
+    const opts = cheaperOptions(r);
+    if (!opts.length) { box.classList.remove('show'); box.innerHTML = ''; return; }
+    box.innerHTML = '<div class="alt-h">Same contents, lower price</div>'
+      + '<div class="alt-sub">Reference price, we will confirm. Pack size may differ.</div>'
+      + opts.map(i => {
+          const x = catalog[i];
+          const meta = [x.m, x.u].filter(Boolean).map(escapeHTML);
+          meta.push('ref. ' + fmt(x.p));
+          return '<div class="alt-row"><div class="alt-info"><div class="alt-name">' + escapeHTML(x.n) + (isRxRec(x) ? RX_MARK : '') + '</div>'
+            + '<div class="alt-meta">' + meta.join(' \u00b7 ') + '</div></div>'
+            + '<button type="button" class="alt-pick" onclick="selectSuggestion(' + i + ')">Choose</button></div>';
+        }).join('');
+    box.classList.add('show');
+  }
+
+  function renderSuggestions(q){
+    let idxs = searchCatalog(q), note = '', noteLabel = 'Showing results for';
+    const alt = vocab.length ? altSpelling(q) : null;
+    if (alt) {
+      const b = searchCatalog(alt).filter(i => !idxs.includes(i));
+      if (b.length) {
+        const merged = [];
+        for (let k = 0; k < 8 && merged.length < 8; k++) {      // exact spelling first, the common spelling right after
+          if (idxs[k] !== undefined) merged.push(idxs[k]);
+          if (b[k] !== undefined && merged.length < 8) merged.push(b[k]);
+        }
+        idxs = merged; note = alt; noteLabel = 'Also showing results for';
+      }
+    }
+    if (idxs.length < 3 && !note) {
+      const fixed = correctQuery(q);
+      if (fixed) {
+        const extra = searchCatalog(fixed).filter(i => !idxs.includes(i));
+        if (extra.length) { idxs = idxs.concat(extra).slice(0, 8); note = fixed; }
+      }
+    }
+    const box = document.getElementById('suggestBox');
+    if (!idxs.length) {
+      box.innerHTML = '<div class="suggest-empty">No matches in our reference list \u2014 you can still type it in and request it.</div>';
     } else {
-      body = iosStep(1, 'Tap the <b>Share</b> icon ' + SHARE_SVG + ' in Safari\'s toolbar<br><span class="ios-sub">Don\'t see it? Tap the ' + DOTS + ' menu next to the address bar first, then choose Share.</span>') +
-        iosStep(2, 'Scroll down and tap <b>Add to Home Screen</b> ' + ADD_SVG) +
-        iosStep(3, 'Tap <b>Add</b> at the top right');
+      box.innerHTML = (note ? `<div class="suggest-note">${noteLabel} <b>${escapeHTML(note)}</b></div>` : '') + idxs.map(i => {
+        const r = catalog[i];
+        const form = r.f || extractForm(r.n, r.u);
+        const meta = [r.m, r.u, r.g].filter(Boolean).map(escapeHTML);
+        if (r.p) meta.push('ref. ' + fmt(r.p));
+        return `
+        <div class="suggest-row" onclick="selectSuggestion(${i})">
+          <div class="sname">${escapeHTML(r.n)}${isRxRec(r) ? RX_MARK : ''}${form ? `<span class="form-badge">${escapeHTML(form)}</span>` : ''}</div>
+          ${r.c ? `<div class="scomp">Contains: ${escapeHTML(r.c)}</div>` : ''}
+          <div class="smeta">${meta.join(' \u00b7 ')}</div>
+        </div>`;
+      }).join('');
     }
-    document.getElementById('iosGuideTitle').textContent = title;
-    document.getElementById('iosGuideBody').innerHTML = body;
-    document.getElementById('iosGuideActions').innerHTML = actions;
-    document.getElementById('iosInstallOverlay').style.display = 'flex';
-  }
-  function closeIOSGuide(){ document.getElementById('iosInstallOverlay').style.display = 'none'; }
-
-  function copyPageLink(btn){
-    var url = location.href.split('#')[0];
-    function done(){ btn.textContent = 'Link copied \u2713'; }
-    function fallback(){
-      var ta = document.createElement('textarea');
-      ta.value = url; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); done(); } catch (err) { window.prompt('Copy this link:', url); }
-      document.body.removeChild(ta);
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, fallback);
-    else fallback();
+    box.classList.add('show');
   }
 
-  function handleInstallTap(e){
-    e.preventDefault();
-    if (deferredInstallPrompt) {
-      deferredInstallPrompt.prompt();
-      deferredInstallPrompt.userChoice.then(function(){ deferredInstallPrompt = null; });
-    } else if (isIOS) {
-      showIOSGuide();
+  function hideSuggestions(){
+    document.getElementById('suggestBox').classList.remove('show');
+  }
+
+  function selectSuggestion(idx){
+    const r = catalog[idx];
+    selectedProduct = r;
+    document.getElementById('prodName').value = r.n;
+    document.getElementById('prodPack').value = r.u || '';
+    hideSuggestions();
+    const tag = document.getElementById('selectedTag');
+    document.getElementById('selectedTagText').textContent = (r.c ? `Matched: ${r.c}` : 'Matched from our reference list') + (isRxRec(r) ? ' \u00b7 Rx: valid prescription required' : '');
+    renderAlts(r);
+    tag.classList.add('show');
+  }
+
+  function clearSelection(refocus){
+    selectedProduct = null;
+    document.getElementById('selectedTag').classList.remove('show');
+    const ab = document.getElementById('altBox'); ab.classList.remove('show'); ab.innerHTML = '';
+    if (refocus !== false) document.getElementById('prodName').focus();
+  }
+
+  function addRequest(){
+    const nameEl = document.getElementById('prodName');
+    const packEl = document.getElementById('prodPack');
+    const name = nameEl.value.trim();
+    const pack = packEl.value.trim();
+    if (!name) { nameEl.focus(); return; }
+    const item = { name, pack, qty: readQty() };
+    if (selectedProduct) {
+      if (selectedProduct.c) item.composition = selectedProduct.c;
+      if (selectedProduct.m) item.manufacturer = selectedProduct.m;
+      if (isRxRec(selectedProduct)) item.rx = true;
+    }
+    items.push(item);
+    nameEl.value = '';
+    packEl.value = '';
+    currentQty = 1;
+    document.getElementById('qtyDisplay').value = '1';
+    clearSelection(false);
+    hideSuggestions();
+    nameEl.focus();
+    render();
+  }
+
+  function removeRequest(i){
+    items.splice(i, 1);
+    render();
+  }
+
+  // ---- Delivery location: asked once when the page opens. Kept only in memory; it goes into the WhatsApp message only while shared. ----
+  let capturedLocation = null; // { lat, lng }
+  function setLoc(state){
+    const t = document.getElementById('locText'), b = document.getElementById('locAction');
+    document.getElementById('locRow').setAttribute('data-state', state);
+    if (state === 'asking') { t.textContent = 'Checking your location\u2026'; b.style.display = 'none'; }
+    else if (state === 'shared') { t.textContent = 'Delivery location shared'; b.textContent = 'Remove'; b.style.display = ''; }
+    else if (state === 'unsupported') { t.textContent = "Location sharing isn't available here. Share your address in the chat."; b.style.display = 'none'; }
+    else { t.textContent = 'Location not shared. Share your address in the chat.'; b.textContent = 'Share'; b.style.display = ''; }
+  }
+  function requestLocation(){
+    if (!navigator.geolocation) { setLoc('unsupported'); return; }
+    setLoc('asking');
+    navigator.geolocation.getCurrentPosition(
+      function(pos){ capturedLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude }; setLoc('shared'); },
+      function(){ capturedLocation = null; setLoc('off'); },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+    );
+  }
+  function clearLocation(){ capturedLocation = null; setLoc('off'); }
+  function locAction(){ if (capturedLocation) clearLocation(); else requestLocation(); }
+
+  // small round photos of the latest items for the cart bar (newest first); falls back to .png, then to an emoji
+  function thumbHTML(it){
+    const p = it.shopId ? shopProducts.find(x => x.id === it.shopId) : null;
+    const e = p ? shopEmoji(p.cat) : '\uD83D\uDC8A';
+    return '<span class="th"><span class="e">' + e + '</span>'
+      + (it.shopId ? '<img src="images/shop/' + escapeHTML(it.shopId) + '.jpg" data-id="' + escapeHTML(it.shopId) + '" alt="" onerror="shopImgFail(this)">' : '')
+      + '</span>';
+  }
+
+  function render(){
+    const wrap = document.getElementById('listWrap');
+    if (!items.length) {
+      wrap.innerHTML = '<p class="empty-note">Nothing added yet.</p>';
+    } else {
+      wrap.innerHTML = items.map((it, i) => `
+        <div class="req-row">
+          <div>
+            <div class="rname">${escapeHTML(it.name)}${isRxItem(it) ? RX_MARK : ''} <span style="color:#5C7676; font-weight:600;">&times;${it.qty || 1}</span></div>
+            ${it.pack ? `<div class="rpack">${escapeHTML(it.pack)}</div>` : ''}
+            ${it.composition ? `<div class="ci-composition">Contains: ${escapeHTML(it.composition)}</div>` : ''}
+            ${it.manufacturer ? `<div class="ci-mfr">${escapeHTML(it.manufacturer)}</div>` : ''}
+          </div>
+          <button onclick="removeRequest(${i})">Remove</button>
+        </div>`).join('');
+    }
+    document.getElementById('sendBar').classList.toggle('show', items.length > 0 || hasPhotoSelected);
+    document.getElementById('sendCountBtn').style.display = items.length ? '' : 'none';
+    document.getElementById('sendCount').textContent = items.length + (items.length === 1 ? ' item' : ' items');
+    document.getElementById('sendThumbs').innerHTML = items.slice(-3).reverse().map(thumbHTML).join('');
+    syncHints();
+    shopSync();
+    renderFreq();
+  }
+
+  function sendRequest(){
+    if (!items.length && !hasPhotoSelected) return;
+    let text;
+    if (items.length) {
+      const lines = items.map(it => {
+        let line = `- ${it.name}${isRxItem(it) ? ' [Rx]' : ''} x${it.qty || 1}${it.pack ? ' (' + it.pack + ')' : ''}`;
+        if (it.composition) line += `\n  Contains: ${it.composition}`;
+        return line;
+      });
+      text = `Hi, I'd like to request the following:\n${lines.join('\n')}\n\nCould you check availability and let me know the price?`;
+    } else {
+      text = `Hi, I have a prescription to share. Could you check availability and let me know the price?`;
+    }
+    if (hasPhotoSelected) {
+      text += `\n\n(I have a photo of the product/prescription to attach here in the chat)`;
+    }
+    if (capturedLocation) {
+      text += `\n\nDelivery location: https://www.google.com/maps?q=${capturedLocation.lat},${capturedLocation.lng}`;
+    }
+    saveOrder(items);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+    items.length = 0;
+    hasPhotoSelected = false;
+    var pc = document.getElementById('photoCheck'); if (pc) pc.checked = false;
+    render();
+  }
+
+  document.getElementById('prodName').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') { e.preventDefault(); addRequest(); }
+  });
+
+  // ---- Quick add shop: products come from shop-products.json; price/composition come from the same catalog the search uses ----
+  const SHOP_CATS = [['Digestion','\uD83C\uDF4B'],['Fever & pain','\uD83C\uDF21\uFE0F'],['Cold & cough','\uD83E\uDD27'],['Baby care','\uD83D\uDC76'],['Skin & first aid','\uD83E\uDE79'],['Wellness','\u26A1']];
+  let shopProducts = [], shopCat = '';
+
+  fetch('shop-products.json')
+    .then(r => r.ok ? r.json() : [])
+    .then(d => { shopProducts = Array.isArray(d) ? d : []; if (!shopProducts.length) shopFallback(); shopAttach(); })
+    .catch(() => { shopProducts = []; shopFallback(); });
+  // if the shop list can't load, don't leave the customer on an empty Categories tab (unless they already chose a tab)
+  function shopFallback(){ if (curTab === 'cat' && !tabTouched) showTab('search', false, true); }
+
+  // Once both files have loaded, copy price, composition and maker from the catalog entry named in "ref"
+  function shopAttach(){
+    if (!shopProducts.length) return;
+    if (catalog.length) {
+      const byName = {};
+      catalog.forEach(r => { if (!byName[r.n] || (!byName[r.n].p && r.p)) byName[r.n] = r; });
+      shopProducts.forEach(p => {
+        const r = byName[p.ref];
+        if (!r) return;
+        if (r.p > 0) p._p = r.p;
+        if (r.c) p._c = r.c;
+        if (r.m) p._m = r.m;
+        if (r.r) p._r = 1;
+      });
+    }
+    renderShop();
+  }
+
+  function shopEmoji(cat){ for (const c of SHOP_CATS) if (c[0] === cat) return c[1]; return '\uD83D\uDED2'; }
+
+  function shopCard(p){
+    return '<div class="pcard">'
+      + '<div class="pimg"><div class="ph" aria-hidden="true">' + shopEmoji(p.cat) + '</div>'
+      + '<img src="images/shop/' + escapeHTML(p.id) + '.jpg" data-id="' + escapeHTML(p.id) + '" alt="' + escapeHTML(p.name) + '" loading="lazy" onerror="shopImgFail(this)"></div>'
+      + '<div class="pname">' + escapeHTML(p.name) + ((p.rx || p._r) ? RX_MARK : '') + '</div>'
+      + (p._c ? '<div class="pcomp">' + escapeHTML(p._c) + '</div>' : '')
+      + (p._p ? '<div class="pprice">ref. ' + fmt(p._p) + '</div>' : '')
+      + '<div class="pctl" data-ctl="' + escapeHTML(p.id) + '"></div></div>';
+  }
+
+  // No photo uploaded yet: try .png once, then drop the broken image so the placeholder tile stays
+  function shopImgFail(el){
+    if (!el.getAttribute('data-tried')) { el.setAttribute('data-tried', '1'); el.src = 'images/shop/' + el.getAttribute('data-id') + '.png'; }
+    else if (el.parentNode) el.parentNode.removeChild(el);
+  }
+
+  function setShopCat(name){
+    shopCat = name;                       // '' = All
+    renderShop();
+    // if the list has scrolled up under the sticky bars, bring its top back into view
+    const t = document.getElementById('gridTitle');
+    const lim = document.getElementById('tabsBar').offsetHeight;
+    const top = t.getBoundingClientRect().top;
+    if (top < lim) window.scrollTo(0, (window.pageYOffset || 0) + top - lim - 8);
+  }
+
+  function renderShop(){
+    const sec = document.getElementById('shop');
+    if (!shopProducts.length) { sec.style.display = 'none'; return; }
+    sec.style.display = 'block';
+    const sub = document.getElementById('subTabs');
+    sub.innerHTML = [['', '\uD83D\uDECD\uFE0F']].concat(SHOP_CATS).map(c => {
+      const first = shopProducts.find(p => p.cat === c[0]);     // the category's first product gives its round photo
+      const pic = first ? '<img src="images/shop/' + escapeHTML(first.id) + '.jpg" data-id="' + escapeHTML(first.id) + '" alt="" onerror="shopImgFail(this)">' : '';
+      return '<button type="button" class="chip' + (shopCat === c[0] ? ' on' : '') + '" aria-pressed="' + (shopCat === c[0]) + '" onclick="setShopCat(\'' + c[0].replace(/'/g, "\\'") + '\')">'
+        + '<span class="ci" aria-hidden="true"><span class="e">' + c[1] + '</span>' + pic + '</span>'
+        + '<span class="cl">' + escapeHTML(c[0] || 'All') + '</span></button>';
+    }).join('');
+    const on = sub.querySelector('.chip.on');
+    if (on) sub.scrollLeft = on.offsetLeft - (sub.clientWidth - on.offsetWidth) / 2;
+    syncSubTabs();
+    const freq = shopProducts.filter(p => p.freq);
+    document.getElementById('freqWrap').style.display = freq.length ? 'block' : 'none';
+    document.getElementById('freqRow').innerHTML = freq.map(shopCard).join('');
+    const list = shopCat ? shopProducts.filter(p => p.cat === shopCat) : shopProducts;
+    document.getElementById('gridTitle').textContent = shopCat ? shopCat + ' (' + list.length + ')' : 'All items (' + list.length + ')';
+    document.getElementById('shopGrid').innerHTML = list.map(shopCard).join('');
+    shopSync();
+  }
+
+  // Show "Add" or a - 1 + stepper on every card, matching what is on the request list
+  function shopSync(){
+    const els = document.querySelectorAll('[data-ctl]');
+    for (let k = 0; k < els.length; k++) {
+      const id = els[k].getAttribute('data-ctl');
+      const it = items.find(x => x.shopId === id);
+      els[k].innerHTML = it
+        ? '<div class="pstep"><button type="button" onclick="shopQty(\'' + id + '\',-1)" aria-label="One less">&minus;</button><span>' + (it.qty || 1) + '</span><button type="button" onclick="shopQty(\'' + id + '\',1)" aria-label="One more">+</button></div>'
+        : '<button type="button" class="padd" onclick="shopQty(\'' + id + '\',1)">Add</button>';
     }
   }
 
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(function(){});
+  function shopQty(id, d){
+    const p = shopProducts.find(x => x.id === id);
+    if (!p) return;
+    const i = items.findIndex(x => x.shopId === id);
+    if (i < 0) {
+      if (d < 0) return;
+      const it = { name: p.name, pack: '', qty: 1, shopId: id };
+      if (p._c) it.composition = p._c;
+      if (p._m) it.manufacturer = p._m;
+      items.push(it);
+    } else {
+      items[i].qty = Math.min(999, (items[i].qty || 1) + d);
+      if (items[i].qty < 1) items.splice(i, 1);
+    }
+    render();
   }
+
+  // ---- Tabs: panels stay in the page and are only shown/hidden, so the search box, notes and list are never cleared ----
+  const TAB_IDS = ['cat', 'search', 'rx', 'freq'];
+  let curTab = 'cat', tabTouched = false;   // the page opens on Categories
+  function syncSubTabs(){
+    const sub = document.getElementById('subTabs');
+    sub.classList.toggle('on', curTab === 'cat' && sub.childNodes.length > 0);
+    document.documentElement.style.setProperty('--stick', (document.getElementById('tabsBar').offsetHeight + 8) + 'px');
+  }
+  window.addEventListener('resize', syncSubTabs);
+  function showTab(id, focusTab, auto){
+    curTab = id;
+    if (!auto) tabTouched = true;
+    TAB_IDS.forEach(t => {
+      const on = (t === id);
+      const b = document.getElementById('tab-' + t);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+      b.setAttribute('tabindex', on ? '0' : '-1');
+      document.getElementById('panel-' + t).classList.toggle('on', on);
+    });
+    syncSubTabs();
+    if (focusTab) document.getElementById('tab-' + id).focus();
+    // if the page was scrolled down, bring the new tab's content to the top, just under the tabs
+    const hh = document.getElementById('hdr').offsetHeight;
+    if ((window.pageYOffset || document.documentElement.scrollTop || 0) > hh) window.scrollTo(0, hh);
+  }
+  document.getElementById('tabs').addEventListener('keydown', function(e){
+    const i = TAB_IDS.findIndex(t => document.getElementById('tab-' + t) === document.activeElement);
+    if (i < 0) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); showTab(TAB_IDS[(i + 1) % TAB_IDS.length], true); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); showTab(TAB_IDS[(i + TAB_IDS.length - 1) % TAB_IDS.length], true); }
+  });
+
+  // tapping the item count on the send bar jumps to the request list
+  function scrollToList(){
+    const el = document.getElementById('listSec');
+    if (el && el.scrollIntoView) el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  }
+
+  // ---- Frequent tab: this customer's own earlier orders. Stored only in this phone's browser (localStorage); never sent anywhere. ----
+  const HIST_KEY = 'huda_prev_orders_v1';
+  let history = [], histOK = true;
+  function itemKey(it){ return it.shopId ? 's:' + it.shopId : 'n:' + String(it.name).toLowerCase().trim() + '|' + String(it.pack || '').toLowerCase().trim(); }
+  function loadHistory(){
+    try {
+      const raw = window.localStorage.getItem(HIST_KEY);
+      const d = raw ? JSON.parse(raw) : [];
+      history = Array.isArray(d) ? d.filter(x => x && x.name && x.k) : [];
+    } catch (e) { history = []; histOK = false; }
+  }
+  function persistHistory(){
+    try { window.localStorage.setItem(HIST_KEY, JSON.stringify(history)); histOK = true; } catch (e) { histOK = false; }
+  }
+  // called when a request is sent: most-ordered first, then most recent; keeps the latest 30
+  function saveOrder(list){
+    if (!list.length) return;
+    const now = Date.now();
+    list.forEach(it => {
+      const k = itemKey(it);
+      let x = history.find(y => y.k === k);
+      if (!x) { x = { k: k, name: it.name, pack: it.pack || '', n: 0 }; history.push(x); }
+      x.n += 1; x.qty = it.qty || 1; x.t = now;
+      if (it.shopId) x.shopId = it.shopId;
+      if (it.composition) x.composition = it.composition;
+      if (it.manufacturer) x.manufacturer = it.manufacturer;
+      if (isRxItem(it)) x.rx = true;
+    });
+    history.sort((a, b) => (b.n - a.n) || (b.t - a.t));
+    if (history.length > 30) history.length = 30;
+    persistHistory();
+  }
+  function freqQty(i, d){
+    const x = history[i];
+    if (!x) return;
+    const j = items.findIndex(y => itemKey(y) === x.k);
+    if (j < 0) {
+      if (d < 0) return;
+      const it = { name: x.name, pack: x.pack || '', qty: x.qty || 1 };
+      if (x.shopId) it.shopId = x.shopId;
+      if (x.composition) it.composition = x.composition;
+      if (x.manufacturer) it.manufacturer = x.manufacturer;
+      if (x.rx) it.rx = true;
+      items.push(it);
+    } else {
+      items[j].qty = Math.min(999, (items[j].qty || 1) + d);
+      if (items[j].qty < 1) items.splice(j, 1);
+    }
+    render();
+  }
+  function clearHistory(){
+    if (!window.confirm('Remove all saved orders from this phone?')) return;
+    history = [];
+    try { window.localStorage.removeItem(HIST_KEY); } catch (e) {}
+    renderFreq();
+  }
+  function renderFreq(){
+    const has = history.length > 0;
+    document.getElementById('freqNote').style.display = has ? 'block' : 'none';
+    document.getElementById('freqClear').style.display = has ? 'block' : 'none';
+    document.getElementById('freqEmptyCard').style.display = has ? 'none' : 'block';
+    document.getElementById('freqEmpty').textContent = histOK
+      ? 'Your previous orders will show here, saved only on your phone.'
+      : "This browser can't save previous orders, so nothing will show here.";
+    document.getElementById('freqList').innerHTML = history.map((x, i) => {
+      const inList = items.some(y => itemKey(y) === x.k);
+      const q = inList ? (items.find(y => itemKey(y) === x.k).qty || 1) : 0;
+      const ctl = inList
+        ? '<div class="pstep"><button type="button" onclick="freqQty(' + i + ',-1)" aria-label="One less">&minus;</button><span>' + q + '</span><button type="button" onclick="freqQty(' + i + ',1)" aria-label="One more">+</button></div>'
+        : '<button type="button" class="padd" onclick="freqQty(' + i + ',1)">Add</button>';
+      return '<div class="freq-row"><div class="freq-info"><div class="rname">' + escapeHTML(x.name) + (x.rx ? RX_MARK : '') + '</div>'
+        + (x.pack ? '<div class="rpack">' + escapeHTML(x.pack) + '</div>' : '')
+        + '<div class="rpack">Ordered ' + x.n + (x.n === 1 ? ' time' : ' times') + ' &middot; last &times;' + (x.qty || 1) + '</div></div>'
+        + '<div class="freq-ctl">' + ctl + '</div></div>';
+    }).join('');
+  }
+
+  // ---- Search box hint: suggests a few names, one every 3 seconds, only while the box is empty; still for reduced-motion users ----
+  const HINTS = ['Dolo 650', 'Digene', 'Strepsils', 'Eno'];
+  let hintI = 0, hintTimer = null;
+  function showHint(){ document.getElementById('prodName').placeholder = 'Search "' + HINTS[hintI] + '"'; }
+  function stopHints(){ if (hintTimer) { clearInterval(hintTimer); hintTimer = null; } }
+  function startHints(){
+    if (hintTimer) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    hintTimer = setInterval(function(){ hintI = (hintI + 1) % HINTS.length; showHint(); }, 3000);
+  }
+  function syncHints(){ if (document.getElementById('prodName').value) stopHints(); else startHints(); }
+  document.getElementById('prodName').addEventListener('input', syncHints);
+  showHint();
+
+  loadHistory();
+  render();
+  syncSubTabs();
+  requestLocation();   // asked once, when the page opens
 </script>
 </body>
 </html>
