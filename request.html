@@ -80,11 +80,34 @@
     display:block; margin:6px auto 0; background:none; border:none; color:#4F6868; font-size:12px;
     font-weight:600; text-decoration:underline; cursor:pointer; padding:8px;
   }
+  .subtabs{
+    display:none; position:relative; max-width:480px; margin:0 auto; overflow-x:auto; white-space:nowrap;
+    padding:8px 14px 4px; border-top:1px solid rgba(11,35,35,0.06); -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  }
+  .subtabs::-webkit-scrollbar{ display:none; }
+  .subtabs.on{ display:block; }
+  .chip{
+    display:inline-flex; flex-direction:column; align-items:center; gap:4px; min-width:56px; margin-right:8px; padding:0 4px 4px;
+    border:none; border-bottom:3px solid transparent; background:transparent; color:var(--ink); vertical-align:top;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:11px; line-height:1.3; white-space:nowrap; cursor:pointer;
+  }
+  .chip .ci{
+    position:relative; width:40px; height:40px; box-sizing:border-box; border-radius:50%; background:#E9F5F4;
+    border:1px solid rgba(11,35,35,0.15); overflow:hidden;
+  }
+  .chip .e{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:19px; }
+  .chip .ci img{ position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; background:#FFFFFF; }
+  .chip:last-child{ margin-right:14px; }
+  .chip.on{ border-bottom-color:var(--teal-deep); color:var(--teal-deep); font-weight:700; }
+  .chip.on .ci{ border:2px solid var(--teal-deep); }
+  .chip:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
+  .sec-h{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; margin:16px 0 8px; }
+  #freqWrap{ display:none; }
   .tabpanel{ display:none; }
   .tabpanel.on{ display:block; }
   .tabpanel > :first-child{ margin-top:0; }
   .tabpanel .info-box{ margin:16px 0 0; }
-  .list-wrap, #gridTitle{ scroll-margin-top:68px; }
+  .list-wrap, #gridTitle{ scroll-margin-top:var(--stick, 68px); }
 
   .wrap{ max-width:480px; margin:0 auto; padding:18px; }
 
@@ -186,6 +209,18 @@
     border:none; border-radius:11px; padding:0 12px; font-family:'Poppins',sans-serif; font-weight:700;
     font-size:13px; white-space:nowrap; cursor:pointer;
   }
+  .send-thumbs{ display:inline-flex; align-items:center; }
+  .send-thumbs .th{
+    position:relative; flex:0 0 28px; width:28px; height:28px; box-sizing:border-box; border-radius:50%;
+    background:#E9F5F4; border:2px solid #0E5C33; overflow:hidden; margin-left:-10px;
+  }
+  .send-thumbs .th:nth-child(1){ margin-left:0; z-index:3; }
+  .send-thumbs .th:nth-child(2){ z-index:2; }
+  .send-thumbs .th:nth-child(3){ z-index:1; }
+  .send-thumbs .e{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:13px; }
+  .send-thumbs img{ position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; background:#FFFFFF; }
+  @media (max-width:399px){ .send-thumbs .th:nth-child(3){ display:none; } }
+  @media (max-width:339px){ .send-thumbs{ display:none; } }
   .send-go{
     flex:1 1 auto; display:flex; align-items:center; justify-content:center; gap:8px; background:transparent;
     color:#FFFFFF; border:none; padding:10px 8px; font-family:'Poppins',sans-serif; font-weight:700;
@@ -213,18 +248,6 @@
   .shop h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:2px; }
   .shop h3{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; margin:16px 0 8px; }
   .shop-sub{ font-size:12px; color:#5C7676; margin:2px 0 12px; line-height:1.5; }
-  .tiles{ display:flex; flex-wrap:wrap; gap:8px; }
-  .tile{
-    width:calc(33.333% - 6px); background:var(--white); border:1.5px solid rgba(11,35,35,0.08); border-radius:14px;
-    padding:10px 4px 8px; text-align:center; cursor:pointer; font-family:'Inter',sans-serif;
-    -webkit-appearance:none; appearance:none;
-  }
-  .tile .ti{ display:block; font-size:24px; line-height:1.25; }
-  .tile .tl{ display:block; font-size:11px; font-weight:600; color:var(--ink); margin-top:3px; line-height:1.3; }
-  .tile.on{ background:var(--teal-deep); border-color:var(--teal-deep); }
-  .tile.on .tl{ color:#FFFFFF; }
-  .hrow{ display:flex; overflow-x:auto; gap:10px; padding:2px 2px 10px; -webkit-overflow-scrolling:touch; }
-  .hrow .pcard{ flex:0 0 138px; }
   .pgrid{ display:flex; flex-wrap:wrap; gap:10px; }
   .pgrid .pcard{ width:calc(50% - 5px); }
   .pcard{
@@ -266,22 +289,21 @@
   </div>
 </div>
 
-<div class="tabs">
+<div class="tabs" id="tabsBar">
   <div class="tabs-in" id="tabs" role="tablist" aria-label="Request sections">
-    <button type="button" class="tab" id="tab-otc" role="tab" aria-selected="false" aria-controls="panel-otc" tabindex="-1" onclick="showTab('otc')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>OTC &amp; FMCG</span></button>
+    <button type="button" class="tab" id="tab-cat" role="tab" aria-selected="false" aria-controls="panel-cat" tabindex="-1" onclick="showTab('cat')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Categories</span></button>
     <button type="button" class="tab" id="tab-search" role="tab" aria-selected="true" aria-controls="panel-search" tabindex="0" onclick="showTab('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search</span></button>
     <button type="button" class="tab" id="tab-rx" role="tab" aria-selected="false" aria-controls="panel-rx" tabindex="-1" onclick="showTab('rx')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><span>Upload Rx</span></button>
     <button type="button" class="tab" id="tab-freq" role="tab" aria-selected="false" aria-controls="panel-freq" tabindex="-1" onclick="showTab('freq')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Frequent</span></button>
   </div>
+  <div class="subtabs" id="subTabs" role="group" aria-label="Categories"></div>
 </div>
 
 <div class="wrap">
-  <section class="tabpanel" id="panel-otc" role="tabpanel" aria-labelledby="tab-otc">
+  <section class="tabpanel" id="panel-cat" role="tabpanel" aria-labelledby="tab-cat">
   <div class="shop" id="shop">
     <h2>Quick add &mdash; popular items</h2>
     <p class="shop-sub">Tap Add to put an item on your request list. We'll check availability and confirm the price on WhatsApp. Prices shown are reference prices, not a confirmed quote.</p>
-    <div class="tiles" id="shopTiles"></div>
-    <div id="freqWrap"><h3>Frequently bought</h3><div class="hrow" id="freqRow"></div></div>
     <h3 id="gridTitle">All items</h3>
     <div class="pgrid" id="shopGrid"></div>
   </div>
@@ -324,10 +346,12 @@
   </div>
   </section>
   <section class="tabpanel" id="panel-freq" role="tabpanel" aria-labelledby="tab-freq">
+  <h3 class="sec-h" id="freqMineH">Your previous orders</h3>
   <p class="freq-note" id="freqNote">Your own earlier orders, saved only on this phone. Tap Add to put one on your request list.</p>
   <div id="freqList"></div>
   <div class="add-card" id="freqEmptyCard"><p class="empty-note" id="freqEmpty"></p></div>
   <button type="button" class="freq-clear" id="freqClear" onclick="clearHistory()">Clear saved orders</button>
+  <div id="freqWrap"><h3 class="sec-h">Frequently bought</h3><div class="pgrid" id="freqRow"></div></div>
   </section>
 
   <div class="list-wrap" id="listSec">
@@ -339,6 +363,7 @@
 
 <div class="send-bar" id="sendBar">
   <button type="button" class="send-count" id="sendCountBtn" onclick="scrollToList()" aria-label="View your request list">
+    <span class="send-thumbs" id="sendThumbs" aria-hidden="true"></span>
     <span id="sendCount"></span>
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
   </button>
@@ -658,6 +683,15 @@
   function clearLocation(){ capturedLocation = null; setLoc('off'); }
   function locAction(){ if (capturedLocation) clearLocation(); else requestLocation(); }
 
+  // small round photos of the latest items for the cart bar (newest first); falls back to .png, then to an emoji
+  function thumbHTML(it){
+    const p = it.shopId ? shopProducts.find(x => x.id === it.shopId) : null;
+    const e = p ? shopEmoji(p.cat) : '\uD83D\uDC8A';
+    return '<span class="th"><span class="e">' + e + '</span>'
+      + (it.shopId ? '<img src="images/shop/' + escapeHTML(it.shopId) + '.jpg" data-id="' + escapeHTML(it.shopId) + '" alt="" onerror="shopImgFail(this)">' : '')
+      + '</span>';
+  }
+
   function render(){
     const wrap = document.getElementById('listWrap');
     if (!items.length) {
@@ -677,6 +711,8 @@
     document.getElementById('sendBar').classList.toggle('show', items.length > 0 || hasPhotoSelected);
     document.getElementById('sendCountBtn').style.display = items.length ? '' : 'none';
     document.getElementById('sendCount').textContent = items.length + (items.length === 1 ? ' item' : ' items');
+    document.getElementById('sendThumbs').innerHTML = items.slice(-3).reverse().map(thumbHTML).join('');
+    syncHints();
     shopSync();
     renderFreq();
   }
@@ -757,19 +793,30 @@
   }
 
   function setShopCat(name){
-    shopCat = (shopCat === name) ? '' : name;
+    shopCat = name;                       // '' = All
     renderShop();
+    // if the list has scrolled up under the sticky bars, bring its top back into view
     const t = document.getElementById('gridTitle');
-    if (shopCat && t.scrollIntoView) t.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    const lim = document.getElementById('tabsBar').offsetHeight;
+    const top = t.getBoundingClientRect().top;
+    if (top < lim) window.scrollTo(0, (window.pageYOffset || 0) + top - lim - 8);
   }
 
   function renderShop(){
     const sec = document.getElementById('shop');
     if (!shopProducts.length) { sec.style.display = 'none'; return; }
     sec.style.display = 'block';
-    document.getElementById('shopTiles').innerHTML = SHOP_CATS.map(c =>
-      '<button type="button" class="tile' + (shopCat === c[0] ? ' on' : '') + '" aria-pressed="' + (shopCat === c[0]) + '" onclick="setShopCat(\'' + c[0].replace(/'/g, "\\'") + '\')">'
-      + '<span class="ti" aria-hidden="true">' + c[1] + '</span><span class="tl">' + escapeHTML(c[0]) + '</span></button>').join('');
+    const sub = document.getElementById('subTabs');
+    sub.innerHTML = [['', '\uD83D\uDECD\uFE0F']].concat(SHOP_CATS).map(c => {
+      const first = shopProducts.find(p => p.cat === c[0]);     // the category's first product gives its round photo
+      const pic = first ? '<img src="images/shop/' + escapeHTML(first.id) + '.jpg" data-id="' + escapeHTML(first.id) + '" alt="" onerror="shopImgFail(this)">' : '';
+      return '<button type="button" class="chip' + (shopCat === c[0] ? ' on' : '') + '" aria-pressed="' + (shopCat === c[0]) + '" onclick="setShopCat(\'' + c[0].replace(/'/g, "\\'") + '\')">'
+        + '<span class="ci" aria-hidden="true"><span class="e">' + c[1] + '</span>' + pic + '</span>'
+        + '<span class="cl">' + escapeHTML(c[0] || 'All') + '</span></button>';
+    }).join('');
+    const on = sub.querySelector('.chip.on');
+    if (on) sub.scrollLeft = on.offsetLeft - (sub.clientWidth - on.offsetWidth) / 2;
+    syncSubTabs();
     const freq = shopProducts.filter(p => p.freq);
     document.getElementById('freqWrap').style.display = freq.length ? 'block' : 'none';
     document.getElementById('freqRow').innerHTML = freq.map(shopCard).join('');
@@ -809,8 +856,16 @@
   }
 
   // ---- Tabs: panels stay in the page and are only shown/hidden, so the search box, notes and list are never cleared ----
-  const TAB_IDS = ['otc', 'search', 'rx', 'freq'];
+  const TAB_IDS = ['cat', 'search', 'rx', 'freq'];
+  let curTab = 'search';
+  function syncSubTabs(){
+    const sub = document.getElementById('subTabs');
+    sub.classList.toggle('on', curTab === 'cat' && sub.childNodes.length > 0);
+    document.documentElement.style.setProperty('--stick', (document.getElementById('tabsBar').offsetHeight + 8) + 'px');
+  }
+  window.addEventListener('resize', syncSubTabs);
   function showTab(id, focusTab){
+    curTab = id;
     TAB_IDS.forEach(t => {
       const on = (t === id);
       const b = document.getElementById('tab-' + t);
@@ -818,6 +873,7 @@
       b.setAttribute('tabindex', on ? '0' : '-1');
       document.getElementById('panel-' + t).classList.toggle('on', on);
     });
+    syncSubTabs();
     if (focusTab) document.getElementById('tab-' + id).focus();
     // if the page was scrolled down, bring the new tab's content to the top, just under the tabs
     const hh = document.getElementById('hdr').offsetHeight;
@@ -911,8 +967,23 @@
     }).join('');
   }
 
+  // ---- Search box hint: suggests a few names, one every 3 seconds, only while the box is empty; still for reduced-motion users ----
+  const HINTS = ['Dolo 650', 'Digene', 'Strepsils', 'Eno'];
+  let hintI = 0, hintTimer = null;
+  function showHint(){ document.getElementById('prodName').placeholder = 'Search "' + HINTS[hintI] + '"'; }
+  function stopHints(){ if (hintTimer) { clearInterval(hintTimer); hintTimer = null; } }
+  function startHints(){
+    if (hintTimer) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    hintTimer = setInterval(function(){ hintI = (hintI + 1) % HINTS.length; showHint(); }, 3000);
+  }
+  function syncHints(){ if (document.getElementById('prodName').value) stopHints(); else startHints(); }
+  document.getElementById('prodName').addEventListener('input', syncHints);
+  showHint();
+
   loadHistory();
   render();
+  syncSubTabs();
   requestLocation();   // asked once, when the page opens
 </script>
 </body>
