@@ -46,6 +46,10 @@
     color:var(--white); display:flex; align-items:center; justify-content:center; text-decoration:none;
     border:1.5px solid rgba(255,255,255,0.55);
   }
+  .hdr-right{ display:flex; align-items:center; gap:10px; flex:0 0 auto; }
+  .cart-btn{ position:relative; cursor:pointer; padding:0; font-family:inherit; -webkit-appearance:none; appearance:none; }
+  .cart-badge{ position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; padding:0 3px; border-radius:10px; background:var(--red); color:#FFFFFF; border:2px solid #0D7072; font-family:'Poppins',sans-serif; font-weight:700; font-size:10.5px; line-height:16px; text-align:center; }
+  .cart-send{ width:100%; margin-top:16px; padding:14px; border:none; border-radius:12px; background:#19874C; color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
   .profile-btn:active{ background:rgba(255,255,255,0.3); }
   .profile-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
 
@@ -349,9 +353,12 @@
     </span>
     <span class="loc-addr" id="locAddr" aria-live="polite">Tap to add your delivery address</span>
   </button>
-  <a class="profile-btn" href="home.html" aria-label="About Huda Medicals">
+  <div class="hdr-right">
+    <button type="button" class="profile-btn cart-btn" id="cartBtn" aria-haspopup="dialog" onclick="openCart()" aria-label="Cart, empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span class="cart-badge" id="cartBadge" style="display:none">0</span></button>
+    <a class="profile-btn" href="home.html" aria-label="About Huda Medicals">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
   </a>
+  </div>
 </div>
 
 <div class="tabs" id="tabsBar">
@@ -421,15 +428,11 @@
   <div id="freqWrap"><h3 class="sec-h">Frequently bought</h3><div class="pgrid" id="freqRow"></div></div>
   </section>
 
-  <div class="list-wrap" id="listSec">
-    <h2>Your request list</h2>
-    <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
-  </div>
 
 </div>
 
 <div class="send-bar" id="sendBar">
-  <button type="button" class="send-count" id="sendCountBtn" onclick="scrollToList()" aria-label="View your request list">
+  <button type="button" class="send-count" id="sendCountBtn" onclick="openCart()" aria-label="View your cart">
     <span class="send-thumbs" id="sendThumbs" aria-hidden="true"></span>
     <span id="sendCount"></span>
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
@@ -445,6 +448,16 @@
   We'll reply on WhatsApp once we've checked stock and pricing — nothing is charged or confirmed until you agree.<br>
   Huda Medicals · Seven Wells, Chennai
 </p>
+
+<div class="locpage" id="cartPage" role="dialog" aria-modal="true" aria-label="Your Cart" aria-hidden="true">
+  <div class="lp-view on">
+    <div class="lp-bar"><button type="button" class="lp-back" onclick="closeCart()" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">Your Cart</h2></div>
+    <div class="lp-body">
+      <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
+      <button type="button" class="cart-send" id="cartSend" onclick="sendRequest()" style="display:none"><svg width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg> Send via WhatsApp</button>
+    </div>
+  </div>
+</div>
 
 <div class="locpage" id="locPage" role="dialog" aria-modal="true" aria-label="Select Your Location" aria-hidden="true">
   <div class="lp-view" id="lpList">
@@ -929,7 +942,7 @@
   // open / close; the phone's Back button closes the page instead of leaving the site
   function setBackground(on){
     Array.prototype.forEach.call(document.body.children, function(el){
-      if (el.id === 'locPage' || el.tagName === 'SCRIPT') return;
+      if (el.id === 'locPage' || el.id === 'cartPage' || el.tagName === 'SCRIPT') return;
       if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert');
     });
     document.body.style.overflow = on ? 'hidden' : '';
@@ -971,7 +984,7 @@
 
   function render(){
     const wrap = document.getElementById('listWrap');
-    if (!items.length) {
+    if (!items.length && !hasPhotoSelected) {
       wrap.innerHTML = '<p class="empty-note">Nothing added yet.</p>';
     } else {
       wrap.innerHTML = items.map((it, i) => `
@@ -983,8 +996,12 @@
             ${it.manufacturer ? `<div class="ci-mfr">${escapeHTML(it.manufacturer)}</div>` : ''}
           </div>
           <button onclick="removeRequest(${i})">Remove</button>
-        </div>`).join('');
+        </div>`).join('') + (hasPhotoSelected ? '<div class="req-row"><div><div class="rname">Photo to attach</div><div class="rpack">Attach it in the WhatsApp chat</div></div></div>' : '');
     }
+    const n = items.length + (hasPhotoSelected ? 1 : 0), cb = document.getElementById('cartBadge');
+    cb.textContent = n > 99 ? '99+' : n; cb.style.display = n ? '' : 'none';
+    document.getElementById('cartBtn').setAttribute('aria-label', n ? 'Cart, ' + n + (n === 1 ? ' item' : ' items') : 'Cart, empty');
+    document.getElementById('cartSend').style.display = n ? '' : 'none';
     document.getElementById('sendBar').classList.toggle('show', items.length > 0 || hasPhotoSelected);
     document.getElementById('sendCountBtn').style.display = items.length ? '' : 'none';
     document.getElementById('sendCount').textContent = items.length + (items.length === 1 ? ' item' : ' items');
@@ -1022,6 +1039,7 @@
     hasPhotoSelected = false;
     var pc = document.getElementById('photoCheck'); if (pc) pc.checked = false;
     render();
+    closeCart();
   }
 
   document.getElementById('prodName').addEventListener('keydown', function(e){
@@ -1171,11 +1189,29 @@
   });
 
   // tapping the item count on the send bar jumps to the request list
-  function scrollToList(){
-    const el = document.getElementById('listSec');
-    if (el && el.scrollIntoView) el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  // ---- Cart page: the request list lives here; the phone's Back button closes it ----
+  let cartOpen = false, cartClosing = false, cartFocus = null;
+  function openCart(){
+    if (cartOpen || locOpen) return;
+    cartFocus = document.activeElement; cartOpen = true;
+    const pg = document.getElementById('cartPage'); pg.classList.add('on'); pg.setAttribute('aria-hidden', 'false');
+    setBackground(true); pg.scrollTop = 0;
+    try { history.pushState({ hudaCart: 1 }, ''); } catch (e) {}
+    document.querySelector('#cartPage .lp-back').focus();
   }
-
+  function hideCart(){
+    if (!cartOpen) return;
+    cartOpen = false; cartClosing = false;
+    const pg = document.getElementById('cartPage'); pg.classList.remove('on'); pg.setAttribute('aria-hidden', 'true');
+    setBackground(false);
+    if (cartFocus && cartFocus.focus) cartFocus.focus();
+  }
+  function closeCart(){
+    if (!cartOpen || cartClosing) return;
+    if (history.state && history.state.hudaCart) { cartClosing = true; history.back(); } else hideCart();
+  }
+  window.addEventListener('popstate', hideCart);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && cartOpen) closeCart(); });
   // ---- Frequent tab: this customer's own earlier orders. Stored only in this phone's browser (localStorage); never sent anywhere. ----
   const HIST_KEY = 'huda_prev_orders_v1';
   let history = [], histOK = true;
