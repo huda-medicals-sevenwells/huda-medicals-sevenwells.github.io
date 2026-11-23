@@ -522,6 +522,17 @@
 <script>
   const WHATSAPP_NUMBER = "919962269992";
   const items = [];
+  // The request list is remembered on this phone, so it is still there when the app is reopened.
+  const CART_KEY = 'huda_cart_v1';
+  function loadCart(){
+    try {
+      const d = JSON.parse(window.localStorage.getItem(CART_KEY) || '[]');
+      if (Array.isArray(d)) d.slice(0, 50).forEach(function(it){
+        if (it && typeof it.name === 'string' && it.name) { it.qty = Math.max(1, parseInt(it.qty, 10) || 1); items.push(it); }
+      });
+    } catch (e) {}
+  }
+  function saveCart(){ try { window.localStorage.setItem(CART_KEY, JSON.stringify(items)); } catch (e) {} }
   let selectedProduct = null;
   let catalog = [];
   let currentQty = 1;
@@ -1012,6 +1023,7 @@
   }
 
   function render(){
+    saveCart();
     const wrap = document.getElementById('listWrap');
     if (!items.length && !hasPhotoSelected) {
       wrap.innerHTML = '<p class="empty-note">Nothing added yet.</p>';
@@ -1332,6 +1344,7 @@
   showHint();
 
   loadHistory();
+  loadCart();
   render();
   syncSubTabs();
   loadAddrs();
