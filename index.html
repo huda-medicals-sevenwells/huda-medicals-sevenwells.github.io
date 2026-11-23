@@ -283,6 +283,14 @@
   .pimg img{ object-fit:contain; background:#FFFFFF; }
   .pname{ font-size:12.5px; font-weight:600; color:var(--ink); line-height:1.35; min-height:34px; }
   .pcomp{ font-size:10.5px; color:#1B7A43; margin-top:2px; line-height:1.35; max-height:28px; overflow:hidden; }
+  .p-new{ font-size:15px; font-weight:800; color:var(--ink); }
+  .p-old{ font-size:11.5px; font-weight:500; color:#5F7878; text-decoration:line-through; margin-left:5px; }
+  .p-off{ display:inline-block; margin-left:5px; font-size:10.5px; font-weight:700; color:#0E5C33; background:#E3F5EA; border-radius:6px; padding:1px 6px; vertical-align:1px; }
+  .offer-card{ display:flex; align-items:center; gap:14px; background:var(--white); border:1px solid rgba(11,35,35,0.08); border-radius:16px; padding:16px; margin-top:16px; }
+  .offer-ic{ flex:0 0 48px; width:48px; height:48px; border-radius:50%; background:#E3F3F1; color:var(--teal-deep); display:flex; align-items:center; justify-content:center; }
+  .offer-ic svg{ width:24px; height:24px; }
+  .offer-big{ font-family:'Poppins',sans-serif; font-weight:800; font-size:24px; color:#0E5C33; line-height:1.15; }
+  .offer-sub{ font-size:13px; color:#4F6868; margin-top:3px; line-height:1.4; }
   .pprice{ font-size:11.5px; font-weight:600; color:var(--teal-deep); margin-top:3px; }
   .pctl{ margin-top:auto; padding-top:8px; }
   .padd{
@@ -367,6 +375,7 @@
     <button type="button" class="tab" id="tab-search" role="tab" aria-selected="false" aria-controls="panel-search" tabindex="-1" onclick="showTab('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search</span></button>
     <button type="button" class="tab" id="tab-rx" role="tab" aria-selected="false" aria-controls="panel-rx" tabindex="-1" onclick="showTab('rx')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><span>Upload Rx</span></button>
     <button type="button" class="tab" id="tab-freq" role="tab" aria-selected="false" aria-controls="panel-freq" tabindex="-1" onclick="showTab('freq')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Frequent</span></button>
+    <button type="button" class="tab" id="tab-offers" role="tab" aria-selected="false" aria-controls="panel-offers" tabindex="-1" onclick="showTab('offers')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><path d="M7 7h.01"/></svg><span>Offers</span></button>
   </div>
   <div class="subtabs" id="subTabs" role="group" aria-label="Categories"></div>
 </div>
@@ -426,6 +435,12 @@
   <div class="add-card" id="freqEmptyCard"><p class="empty-note" id="freqEmpty"></p></div>
   <button type="button" class="freq-clear" id="freqClear" onclick="clearHistory()">Clear saved orders</button>
   <div id="freqWrap"><h3 class="sec-h">Frequently bought</h3><div class="pgrid" id="freqRow"></div></div>
+  </section>
+  <section class="tabpanel" id="panel-offers" role="tabpanel" aria-labelledby="tab-offers">
+  <div class="offer-card">
+    <span class="offer-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><path d="M7 7h.01"/></svg></span>
+    <div><div class="offer-big">10% OFF</div><div class="offer-sub">Chronic-condition and prescription medicines</div></div>
+  </div>
   </section>
 
 
@@ -513,6 +528,13 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
   function fmt(n){ return '\u20b9' + Number(n).toLocaleString('en-IN'); }
+  // 10% off is shown only on prescription (scheduled / chronic-condition) medicines, using the same Rx flag as the Rx mark. FMCG and OTC show the plain reference price.
+  const DISC_PCT = 10;
+  function priceHTML(price, rx){
+    if (!rx) return 'ref. ' + fmt(price);
+    const d = Math.round(price * (100 - DISC_PCT)) / 100;
+    return '<span class="p-new">' + fmt(d) + '</span><span class="sr-only">, was </span><s class="p-old">' + fmt(price) + '</s><span class="p-off">' + DISC_PCT + '% off</span>';
+  }
 
   function readQty(){
     var n = parseInt(document.getElementById('qtyDisplay').value, 10);
@@ -731,7 +753,7 @@
       + opts.map(i => {
           const x = catalog[i];
           const meta = [x.m, x.u].filter(Boolean).map(escapeHTML);
-          meta.push('ref. ' + fmt(x.p));
+          meta.push(priceHTML(x.p, isRxRec(x)));
           return '<div class="alt-row"><div class="alt-info"><div class="alt-name">' + escapeHTML(x.n) + (isRxRec(x) ? RX_MARK : '') + '</div>'
             + '<div class="alt-meta">' + meta.join(' \u00b7 ') + '</div></div>'
             + '<button type="button" class="alt-pick" onclick="selectSuggestion(' + i + ')">Choose</button></div>';
@@ -768,7 +790,7 @@
         const r = catalog[i];
         const form = r.f || extractForm(r.n, r.u);
         const meta = [r.m, r.u, r.g].filter(Boolean).map(escapeHTML);
-        if (r.p) meta.push('ref. ' + fmt(r.p));
+        if (r.p) meta.push(priceHTML(r.p, isRxRec(r)));
         return `
         <div class="suggest-row" onclick="selectSuggestion(${i})">
           <div class="sname">${escapeHTML(r.n)}${isRxRec(r) ? RX_MARK : ''}${form ? `<span class="form-badge">${escapeHTML(form)}</span>` : ''}</div>
@@ -1083,7 +1105,7 @@
       + '<img src="images/shop/' + escapeHTML(p.id) + '.jpg" data-id="' + escapeHTML(p.id) + '" alt="' + escapeHTML(p.name) + '" loading="lazy" onerror="shopImgFail(this)"></div>'
       + '<div class="pname">' + escapeHTML(p.name) + ((p.rx || p._r) ? RX_MARK : '') + '</div>'
       + (p._c ? '<div class="pcomp">' + escapeHTML(p._c) + '</div>' : '')
-      + (p._p ? '<div class="pprice">ref. ' + fmt(p._p) + '</div>' : '')
+      + (p._p ? '<div class="pprice">' + priceHTML(p._p, p.rx || p._r) + '</div>' : '')
       + '<div class="pctl" data-ctl="' + escapeHTML(p.id) + '"></div></div>';
   }
 
@@ -1157,7 +1179,7 @@
   }
 
   // ---- Tabs: panels stay in the page and are only shown/hidden, so the search box, notes and list are never cleared ----
-  const TAB_IDS = ['cat', 'search', 'rx', 'freq'];
+  const TAB_IDS = ['cat', 'search', 'rx', 'freq', 'offers'];
   let curTab = 'cat', tabTouched = false;   // the page opens on Categories
   function syncSubTabs(){
     const sub = document.getElementById('subTabs');
@@ -1188,7 +1210,6 @@
     else if (e.key === 'ArrowLeft') { e.preventDefault(); showTab(TAB_IDS[(i + TAB_IDS.length - 1) % TAB_IDS.length], true); }
   });
 
-  // tapping the item count on the send bar jumps to the request list
   // ---- Cart page: the request list lives here; the phone's Back button closes it ----
   let cartOpen = false, cartClosing = false, cartFocus = null;
   function openCart(){
