@@ -283,14 +283,24 @@
   .pimg img{ object-fit:contain; background:#FFFFFF; }
   .pname{ font-size:12.5px; font-weight:600; color:var(--ink); line-height:1.35; min-height:34px; }
   .pcomp{ font-size:10.5px; color:#1B7A43; margin-top:2px; line-height:1.35; max-height:28px; overflow:hidden; }
-  .p-new{ font-size:15px; font-weight:800; color:var(--ink); }
-  .p-old{ font-size:11.5px; font-weight:500; color:#5F7878; text-decoration:line-through; margin-left:5px; }
-  .p-off{ display:inline-block; margin-left:5px; font-size:10.5px; font-weight:700; color:#0E5C33; background:#E3F5EA; border-radius:6px; padding:1px 6px; vertical-align:1px; }
-  .offer-card{ display:flex; align-items:center; gap:14px; background:var(--white); border:1px solid rgba(11,35,35,0.08); border-radius:16px; padding:16px; margin-top:16px; }
-  .offer-ic{ flex:0 0 48px; width:48px; height:48px; border-radius:50%; background:#E3F3F1; color:var(--teal-deep); display:flex; align-items:center; justify-content:center; }
-  .offer-ic svg{ width:24px; height:24px; }
-  .offer-big{ font-family:'Poppins',sans-serif; font-weight:800; font-size:24px; color:#0E5C33; line-height:1.15; }
-  .offer-sub{ font-size:13px; color:#4F6868; margin-top:3px; line-height:1.4; }
+  .poster{ position:relative; overflow:hidden; border-radius:20px; margin-top:16px; padding:22px 18px 20px; color:#FFFFFF; background:linear-gradient(155deg, #0B5B5D 0%, #0D7072 55%, #14803F 100%); }
+  .poster::before, .poster::after{ content:""; position:absolute; border-radius:50%; background:rgba(255,255,255,0.08); }
+  .poster::before{ width:180px; height:180px; top:-60px; right:-50px; }
+  .poster::after{ width:130px; height:130px; bottom:-45px; left:-40px; }
+  .poster > *{ position:relative; z-index:1; }
+  .po-chip{ display:inline-flex; align-items:center; gap:6px; background:#FFD966; color:#3A2E00; font-family:'Poppins',sans-serif; font-weight:700; font-size:11.5px; letter-spacing:0.06em; padding:5px 12px; border-radius:999px; }
+  .po-title{ font-family:'Poppins',sans-serif; font-weight:800; font-size:27px; line-height:1.15; margin-top:12px; }
+  .po-tier{ display:flex; align-items:center; gap:12px; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.3); border-radius:14px; padding:12px 14px; margin-top:12px; }
+  .po-ic{ flex:0 0 40px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; }
+  .po-lbl{ flex:1 1 auto; min-width:0; font-size:13.5px; font-weight:600; line-height:1.3; }
+  .po-pct{ flex:0 0 auto; text-align:right; font-family:'Poppins',sans-serif; font-weight:800; font-size:30px; line-height:1; color:#FFD966; }
+  .po-pct small{ display:block; font-size:11px; font-weight:700; letter-spacing:0.08em; margin-top:2px; }
+  .po-pct small:first-child{ margin:0 0 2px; }
+  .po-tier.hot{ background:#FFFFFF; color:var(--ink); border-color:#FFFFFF; }
+  .po-tier.hot .po-ic{ background:#E3F5EA; color:#0E5C33; }
+  .po-tier.hot .po-pct{ color:#0E5C33; }
+  .po-cta{ width:100%; margin-top:16px; padding:13px; border:none; border-radius:12px; background:#FFFFFF; color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; }
+  .po-cta:focus-visible{ outline:3px solid #FFD966; }
   .pprice{ font-size:11.5px; font-weight:600; color:var(--teal-deep); margin-top:3px; }
   .pctl{ margin-top:auto; padding-top:8px; }
   .padd{
@@ -437,9 +447,13 @@
   <div id="freqWrap"><h3 class="sec-h">Frequently bought</h3><div class="pgrid" id="freqRow"></div></div>
   </section>
   <section class="tabpanel" id="panel-offers" role="tabpanel" aria-labelledby="tab-offers">
-  <div class="offer-card">
-    <span class="offer-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><path d="M7 7h.01"/></svg></span>
-    <div><div class="offer-big">10% OFF</div><div class="offer-sub">Chronic-condition and prescription medicines</div></div>
+  <div class="poster">
+    <span class="po-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg> NEW SHOP OPENING</span>
+    <h2 class="po-title">Limited Period Special Offer</h2>
+    <div class="po-tier"><span class="po-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span class="po-lbl">Orders below ₹1999</span><span class="po-pct">15%<small>OFF</small></span></div>
+    <div class="po-tier"><span class="po-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span class="po-lbl">Orders ₹1999 and above</span><span class="po-pct">18%<small>OFF</small></span></div>
+    <div class="po-tier hot"><span class="po-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10.5 20.5-7-7a4.95 4.95 0 0 1 7-7l7 7a4.95 4.95 0 0 1-7 7z"/><path d="m8.5 8.5 7 7"/></svg></span><span class="po-lbl">Generic alternative medicines</span><span class="po-pct"><small>UP TO</small>50%<small>OFF</small></span></div>
+    <button type="button" class="po-cta" onclick="showTab('cat')">Start ordering</button>
   </div>
   </section>
 
@@ -528,13 +542,6 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
   function fmt(n){ return '\u20b9' + Number(n).toLocaleString('en-IN'); }
-  // 10% off is shown only on prescription (scheduled / chronic-condition) medicines, using the same Rx flag as the Rx mark. FMCG and OTC show the plain reference price.
-  const DISC_PCT = 10;
-  function priceHTML(price, rx){
-    if (!rx) return 'ref. ' + fmt(price);
-    const d = Math.round(price * (100 - DISC_PCT)) / 100;
-    return '<span class="p-new">' + fmt(d) + '</span><span class="sr-only">, was </span><s class="p-old">' + fmt(price) + '</s><span class="p-off">' + DISC_PCT + '% off</span>';
-  }
 
   function readQty(){
     var n = parseInt(document.getElementById('qtyDisplay').value, 10);
@@ -753,7 +760,7 @@
       + opts.map(i => {
           const x = catalog[i];
           const meta = [x.m, x.u].filter(Boolean).map(escapeHTML);
-          meta.push(priceHTML(x.p, isRxRec(x)));
+          meta.push('ref. ' + fmt(x.p));
           return '<div class="alt-row"><div class="alt-info"><div class="alt-name">' + escapeHTML(x.n) + (isRxRec(x) ? RX_MARK : '') + '</div>'
             + '<div class="alt-meta">' + meta.join(' \u00b7 ') + '</div></div>'
             + '<button type="button" class="alt-pick" onclick="selectSuggestion(' + i + ')">Choose</button></div>';
@@ -790,7 +797,7 @@
         const r = catalog[i];
         const form = r.f || extractForm(r.n, r.u);
         const meta = [r.m, r.u, r.g].filter(Boolean).map(escapeHTML);
-        if (r.p) meta.push(priceHTML(r.p, isRxRec(r)));
+        if (r.p) meta.push('ref. ' + fmt(r.p));
         return `
         <div class="suggest-row" onclick="selectSuggestion(${i})">
           <div class="sname">${escapeHTML(r.n)}${isRxRec(r) ? RX_MARK : ''}${form ? `<span class="form-badge">${escapeHTML(form)}</span>` : ''}</div>
@@ -1105,7 +1112,7 @@
       + '<img src="images/shop/' + escapeHTML(p.id) + '.jpg" data-id="' + escapeHTML(p.id) + '" alt="' + escapeHTML(p.name) + '" loading="lazy" onerror="shopImgFail(this)"></div>'
       + '<div class="pname">' + escapeHTML(p.name) + ((p.rx || p._r) ? RX_MARK : '') + '</div>'
       + (p._c ? '<div class="pcomp">' + escapeHTML(p._c) + '</div>' : '')
-      + (p._p ? '<div class="pprice">' + priceHTML(p._p, p.rx || p._r) + '</div>' : '')
+      + (p._p ? '<div class="pprice">ref. ' + fmt(p._p) + '</div>' : '')
       + '<div class="pctl" data-ctl="' + escapeHTML(p.id) + '"></div></div>';
   }
 
