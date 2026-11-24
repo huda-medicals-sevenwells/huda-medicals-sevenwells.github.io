@@ -48,7 +48,6 @@
   }
   .hdr-right{ display:flex; align-items:center; gap:10px; flex:0 0 auto; }
   .fabs{ position:fixed; right:16px; bottom:20px; z-index:60; display:flex; flex-direction:column; align-items:flex-end; gap:12px; }
-  .send-bar.show ~ .fabs{ bottom:92px; }
   .fab{ position:relative; display:flex; align-items:center; justify-content:center; gap:8px; border:none; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; -webkit-appearance:none; appearance:none; box-shadow:0 10px 24px -6px rgba(11,35,35,0.5); }
   .fab-cart{ width:58px; height:58px; border-radius:50%; background:var(--teal-deep); color:#FFFFFF; }
   .fab-offers{ height:48px; padding:0 18px; border-radius:999px; background:#F5A623; color:#0B2323; }
@@ -249,34 +248,6 @@
   }
   .empty-note{ text-align:center; color:#5F7878; font-size:12.5px; padding:14px 0; }
 
-  .send-bar{
-    display:none; position:fixed; left:18px; right:18px; bottom:16px; max-width:444px; margin:0 auto;
-    background:#19874C; border-radius:16px; padding:6px; align-items:stretch; gap:6px;
-    box-shadow:0 10px 28px -8px rgba(11,35,35,0.4); width:calc(100% - 36px);
-  }
-  .send-bar.show{ display:flex; }
-  .send-count{
-    flex:0 0 auto; display:flex; align-items:center; gap:5px; background:#0E5C33; color:#FFFFFF;
-    border:none; border-radius:11px; padding:0 12px; font-family:'Poppins',sans-serif; font-weight:700;
-    font-size:13px; white-space:nowrap; cursor:pointer;
-  }
-  .send-thumbs{ display:inline-flex; align-items:center; }
-  .send-thumbs .th{
-    position:relative; flex:0 0 28px; width:28px; height:28px; box-sizing:border-box; border-radius:50%;
-    background:#E9F5F4; border:2px solid #0E5C33; overflow:hidden; margin-left:-10px;
-  }
-  .send-thumbs .th:nth-child(1){ margin-left:0; z-index:3; }
-  .send-thumbs .th:nth-child(2){ z-index:2; }
-  .send-thumbs .th:nth-child(3){ z-index:1; }
-  .send-thumbs .e{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:13px; }
-  .send-thumbs img{ position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; background:#FFFFFF; }
-  @media (max-width:399px){ .send-thumbs .th:nth-child(3){ display:none; } }
-  @media (max-width:339px){ .send-thumbs{ display:none; } }
-  .send-go{
-    flex:1 1 auto; display:flex; align-items:center; justify-content:center; gap:8px; background:transparent;
-    color:#FFFFFF; border:none; padding:10px 8px; font-family:'Poppins',sans-serif; font-weight:700;
-    font-size:14px; cursor:pointer;
-  }
 
   .quick-hint{ font-size:11.5px; color:#5C7676; margin:-6px 0 12px; line-height:1.5; }
 
@@ -491,18 +462,6 @@
   </section>
 
 
-</div>
-
-<div class="send-bar" id="sendBar">
-  <button type="button" class="send-count" id="sendCountBtn" onclick="openCart()" aria-label="View your cart">
-    <span class="send-thumbs" id="sendThumbs" aria-hidden="true"></span>
-    <span id="sendCount"></span>
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-  </button>
-  <button type="button" class="send-go" onclick="sendRequest()">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
-    Send via WhatsApp
-  </button>
 </div>
 
 <p class="footer-note">
@@ -1164,10 +1123,6 @@
     document.getElementById('cartBtn').setAttribute('aria-label', n ? 'Cart, ' + n + (n === 1 ? ' item' : ' items') : 'Cart, empty');
     document.getElementById('cartSend').style.display = n ? '' : 'none';
     cartHint();
-    document.getElementById('sendBar').classList.toggle('show', items.length > 0 || hasPhotoSelected);
-    document.getElementById('sendCountBtn').style.display = items.length ? '' : 'none';
-    document.getElementById('sendCount').textContent = items.length + (items.length === 1 ? ' item' : ' items');
-    document.getElementById('sendThumbs').innerHTML = items.slice(-3).reverse().map(thumbHTML).join('');
     syncHints();
     shopSync();
     renderFreq();
@@ -1257,6 +1212,7 @@
 
   function setShopCat(name){
     shopCat = name;                       // '' = All
+    if (curTab !== 'cat') showTab('cat');  // picking a category while searching returns to the categories view
     renderShop();
     // if the list has scrolled up under the sticky bars, bring its top back into view
     const t = document.getElementById('gridTitle');
@@ -1324,7 +1280,7 @@
   let curTab = 'cat', tabTouched = false;   // the page opens on Categories
   function syncSubTabs(){
     const sub = document.getElementById('subTabs');
-    const subOn = (curTab === 'cat' && sub.childNodes.length > 0);
+    const subOn = sub.childNodes.length > 0;
     sub.classList.toggle('on', subOn); document.getElementById('tabsBar').style.display = subOn ? '' : 'none';
     document.documentElement.style.setProperty('--stick', (document.getElementById('tabsBar').offsetHeight + 8) + 'px');
   }
