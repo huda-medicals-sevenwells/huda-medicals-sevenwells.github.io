@@ -47,6 +47,14 @@
     border:1.5px solid rgba(255,255,255,0.55);
   }
   .hdr-right{ display:flex; align-items:center; gap:10px; flex:0 0 auto; }
+  .fabs{ position:fixed; right:16px; bottom:20px; z-index:60; display:flex; flex-direction:column; align-items:flex-end; gap:12px; }
+  .send-bar.show ~ .fabs{ bottom:92px; }
+  .fab{ position:relative; display:flex; align-items:center; justify-content:center; gap:8px; border:none; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; -webkit-appearance:none; appearance:none; box-shadow:0 10px 24px -6px rgba(11,35,35,0.5); }
+  .fab-cart{ width:58px; height:58px; border-radius:50%; background:var(--teal-deep); color:#FFFFFF; }
+  .fab-offers{ height:48px; padding:0 18px; border-radius:999px; background:#F5A623; color:#0B2323; }
+  .fab:active{ filter:brightness(0.92); }
+  .fab:focus-visible{ outline:3px solid var(--ink); outline-offset:3px; }
+  .fab .cart-badge{ border-color:#FFFFFF; top:-4px; right:-4px; }
   .cart-btn{ position:relative; cursor:pointer; padding:0; font-family:inherit; -webkit-appearance:none; appearance:none; }
   .cart-badge{ position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; padding:0 3px; border-radius:10px; background:var(--red); color:#FFFFFF; border:2px solid #0D7072; font-family:'Poppins',sans-serif; font-weight:700; font-size:10.5px; line-height:16px; text-align:center; }
   .cart-send{ width:100%; margin-top:16px; padding:14px; border:none; border-radius:12px; background:#19874C; color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
@@ -184,6 +192,20 @@
   }
 
   .search-wrap{ position:relative; }
+  #searchTop{ position:relative; z-index:40; padding:12px 18px 10px; background:var(--paper); }
+  .sbar{ display:flex; align-items:center; gap:2px; background:var(--white); border:1.5px solid var(--teal-deep); border-radius:999px; padding:0 6px 0 14px; min-height:54px; margin-top:4px; }
+  .sbar:focus-within{ box-shadow:0 0 0 3px rgba(15,139,141,0.25); }
+  .sbar > svg{ flex:0 0 auto; color:var(--teal-deep); }
+  .sbar-in{ flex:1 1 auto; min-width:0; border:none; outline:none; background:transparent; font-family:'Inter',sans-serif; font-size:16px; color:var(--ink); padding:13px 6px; }
+  .sbar-btn{ flex:0 0 44px; width:44px; height:44px; border:none; border-radius:50%; background:transparent; color:var(--teal-deep); display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .rx-back{ border:none; background:transparent; color:var(--teal-deep); font-family:'Inter',sans-serif; font-weight:700; font-size:14px; padding:10px 2px; margin-bottom:6px; cursor:pointer; }
+  .rx-back:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
+  .sbar-btn:active{ background:rgba(15,139,141,0.14); }
+  .sbar-btn:focus-visible{ outline:3px solid var(--teal); outline-offset:-3px; }
+  .sbar-btn.on{ background:#F27B54; color:#0B2323; }
+  .sbar-wrap .suggest-box{ margin-top:6px; border-top:1.5px solid rgba(11,35,35,0.12); border-radius:12px; }
+  .mic-msg{ margin:8px 6px 0; font-size:12.5px; line-height:1.4; color:#3F5A5A; }
+  .mic-msg:empty{ display:none; }
   .suggest-box{
     display:none; position:absolute; left:0; right:0; top:100%; margin-top:-8px; z-index:20;
     background:var(--white); border:1.5px solid rgba(11,35,35,0.12); border-top:none;
@@ -398,26 +420,33 @@
     <span class="loc-open" id="locOpen"></span>
   </button>
   <div class="hdr-right">
-    <button type="button" class="profile-btn cart-btn" id="cartBtn" aria-haspopup="dialog" onclick="openCart()" aria-label="Cart, empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span class="cart-badge" id="cartBadge" style="display:none">0</span></button>
+    <button type="button" class="profile-btn" id="favBtn" aria-haspopup="dialog" onclick="openSub('fav')" aria-label="Saved orders and frequent items"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
     <a class="profile-btn" href="home.html" aria-label="About Huda Medicals">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
   </a>
   </div>
 </div>
 
-<div class="tabs" id="tabsBar">
-  <div class="tabs-in" id="tabs" role="tablist" aria-label="Request sections">
-    <button type="button" class="tab" id="tab-cat" role="tab" aria-selected="true" aria-controls="panel-cat" tabindex="0" onclick="showTab('cat')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Categories</span></button>
-    <button type="button" class="tab" id="tab-search" role="tab" aria-selected="false" aria-controls="panel-search" tabindex="-1" onclick="showTab('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search</span></button>
-    <button type="button" class="tab" id="tab-rx" role="tab" aria-selected="false" aria-controls="panel-rx" tabindex="-1" onclick="showTab('rx')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><span>Upload Rx</span></button>
-    <button type="button" class="tab" id="tab-freq" role="tab" aria-selected="false" aria-controls="panel-freq" tabindex="-1" onclick="showTab('freq')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Frequent</span></button>
-    <button type="button" class="tab" id="tab-offers" role="tab" aria-selected="false" aria-controls="panel-offers" tabindex="-1" onclick="showTab('offers')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><path d="M7 7h.01"/></svg><span>Offers</span></button>
+<div class="wrap" id="searchTop">
+  <div class="sbar-wrap search-wrap">
+    <div class="sbar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="text" id="prodName" class="sbar-in" placeholder="Start typing to search..." autocomplete="off" aria-label="Product name">
+      <button type="button" class="sbar-btn" id="clrBtn" onclick="clearSearch()" aria-label="Clear search and go back to categories" style="display:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <button type="button" class="sbar-btn" id="micBtn" onclick="startVoice()" aria-label="Search by voice" aria-pressed="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+      <button type="button" class="sbar-btn" id="camBtn" onclick="showTab('rx')" aria-label="Send a photo of a prescription or product"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L17 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></svg></button>
+    </div>
+    <div class="suggest-box" id="suggestBox"></div>
   </div>
+  <p class="mic-msg" id="micMsg" role="status" aria-live="polite"></p>
+</div>
+
+<div class="tabs" id="tabsBar">
   <div class="subtabs" id="subTabs" role="group" aria-label="Categories"></div>
 </div>
 
 <div class="wrap">
-  <section class="tabpanel on" id="panel-cat" role="tabpanel" aria-labelledby="tab-cat">
+  <section class="tabpanel on" id="panel-cat" role="region" aria-label="Categories and popular items">
   <div class="shop" id="shop">
     <h2>Quick add &mdash; popular items</h2>
     <p class="shop-sub">Tap Add to put an item on your request list. We'll check availability and confirm the price on WhatsApp. Prices shown are reference prices, not a confirmed quote.</p>
@@ -425,14 +454,9 @@
     <div class="pgrid" id="shopGrid"></div>
   </div>
   </section>
-  <section class="tabpanel" id="panel-search" role="tabpanel" aria-labelledby="tab-search">
+  <section class="tabpanel" id="panel-search" role="region" aria-label="Search results and add to list">
+  <p class="quick-hint" style="margin:0 2px 12px;">Not sure we stock it? Type it anyway and we'll check.</p>
   <div class="add-card">
-    <label class="field-label" for="prodName">Product name</label>
-    <p class="quick-hint">Search below — if you're not sure we stock it, type it anyway and we'll check.</p>
-    <div class="search-wrap">
-      <input type="text" id="prodName" class="field-input" placeholder="Start typing to search..." autocomplete="off">
-      <div class="suggest-box" id="suggestBox"></div>
-    </div>
     <div class="selected-tag" id="selectedTag">
       <span>&#10003; <span id="selectedTagText"></span></span>
       <button onclick="clearSelection()">Change</button>
@@ -453,7 +477,8 @@
     Start typing and we'll suggest matching products with their composition and manufacturer, if we recognize them. Can't find it in suggestions? Just type it anyway — you don't need to know if we stock it, that's what we'll check for you. Any price shown while searching is a reference price, not a confirmed quote — we'll confirm the real price when we check.
   </div>
   </section>
-  <section class="tabpanel" id="panel-rx" role="tabpanel" aria-labelledby="tab-rx">
+  <section class="tabpanel" id="panel-rx" role="region" aria-label="Prescription or product photo">
+  <button type="button" class="rx-back" onclick="showTab('cat')">&larr; Back to categories</button>
   <p class="rx-note">Valid prescription required for some medicines. WhatsApp it to us so the correct medicine is ready for home delivery or store pickup.</p>
   <div class="photo-card">
     <h2>Product Photo or Prescription <span style="font-weight:500; color:#5F7878;">(optional)</span></h2>
@@ -462,29 +487,6 @@
       <input type="checkbox" id="photoCheck" onchange="setPhotoFlag(this.checked)">
       <span>I'll be attaching a photo or prescription</span>
     </label>
-  </div>
-  </section>
-  <section class="tabpanel" id="panel-freq" role="tabpanel" aria-labelledby="tab-freq">
-  <h3 class="sec-h" id="freqMineH">Your previous orders</h3>
-  <p class="freq-note" id="freqNote">Your own earlier orders, saved only on this phone. Tap Add to put one on your request list.</p>
-  <div id="freqList"></div>
-  <div class="add-card" id="freqEmptyCard"><p class="empty-note" id="freqEmpty"></p></div>
-  <button type="button" class="freq-clear" id="freqClear" onclick="clearHistory()">Clear saved orders</button>
-  <div id="freqWrap"><h3 class="sec-h">Frequently bought</h3><div class="pgrid" id="freqRow"></div></div>
-  </section>
-  <section class="tabpanel" id="panel-offers" role="tabpanel" aria-labelledby="tab-offers">
-  <div class="poster">
-    <span class="po-chip">LIMITED PERIOD</span>
-    <h2 class="po-title">Huda Medicals <span>Grand Opening Offer</span></h2>
-    <p class="po-sub">Save on your monthly medicines</p>
-    <div class="po-tiers">
-      <div class="po-tier"><span class="po-k">Orders</span><span class="po-r">up to ₹999</span><span class="po-pct">12<em>%</em></span><span class="po-off">OFF</span></div>
-      <div class="po-tier"><span class="po-k">Orders</span><span class="po-r">₹1,000 to ₹1,999</span><span class="po-pct">15<em>%</em></span><span class="po-off">OFF</span></div>
-      <div class="po-tier top"><span class="po-k">Orders</span><span class="po-r">₹2,000 and above</span><span class="po-pct">18<em>%</em></span><span class="po-off">OFF</span></div>
-    </div>
-    <div class="po-gen"><svg width="46" height="52" viewBox="0 0 46 52" fill="none" aria-hidden="true"><rect x="9" y="2" width="22" height="9" rx="2.5" fill="#F5A623"/><rect x="6" y="10" width="28" height="36" rx="6" fill="#16224D" stroke="#F5A623" stroke-width="1.5"/><rect x="10" y="20" width="20" height="18" rx="3" fill="#FBF1E1"/><path d="M20 23v12M14 29h12" stroke="#F5A623" stroke-width="3.5" stroke-linecap="round"/><rect x="26" y="38" width="18" height="9" rx="4.5" transform="rotate(-25 26 38)" fill="#F27B54"/></svg><div><div class="po-gen-t">Genuine generic alternatives</div><div class="po-gen-p"><small>UP TO</small><b>50%</b><small>OFF</small></div></div></div>
-    <button type="button" class="po-cta" onclick="showTab('cat')">Start ordering</button>
-    <p class="po-soon">Promotional offers coming soon</p>
   </div>
   </section>
 
@@ -508,6 +510,46 @@
   We'll reply on WhatsApp once we've checked stock and pricing — nothing is charged or confirmed until you agree.<br>
   Huda Medicals · Seven Wells, Chennai
 </p>
+
+<div class="fabs" id="fabs">
+  <button type="button" class="fab fab-offers" id="offersBtn" aria-haspopup="dialog" onclick="openSub('offers')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.2"/></svg><span>Offers</span></button>
+    <button type="button" class="fab fab-cart" id="cartBtn" aria-haspopup="dialog" onclick="openCart()" aria-label="Cart, empty"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span class="cart-badge" id="cartBadge" style="display:none">0</span></button>
+</div>
+
+<div class="locpage" id="favPage" role="dialog" aria-modal="true" aria-label="Saved orders and frequent items" aria-hidden="true">
+  <div class="lp-view on">
+    <div class="lp-bar"><button type="button" class="lp-back" onclick="closeSub()" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">Frequent items</h2></div>
+    <div class="lp-body">
+  <h3 class="sec-h" id="freqMineH">Your previous orders</h3>
+  <p class="freq-note" id="freqNote">Your own earlier orders, saved only on this phone. Tap Add to put one on your request list.</p>
+  <div id="freqList"></div>
+  <div class="add-card" id="freqEmptyCard"><p class="empty-note" id="freqEmpty"></p></div>
+  <button type="button" class="freq-clear" id="freqClear" onclick="clearHistory()">Clear saved orders</button>
+  <div id="freqWrap"><h3 class="sec-h">Frequently bought</h3><div class="pgrid" id="freqRow"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="locpage" id="offersPage" role="dialog" aria-modal="true" aria-label="Offers" aria-hidden="true">
+  <div class="lp-view on">
+    <div class="lp-bar"><button type="button" class="lp-back" onclick="closeSub()" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">Offers</h2></div>
+    <div class="lp-body">
+  <div class="poster">
+    <span class="po-chip">LIMITED PERIOD</span>
+    <h2 class="po-title">Huda Medicals <span>Grand Opening Offer</span></h2>
+    <p class="po-sub">Save on your monthly medicines</p>
+    <div class="po-tiers">
+      <div class="po-tier"><span class="po-k">Orders</span><span class="po-r">up to ₹999</span><span class="po-pct">12<em>%</em></span><span class="po-off">OFF</span></div>
+      <div class="po-tier"><span class="po-k">Orders</span><span class="po-r">₹1,000 to ₹1,999</span><span class="po-pct">15<em>%</em></span><span class="po-off">OFF</span></div>
+      <div class="po-tier top"><span class="po-k">Orders</span><span class="po-r">₹2,000 and above</span><span class="po-pct">18<em>%</em></span><span class="po-off">OFF</span></div>
+    </div>
+    <div class="po-gen"><svg width="46" height="52" viewBox="0 0 46 52" fill="none" aria-hidden="true"><rect x="9" y="2" width="22" height="9" rx="2.5" fill="#F5A623"/><rect x="6" y="10" width="28" height="36" rx="6" fill="#16224D" stroke="#F5A623" stroke-width="1.5"/><rect x="10" y="20" width="20" height="18" rx="3" fill="#FBF1E1"/><path d="M20 23v12M14 29h12" stroke="#F5A623" stroke-width="3.5" stroke-linecap="round"/><rect x="26" y="38" width="18" height="9" rx="4.5" transform="rotate(-25 26 38)" fill="#F27B54"/></svg><div><div class="po-gen-t">Genuine generic alternatives</div><div class="po-gen-p"><small>UP TO</small><b>50%</b><small>OFF</small></div></div></div>
+    <button type="button" class="po-cta" onclick="closeSub()">Start ordering</button>
+    <p class="po-soon">Promotional offers coming soon</p>
+  </div>
+    </div>
+  </div>
+</div>
 
 <div class="locpage" id="cartPage" role="dialog" aria-modal="true" aria-label="Your Cart" aria-hidden="true">
   <div class="lp-view on">
@@ -1018,7 +1060,7 @@
   // open / close; the phone's Back button closes the page instead of leaving the site
   function setBackground(on){
     Array.prototype.forEach.call(document.body.children, function(el){
-      if (el.id === 'locPage' || el.id === 'cartPage' || el.tagName === 'SCRIPT') return;
+      if (el.id === 'locPage' || el.id === 'cartPage' || el.id === 'favPage' || el.id === 'offersPage' || el.tagName === 'SCRIPT') return;
       if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert');
     });
     document.body.style.overflow = on ? 'hidden' : '';
@@ -1278,37 +1320,24 @@
   }
 
   // ---- Tabs: panels stay in the page and are only shown/hidden, so the search box, notes and list are never cleared ----
-  const TAB_IDS = ['cat', 'search', 'rx', 'freq', 'offers'];
+  const PANEL_IDS = ['cat', 'search', 'rx'];    // Search and Rx panels open from the search bar (mic, camera, typing)
   let curTab = 'cat', tabTouched = false;   // the page opens on Categories
   function syncSubTabs(){
     const sub = document.getElementById('subTabs');
-    sub.classList.toggle('on', curTab === 'cat' && sub.childNodes.length > 0);
+    const subOn = (curTab === 'cat' && sub.childNodes.length > 0);
+    sub.classList.toggle('on', subOn); document.getElementById('tabsBar').style.display = subOn ? '' : 'none';
     document.documentElement.style.setProperty('--stick', (document.getElementById('tabsBar').offsetHeight + 8) + 'px');
   }
   window.addEventListener('resize', syncSubTabs);
   function showTab(id, focusTab, auto){
     curTab = id;
     if (!auto) tabTouched = true;
-    TAB_IDS.forEach(t => {
-      const on = (t === id);
-      const b = document.getElementById('tab-' + t);
-      b.setAttribute('aria-selected', on ? 'true' : 'false');
-      b.setAttribute('tabindex', on ? '0' : '-1');
-      document.getElementById('panel-' + t).classList.toggle('on', on);
-    });
+    PANEL_IDS.forEach(t => document.getElementById('panel-' + t).classList.toggle('on', t === id));
     syncSubTabs();
-    if (focusTab) document.getElementById('tab-' + id).focus();
     // if the page was scrolled down, bring the new tab's content to the top, just under the tabs
-    const hh = document.getElementById('hdr').offsetHeight;
+    const hh = document.getElementById('hdr').offsetHeight + document.getElementById('searchTop').offsetHeight;
     if ((window.pageYOffset || document.documentElement.scrollTop || 0) > hh) window.scrollTo(0, hh);
   }
-  document.getElementById('tabs').addEventListener('keydown', function(e){
-    const i = TAB_IDS.findIndex(t => document.getElementById('tab-' + t) === document.activeElement);
-    if (i < 0) return;
-    if (e.key === 'ArrowRight') { e.preventDefault(); showTab(TAB_IDS[(i + 1) % TAB_IDS.length], true); }
-    else if (e.key === 'ArrowLeft') { e.preventDefault(); showTab(TAB_IDS[(i + TAB_IDS.length - 1) % TAB_IDS.length], true); }
-  });
-
   // ---- Cart page: the request list lives here; the phone's Back button closes it ----
   let cartOpen = false, cartClosing = false, cartFocus = null;
   function openCart(){
@@ -1331,7 +1360,28 @@
     if (history.state && history.state.hudaCart) { cartClosing = true; history.back(); } else hideCart();
   }
   window.addEventListener('popstate', hideCart);
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && cartOpen) closeCart(); });
+  // ---- Heart (Frequent items) and Offers pages: full-screen, Back arrow and the phone's Back button close them ----
+  let subOpen = null, subClosing = false, subFocus = null;
+  function openSub(id){
+    if (subOpen || cartOpen || locOpen) return;
+    subFocus = document.activeElement; subOpen = id;
+    const pg = document.getElementById(id + 'Page'); pg.classList.add('on'); pg.setAttribute('aria-hidden', 'false');
+    setBackground(true); pg.scrollTop = 0;
+    try { history.pushState({ hudaSub: 1 }, ''); } catch (e) {}
+    pg.querySelector('.lp-back').focus();
+  }
+  function hideSub(){
+    if (!subOpen) return;
+    const pg = document.getElementById(subOpen + 'Page'); subOpen = null; subClosing = false;
+    pg.classList.remove('on'); pg.setAttribute('aria-hidden', 'true'); setBackground(false);
+    if (subFocus && subFocus.focus) subFocus.focus();
+  }
+  function closeSub(){
+    if (!subOpen || subClosing) return;
+    if (history.state && history.state.hudaSub) { subClosing = true; history.back(); } else hideSub();
+  }
+  window.addEventListener('popstate', hideSub);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { if (cartOpen) closeCart(); else if (subOpen) closeSub(); } });
   // ---- Frequent tab: this customer's own earlier orders. Stored only in this phone's browser (localStorage); never sent anywhere. ----
   const HIST_KEY = 'huda_prev_orders_v1';
   let history = [], histOK = true;
@@ -1423,6 +1473,57 @@
   }
   function syncHints(){ if (document.getElementById('prodName').value) stopHints(); else startHints(); }
   document.getElementById('prodName').addEventListener('input', syncHints);
+
+  // Tapping or typing in the search bar opens the search view (suggestions, quantity, Add to my list)
+  document.getElementById('prodName').addEventListener('focus', function(){ if (curTab !== 'search') showTab('search'); });
+  document.getElementById('prodName').addEventListener('input', function(){
+    document.getElementById('clrBtn').style.display = this.value ? '' : 'none';
+    if (this.value && curTab !== 'search') showTab('search');
+    else if (!this.value && curTab === 'search' && !document.getElementById('selectedTag').classList.contains('show')) showTab('cat', false, true);
+  });
+  // leaving the bar while it is empty returns to the categories
+  document.getElementById('prodName').addEventListener('blur', function(){
+    setTimeout(function(){
+      const p = document.getElementById('panel-search');
+      if (curTab === 'search' && !document.getElementById('prodName').value && !p.contains(document.activeElement) && !document.getElementById('selectedTag').classList.contains('show')) showTab('cat', false, true);
+    }, 200);
+  });
+  function clearSearch(){
+    const i = document.getElementById('prodName'); i.value = '';
+    i.dispatchEvent(new Event('input', { bubbles: true }));
+    try { clearSelection(); } catch (e) {}
+    document.getElementById('clrBtn').style.display = 'none';
+    showTab('cat', false, true);
+  }
+
+  // ---- Voice search (phone's own speech recognition, English India). Where the browser has none, a short message tells the customer to type. ----
+  let voiceRec = null, voiceOn = false, micTimer = null;
+  function micSay(t, keep){
+    const el = document.getElementById('micMsg'); if (!el) return;
+    el.textContent = t; clearTimeout(micTimer);
+    if (t && !keep) micTimer = setTimeout(function(){ el.textContent = ''; }, 6000);
+  }
+  function startVoice(){
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) { micSay("Voice search isn't available in this browser. Please type, or use the mic on your keyboard."); return; }
+    if (voiceOn && voiceRec) { try { voiceRec.stop(); } catch (e) {} return; }
+    const btn = document.getElementById('micBtn'), inp = document.getElementById('prodName');
+    try { voiceRec = new SR(); } catch (e) { micSay("Voice search isn't available in this browser. Please type instead."); return; }
+    voiceRec.lang = 'en-IN'; voiceRec.interimResults = false; voiceRec.maxAlternatives = 1; voiceRec.continuous = false;
+    voiceRec.onstart = function(){ voiceOn = true; btn.classList.add('on'); btn.setAttribute('aria-pressed', 'true'); micSay('Listening... say the medicine name', true); };
+    voiceRec.onresult = function(e){
+      let t = ''; try { t = e.results[0][0].transcript; } catch (x) {}
+      t = (t || '').trim().replace(/[.]+$/, '');
+      if (t) { inp.value = t; inp.dispatchEvent(new Event('input', { bubbles: true })); inp.focus(); micSay('Heard: ' + t); }
+      else micSay("Couldn't hear that. Please try again.");
+    };
+    voiceRec.onerror = function(e){
+      micSay((e.error === 'not-allowed' || e.error === 'service-not-allowed') ? 'The microphone is blocked. Allow it for this site, or type instead.'
+        : e.error === 'no-speech' ? "Couldn't hear anything. Please try again." : "Voice search didn't work. Please type instead.");
+    };
+    voiceRec.onend = function(){ voiceOn = false; btn.classList.remove('on'); btn.setAttribute('aria-pressed', 'false'); const m = document.getElementById('micMsg'); if (m && m.textContent.indexOf('Listening') === 0) micSay(''); };
+    try { voiceRec.start(); } catch (e) { micSay("Voice search didn't start. Please try again."); }
+  }
   showHint();
 
   loadHistory();
