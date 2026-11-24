@@ -50,6 +50,12 @@
   .cart-btn{ position:relative; cursor:pointer; padding:0; font-family:inherit; -webkit-appearance:none; appearance:none; }
   .cart-badge{ position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; padding:0 3px; border-radius:10px; background:var(--red); color:#FFFFFF; border:2px solid #0D7072; font-family:'Poppins',sans-serif; font-weight:700; font-size:10.5px; line-height:16px; text-align:center; }
   .cart-send{ width:100%; margin-top:16px; padding:14px; border:none; border-radius:12px; background:#19874C; color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .loc-open{ display:block; font-size:11.5px; line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:1px; }
+  .loc-open i{ display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:5px; vertical-align:1px; background:#8FF0B8; }
+  .loc-open.closed i{ background:#FFB4A8; }
+  .cart-hint{ margin-top:12px; padding:10px 14px; border-radius:12px; background:#E3F4F1; color:#0B2323; font-size:13px; line-height:1.45; border:1px solid rgba(11,91,93,0.25); }
+  .cart-hint b{ color:#0B5B5D; }
+  .cart-hint small{ display:block; margin-top:3px; font-size:11.5px; color:#3F5A5A; }
   .profile-btn:active{ background:rgba(255,255,255,0.3); }
   .profile-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
 
@@ -283,24 +289,34 @@
   .pimg img{ object-fit:contain; background:#FFFFFF; }
   .pname{ font-size:12.5px; font-weight:600; color:var(--ink); line-height:1.35; min-height:34px; }
   .pcomp{ font-size:10.5px; color:#1B7A43; margin-top:2px; line-height:1.35; max-height:28px; overflow:hidden; }
-  .poster{ position:relative; overflow:hidden; border-radius:20px; margin-top:16px; padding:22px 18px 20px; color:#FFFFFF; background:linear-gradient(155deg, #0B5B5D 0%, #0D7072 55%, #14803F 100%); }
-  .poster::before, .poster::after{ content:""; position:absolute; border-radius:50%; background:rgba(255,255,255,0.08); }
-  .poster::before{ width:180px; height:180px; top:-60px; right:-50px; }
-  .poster::after{ width:130px; height:130px; bottom:-45px; left:-40px; }
+  .poster{ position:relative; overflow:hidden; border-radius:22px; margin-top:16px; padding:22px 16px 18px; color:#FBF1E1; text-align:center; background:linear-gradient(170deg, #0A0F24 0%, #111B3F 100%); border:1.5px solid rgba(245,166,35,0.45); }
+  .poster::before{ content:""; position:absolute; width:30px; height:84px; top:92px; right:-4px; border-radius:15px; background:linear-gradient(#F27B54 50%, #FBF1E1 50%); transform:rotate(35deg); opacity:0.3; }
+  .poster::after{ content:""; position:absolute; width:78px; height:78px; border-radius:50%; bottom:70px; left:-30px; background:#FBF1E1; opacity:0.1; }
   .poster > *{ position:relative; z-index:1; }
-  .po-chip{ display:inline-flex; align-items:center; gap:6px; background:#FFD966; color:#3A2E00; font-family:'Poppins',sans-serif; font-weight:700; font-size:11.5px; letter-spacing:0.06em; padding:5px 12px; border-radius:999px; }
-  .po-title{ font-family:'Poppins',sans-serif; font-weight:800; font-size:27px; line-height:1.15; margin-top:12px; }
-  .po-tier{ display:flex; align-items:center; gap:12px; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.3); border-radius:14px; padding:12px 14px; margin-top:12px; }
-  .po-ic{ flex:0 0 40px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; }
-  .po-lbl{ flex:1 1 auto; min-width:0; font-size:13.5px; font-weight:600; line-height:1.3; }
-  .po-pct{ flex:0 0 auto; text-align:right; font-family:'Poppins',sans-serif; font-weight:800; font-size:30px; line-height:1; color:#FFD966; }
-  .po-pct small{ display:block; font-size:11px; font-weight:700; letter-spacing:0.08em; margin-top:2px; }
-  .po-pct small:first-child{ margin:0 0 2px; }
-  .po-tier.hot{ background:#FFFFFF; color:var(--ink); border-color:#FFFFFF; }
-  .po-tier.hot .po-ic{ background:#E3F5EA; color:#0E5C33; }
-  .po-tier.hot .po-pct{ color:#0E5C33; }
-  .po-cta{ width:100%; margin-top:16px; padding:13px; border:none; border-radius:12px; background:#FFFFFF; color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; }
-  .po-cta:focus-visible{ outline:3px solid #FFD966; }
+  .po-chip{ display:inline-block; background:#F27B54; color:#0A0F24; font-family:'Poppins',sans-serif; font-weight:700; font-size:11px; line-height:1.35; letter-spacing:0.05em; padding:6px 14px; border-radius:999px; box-shadow:0 0 0 3px #0A0F24, 0 0 0 4.5px rgba(245,166,35,0.6); }
+  .po-title{ font-family:'Poppins',sans-serif; font-weight:800; font-size:27px; line-height:1.14; margin-top:18px; color:#FBF1E1; }
+  .po-sub{ margin-top:8px; font-size:14px; font-weight:600; line-height:1.3; color:#D5D9EA; }
+  .po-title span{ display:block; color:#F27B54; }
+  .po-tiers{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:18px; align-items:stretch; }
+  .po-tier{ display:flex; flex-direction:column; align-items:center; background:#FBF1E1; color:#0A0F24; border:1.5px solid #F5A623; border-radius:14px; padding:11px 4px 10px; }
+  .po-k{ font-size:11px; font-weight:600; line-height:1.2; }
+  .po-r{ font-size:12.5px; font-weight:700; line-height:1.25; min-height:32px; margin-top:2px; display:flex; align-items:center; justify-content:center; }
+  .po-pct{ margin-top:6px; padding-top:7px; width:80%; border-top:1.5px solid rgba(10,15,36,0.18); font-family:'Poppins',sans-serif; font-weight:800; font-size:33px; line-height:1; color:#C8440F; }
+  .po-pct em{ font-style:normal; font-size:19px; margin-left:1px; }
+  .po-off{ margin-top:3px; font-family:'Poppins',sans-serif; font-weight:800; font-size:13px; letter-spacing:0.08em; }
+  .po-tier.top{ background:#F5A623; border-color:#FFD27A; box-shadow:0 0 18px rgba(245,166,35,0.45); transform:scale(1.04); }
+  .po-tier.top .po-pct{ color:#0A0F24; border-top-color:rgba(10,15,36,0.35); }
+  .po-gen{ display:flex; align-items:center; gap:12px; margin-top:16px; padding:12px 12px; border:1.5px solid #F5A623; border-radius:14px; text-align:left; background:rgba(245,166,35,0.08); }
+  .po-gen svg{ flex:0 0 46px; }
+  .po-gen-t{ font-size:14px; font-weight:600; line-height:1.3; color:#FBF1E1; }
+  .po-gen-p{ margin-top:2px; font-family:'Poppins',sans-serif; font-weight:800; color:#F5A623; line-height:1; white-space:nowrap; }
+  .po-gen-p small{ font-size:12px; letter-spacing:0.06em; }
+  .po-gen-p b{ font-size:32px; margin:0 3px; }
+  .po-cta{ width:100%; margin-top:16px; padding:13px; border:none; border-radius:12px; background:#F5A623; color:#0A0F24; font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; }
+  .po-cta:active{ background:#E09512; }
+  .po-cta:focus-visible{ outline:3px solid #FBF1E1; outline-offset:2px; }
+  .po-soon{ display:flex; align-items:center; gap:10px; margin-top:16px; font-size:12.5px; line-height:1.3; color:#D5D9EA; }
+  .po-soon::before, .po-soon::after{ content:""; flex:1 1 0; height:1px; background:rgba(245,166,35,0.55); }
   .req-act{ display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
   .req-row .qty{ display:flex; align-items:center; gap:4px; }
   .req-row .qty button{ width:34px; height:34px; padding:0; border-radius:50%; border:1.5px solid var(--teal-deep); background:#FFFFFF; color:var(--teal-deep); font-size:18px; font-weight:700; cursor:pointer; }
@@ -379,6 +395,7 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
     </span>
     <span class="loc-addr" id="locAddr" aria-live="polite">Tap to add your delivery address</span>
+    <span class="loc-open" id="locOpen"></span>
   </button>
   <div class="hdr-right">
     <button type="button" class="profile-btn cart-btn" id="cartBtn" aria-haspopup="dialog" onclick="openCart()" aria-label="Cart, empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span class="cart-badge" id="cartBadge" style="display:none">0</span></button>
@@ -457,12 +474,17 @@
   </section>
   <section class="tabpanel" id="panel-offers" role="tabpanel" aria-labelledby="tab-offers">
   <div class="poster">
-    <span class="po-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg> NEW SHOP OPENING</span>
-    <h2 class="po-title">Limited Period Special Offer</h2>
-    <div class="po-tier"><span class="po-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span class="po-lbl">Orders below ₹1999</span><span class="po-pct">15%<small>OFF</small></span></div>
-    <div class="po-tier"><span class="po-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span class="po-lbl">Orders ₹1999 and above</span><span class="po-pct">18%<small>OFF</small></span></div>
-    <div class="po-tier hot"><span class="po-ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10.5 20.5-7-7a4.95 4.95 0 0 1 7-7l7 7a4.95 4.95 0 0 1-7 7z"/><path d="m8.5 8.5 7 7"/></svg></span><span class="po-lbl">Generic alternative medicines</span><span class="po-pct"><small>UP TO</small>50%<small>OFF</small></span></div>
+    <span class="po-chip">LIMITED PERIOD</span>
+    <h2 class="po-title">Huda Medicals <span>Grand Opening Offer</span></h2>
+    <p class="po-sub">Save on your monthly medicines</p>
+    <div class="po-tiers">
+      <div class="po-tier"><span class="po-k">Orders</span><span class="po-r">up to ₹999</span><span class="po-pct">12<em>%</em></span><span class="po-off">OFF</span></div>
+      <div class="po-tier"><span class="po-k">Orders</span><span class="po-r">₹1,000 to ₹1,999</span><span class="po-pct">15<em>%</em></span><span class="po-off">OFF</span></div>
+      <div class="po-tier top"><span class="po-k">Orders</span><span class="po-r">₹2,000 and above</span><span class="po-pct">18<em>%</em></span><span class="po-off">OFF</span></div>
+    </div>
+    <div class="po-gen"><svg width="46" height="52" viewBox="0 0 46 52" fill="none" aria-hidden="true"><rect x="9" y="2" width="22" height="9" rx="2.5" fill="#F5A623"/><rect x="6" y="10" width="28" height="36" rx="6" fill="#16224D" stroke="#F5A623" stroke-width="1.5"/><rect x="10" y="20" width="20" height="18" rx="3" fill="#FBF1E1"/><path d="M20 23v12M14 29h12" stroke="#F5A623" stroke-width="3.5" stroke-linecap="round"/><rect x="26" y="38" width="18" height="9" rx="4.5" transform="rotate(-25 26 38)" fill="#F27B54"/></svg><div><div class="po-gen-t">Genuine generic alternatives</div><div class="po-gen-p"><small>UP TO</small><b>50%</b><small>OFF</small></div></div></div>
     <button type="button" class="po-cta" onclick="showTab('cat')">Start ordering</button>
+    <p class="po-soon">Promotional offers coming soon</p>
   </div>
   </section>
 
@@ -493,6 +515,7 @@
     <div class="lp-body">
       <div class="cart-addr" id="cartAddr"></div>
       <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
+      <div class="cart-hint" id="cartHint" style="display:none"></div>
       <button type="button" class="cart-send" id="cartSend" onclick="sendRequest()" style="display:none"><svg width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg> Send via WhatsApp</button>
     </div>
   </div>
@@ -864,6 +887,7 @@
       if (selectedProduct.c) item.composition = selectedProduct.c;
       if (selectedProduct.m) item.manufacturer = selectedProduct.m;
       if (isRxRec(selectedProduct)) item.rx = true;
+      if (selectedProduct.p > 0) item.p = selectedProduct.p;
     }
     items.push(item);
     nameEl.value = '';
@@ -1036,6 +1060,46 @@
 
   function changeQty(i, d){ const it = items[i]; if (!it) return; it.qty = Math.min(99, Math.max(1, (it.qty || 1) + d)); render(); }
   function changeAddr(){ hideCart(); openLoc(); }
+  // Offer hint on the Cart page: 12% up to Rs 999, 15% from 1,000 to 1,999, 18% from 2,000. Uses reference prices only (items without one are not counted).
+  const OFFER_T1 = 1000, OFFER_T2 = 2000;
+  function cartHint(){
+    const el = document.getElementById('cartHint');
+    if (!el) return;
+    let total = 0;
+    items.forEach(function(it){ if (it.p > 0) total += it.p * (it.qty || 1); });
+    if (!(total > 0)) { el.style.display = 'none'; return; }
+    const note = '<small>Based on reference prices. We confirm the final bill on WhatsApp.</small>';
+    el.innerHTML = total < OFFER_T1
+      ? 'Add <b>' + fmt(Math.ceil(OFFER_T1 - total)) + '</b> more to get 15% off (now 12%).' + note
+      : total < OFFER_T2
+        ? 'Add <b>' + fmt(Math.ceil(OFFER_T2 - total)) + '</b> more to get 18% off (now 15%).' + note
+        : 'Your order reaches the <b>18% off</b> offer.' + note;
+    el.style.display = '';
+  }
+
+  // ---- Open / Closed line in the header (shop hours TEMPORARILY 4 PM to 12 AM daily, India time; the normal hours were 6 AM to 11 PM) ----
+  const OPEN_H = 16, CLOSE_H = 24;
+  function shopOpenNow(){
+    let h = null, m = 0;
+    try {
+      const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+      parts.forEach(function(p){ if (p.type === 'hour') h = parseInt(p.value, 10) % 24; if (p.type === 'minute') m = parseInt(p.value, 10); });
+    } catch (e) {}
+    if (h === null) return null;
+    return h >= OPEN_H && h < CLOSE_H;
+  }
+  function updateOpen(){
+    const el = document.getElementById('locOpen'), btn = document.getElementById('locBtn');
+    if (!el) return;
+    const o = shopOpenNow();
+    if (o === null) { el.style.display = 'none'; return; }
+    const txt = o ? 'Open now \u00b7 closes 12 AM' : 'Closed \u00b7 opens 4 PM';
+    el.className = 'loc-open' + (o ? '' : ' closed');
+    el.innerHTML = '<i aria-hidden="true"></i>' + txt;
+    el.style.display = '';
+    if (btn) btn.setAttribute('aria-label', 'Choose delivery location. Shop ' + txt.replace(' \u00b7 ', ', ').toLowerCase());
+  }
+  updateOpen(); setInterval(updateOpen, 60000);
   function render(){
     saveCart();
     const wrap = document.getElementById('listWrap');
@@ -1057,6 +1121,7 @@
     cb.textContent = n > 99 ? '99+' : n; cb.style.display = n ? '' : 'none';
     document.getElementById('cartBtn').setAttribute('aria-label', n ? 'Cart, ' + n + (n === 1 ? ' item' : ' items') : 'Cart, empty');
     document.getElementById('cartSend').style.display = n ? '' : 'none';
+    cartHint();
     document.getElementById('sendBar').classList.toggle('show', items.length > 0 || hasPhotoSelected);
     document.getElementById('sendCountBtn').style.display = items.length ? '' : 'none';
     document.getElementById('sendCount').textContent = items.length + (items.length === 1 ? ' item' : ' items');
@@ -1203,6 +1268,7 @@
       const it = { name: p.name, pack: '', qty: 1, shopId: id };
       if (p._c) it.composition = p._c;
       if (p._m) it.manufacturer = p._m;
+      if (p._p) it.p = p._p;
       items.push(it);
     } else {
       items[i].qty = Math.min(999, (items[i].qty || 1) + d);
@@ -1293,6 +1359,7 @@
       if (it.composition) x.composition = it.composition;
       if (it.manufacturer) x.manufacturer = it.manufacturer;
       if (isRxItem(it)) x.rx = true;
+      if (it.p > 0) x.p = it.p;
     });
     history.sort((a, b) => (b.n - a.n) || (b.t - a.t));
     if (history.length > 30) history.length = 30;
@@ -1309,6 +1376,7 @@
       if (x.composition) it.composition = x.composition;
       if (x.manufacturer) it.manufacturer = x.manufacturer;
       if (x.rx) it.rx = true;
+      if (x.p > 0) it.p = x.p;
       items.push(it);
     } else {
       items[j].qty = Math.min(999, (items[j].qty || 1) + d);
