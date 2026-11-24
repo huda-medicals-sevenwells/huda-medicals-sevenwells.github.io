@@ -301,6 +301,15 @@
   .po-tier.hot .po-pct{ color:#0E5C33; }
   .po-cta{ width:100%; margin-top:16px; padding:13px; border:none; border-radius:12px; background:#FFFFFF; color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; }
   .po-cta:focus-visible{ outline:3px solid #FFD966; }
+  .req-act{ display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
+  .req-row .qty{ display:flex; align-items:center; gap:4px; }
+  .req-row .qty button{ width:34px; height:34px; padding:0; border-radius:50%; border:1.5px solid var(--teal-deep); background:#FFFFFF; color:var(--teal-deep); font-size:18px; font-weight:700; cursor:pointer; }
+  .req-row .qty span{ min-width:24px; text-align:center; font-weight:700; }
+  .cart-addr{ display:flex; align-items:center; gap:10px; background:#FFFFFF; border:1px solid rgba(11,35,35,0.1); border-radius:14px; padding:10px 6px 10px 14px; margin-bottom:14px; }
+  .ca-t{ flex:1 1 auto; min-width:0; }
+  .ca-l{ font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; }
+  .ca-a{ font-size:12px; color:#4F6868; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ca-c{ flex:0 0 auto; background:none; border:none; color:var(--teal-deep); font-weight:700; font-size:13px; cursor:pointer; padding:10px; }
   .pprice{ font-size:11.5px; font-weight:600; color:var(--teal-deep); margin-top:3px; }
   .pctl{ margin-top:auto; padding-top:8px; }
   .padd{
@@ -482,6 +491,7 @@
   <div class="lp-view on">
     <div class="lp-bar"><button type="button" class="lp-back" onclick="closeCart()" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">Your Cart</h2></div>
     <div class="lp-body">
+      <div class="cart-addr" id="cartAddr"></div>
       <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
       <button type="button" class="cart-send" id="cartSend" onclick="sendRequest()" style="display:none"><svg width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg> Send via WhatsApp</button>
     </div>
@@ -896,6 +906,8 @@
     else if (a) { lab.textContent = a.label; ad.textContent = oneLine(a.text); }
     else if (gpsState === 'asking') { lab.textContent = 'Locating\u2026'; ad.textContent = 'Checking your location'; }
     else { lab.textContent = 'Select location'; ad.textContent = 'Tap to add your delivery address'; }
+    const none = lab.textContent === 'Select location';
+    document.getElementById('cartAddr').innerHTML = '<div class="ca-t"><div class="ca-l">' + (none ? 'No delivery address yet' : 'Deliver to ' + escapeHTML(lab.textContent)) + '</div>' + (none ? '' : '<div class="ca-a">' + escapeHTML(ad.textContent) + '</div>') + '</div><button type="button" class="ca-c" onclick="changeAddr()">' + (none ? 'Add' : 'Change') + '</button>';
   }
   function renderLoc(){ renderHeader(); if (locOpen) renderPage(); }
 
@@ -1022,6 +1034,8 @@
       + '</span>';
   }
 
+  function changeQty(i, d){ const it = items[i]; if (!it) return; it.qty = Math.min(99, Math.max(1, (it.qty || 1) + d)); render(); }
+  function changeAddr(){ hideCart(); openLoc(); }
   function render(){
     saveCart();
     const wrap = document.getElementById('listWrap');
@@ -1036,7 +1050,7 @@
             ${it.composition ? `<div class="ci-composition">Contains: ${escapeHTML(it.composition)}</div>` : ''}
             ${it.manufacturer ? `<div class="ci-mfr">${escapeHTML(it.manufacturer)}</div>` : ''}
           </div>
-          <button onclick="removeRequest(${i})">Remove</button>
+          <div class="req-act"><div class="qty"><button type="button" onclick="changeQty(${i},-1)" aria-label="Decrease quantity">&minus;</button><span>${it.qty || 1}</span><button type="button" onclick="changeQty(${i},1)" aria-label="Increase quantity">+</button></div><button onclick="removeRequest(${i})">Remove</button></div>
         </div>`).join('') + (hasPhotoSelected ? '<div class="req-row"><div><div class="rname">Photo to attach</div><div class="rpack">Attach it in the WhatsApp chat</div></div></div>' : '');
     }
     const n = items.length + (hasPhotoSelected ? 1 : 0), cb = document.getElementById('cartBadge');
