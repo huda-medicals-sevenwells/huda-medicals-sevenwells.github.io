@@ -257,6 +257,10 @@
   }
   .photo-card h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:4px; }
   .photo-sub{ font-size:12px; color:#5C7676; margin-bottom:12px; line-height:1.5; }
+  .photo-btn{ display:flex; align-items:center; justify-content:center; gap:9px; width:100%; padding:13px; margin-bottom:12px; border:none; border-radius:12px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:14.5px; cursor:pointer; }
+  .photo-msg{ font-size:12.5px; line-height:1.5; color:var(--ink); margin:-4px 0 12px; }
+  .photo-msg:empty{ display:none; }
+  .photo-msg a{ color:var(--teal-deep); font-weight:700; }
   .photo-check{ display:flex; align-items:center; gap:9px; cursor:pointer; }
   .photo-check input{ width:18px; height:18px; accent-color:var(--teal-deep); flex:0 0 18px; }
   .photo-check span{ font-size:12.5px; font-weight:600; color:var(--ink); }
@@ -375,12 +379,45 @@
   .fm-chip{ padding:8px 16px; border-radius:999px; border:1.5px solid #7A9090; background:var(--white); color:var(--ink); font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; cursor:pointer; }
   .fm-err{ display:none; color:var(--red); font-size:12.5px; margin-top:6px; }
   .fm-save{ width:100%; margin-top:20px; padding:14px; border:none; border-radius:12px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; }
+  /* ---- Saved lists (family medicine lists) ---- */
+  .lists-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin:2px 0 6px; }
+  .lists-new{ background:var(--teal-deep); color:#FFFFFF; border:none; border-radius:999px; padding:9px 15px; font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer; }
+  .list-card{ background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:14px; padding:13px 14px; margin-bottom:10px; }
+  .lc-top{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+  .lc-name{ font-family:'Poppins',sans-serif; font-weight:700; font-size:14.5px; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .lc-count{ flex:0 0 auto; font-size:12px; color:#4F6868; }
+  .lc-prev{ font-size:12px; color:#5C7676; margin-top:4px; line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .lc-act{ display:flex; gap:8px; margin-top:11px; }
+  .lc-add{ flex:1 1 auto; padding:10px; border:none; border-radius:10px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; cursor:pointer; }
+  .lc-edit{ flex:0 0 auto; padding:10px 20px; border:1.5px solid var(--teal-deep); border-radius:10px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; cursor:pointer; }
+  .le-addrow{ display:flex; gap:8px; }
+  .le-addrow .fm-input{ flex:1 1 auto; min-width:0; }
+  .le-addbtn{ flex:0 0 auto; padding:0 20px; border:none; border-radius:12px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; cursor:pointer; }
+  .le-sec{ width:100%; margin-top:12px; padding:12px; border:1.5px solid var(--teal-deep); border-radius:12px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; cursor:pointer; }
+  .le-del{ display:block; margin:18px auto 0; background:none; border:none; color:var(--red); font-weight:700; font-size:13px; text-decoration:underline; cursor:pointer; padding:10px; }
+  .le-rm{ display:block; width:100%; margin-top:6px; background:none; border:none; color:var(--red); font-size:12px; font-weight:700; cursor:pointer; padding:6px 0; }
+  .req-row button.save-link{ display:inline-block; margin-top:8px; padding:7px 12px; border-radius:9px; background:rgba(15,139,141,0.12); color:var(--teal-deep); font-size:12px; font-weight:700; }
+  .cart-saveall{ display:block; margin:0 0 12px auto; padding:9px 16px; border:1.5px solid var(--teal-deep); border-radius:999px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer; }
+  .sheet-bg{ display:none; position:fixed; top:0; right:0; bottom:0; left:0; z-index:140; background:rgba(11,35,35,0.5); }
+  .sheet-bg.on{ display:block; }
+  .sheet{ position:absolute; left:0; right:0; bottom:0; max-width:480px; margin:0 auto; background:var(--paper); border-radius:18px 18px 0 0; padding:18px 16px 20px; max-height:88%; overflow-y:auto; outline:none; }
+  .sh-h{ font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; }
+  .sh-sub{ font-size:12.5px; color:#4F6868; margin:3px 0 12px; line-height:1.45; }
+  .sh-list{ display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; padding:12px 14px; margin-bottom:8px; border:1.5px solid rgba(11,35,35,0.14); border-radius:12px; background:var(--white); font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; color:var(--ink); cursor:pointer; text-align:left; }
+  .sh-list span:last-child{ font-family:'Inter',sans-serif; font-weight:500; font-size:12px; color:#4F6868; flex:0 0 auto; }
+  .sh-cancel{ display:block; margin:10px auto 0; background:none; border:none; color:#4F6868; font-weight:700; font-size:13px; padding:10px; cursor:pointer; }
+  .toast{ display:none; position:fixed; left:50%; bottom:24px; transform:translateX(-50%); max-width:88%; background:#0B2323; color:#FFFFFF; padding:11px 16px; border-radius:12px; font-size:13px; line-height:1.4; text-align:center; z-index:150; box-shadow:0 8px 24px -6px rgba(11,35,35,0.5); }
+  .toast.on{ display:block; }
+  .logo-btn{ flex:0 0 40px; width:40px; height:40px; border-radius:50%; background:#FFFFFF; display:flex; align-items:center; justify-content:center; border:1.5px solid rgba(255,255,255,0.7); overflow:hidden; text-decoration:none; color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; }
+  .logo-btn img{ width:26px; height:auto; display:block; }
+  .logo-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
 </style>
 </head>
 <body>
 
 <div class="header" id="hdr">
   <h1 class="sr-only">Huda Medicals: Request a Product</h1>
+  <a class="logo-btn" href="home.html" aria-label="About Huda Medicals: shop info, hours and contact"><img src="logo-mark.png" alt="" onerror="this.replaceWith(document.createTextNode('HM'))"></a>
   <button type="button" class="loc-btn" id="locBtn" aria-haspopup="dialog" onclick="openLoc()" aria-label="Choose delivery location">
     <span class="loc-top">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -392,9 +429,9 @@
   </button>
   <div class="hdr-right">
     <button type="button" class="profile-btn" id="favBtn" aria-haspopup="dialog" onclick="openSub('fav')" aria-label="Saved orders and frequent items"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
-    <a class="profile-btn" href="home.html" aria-label="About Huda Medicals">
+    <button type="button" class="profile-btn" id="profileBtn" aria-haspopup="dialog" onclick="openSub('profile')" aria-label="My profile">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
-  </a>
+  </button>
   </div>
 </div>
 
@@ -453,7 +490,10 @@
   <p class="rx-note">Valid prescription required for some medicines. WhatsApp it to us so the correct medicine is ready for home delivery or store pickup.</p>
   <div class="photo-card">
     <h2>Product Photo or Prescription <span style="font-weight:500; color:#5F7878;">(optional)</span></h2>
-    <p class="photo-sub">If a photo helps us confirm what you need, attach it directly in the WhatsApp chat after you send your request &mdash; just use the &#128206; icon there. Nothing to select here.</p>
+    <p class="photo-sub">Tap the button, take or choose the photo, then pick WhatsApp and the Huda Medicals chat. You can also attach it in the chat with the &#128206; icon after you send your request.</p>
+    <input type="file" id="photoFile" accept="image/*" style="display:none" onchange="sharePhoto(this)">
+    <button type="button" class="photo-btn" onclick="document.getElementById('photoFile').click()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Take or choose photo</button>
+    <p class="photo-msg" id="photoMsg" role="status" aria-live="polite"></p>
     <label class="photo-check">
       <input type="checkbox" id="photoCheck" onchange="setPhotoFlag(this.checked)">
       <span>I'll be attaching a photo or prescription</span>
@@ -475,16 +515,55 @@
     <button type="button" class="fab fab-cart" id="cartBtn" aria-haspopup="dialog" onclick="openCart()" aria-label="Cart, empty"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span class="cart-badge" id="cartBadge" style="display:none">0</span></button>
 </div>
 
-<div class="locpage" id="favPage" role="dialog" aria-modal="true" aria-label="Saved orders and frequent items" aria-hidden="true">
-  <div class="lp-view on">
-    <div class="lp-bar"><button type="button" class="lp-back" onclick="closeSub()" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">Frequent items</h2></div>
+<div class="locpage" id="favPage" role="dialog" aria-modal="true" aria-label="My lists and frequent items" aria-hidden="true">
+  <div class="lp-view on" id="favMain">
+    <div class="lp-bar"><button type="button" class="lp-back" onclick="closeSub()" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">Lists &amp; frequent items</h2></div>
     <div class="lp-body">
+  <div class="lists-head"><h3 class="sec-h" style="margin:0">My lists</h3><button type="button" class="lists-new" onclick="newListFromPage()">+ New list</button></div>
+  <p class="freq-note" id="listsNote">Save regular medicines under a name like Father or Mother, then add the whole list to your cart in one tap. Saved only on this phone.</p>
+  <div id="listsWrap"></div>
   <h3 class="sec-h" id="freqMineH">Your previous orders</h3>
   <p class="freq-note" id="freqNote">Your own earlier orders, saved only on this phone. Tap Add to put one on your request list.</p>
   <div id="freqList"></div>
   <div class="add-card" id="freqEmptyCard"><p class="empty-note" id="freqEmpty"></p></div>
   <button type="button" class="freq-clear" id="freqClear" onclick="clearHistory()">Clear saved orders</button>
   <div id="freqWrap"><h3 class="sec-h">Frequently bought</h3><div class="pgrid" id="freqRow"></div></div>
+    </div>
+  </div>
+
+  <div class="lp-view" id="listEdit">
+    <div class="lp-bar"><button type="button" class="lp-back" onclick="closeListEdit()" aria-label="Back to my lists"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">Edit list</h2></div>
+    <div class="lp-body">
+      <label class="fm-lbl" for="leName" style="margin-top:0">List name</label>
+      <input type="text" class="fm-input" id="leName" maxlength="24" autocomplete="off" oninput="renameList(this.value)">
+      <div class="fm-err" id="leErr" role="alert">Please type a name for the list.</div>
+      <h3 class="sec-h">Medicines</h3>
+      <div id="leItems"></div>
+      <label class="fm-lbl" for="leAdd">Add a medicine</label>
+      <div class="le-addrow"><input type="text" class="fm-input" id="leAdd" maxlength="80" autocomplete="off" placeholder="Type the medicine name" onkeydown="if(event.key==='Enter'){event.preventDefault();addTypedToList();}"><button type="button" class="le-addbtn" onclick="addTypedToList()">Add</button></div>
+      <button type="button" class="le-sec" onclick="addCartToList()">Add items from my cart</button>
+      <button type="button" class="fm-save" id="leAddAll" onclick="addListToCart(editListId)">Add all to cart</button>
+      <button type="button" class="le-del" onclick="deleteList()">Delete this list</button>
+    </div>
+  </div>
+</div>
+
+<div class="locpage" id="profilePage" role="dialog" aria-modal="true" aria-label="My profile" aria-hidden="true">
+  <div class="lp-view on">
+    <div class="lp-bar"><button type="button" class="lp-back" onclick="closeSub()" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">My profile</h2></div>
+    <div class="lp-body">
+      <label class="fm-lbl" for="pfName" style="margin-top:0">Your name</label>
+      <input type="text" class="fm-input" id="pfName" maxlength="40" autocomplete="name" oninput="saveProfile()">
+      <label class="fm-lbl" for="pfPhone">Phone number</label>
+      <input type="tel" class="fm-input" id="pfPhone" inputmode="tel" maxlength="15" autocomplete="tel" oninput="saveProfile()">
+      <p class="lp-note">Your name and number are added to your WhatsApp request, so we know who is asking.</p>
+      <h3 class="lp-h">My things</h3>
+      <div class="lp-actions" style="margin-top:0">
+        <div class="lp-row"><button type="button" class="lp-act" onclick="pfGo('fav')"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="tx"><span class="tt">Last orders</span><span class="st" id="pfOrders"></span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+        <div class="lp-row"><button type="button" class="lp-act" onclick="pfGo('fav')"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg></span><span class="tx"><span class="tt">My lists</span><span class="st" id="pfLists"></span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+        <div class="lp-row"><button type="button" class="lp-act" onclick="pfGo(openLoc)"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span class="tx"><span class="tt">Saved addresses</span><span class="st" id="pfAddrs"></span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+      </div>
+      <p class="lp-note">All of this is saved only on this phone. Clearing the browser data removes it.</p>
     </div>
   </div>
 </div>
@@ -515,12 +594,28 @@
     <div class="lp-bar"><button type="button" class="lp-back" onclick="closeCart()" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">Your Cart</h2></div>
     <div class="lp-body">
       <div class="cart-addr" id="cartAddr"></div>
+      <button type="button" class="cart-saveall" id="cartSaveAll" onclick="openSave(-1)" style="display:none">Save all to a list</button>
       <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
       <div class="cart-hint" id="cartHint" style="display:none"></div>
       <button type="button" class="cart-send" id="cartSend" onclick="sendRequest()" style="display:none"><svg width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg> Send via WhatsApp</button>
     </div>
   </div>
 </div>
+
+<div class="sheet-bg" id="listSheet" aria-hidden="true" onclick="if(event.target===this)closeSheet()">
+  <div class="sheet" id="sheetBox" role="dialog" aria-modal="true" aria-labelledby="shTitle" tabindex="-1">
+    <h2 class="sh-h" id="shTitle">Save to list</h2>
+    <p class="sh-sub" id="shSub"></p>
+    <div id="shLists"></div>
+    <label class="fm-lbl" for="shName" style="margin-top:6px">Or start a new list</label>
+    <input type="text" class="fm-input" id="shName" maxlength="24" autocomplete="off" placeholder="For example: Father" onkeydown="if(event.key==='Enter'){event.preventDefault();saveNewList();}">
+    <div class="fm-chips"><button type="button" class="fm-chip" onclick="setSheetName('Father')">Father</button><button type="button" class="fm-chip" onclick="setSheetName('Mother')">Mother</button></div>
+    <div class="fm-err" id="shErr" role="alert"></div>
+    <button type="button" class="fm-save" onclick="saveNewList()">Create list and save</button>
+    <button type="button" class="sh-cancel" onclick="closeSheet()">Cancel</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <div class="locpage" id="locPage" role="dialog" aria-modal="true" aria-label="Select Your Location" aria-hidden="true">
   <div class="lp-view" id="lpList">
@@ -609,6 +704,26 @@
   }
 
   // ---- Photo/prescription: just a flag - the photo itself gets attached inside WhatsApp ----
+  // Photo: opens the phone's share menu with the picked photo, so the customer chooses WhatsApp and the Huda chat.
+  async function sharePhoto(inp){
+    const f = inp.files && inp.files[0], msg = document.getElementById('photoMsg');
+    inp.value = '';
+    if (!f) return;
+    const chatLink = '<a href="https://wa.me/' + WHATSAPP_NUMBER + '" target="_blank" rel="noopener">Open the Huda Medicals chat</a>';
+    try {
+      if (navigator.canShare && navigator.share && navigator.canShare({ files: [f] })) {
+        await navigator.share({ files: [f], text: 'Photo for Huda Medicals' });
+        msg.textContent = 'Photo shared. Now tap Cart and send your request.';
+        const pc = document.getElementById('photoCheck'); if (pc) pc.checked = true;
+        setPhotoFlag(true);
+      } else {
+        msg.innerHTML = "This phone can't open the share menu here. " + chatLink + ' and attach the photo with the &#128206; icon.';
+      }
+    } catch (e) {
+      if (e && e.name === 'AbortError') msg.textContent = '';
+      else msg.innerHTML = "The photo could not be shared. " + chatLink + ' and attach it with the &#128206; icon.';
+    }
+  }
   let hasPhotoSelected = false;
   function setPhotoFlag(v){ hasPhotoSelected = !!v; render(); }
 
@@ -1019,7 +1134,7 @@
   // open / close; the phone's Back button closes the page instead of leaving the site
   function setBackground(on){
     Array.prototype.forEach.call(document.body.children, function(el){
-      if (el.id === 'locPage' || el.id === 'cartPage' || el.id === 'favPage' || el.id === 'offersPage' || el.tagName === 'SCRIPT') return;
+      if (el.id === 'locPage' || el.id === 'cartPage' || el.id === 'favPage' || el.id === 'offersPage' || el.id === 'profilePage' || el.id === 'listSheet' || el.id === 'toast' || el.tagName === 'SCRIPT') return;
       if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert');
     });
     document.body.style.overflow = on ? 'hidden' : '';
@@ -1114,6 +1229,7 @@
             ${it.pack ? `<div class="rpack">${escapeHTML(it.pack)}</div>` : ''}
             ${it.composition ? `<div class="ci-composition">Contains: ${escapeHTML(it.composition)}</div>` : ''}
             ${it.manufacturer ? `<div class="ci-mfr">${escapeHTML(it.manufacturer)}</div>` : ''}
+            <button type="button" class="save-link" onclick="openSave(${i})">Save to list</button>
           </div>
           <div class="req-act"><div class="qty"><button type="button" onclick="changeQty(${i},-1)" aria-label="Decrease quantity">&minus;</button><span>${it.qty || 1}</span><button type="button" onclick="changeQty(${i},1)" aria-label="Increase quantity">+</button></div><button onclick="removeRequest(${i})">Remove</button></div>
         </div>`).join('') + (hasPhotoSelected ? '<div class="req-row"><div><div class="rname">Photo to attach</div><div class="rpack">Attach it in the WhatsApp chat</div></div></div>' : '');
@@ -1122,6 +1238,7 @@
     cb.textContent = n > 99 ? '99+' : n; cb.style.display = n ? '' : 'none';
     document.getElementById('cartBtn').setAttribute('aria-label', n ? 'Cart, ' + n + (n === 1 ? ' item' : ' items') : 'Cart, empty');
     document.getElementById('cartSend').style.display = n ? '' : 'none';
+    document.getElementById('cartSaveAll').style.display = items.length ? '' : 'none';
     cartHint();
     syncHints();
     shopSync();
@@ -1143,6 +1260,9 @@
     }
     if (hasPhotoSelected) {
       text += `\n\n(I have a photo of the product/prescription to attach here in the chat)`;
+    }
+    if (profile.name || profile.phone) {
+      text += '\n\n' + [profile.name ? 'Name: ' + profile.name : '', profile.phone ? 'Phone: ' + profile.phone : ''].filter(Boolean).join('\n');
     }
     const dest = chosenAddr();
     if (useGps && capturedLocation) {
@@ -1321,6 +1441,8 @@
   function openSub(id){
     if (subOpen || cartOpen || locOpen) return;
     subFocus = document.activeElement; subOpen = id;
+    if (id === 'fav') showFavView('main');
+    if (id === 'profile') renderProfile();
     const pg = document.getElementById(id + 'Page'); pg.classList.add('on'); pg.setAttribute('aria-hidden', 'false');
     setBackground(true); pg.scrollTop = 0;
     try { history.pushState({ hudaSub: 1 }, ''); } catch (e) {}
@@ -1331,6 +1453,7 @@
     const pg = document.getElementById(subOpen + 'Page'); subOpen = null; subClosing = false;
     pg.classList.remove('on'); pg.setAttribute('aria-hidden', 'true'); setBackground(false);
     if (subFocus && subFocus.focus) subFocus.focus();
+    if (afterSubFn) { const f = afterSubFn; afterSubFn = null; setTimeout(f, 0); }
   }
   function closeSub(){
     if (!subOpen || subClosing) return;
@@ -1340,17 +1463,17 @@
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { if (cartOpen) closeCart(); else if (subOpen) closeSub(); } });
   // ---- Frequent tab: this customer's own earlier orders. Stored only in this phone's browser (localStorage); never sent anywhere. ----
   const HIST_KEY = 'huda_prev_orders_v1';
-  let history = [], histOK = true;
+  let orderHist = [], histOK = true;
   function itemKey(it){ return it.shopId ? 's:' + it.shopId : 'n:' + String(it.name).toLowerCase().trim() + '|' + String(it.pack || '').toLowerCase().trim(); }
   function loadHistory(){
     try {
       const raw = window.localStorage.getItem(HIST_KEY);
       const d = raw ? JSON.parse(raw) : [];
-      history = Array.isArray(d) ? d.filter(x => x && x.name && x.k) : [];
-    } catch (e) { history = []; histOK = false; }
+      orderHist = Array.isArray(d) ? d.filter(x => x && x.name && x.k) : [];
+    } catch (e) { orderHist = []; histOK = false; }
   }
   function persistHistory(){
-    try { window.localStorage.setItem(HIST_KEY, JSON.stringify(history)); histOK = true; } catch (e) { histOK = false; }
+    try { window.localStorage.setItem(HIST_KEY, JSON.stringify(orderHist)); histOK = true; } catch (e) { histOK = false; }
   }
   // called when a request is sent: most-ordered first, then most recent; keeps the latest 30
   function saveOrder(list){
@@ -1358,8 +1481,8 @@
     const now = Date.now();
     list.forEach(it => {
       const k = itemKey(it);
-      let x = history.find(y => y.k === k);
-      if (!x) { x = { k: k, name: it.name, pack: it.pack || '', n: 0 }; history.push(x); }
+      let x = orderHist.find(y => y.k === k);
+      if (!x) { x = { k: k, name: it.name, pack: it.pack || '', n: 0 }; orderHist.push(x); }
       x.n += 1; x.qty = it.qty || 1; x.t = now;
       if (it.shopId) x.shopId = it.shopId;
       if (it.composition) x.composition = it.composition;
@@ -1367,12 +1490,12 @@
       if (isRxItem(it)) x.rx = true;
       if (it.p > 0) x.p = it.p;
     });
-    history.sort((a, b) => (b.n - a.n) || (b.t - a.t));
-    if (history.length > 30) history.length = 30;
+    orderHist.sort((a, b) => (b.n - a.n) || (b.t - a.t));
+    if (orderHist.length > 30) orderHist.length = 30;
     persistHistory();
   }
   function freqQty(i, d){
-    const x = history[i];
+    const x = orderHist[i];
     if (!x) return;
     const j = items.findIndex(y => itemKey(y) === x.k);
     if (j < 0) {
@@ -1392,19 +1515,19 @@
   }
   function clearHistory(){
     if (!window.confirm('Remove all saved orders from this phone?')) return;
-    history = [];
+    orderHist = [];
     try { window.localStorage.removeItem(HIST_KEY); } catch (e) {}
     renderFreq();
   }
   function renderFreq(){
-    const has = history.length > 0;
+    const has = orderHist.length > 0;
     document.getElementById('freqNote').style.display = has ? 'block' : 'none';
     document.getElementById('freqClear').style.display = has ? 'block' : 'none';
     document.getElementById('freqEmptyCard').style.display = has ? 'none' : 'block';
     document.getElementById('freqEmpty').textContent = histOK
       ? 'Your previous orders will show here, saved only on your phone.'
       : "This browser can't save previous orders, so nothing will show here.";
-    document.getElementById('freqList').innerHTML = history.map((x, i) => {
+    document.getElementById('freqList').innerHTML = orderHist.map((x, i) => {
       const inList = items.some(y => itemKey(y) === x.k);
       const q = inList ? (items.find(y => itemKey(y) === x.k).qty || 1) : 0;
       const ctl = inList
@@ -1482,8 +1605,236 @@
   }
   showHint();
 
+  // ---- Saved lists (for example Father, Mother): kept only on this phone, never sent anywhere ----
+  const LISTS_KEY = 'huda_lists_v1', MAX_LISTS = 10, MAX_LIST_ITEMS = 40;
+  let lists = [], listsOK = true, editListId = null, sheetItems = [], sheetFocus = null, toastTimer = null;
+  function loadLists(){
+    try {
+      const d = JSON.parse(window.localStorage.getItem(LISTS_KEY) || '[]');
+      lists = Array.isArray(d) ? d.filter(l => l && l.id && typeof l.name === 'string' && Array.isArray(l.items)) : [];
+      lists.forEach(l => { l.items = l.items.filter(x => x && typeof x.name === 'string' && x.name).slice(0, MAX_LIST_ITEMS); });
+    } catch (e) { lists = []; listsOK = false; }
+  }
+  function persistLists(){
+    try { window.localStorage.setItem(LISTS_KEY, JSON.stringify(lists)); listsOK = true; }
+    catch (e) { listsOK = false; toast("This browser can't save lists."); }
+  }
+  function getList(id){ return lists.find(l => l.id === id); }
+  function copyItem(it){
+    const c = {};
+    Object.keys(it).forEach(k => { const v = it[k]; if (v !== '' && v !== null && (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean')) c[k] = v; });
+    c.qty = Math.max(1, Math.min(99, parseInt(c.qty, 10) || 1));
+    return c;
+  }
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('on');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function(){ t.classList.remove('on'); }, 2800);
+  }
+  // put items into a list: same medicine = quantity updated, new medicine = added; returns how many were saved
+  function mergeIntoList(list, arr){
+    let n = 0;
+    arr.forEach(it => {
+      const k = itemKey(it), j = list.items.findIndex(x => itemKey(x) === k);
+      if (j >= 0) { list.items[j].qty = copyItem(it).qty; n++; }
+      else if (list.items.length < MAX_LIST_ITEMS) { list.items.push(copyItem(it)); n++; }
+    });
+    return n;
+  }
+  function uniqueListName(base){
+    let name = base, i = 2;
+    while (lists.some(l => l.name.toLowerCase() === name.toLowerCase())) { name = base + ' ' + i; i++; }
+    return name;
+  }
+  function newListObj(name){
+    return { id: 'l' + Date.now().toString(36) + Math.floor(Math.random() * 1296).toString(36), name: name, items: [] };
+  }
+
+  // -- Save from the Cart page (one item, or all) --
+  function openSave(idx){
+    const arr = idx === -1 ? items.map(copyItem) : (items[idx] ? [copyItem(items[idx])] : []);
+    if (!arr.length) return;
+    sheetItems = arr; sheetFocus = document.activeElement;
+    document.getElementById('shSub').textContent = arr.length === 1 ? arr[0].name : arr.length + ' items from your cart';
+    document.getElementById('shName').value = '';
+    document.getElementById('shErr').style.display = 'none';
+    document.getElementById('shLists').innerHTML = lists.map(l =>
+      '<button type="button" class="sh-list" onclick="saveToList(\'' + l.id + '\')"><span>' + escapeHTML(l.name) + '</span><span>' + l.items.length + (l.items.length === 1 ? ' item' : ' items') + '</span></button>').join('');
+    const sh = document.getElementById('listSheet'); sh.classList.add('on'); sh.setAttribute('aria-hidden', 'false');
+    document.getElementById('sheetBox').focus();
+  }
+  function closeSheet(){
+    const sh = document.getElementById('listSheet');
+    if (!sh.classList.contains('on')) return;
+    sh.classList.remove('on'); sh.setAttribute('aria-hidden', 'true');
+    if (sheetFocus && sheetFocus.focus) { try { sheetFocus.focus(); } catch (e) {} }
+  }
+  function setSheetName(v){ document.getElementById('shName').value = v; document.getElementById('shErr').style.display = 'none'; }
+  function sheetErr(m){ const e = document.getElementById('shErr'); e.textContent = m; e.style.display = 'block'; }
+  function finishSave(list, n){
+    persistLists(); renderLists(); closeSheet();
+    toast(n === 1 ? 'Saved to ' + list.name : 'Saved ' + n + ' items to ' + list.name);
+  }
+  function saveToList(id){
+    const l = getList(id); if (!l) return;
+    const n = mergeIntoList(l, sheetItems);
+    if (!n) { sheetErr('This list is full (' + MAX_LIST_ITEMS + ' medicines).'); return; }
+    finishSave(l, n);
+  }
+  function saveNewList(){
+    const name = document.getElementById('shName').value.trim();
+    if (!name) { sheetErr('Please type a name for the list.'); return; }
+    let l = lists.find(x => x.name.toLowerCase() === name.toLowerCase());
+    if (!l) {
+      if (lists.length >= MAX_LISTS) { sheetErr('You can keep up to ' + MAX_LISTS + ' lists. Pick one above.'); return; }
+      l = newListObj(name); lists.push(l);
+    }
+    const n = mergeIntoList(l, sheetItems);
+    finishSave(l, n);
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && document.getElementById('listSheet').classList.contains('on')) { e.stopImmediatePropagation(); closeSheet(); }
+  }, true);
+  window.addEventListener('popstate', closeSheet);
+
+  // -- My lists on the heart page --
+  function renderLists(){
+    const w = document.getElementById('listsWrap');
+    if (!lists.length) {
+      w.innerHTML = '<div class="add-card"><p class="empty-note">' + (listsOK ? 'No lists yet. Tap New list, or use Save to list in your cart.' : "This browser can't save lists.") + '</p></div>';
+      return;
+    }
+    w.innerHTML = lists.map(l => {
+      const c = l.items.length;
+      return '<div class="list-card"><div class="lc-top"><div class="lc-name">' + escapeHTML(l.name) + '</div><div class="lc-count">' + c + (c === 1 ? ' item' : ' items') + '</div></div>'
+        + '<div class="lc-prev">' + (c ? escapeHTML(l.items.map(x => x.name).join(', ')) : 'Empty. Tap Edit to add medicines.') + '</div>'
+        + '<div class="lc-act">' + (c ? '<button type="button" class="lc-add" onclick="addListToCart(\'' + l.id + '\')">Add all to cart</button>' : '')
+        + '<button type="button" class="lc-edit" onclick="openListEdit(\'' + l.id + '\')">Edit</button></div></div>';
+    }).join('');
+  }
+  function addListToCart(id){
+    const l = getList(id); if (!l) return;
+    let added = 0, had = 0;
+    l.items.forEach(x => {
+      const k = itemKey(x);
+      if (items.some(y => itemKey(y) === k)) { had++; return; }
+      if (items.length >= 50) return;
+      items.push(copyItem(x)); added++;
+    });
+    render();
+    toast(added ? 'Added ' + added + (added === 1 ? ' item' : ' items') + ' to your cart' + (had ? ' (' + had + ' already there)' : '') : (had ? 'Already in your cart' : 'This list is empty'));
+  }
+  function showFavView(v){
+    document.getElementById('favMain').classList.toggle('on', v === 'main');
+    document.getElementById('listEdit').classList.toggle('on', v === 'edit');
+    document.getElementById('favPage').scrollTop = 0;
+  }
+  function newListFromPage(){
+    if (lists.length >= MAX_LISTS) { toast('You can keep up to ' + MAX_LISTS + ' lists.'); return; }
+    const l = newListObj(uniqueListName('New list')); lists.push(l); persistLists(); renderLists();
+    openListEdit(l.id, true);
+  }
+  function openListEdit(id, selectName){
+    const l = getList(id); if (!l) return;
+    editListId = id; showFavView('edit');
+    const nm = document.getElementById('leName'); nm.value = l.name;
+    document.getElementById('leErr').style.display = 'none';
+    document.getElementById('leAdd').value = '';
+    renderListEdit();
+    if (selectName) { nm.focus(); try { nm.select(); } catch (e) {} } else document.querySelector('#listEdit .lp-back').focus();
+  }
+  function closeListEdit(){
+    const nm = document.getElementById('leName');
+    if (!nm.value.trim()) nm.value = (getList(editListId) || {}).name || '';
+    editListId = null; showFavView('main'); renderLists();
+    document.querySelector('#favMain .lp-back').focus();
+  }
+  function renderListEdit(){
+    const l = getList(editListId); if (!l) return;
+    document.getElementById('leItems').innerHTML = l.items.length ? l.items.map((x, i) =>
+      '<div class="freq-row"><div class="freq-info"><div class="rname">' + escapeHTML(x.name) + (x.rx ? RX_MARK : '') + '</div>'
+      + (x.pack ? '<div class="rpack">' + escapeHTML(x.pack) + '</div>' : '') + '</div>'
+      + '<div class="freq-ctl"><div class="pstep"><button type="button" onclick="leQty(' + i + ',-1)" aria-label="One less">&minus;</button><span>' + (x.qty || 1) + '</span><button type="button" onclick="leQty(' + i + ',1)" aria-label="One more">+</button></div>'
+      + '<button type="button" class="le-rm" onclick="leRemove(' + i + ')">Remove</button></div></div>').join('')
+      : '<div class="add-card"><p class="empty-note">No medicines yet. Add one below, or add the items from your cart.</p></div>';
+    document.getElementById('leAddAll').style.display = l.items.length ? '' : 'none';
+  }
+  function renameList(v){
+    const l = getList(editListId); if (!l) return;
+    const t = v.trim();
+    if (!t) { document.getElementById('leErr').style.display = 'block'; return; }
+    document.getElementById('leErr').style.display = 'none';
+    l.name = t.slice(0, 24); persistLists();
+  }
+  function leQty(i, d){
+    const l = getList(editListId); if (!l || !l.items[i]) return;
+    l.items[i].qty = Math.min(99, Math.max(1, (l.items[i].qty || 1) + d));
+    persistLists(); renderListEdit();
+  }
+  function leRemove(i){
+    const l = getList(editListId); if (!l) return;
+    l.items.splice(i, 1); persistLists(); renderListEdit();
+  }
+  function addTypedToList(){
+    const l = getList(editListId); if (!l) return;
+    const inp = document.getElementById('leAdd'), name = inp.value.trim();
+    if (!name) { inp.focus(); return; }
+    const it = { name: name, qty: 1 }, k = itemKey(it), j = l.items.findIndex(x => itemKey(x) === k);
+    if (j >= 0) l.items[j].qty = Math.min(99, (l.items[j].qty || 1) + 1);
+    else if (l.items.length >= MAX_LIST_ITEMS) { toast('This list is full (' + MAX_LIST_ITEMS + ' medicines).'); return; }
+    else l.items.push(it);
+    persistLists(); inp.value = ''; renderListEdit(); inp.focus();
+  }
+  function addCartToList(){
+    const l = getList(editListId); if (!l) return;
+    if (!items.length) { toast('Your cart is empty.'); return; }
+    const n = mergeIntoList(l, items);
+    persistLists(); renderListEdit();
+    toast(n ? 'Added ' + n + (n === 1 ? ' item' : ' items') + ' from your cart' : 'This list is full (' + MAX_LIST_ITEMS + ' medicines).');
+  }
+  function deleteList(){
+    const l = getList(editListId); if (!l) return;
+    if (!window.confirm('Delete the list "' + l.name + '"?')) return;
+    lists = lists.filter(x => x.id !== l.id); persistLists();
+    editListId = null; showFavView('main'); renderLists();
+    toast('List deleted');
+  }
+
+  // ---- My profile: name and phone typed once, kept only on this phone ----
+  const PROFILE_KEY = 'huda_profile_v1';
+  let profile = { name: '', phone: '' }, afterSubFn = null;
+  function loadProfile(){
+    try {
+      const d = JSON.parse(window.localStorage.getItem(PROFILE_KEY) || '{}') || {};
+      profile = { name: String(d.name || '').slice(0, 40), phone: String(d.phone || '').slice(0, 15) };
+    } catch (e) {}
+  }
+  function saveProfile(){
+    const pn = document.getElementById('pfName'), pp = document.getElementById('pfPhone');
+    const ph = pp.value.replace(/[^0-9+ ]/g, '');
+    if (ph !== pp.value) pp.value = ph;
+    profile = { name: pn.value.trim().slice(0, 40), phone: ph.trim().slice(0, 15) };
+    try { window.localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); } catch (e) {}
+  }
+  function renderProfile(){
+    document.getElementById('pfName').value = profile.name;
+    document.getElementById('pfPhone').value = profile.phone;
+    const n = orderHist.length, l = lists.length, a = addrs.length;
+    document.getElementById('pfOrders').textContent = n ? n + (n === 1 ? ' medicine you ordered before' : ' medicines you ordered before') : 'Nothing yet';
+    document.getElementById('pfLists').textContent = l ? l + (l === 1 ? ' list' : ' lists') : 'Family lists like Father or Mother';
+    document.getElementById('pfAddrs').textContent = a ? a + ' saved' : 'None yet';
+  }
+  // leave the profile page, then open another page once it has closed
+  function pfGo(target){
+    afterSubFn = typeof target === 'string' ? function(){ openSub(target); } : target;
+    closeSub();
+  }
+
   loadHistory();
+  loadProfile();
+  loadLists();
   loadCart();
+  renderLists();
   render();
   syncSubTabs();
   loadAddrs();
