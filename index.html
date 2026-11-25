@@ -197,8 +197,6 @@
   .sbar > svg{ flex:0 0 auto; color:var(--teal-deep); }
   .sbar-in{ flex:1 1 auto; min-width:0; border:none; outline:none; background:transparent; font-family:'Inter',sans-serif; font-size:16px; color:var(--ink); padding:13px 6px; }
   .sbar-btn{ flex:0 0 44px; width:44px; height:44px; border:none; border-radius:50%; background:transparent; color:var(--teal-deep); display:flex; align-items:center; justify-content:center; cursor:pointer; }
-  .rx-back{ border:none; background:transparent; color:var(--teal-deep); font-family:'Inter',sans-serif; font-weight:700; font-size:14px; padding:10px 2px; margin-bottom:6px; cursor:pointer; }
-  .rx-back:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
   .sbar-btn:active{ background:rgba(15,139,141,0.14); }
   .sbar-btn:focus-visible{ outline:3px solid var(--teal); outline-offset:-3px; }
   .sbar-btn.on{ background:#F27B54; color:#0B2323; }
@@ -251,24 +249,6 @@
 
   .quick-hint{ font-size:11.5px; color:#5C7676; margin:-6px 0 12px; line-height:1.5; }
 
-  .photo-card{
-    background:var(--white); border-radius:16px; padding:16px; border:1px solid rgba(11,35,35,0.07);
-    margin-top:16px;
-  }
-  .photo-card h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:4px; }
-  .photo-sub{ font-size:12px; color:#5C7676; margin-bottom:12px; line-height:1.5; }
-  .photo-btn{ display:flex; align-items:center; justify-content:center; gap:9px; width:100%; padding:13px; margin-bottom:12px; border:none; border-radius:12px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:14.5px; cursor:pointer; }
-  .photo-prev{ display:flex; gap:12px; align-items:center; margin-bottom:12px; }
-  .photo-prev img{ width:84px; height:84px; object-fit:cover; border-radius:12px; border:1px solid rgba(11,35,35,0.15); flex:0 0 84px; }
-  .photo-prev-btns{ display:flex; flex-direction:column; gap:8px; flex:1 1 auto; }
-  .photo-send{ padding:11px; border:none; border-radius:10px; background:#19874C; color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; cursor:pointer; }
-  .photo-again{ padding:8px; border:none; background:none; color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; text-decoration:underline; cursor:pointer; }
-  .photo-msg{ font-size:12.5px; line-height:1.5; color:var(--ink); margin:-4px 0 12px; }
-  .photo-msg:empty{ display:none; }
-  .photo-msg a{ color:var(--teal-deep); font-weight:700; }
-  .photo-check{ display:flex; align-items:center; gap:9px; cursor:pointer; }
-  .photo-check input{ width:18px; height:18px; accent-color:var(--teal-deep); flex:0 0 18px; }
-  .photo-check span{ font-size:12.5px; font-weight:600; color:var(--ink); }
 
   .footer-note{
     text-align:center; font-size:11px; color:#5F7878; padding:24px 18px 90px; line-height:1.6;
@@ -454,7 +434,7 @@
       <input type="text" id="prodName" class="sbar-in" placeholder="Start typing to search..." autocomplete="off" aria-label="Product name">
       <button type="button" class="sbar-btn" id="clrBtn" onclick="clearSearch()" aria-label="Clear search and go back to categories" style="display:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <button type="button" class="sbar-btn" id="micBtn" onclick="startVoice()" aria-label="Search by voice" aria-pressed="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
-      <button type="button" class="sbar-btn" id="camBtn" onclick="showTab('rx')" aria-label="Send a photo of a prescription or product"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L17 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></svg></button>
+      <button type="button" class="sbar-btn" id="camBtn" onclick="openPhotoChat()" aria-label="Send a photo of a prescription or product"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L17 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></svg></button>
     </div>
     <div class="suggest-box" id="suggestBox"></div>
   </div>
@@ -497,31 +477,11 @@
     Start typing and we'll suggest matching products with their composition and manufacturer, if we recognize them. Can't find it in suggestions? Just type it anyway — you don't need to know if we stock it, that's what we'll check for you. Any price shown while searching is a reference price, not a confirmed quote — we'll confirm the real price when we check.
   </div>
   </section>
-  <section class="tabpanel" id="panel-rx" role="region" aria-label="Prescription or product photo">
-  <button type="button" class="rx-back" onclick="showTab('cat')">&larr; Back to categories</button>
-  <p class="rx-note">Valid prescription required for some medicines. WhatsApp it to us so the correct medicine is ready for home delivery or store pickup.</p>
-  <div class="photo-card">
-    <h2>Product Photo or Prescription <span style="font-weight:500; color:#5F7878;">(optional)</span></h2>
-    <p class="photo-sub">Tap the button, take or choose the photo, then pick WhatsApp and the Huda Medicals chat. You can also attach it in the chat with the &#128206; icon after you send your request.</p>
-    <input type="file" id="photoFile" accept="image/*" style="display:none" onchange="pickPhoto(this)">
-    <button type="button" class="photo-btn" onclick="document.getElementById('photoFile').click()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Take or choose photo</button>
-    <div class="photo-prev" id="photoPrev" style="display:none">
-      <img id="photoThumb" alt="Selected photo">
-      <div class="photo-prev-btns"><button type="button" class="photo-send" onclick="doSharePhoto()">Send this photo</button><button type="button" class="photo-again" onclick="document.getElementById('photoFile').click()">Choose another</button></div>
-    </div>
-    <p class="photo-msg" id="photoMsg" role="status" aria-live="polite"></p>
-    <label class="photo-check">
-      <input type="checkbox" id="photoCheck" onchange="setPhotoFlag(this.checked)">
-      <span>I'll be attaching a photo or prescription</span>
-    </label>
-  </div>
-  </section>
 
 
 </div>
 
 <p class="footer-note">
-  Rx: valid prescription required. WhatsApp it to us so the correct medicine is ready for home delivery or store pickup.<br>
   We'll reply on WhatsApp once we've checked stock and pricing — nothing is charged or confirmed until you agree.<br>
   Huda Medicals · Seven Wells, Chennai
 </p>
@@ -617,6 +577,7 @@
       <div class="cart-hint" id="cartHint" style="display:none"></div>
       <button type="button" class="cart-send" id="cartSend" onclick="sendRequest()" style="display:none"><svg width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg> Send via WhatsApp</button>
       <div id="laterCart"></div>
+      <p class="rx-note" id="cartRxNote" style="margin-top:18px"><span class="rx-mark">Rx</span> Items marked Rx need a valid prescription. Send it in the WhatsApp chat so the medicine is ready for home delivery or store pickup.</p>
     </div>
   </div>
 </div>
@@ -724,39 +685,11 @@
 
   // ---- Photo/prescription: just a flag - the photo itself gets attached inside WhatsApp ----
   // Photo: opens the phone's share menu with the picked photo, so the customer chooses WhatsApp and the Huda chat.
-  let pendingPhoto = null, pendingURL = null;
-  function chatLinkHTML(){ return '<a href="https://wa.me/' + WHATSAPP_NUMBER + '" target="_blank" rel="noopener">Open the Huda Medicals chat</a>'; }
-  // step 1: the customer picks a photo; step 2 (a separate tap, which the phone requires) opens the share menu
-  function pickPhoto(inp){
-    const f = inp.files && inp.files[0], msg = document.getElementById('photoMsg');
-    inp.value = '';
-    if (!f) return;
-    pendingPhoto = f;
-    if (pendingURL) { try { URL.revokeObjectURL(pendingURL); } catch (e) {} }
-    try { pendingURL = URL.createObjectURL(f); document.getElementById('photoThumb').src = pendingURL; } catch (e) {}
-    document.getElementById('photoPrev').style.display = 'flex';
-    if (navigator.canShare && navigator.share && navigator.canShare({ files: [f] })) {
-      msg.textContent = 'Tap Send this photo, then choose WhatsApp and the Huda Medicals chat.';
-    } else {
-      msg.innerHTML = "This phone can't open the share menu here. " + chatLinkHTML() + ' and attach the photo with the &#128206; icon.';
-      document.querySelector('#photoPrev .photo-send').style.display = 'none';
-    }
+  // camera button: opens the Huda WhatsApp chat, where the customer attaches the photo with the paperclip
+  function openPhotoChat(){
+    const t = 'Hi, I am sending a photo of my prescription or product.';
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(t), '_blank', 'noopener');
   }
-  async function doSharePhoto(){
-    const f = pendingPhoto, msg = document.getElementById('photoMsg');
-    if (!f) return;
-    try {
-      await navigator.share({ files: [f], text: 'Photo for Huda Medicals' });
-      msg.textContent = 'Photo shared. Now tap Cart and send your request.';
-      const pc = document.getElementById('photoCheck'); if (pc) pc.checked = true;
-      setPhotoFlag(true);
-    } catch (e) {
-      if (e && e.name === 'AbortError') msg.textContent = 'Not sent. Tap Send this photo to try again.';
-      else msg.innerHTML = 'The photo could not be shared (' + escapeHTML((e && e.name) || 'error') + '). ' + chatLinkHTML() + ' and attach it with the &#128206; icon.';
-    }
-  }
-  let hasPhotoSelected = false;
-  function setPhotoFlag(v){ hasPhotoSelected = !!v; render(); }
 
   // ---- Search matching: tolerant of spacing/case differences ("dolo650" should find "Dolo 650") ----
   function normalize(s){ return String(s).toLowerCase().replace(/[^a-z0-9]/g, ''); }
@@ -1250,7 +1183,7 @@
   function render(){
     saveCart();
     const wrap = document.getElementById('listWrap');
-    if (!items.length && !hasPhotoSelected) {
+    if (!items.length) {
       wrap.innerHTML = '<p class="empty-note">Nothing added yet.</p>' + reorderCardHTML();
     } else {
       wrap.innerHTML = items.map((it, i) => `
@@ -1263,9 +1196,9 @@
             <button type="button" class="save-link" onclick="moveToLater(${i})">Buy later</button><button type="button" class="save-link" onclick="openSave(${i})">Save to list</button>
           </div>
           <div class="req-act"><div class="qty"><button type="button" onclick="changeQty(${i},-1)" aria-label="Decrease quantity">&minus;</button><span>${it.qty || 1}</span><button type="button" onclick="changeQty(${i},1)" aria-label="Increase quantity">+</button></div><button onclick="removeRequest(${i})">Remove</button></div>
-        </div>`).join('') + (hasPhotoSelected ? '<div class="req-row"><div><div class="rname">Photo to attach</div><div class="rpack">Attach it in the WhatsApp chat</div></div></div>' : '');
+        </div>`).join('');
     }
-    const n = items.length + (hasPhotoSelected ? 1 : 0), cb = document.getElementById('cartBadge');
+    const n = items.length, cb = document.getElementById('cartBadge');
     cb.textContent = n > 99 ? '99+' : n; cb.style.display = n ? '' : 'none';
     document.getElementById('cartBtn').setAttribute('aria-label', n ? 'Cart, ' + n + (n === 1 ? ' item' : ' items') : 'Cart, empty');
     document.getElementById('cartSend').style.display = n ? '' : 'none';
@@ -1277,7 +1210,7 @@
   }
 
   function sendRequest(){
-    if (!items.length && !hasPhotoSelected) return;
+    if (!items.length) return;
     // WhatsApp formatting: *bold* for medicines and labels, _italic_ for notes (WhatsApp has no underline)
     const wa = v => String(v).replace(/[*_~`]/g, '').trim();
     const out = [];
@@ -1287,9 +1220,6 @@
         out.push('*' + (i + 1) + '. ' + wa(it.name) + '*' + (isRxItem(it) ? ' [Rx]' : '') + ' \u00d7' + (it.qty || 1));
         if (it.pack && wa(it.pack)) out.push('_Note: ' + wa(it.pack) + '_');
       });
-      if (hasPhotoSelected) out.push('', '_Photo to follow in this chat_');
-    } else {
-      out.push('*Prescription / photo request*', '', '_Photo to follow in this chat_');
     }
     const info = [];
     if (profile.name) info.push('*Name:* ' + wa(profile.name));
@@ -1303,8 +1233,6 @@
     renderLists();
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     items.length = 0;
-    hasPhotoSelected = false;
-    var pc = document.getElementById('photoCheck'); if (pc) pc.checked = false;
     render();
     closeCart();
   }
@@ -1426,7 +1354,7 @@
   }
 
   // ---- Tabs: panels stay in the page and are only shown/hidden, so the search box, notes and list are never cleared ----
-  const PANEL_IDS = ['cat', 'search', 'rx'];    // Search and Rx panels open from the search bar (mic, camera, typing)
+  const PANEL_IDS = ['cat', 'search'];    // the search panel opens when typing or using the mic
   let curTab = 'cat', tabTouched = false;   // the page opens on Categories
   function syncSubTabs(){
     const sub = document.getElementById('subTabs');
