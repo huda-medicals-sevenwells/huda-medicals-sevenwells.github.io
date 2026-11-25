@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Request a Product — Huda Medicals</title>
-<meta name="robots" content="noindex">
+<title>Huda Medicals — Order medicines, Seven Wells, Chennai</title>
+<link rel="canonical" href="https://huda-medicals-sevenwells.github.io/">
+<meta name="description" content="Order medicines on WhatsApp. Fast home delivery from Huda Medicals, Seven Wells, Chennai.">
+
+<!-- Social share preview: shown when the link is shared on WhatsApp -->
+<meta property="og:title" content="Huda Medicals — ஹுதா மருந்தகம்">
+<meta property="og:description" content="Order medicines on WhatsApp. Fast home delivery &amp; 24×7 medical advice — Seven Wells, Chennai">
+<meta property="og:image" content="https://huda-medicals-sevenwells.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://huda-medicals-sevenwells.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Huda Medicals">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0F8B8D">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -403,6 +416,12 @@
   .fav-dot{ position:absolute; top:-2px; right:-2px; width:11px; height:11px; border-radius:50%; background:#F5A623; border:2px solid #0D7072; display:none; }
   .fav-dot.on{ display:block; }
   .req-row button.save-link{ margin-right:8px; }
+  .cart-note{ margin:14px 0 4px; }
+  .cart-note textarea{ resize:none; font-family:inherit; line-height:1.4; padding-top:11px; }
+  .cart-call{ display:flex; align-items:center; justify-content:center; gap:8px; margin-top:12px; padding:12px; border:1.5px solid var(--teal-deep); border-radius:12px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; text-decoration:none; }
+  .toast-undo{ margin-left:14px; padding:4px 10px; border:none; border-radius:8px; background:#FFFFFF; color:#0B2323; font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; cursor:pointer; }
+  .cart-priv{ font-size:12px; line-height:1.5; color:#4F6868; margin:10px 2px 0; text-align:center; }
+  .suggest-retry{ margin-left:6px; padding:4px 10px; border:1.5px solid var(--teal-deep); border-radius:8px; background:var(--white); color:var(--teal-deep); font-weight:700; font-size:12px; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -540,6 +559,7 @@
         <div class="lp-row"><button type="button" class="lp-act" onclick="pfGo('fav')"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="tx"><span class="tt">Last orders</span><span class="st" id="pfOrders"></span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
         <div class="lp-row"><button type="button" class="lp-act" onclick="pfGo('fav')"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg></span><span class="tx"><span class="tt">My lists</span><span class="st" id="pfLists"></span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
         <div class="lp-row"><button type="button" class="lp-act" onclick="pfGo(openLoc)"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span class="tx"><span class="tt">Saved addresses</span><span class="st" id="pfAddrs"></span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+        <div class="lp-row"><a class="lp-act" href="tel:+919962269992" style="text-decoration:none; color:inherit;"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.62a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.46-1.19a2 2 0 0 1 2.11-.45c.84.29 1.72.5 2.62.62A2 2 0 0 1 22 16.92z"/></svg></span><span class="tx"><span class="tt">Call Huda Medicals</span><span class="st">9962 269 992</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></div>
       </div>
       <p class="lp-note">All of this is saved only on this phone. Clearing the browser data removes it.</p>
     </div>
@@ -574,8 +594,14 @@
       <div class="cart-addr" id="cartAddr"></div>
       <button type="button" class="cart-saveall" id="cartSaveAll" onclick="openSave(-1)" style="display:none">Save all to a list</button>
       <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
+      <div class="cart-note" id="cartNoteBox" style="display:none">
+        <label class="fm-lbl" for="cartNote" style="margin-top:0">Anything else we should know? <span style="font-weight:500;">(optional)</span></label>
+        <textarea class="fm-input" id="cartNote" rows="2" maxlength="200" placeholder="e.g. deliver after 6 PM, call before delivery" oninput="saveOrderNote()"></textarea>
+      </div>
       <div class="cart-hint" id="cartHint" style="display:none"></div>
       <button type="button" class="cart-send" id="cartSend" onclick="sendRequest()" style="display:none"><svg width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg> Send via WhatsApp</button>
+      <p class="cart-priv" id="cartPriv" style="display:none">Sending opens WhatsApp with your list, name, phone and delivery address for Huda Medicals. Your lists, addresses and past orders stay only on this phone.</p>
+      <a class="cart-call" href="tel:+919962269992"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.62a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.46-1.19a2 2 0 0 1 2.11-.45c.84.29 1.72.5 2.62.62A2 2 0 0 1 22 16.92z"/></svg>Prefer to talk? Call 9962 269 992</a>
       <div id="laterCart"></div>
       <p class="rx-note" id="cartRxNote" style="margin-top:18px"><span class="rx-mark">Rx</span> Items marked Rx need a valid prescription. Send it in the WhatsApp chat so the medicine is ready for home delivery or store pickup.</p>
     </div>
@@ -646,17 +672,34 @@
   let catalog = [];
   let currentQty = 1;
 
-  fetch('reference-catalog.json')
-    .then(r => r.ok ? r.json() : [])
-    .then(data => {
-      // normalise once, so each keystroke only does cheap comparisons across ~44,000 items
-      data.forEach(r => { r._n = normalize(r.n); r._c = r.c ? normalize(r.c) : ''; });
-      catalog = data;
-      buildAltIndex();
-      shopAttach();
-      setTimeout(buildVocab, 50);   // word list for spelling correction
-    })
-    .catch(() => { catalog = []; });
+  // catalogState: 'loading' | 'ready' | 'failed' (the search box tells the customer while suggestions are not ready)
+  let catalogState = 'loading';
+  function loadCatalog(){
+    catalogState = 'loading';
+    fetch('reference-catalog.json')
+      .then(r => r.ok ? r.json() : Promise.reject(new Error('bad response')))
+      .then(data => {
+        // normalise once, so each keystroke only does cheap comparisons across ~44,000 items
+        data.forEach(r => { r._n = normalize(r.n); r._c = r.c ? normalize(r.c) : ''; });
+        catalog = data;
+        catalogState = 'ready';
+        buildAltIndex();
+        shopAttach();
+        setTimeout(buildVocab, 50);   // word list for spelling correction
+        const q = document.getElementById('prodName').value.trim();
+        if (q.length >= 2 && !selectedProduct) renderSuggestions(q);   // customer typed while it loaded
+      })
+      .catch(() => { catalog = []; catalogState = 'failed'; const q = document.getElementById('prodName').value.trim(); if (q.length >= 2) showCatalogStatus(); });
+  }
+  function showCatalogStatus(){
+    const box = document.getElementById('suggestBox');
+    box.innerHTML = catalogState === 'failed'
+      ? '<div class="suggest-empty">Suggestions are not available right now. Type the name and we&rsquo;ll check it for you. <button type="button" class="suggest-retry" onclick="retryCatalog()">Try again</button></div>'
+      : '<div class="suggest-empty">Loading medicine suggestions&hellip; you can keep typing.</div>';
+    box.classList.add('show');
+  }
+  function retryCatalog(){ loadCatalog(); showCatalogStatus(); }
+  loadCatalog();
 
   function escapeHTML(s){
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -718,7 +761,8 @@
     clearTimeout(searchDebounce);
     const q = this.value.trim();
     if (selectedProduct) clearSelection(false);
-    if (q.length < 2 || !catalog.length) { hideSuggestions(); return; }
+    if (q.length < 2) { hideSuggestions(); return; }
+    if (catalogState !== 'ready') { showCatalogStatus(); return; }
     searchDebounce = setTimeout(() => renderSuggestions(q), 150);
   });
 
@@ -981,8 +1025,10 @@
   }
 
   function removeRequest(i){
+    const it = items[i]; if (!it) return;
     items.splice(i, 1);
     render();
+    toast('Removed from cart', function(){ items.splice(Math.min(i, items.length), 0, it); render(); });
   }
 
   // ---- Delivery location. Saved addresses: typed once, kept only in this phone's browser (localStorage), never sent anywhere except in the WhatsApp message while selected. Live position: memory only. ----
@@ -1203,6 +1249,8 @@
     document.getElementById('cartBtn').setAttribute('aria-label', n ? 'Cart, ' + n + (n === 1 ? ' item' : ' items') : 'Cart, empty');
     document.getElementById('cartSend').style.display = n ? '' : 'none';
     document.getElementById('cartSaveAll').style.display = items.length ? '' : 'none';
+    document.getElementById('cartNoteBox').style.display = items.length ? '' : 'none';
+    document.getElementById('cartPriv').style.display = items.length ? '' : 'none';
     cartHint();
     syncHints();
     shopSync();
@@ -1215,11 +1263,13 @@
     const wa = v => String(v).replace(/[*_~`]/g, '').trim();
     const out = [];
     if (items.length) {
-      out.push('*Medicine request*', '');
+      out.push('*Medicine request #' + nextRequestNo() + '*', '');
       items.forEach((it, i) => {
         out.push('*' + (i + 1) + '. ' + wa(it.name) + '*' + (isRxItem(it) ? ' [Rx]' : '') + ' \u00d7' + (it.qty || 1));
         if (it.pack && wa(it.pack)) out.push('_Note: ' + wa(it.pack) + '_');
       });
+      const on = wa(document.getElementById('cartNote').value.replace(/\s+/g, ' '));
+      if (on) out.push('', '_Order note: ' + on + '_');
     }
     const info = [];
     if (profile.name) info.push('*Name:* ' + wa(profile.name));
@@ -1233,6 +1283,7 @@
     renderLists();
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     items.length = 0;
+    document.getElementById('cartNote').value = ''; saveOrderNote();
     render();
     closeCart();
   }
@@ -1585,10 +1636,18 @@
     c.qty = Math.max(1, Math.min(99, parseInt(c.qty, 10) || 1));
     return c;
   }
-  function toast(msg){
+  let undoFn = null;
+  function toast(msg, undo){
     const t = document.getElementById('toast');
-    t.textContent = msg; t.classList.add('on');
-    clearTimeout(toastTimer); toastTimer = setTimeout(function(){ t.classList.remove('on'); }, 2800);
+    t.textContent = msg; undoFn = undo || null;
+    if (undo) {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'toast-undo'; b.textContent = 'Undo';
+      b.onclick = function(){ const f = undoFn; undoFn = null; t.classList.remove('on'); clearTimeout(toastTimer); if (f) f(); };
+      t.appendChild(b);
+    }
+    t.classList.add('on');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function(){ t.classList.remove('on'); undoFn = null; }, undo ? 6000 : 2800);
   }
   // put items into a list: same medicine = quantity updated, new medicine = added; returns how many were saved
   function mergeIntoList(list, arr){
@@ -1879,7 +1938,12 @@
     later.unshift(c); if (later.length > MAX_LATER) later.length = MAX_LATER;
     items.splice(i, 1);
     persistLater(); render(); renderLater();
-    toast('Moved to Buy later');
+    toast('Moved to Buy later', function(){
+      const j2 = later.findIndex(x => itemKey(x) === k);
+      if (j2 >= 0) later.splice(j2, 1);
+      items.splice(Math.min(i, items.length), 0, it);
+      persistLater(); render(); renderLater();
+    });
   }
   function laterToCart(i){
     const x = later[i]; if (!x) return;
@@ -1899,14 +1963,34 @@
     toast(n ? 'Moved ' + n + (n === 1 ? ' item' : ' items') + ' to cart' : 'Already in your cart');
   }
   function laterRemove(i){
-    if (!later[i]) return;
+    const x = later[i]; if (!x) return;
     later.splice(i, 1); persistLater(); renderLater();
+    toast('Removed from Buy later', function(){ later.splice(Math.min(i, later.length), 0, x); persistLater(); renderLater(); });
   }
+
+  // ---- Request number: date plus the nth request sent today from this phone, for example #2511-1 ----
+  const REQNO_KEY = 'huda_reqno_v1';
+  function nextRequestNo(){
+    const d = new Date(), tag = String(d.getDate()).padStart(2, '0') + String(d.getMonth() + 1).padStart(2, '0');
+    let n = 1;
+    try {
+      const o = JSON.parse(window.localStorage.getItem(REQNO_KEY) || '{}');
+      if (o && o.tag === tag) n = (o.n || 0) + 1;
+      window.localStorage.setItem(REQNO_KEY, JSON.stringify({ tag: tag, n: n }));
+    } catch (e) {}
+    return tag + '-' + n;
+  }
+
+  // ---- Order note (for example "deliver after 6 PM"): kept on the phone until the order is sent ----
+  const NOTE_KEY = 'huda_order_note_v1';
+  function loadOrderNote(){ try { document.getElementById('cartNote').value = (window.localStorage.getItem(NOTE_KEY) || '').slice(0, 200); } catch (e) {} }
+  function saveOrderNote(){ try { window.localStorage.setItem(NOTE_KEY, document.getElementById('cartNote').value.slice(0, 200)); } catch (e) {} }
 
   loadHistory();
   loadProfile();
   loadLists();
   loadCart();
+  loadOrderNote();
   loadLater();
   renderLater();
   renderLists();
