@@ -411,6 +411,13 @@
   .logo-btn{ flex:0 0 40px; width:40px; height:40px; border-radius:50%; background:#FFFFFF; display:flex; align-items:center; justify-content:center; border:1.5px solid rgba(255,255,255,0.7); overflow:hidden; text-decoration:none; color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; }
   .logo-btn img{ width:26px; height:auto; display:block; }
   .logo-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
+  .lc-due{ display:inline-block; margin-top:6px; padding:3px 10px; border-radius:999px; background:#FDEBC8; color:#6B4300; font-size:11.5px; font-weight:700; }
+  .lc-last{ font-size:11.5px; color:#4F6868; margin-top:6px; }
+  .reorder-card{ background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:14px; padding:13px 14px; margin-top:10px; }
+  .profile-btn{ position:relative; }
+  .fav-dot{ position:absolute; top:-2px; right:-2px; width:11px; height:11px; border-radius:50%; background:#F5A623; border:2px solid #0D7072; display:none; }
+  .fav-dot.on{ display:block; }
+  .req-row button.save-link{ margin-right:8px; }
 </style>
 </head>
 <body>
@@ -428,7 +435,7 @@
     <span class="loc-open" id="locOpen"></span>
   </button>
   <div class="hdr-right">
-    <button type="button" class="profile-btn" id="favBtn" aria-haspopup="dialog" onclick="openSub('fav')" aria-label="Saved orders and frequent items"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
+    <button type="button" class="profile-btn" id="favBtn" aria-haspopup="dialog" onclick="openSub('fav')" aria-label="My lists and frequent items"><i class="fav-dot" id="favDot"></i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
     <button type="button" class="profile-btn" id="profileBtn" aria-haspopup="dialog" onclick="openSub('profile')" aria-label="My profile">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
   </button>
@@ -519,6 +526,8 @@
   <div class="lp-view on" id="favMain">
     <div class="lp-bar"><button type="button" class="lp-back" onclick="closeSub()" aria-label="Back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></button><h2 class="lp-title">Lists &amp; frequent items</h2></div>
     <div class="lp-body">
+  <div id="laterWrap"></div>
+  <div id="lastOrderCard"></div>
   <div class="lists-head"><h3 class="sec-h" style="margin:0">My lists</h3><button type="button" class="lists-new" onclick="newListFromPage()">+ New list</button></div>
   <p class="freq-note" id="listsNote">Save regular medicines under a name like Father or Mother, then add the whole list to your cart in one tap. Saved only on this phone.</p>
   <div id="listsWrap"></div>
@@ -598,6 +607,7 @@
       <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
       <div class="cart-hint" id="cartHint" style="display:none"></div>
       <button type="button" class="cart-send" id="cartSend" onclick="sendRequest()" style="display:none"><svg width="17" height="17" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.32A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg> Send via WhatsApp</button>
+      <div id="laterCart"></div>
     </div>
   </div>
 </div>
@@ -1220,7 +1230,7 @@
     saveCart();
     const wrap = document.getElementById('listWrap');
     if (!items.length && !hasPhotoSelected) {
-      wrap.innerHTML = '<p class="empty-note">Nothing added yet.</p>';
+      wrap.innerHTML = '<p class="empty-note">Nothing added yet.</p>' + reorderCardHTML();
     } else {
       wrap.innerHTML = items.map((it, i) => `
         <div class="req-row">
@@ -1229,7 +1239,7 @@
             ${it.pack ? `<div class="rpack">${escapeHTML(it.pack)}</div>` : ''}
             ${it.composition ? `<div class="ci-composition">Contains: ${escapeHTML(it.composition)}</div>` : ''}
             ${it.manufacturer ? `<div class="ci-mfr">${escapeHTML(it.manufacturer)}</div>` : ''}
-            <button type="button" class="save-link" onclick="openSave(${i})">Save to list</button>
+            <button type="button" class="save-link" onclick="moveToLater(${i})">Buy later</button><button type="button" class="save-link" onclick="openSave(${i})">Save to list</button>
           </div>
           <div class="req-act"><div class="qty"><button type="button" onclick="changeQty(${i},-1)" aria-label="Decrease quantity">&minus;</button><span>${it.qty || 1}</span><button type="button" onclick="changeQty(${i},1)" aria-label="Increase quantity">+</button></div><button onclick="removeRequest(${i})">Remove</button></div>
         </div>`).join('') + (hasPhotoSelected ? '<div class="req-row"><div><div class="rname">Photo to attach</div><div class="rpack">Attach it in the WhatsApp chat</div></div></div>' : '');
@@ -1247,30 +1257,29 @@
 
   function sendRequest(){
     if (!items.length && !hasPhotoSelected) return;
-    let text;
+    // WhatsApp formatting: *bold* for medicines and labels, _italic_ for notes (WhatsApp has no underline)
+    const wa = v => String(v).replace(/[*_~`]/g, '').trim();
+    const out = [];
     if (items.length) {
-      const lines = items.map(it => {
-        let line = `- ${it.name}${isRxItem(it) ? ' [Rx]' : ''} x${it.qty || 1}${it.pack ? ' (' + it.pack + ')' : ''}`;
-        if (it.composition) line += `\n  Contains: ${it.composition}`;
-        return line;
+      out.push('*Medicine request*', '');
+      items.forEach((it, i) => {
+        out.push('*' + (i + 1) + '. ' + wa(it.name) + '*' + (isRxItem(it) ? ' [Rx]' : '') + ' \u00d7' + (it.qty || 1));
+        if (it.pack && wa(it.pack)) out.push('_Note: ' + wa(it.pack) + '_');
       });
-      text = `Hi, I'd like to request the following:\n${lines.join('\n')}\n\nCould you check availability and let me know the price?`;
+      if (hasPhotoSelected) out.push('', '_Photo to follow in this chat_');
     } else {
-      text = `Hi, I have a prescription to share. Could you check availability and let me know the price?`;
+      out.push('*Prescription / photo request*', '', '_Photo to follow in this chat_');
     }
-    if (hasPhotoSelected) {
-      text += `\n\n(I have a photo of the product/prescription to attach here in the chat)`;
-    }
-    if (profile.name || profile.phone) {
-      text += '\n\n' + [profile.name ? 'Name: ' + profile.name : '', profile.phone ? 'Phone: ' + profile.phone : ''].filter(Boolean).join('\n');
-    }
+    const info = [];
+    if (profile.name) info.push('*Name:* ' + wa(profile.name));
+    if (profile.phone) info.push('*Phone:* ' + wa(profile.phone));
     const dest = chosenAddr();
-    if (useGps && capturedLocation) {
-      text += `\n\nDelivery location: https://www.google.com/maps?q=${capturedLocation.lat},${capturedLocation.lng}`;
-    } else if (dest) {
-      text += `\n\nDelivery address (${dest.label}):\n${dest.text}`;
-    }
+    if (useGps && capturedLocation) info.push('*Location:* https://www.google.com/maps?q=' + capturedLocation.lat + ',' + capturedLocation.lng);
+    else if (dest) info.push('*Deliver to (' + wa(dest.label) + '):*\n' + dest.text.replace(/[*_~`]/g, ''));
+    if (info.length) out.push('', ...info);
+    const text = out.join('\n');
     saveOrder(items);
+    renderLists();
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     items.length = 0;
     hasPhotoSelected = false;
@@ -1520,6 +1529,7 @@
     renderFreq();
   }
   function renderFreq(){
+    renderLastOrder();
     const has = orderHist.length > 0;
     document.getElementById('freqNote').style.display = has ? 'block' : 'none';
     document.getElementById('freqClear').style.display = has ? 'block' : 'none';
@@ -1672,7 +1682,7 @@
   function setSheetName(v){ document.getElementById('shName').value = v; document.getElementById('shErr').style.display = 'none'; }
   function sheetErr(m){ const e = document.getElementById('shErr'); e.textContent = m; e.style.display = 'block'; }
   function finishSave(list, n){
-    persistLists(); renderLists(); closeSheet();
+    persistLists(); renderLists(); updateFavDot(); closeSheet();
     toast(n === 1 ? 'Saved to ' + list.name : 'Saved ' + n + ' items to ' + list.name);
   }
   function saveToList(id){
@@ -1699,15 +1709,17 @@
 
   // -- My lists on the heart page --
   function renderLists(){
+    updateFavDot();
     const w = document.getElementById('listsWrap');
     if (!lists.length) {
       w.innerHTML = '<div class="add-card"><p class="empty-note">' + (listsOK ? 'No lists yet. Tap New list, or use Save to list in your cart.' : "This browser can't save lists.") + '</p></div>';
       return;
     }
     w.innerHTML = lists.map(l => {
-      const c = l.items.length;
+      const c = l.items.length, lo = listLastOrdered(l), due = lo && daysSince(lo) >= REFILL_DAYS;
       return '<div class="list-card"><div class="lc-top"><div class="lc-name">' + escapeHTML(l.name) + '</div><div class="lc-count">' + c + (c === 1 ? ' item' : ' items') + '</div></div>'
         + '<div class="lc-prev">' + (c ? escapeHTML(l.items.map(x => x.name).join(', ')) : 'Empty. Tap Edit to add medicines.') + '</div>'
+        + (lo ? (due ? '<span class="lc-due">Time to refill? Last ordered ' + agoText(lo) + '</span>' : '<div class="lc-last">Last ordered ' + agoText(lo) + '</div>') : '')
         + '<div class="lc-act">' + (c ? '<button type="button" class="lc-add" onclick="addListToCart(\'' + l.id + '\')">Add all to cart</button>' : '')
         + '<button type="button" class="lc-edit" onclick="openListEdit(\'' + l.id + '\')">Edit</button></div></div>';
     }).join('');
@@ -1830,11 +1842,127 @@
     closeSub();
   }
 
+  // ---- Reorder the last order, and the refill reminder on lists (both use the orders saved on this phone) ----
+  const REFILL_DAYS = 28;
+  function daysSince(t){ return Math.max(0, Math.floor((Date.now() - t) / 86400000)); }
+  function agoText(t){
+    const d = daysSince(t);
+    if (d === 0) return 'today';
+    if (d === 1) return 'yesterday';
+    if (d < 60) return d + ' days ago';
+    return 'about ' + Math.round(d / 30) + ' months ago';
+  }
+  // the last order = the saved medicines that share the newest order time
+  function lastOrder(){
+    let mx = 0;
+    orderHist.forEach(x => { if ((x.t || 0) > mx) mx = x.t; });
+    return mx ? { t: mx, list: orderHist.filter(x => x.t === mx) } : null;
+  }
+  function histToItem(x){
+    const it = { name: x.name, pack: x.pack || '', qty: Math.max(1, x.qty || 1) };
+    ['shopId', 'composition', 'manufacturer', 'p', 'rx'].forEach(k => { if (x[k]) it[k] = x[k]; });
+    return it;
+  }
+  function listLastOrdered(l){
+    let mx = 0;
+    l.items.forEach(it => { const k = itemKey(it), h = orderHist.find(x => x.k === k); if (h && (h.t || 0) > mx) mx = h.t; });
+    return mx;
+  }
+  function updateFavDot(){
+    const due = lists.some(l => { const lo = listLastOrdered(l); return lo && daysSince(lo) >= REFILL_DAYS; });
+    const d = document.getElementById('favDot'); if (d) d.classList.toggle('on', due);
+  }
+  function reorderLast(){
+    const lo = lastOrder(); if (!lo) return;
+    let added = 0, had = 0;
+    lo.list.forEach(x => {
+      const k = x.k;
+      if (items.some(y => itemKey(y) === k)) { had++; return; }
+      if (items.length >= 50) return;
+      items.push(histToItem(x)); added++;
+    });
+    render();
+    toast(added ? 'Added ' + added + (added === 1 ? ' item' : ' items') + ' from your last order' + (had ? ' (' + had + ' already there)' : '') : 'Already in your cart');
+  }
+  function lastOrderBlock(lo){
+    const n = lo.list.length, dt = new Date(lo.t).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+    return '<div class="lc-top"><div class="lc-name">Your last order</div><div class="lc-count">' + n + (n === 1 ? ' item' : ' items') + '</div></div>'
+      + '<div class="lc-prev">' + escapeHTML(lo.list.map(x => x.name).join(', ')) + '</div>'
+      + '<div class="lc-last">Ordered ' + dt + '</div>'
+      + '<div class="lc-act"><button type="button" class="lc-add" onclick="reorderLast()">Reorder: add all to cart</button></div>';
+  }
+  function reorderCardHTML(){ const lo = lastOrder(); return lo ? '<div class="reorder-card">' + lastOrderBlock(lo) + '</div>' : ''; }
+  function renderLastOrder(){
+    const el = document.getElementById('lastOrderCard'); if (!el) return;
+    const lo = lastOrder();
+    el.innerHTML = lo ? '<div class="list-card">' + lastOrderBlock(lo) + '</div>' : '';
+  }
+
+  // ---- Buy later: items moved out of the cart, kept on this phone so they can be added back in one tap ----
+  const LATER_KEY = 'huda_later_v1', MAX_LATER = 30;
+  let later = [];
+  function loadLater(){
+    try {
+      const d = JSON.parse(window.localStorage.getItem(LATER_KEY) || '[]');
+      later = Array.isArray(d) ? d.filter(x => x && typeof x.name === 'string' && x.name).slice(0, MAX_LATER) : [];
+    } catch (e) { later = []; }
+  }
+  function persistLater(){ try { window.localStorage.setItem(LATER_KEY, JSON.stringify(later)); } catch (e) { toast("This browser can't save the Buy later list."); } }
+  function laterHTML(){
+    const n = later.length;
+    if (!n) return '';
+    return '<h3 class="sec-h">Buy later (' + n + ')</h3>'
+      + (n > 1 ? '<button type="button" class="le-sec" style="margin:0 0 10px" onclick="moveAllLater()">Move all to cart</button>' : '')
+      + later.map((x, i) =>
+        '<div class="freq-row"><div class="freq-info"><div class="rname">' + escapeHTML(x.name) + (x.rx ? RX_MARK : '') + ' <span style="color:#5C7676; font-weight:600;">&times;' + (x.qty || 1) + '</span></div>'
+        + (x.pack ? '<div class="rpack">' + escapeHTML(x.pack) + '</div>' : '') + '</div>'
+        + '<div class="freq-ctl"><button type="button" class="padd" onclick="laterToCart(' + i + ')">Move to cart</button>'
+        + '<button type="button" class="le-rm" onclick="laterRemove(' + i + ')">Remove</button></div></div>').join('');
+  }
+  function renderLater(){
+    const h = laterHTML();
+    ['laterWrap', 'laterCart'].forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = h; });
+  }
+  function moveToLater(i){
+    const it = items[i]; if (!it) return;
+    const k = itemKey(it), c = copyItem(it), j = later.findIndex(x => itemKey(x) === k);
+    if (j >= 0) later.splice(j, 1);
+    later.unshift(c); if (later.length > MAX_LATER) later.length = MAX_LATER;
+    items.splice(i, 1);
+    persistLater(); render(); renderLater();
+    toast('Moved to Buy later');
+  }
+  function laterToCart(i){
+    const x = later[i]; if (!x) return;
+    const k = itemKey(x), had = items.some(y => itemKey(y) === k);
+    if (!had) { if (items.length >= 50) { toast('Your cart is full.'); return; } items.push(copyItem(x)); }
+    later.splice(i, 1);
+    persistLater(); render(); renderLater();
+    toast(had ? 'Already in your cart' : 'Moved to cart');
+  }
+  function moveAllLater(){
+    let n = 0;
+    later.slice().forEach(x => {
+      const k = itemKey(x);
+      if (!items.some(y => itemKey(y) === k) && items.length < 50) { items.push(copyItem(x)); n++; }
+    });
+    later = []; persistLater(); render(); renderLater();
+    toast(n ? 'Moved ' + n + (n === 1 ? ' item' : ' items') + ' to cart' : 'Already in your cart');
+  }
+  function laterRemove(i){
+    if (!later[i]) return;
+    later.splice(i, 1); persistLater(); renderLater();
+  }
+
   loadHistory();
   loadProfile();
   loadLists();
   loadCart();
+  loadLater();
+  renderLater();
   renderLists();
+  renderLastOrder();
+  updateFavDot();
   render();
   syncSubTabs();
   loadAddrs();
