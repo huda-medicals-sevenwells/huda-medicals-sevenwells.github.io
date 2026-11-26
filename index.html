@@ -19,6 +19,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0F8B8D">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,8 +54,8 @@
   .loc-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
   .loc-top{ display:flex; align-items:center; gap:5px; }
   .loc-top svg{ flex:0 0 auto; }
-  .loc-label{ font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
-  .loc-addr{ display:block; font-size:12px; line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .loc-label{ font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(16px*var(--ts,1)); line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+  .loc-addr{ display:block; font-size:calc(12px*var(--ts,1)); line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .profile-btn{
     flex:0 0 40px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.18);
     color:var(--white); display:flex; align-items:center; justify-content:center; text-decoration:none;
@@ -61,21 +63,21 @@
   }
   .hdr-right{ display:flex; align-items:center; gap:10px; flex:0 0 auto; }
   .fabs{ position:fixed; right:16px; bottom:20px; z-index:60; display:flex; flex-direction:column; align-items:flex-end; gap:12px; }
-  .fab{ position:relative; display:flex; align-items:center; justify-content:center; gap:8px; border:none; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; -webkit-appearance:none; appearance:none; box-shadow:0 10px 24px -6px rgba(11,35,35,0.5); }
+  .fab{ position:relative; display:flex; align-items:center; justify-content:center; gap:8px; border:none; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(14px*var(--ts,1)); -webkit-appearance:none; appearance:none; box-shadow:0 10px 24px -6px rgba(11,35,35,0.5); }
   .fab-cart{ width:58px; height:58px; border-radius:50%; background:var(--teal-deep); color:#FFFFFF; }
   .fab-offers{ height:48px; padding:0 18px; border-radius:999px; background:#F5A623; color:#0B2323; }
   .fab:active{ filter:brightness(0.92); }
   .fab:focus-visible{ outline:3px solid var(--ink); outline-offset:3px; }
   .fab .cart-badge{ border-color:#FFFFFF; top:-4px; right:-4px; }
   .cart-btn{ position:relative; cursor:pointer; padding:0; font-family:inherit; -webkit-appearance:none; appearance:none; }
-  .cart-badge{ position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; padding:0 3px; border-radius:10px; background:var(--red); color:#FFFFFF; border:2px solid #0D7072; font-family:'Poppins',sans-serif; font-weight:700; font-size:10.5px; line-height:16px; text-align:center; }
-  .cart-send{ width:100%; margin-top:16px; padding:14px; border:none; border-radius:12px; background:#19874C; color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
-  .loc-open{ display:block; font-size:11.5px; line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:1px; }
+  .cart-badge{ position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; padding:0 3px; border-radius:10px; background:var(--red); color:#FFFFFF; border:2px solid #0D7072; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(10.5px*var(--ts,1)); line-height:16px; text-align:center; }
+  .cart-send{ width:100%; margin-top:16px; padding:14px; border:none; border-radius:12px; background:#19874C; color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(15px*var(--ts,1)); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .loc-open{ display:block; font-size:calc(11.5px*var(--ts,1)); line-height:1.4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:1px; }
   .loc-open i{ display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:5px; vertical-align:1px; background:#8FF0B8; }
   .loc-open.closed i{ background:#FFB4A8; }
-  .cart-hint{ margin-top:12px; padding:10px 14px; border-radius:12px; background:#E3F4F1; color:#0B2323; font-size:13px; line-height:1.45; border:1px solid rgba(11,91,93,0.25); }
+  .cart-hint{ margin-top:12px; padding:10px 14px; border-radius:12px; background:#E3F4F1; color:#0B2323; font-size:calc(13px*var(--ts,1)); line-height:1.45; border:1px solid rgba(11,91,93,0.25); }
   .cart-hint b{ color:#0B5B5D; }
-  .cart-hint small{ display:block; margin-top:3px; font-size:11.5px; color:#3F5A5A; }
+  .cart-hint small{ display:block; margin-top:3px; font-size:calc(11.5px*var(--ts,1)); color:#3F5A5A; }
   .profile-btn:active{ background:rgba(255,255,255,0.3); }
   .profile-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
 
@@ -88,7 +90,7 @@
   .tab{
     flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;
     padding:8px 2px 6px; border:none; border-bottom:3px solid transparent; background:transparent;
-    color:#5F7878; font-family:'Poppins',sans-serif; font-weight:600; font-size:11px; line-height:1.2;
+    color:#5F7878; font-family:'Poppins',sans-serif; font-weight:600; font-size:calc(11px*var(--ts,1)); line-height:1.2;
     white-space:nowrap; cursor:pointer; -webkit-appearance:none; appearance:none;
   }
   .tab svg{ width:19px; height:19px; flex:0 0 19px; }
@@ -96,17 +98,17 @@
   .tab:focus-visible{ outline:2px solid var(--teal); outline-offset:-3px; }
 
   /* ---- Frequent tab ---- */
-  .freq-note{ font-size:12px; color:#5C7676; margin:0 0 10px; line-height:1.5; }
+  .freq-note{ font-size:calc(12px*var(--ts,1)); color:#5C7676; margin:0 0 10px; line-height:1.5; }
   .freq-row{
     display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--white);
     border:1px solid rgba(11,35,35,0.07); border-radius:12px; padding:11px 13px; margin-bottom:8px;
   }
   .freq-info{ min-width:0; flex:1 1 auto; }
-  .freq-row .rname{ font-size:13px; font-weight:600; }
-  .freq-row .rpack{ font-size:11.5px; color:#5C7676; margin-top:2px; }
+  .freq-row .rname{ font-size:calc(13px*var(--ts,1)); font-weight:600; }
+  .freq-row .rpack{ font-size:calc(11.5px*var(--ts,1)); color:#5C7676; margin-top:2px; }
   .freq-ctl{ flex:0 0 104px; }
   .freq-clear{
-    display:block; margin:6px auto 0; background:none; border:none; color:#4F6868; font-size:12px;
+    display:block; margin:6px auto 0; background:none; border:none; color:#4F6868; font-size:calc(12px*var(--ts,1));
     font-weight:600; text-decoration:underline; cursor:pointer; padding:8px;
   }
   .subtabs{
@@ -118,39 +120,39 @@
   .chip{
     display:inline-flex; flex-direction:column; align-items:center; gap:4px; min-width:56px; margin-right:8px; padding:0 4px 4px;
     border:none; border-bottom:3px solid transparent; background:transparent; color:var(--ink); vertical-align:top;
-    font-family:'Poppins',sans-serif; font-weight:600; font-size:11px; line-height:1.3; white-space:nowrap; cursor:pointer;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:calc(11px*var(--ts,1)); line-height:1.3; white-space:nowrap; cursor:pointer;
   }
   .chip .ci{
     position:relative; width:40px; height:40px; box-sizing:border-box; border-radius:50%; background:#E9F5F4;
     border:1px solid rgba(11,35,35,0.15); overflow:hidden;
   }
-  .chip .e{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:19px; }
+  .chip .e{ position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:calc(19px*var(--ts,1)); }
   .chip .ci img{ position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; background:#FFFFFF; }
   .chip:last-child{ margin-right:14px; }
   .chip.on{ border-bottom-color:var(--teal-deep); color:var(--teal-deep); font-weight:700; }
   .chip.on .ci{ border:2px solid var(--teal-deep); }
   .chip:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
-  .sec-h{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; margin:16px 0 8px; }
+  .sec-h{ font-family:'Poppins',sans-serif; font-size:calc(12.5px*var(--ts,1)); font-weight:700; margin:16px 0 8px; }
   #freqWrap{ display:none; }
   .rx-mark{
     display:inline-block; margin-left:6px; padding:0 5px; border:1px solid var(--red); border-radius:4px; color:var(--red);
-    font-family:'Poppins',sans-serif; font-size:10px; font-weight:700; line-height:1.5; vertical-align:middle;
+    font-family:'Poppins',sans-serif; font-size:calc(10px*var(--ts,1)); font-weight:700; line-height:1.5; vertical-align:middle;
   }
   .rx-note{
     background:var(--white); border:1px solid rgba(193,39,45,0.3); border-radius:12px; padding:11px 13px;
-    font-size:12.5px; line-height:1.5; color:var(--ink); margin-bottom:12px;
+    font-size:calc(12.5px*var(--ts,1)); line-height:1.5; color:var(--ink); margin-bottom:12px;
   }
   .alt-box{ display:none; margin:10px 0 2px; padding:10px 12px; background:#F0F9F8; border:1px solid rgba(15,139,141,0.25); border-radius:12px; }
   .alt-box.show{ display:block; }
-  .alt-h{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; }
-  .alt-sub{ font-size:11.5px; color:#4F6868; margin:1px 0 8px; line-height:1.45; }
+  .alt-h{ font-family:'Poppins',sans-serif; font-size:calc(12.5px*var(--ts,1)); font-weight:700; }
+  .alt-sub{ font-size:calc(11.5px*var(--ts,1)); color:#4F6868; margin:1px 0 8px; line-height:1.45; }
   .alt-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 0; border-top:1px solid rgba(11,35,35,0.08); }
   .alt-info{ min-width:0; flex:1 1 auto; }
-  .alt-name{ font-size:13px; font-weight:600; line-height:1.35; }
-  .alt-meta{ font-size:11.5px; color:#4F6868; margin-top:2px; line-height:1.4; }
+  .alt-name{ font-size:calc(13px*var(--ts,1)); font-weight:600; line-height:1.35; }
+  .alt-meta{ font-size:calc(11.5px*var(--ts,1)); color:#4F6868; margin-top:2px; line-height:1.4; }
   .alt-pick{
     flex:0 0 auto; background:var(--white); color:var(--teal-deep); border:1.5px solid var(--teal-deep); border-radius:9px;
-    padding:7px 12px; font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer;
+    padding:7px 12px; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(12.5px*var(--ts,1)); cursor:pointer;
   }
   .tabpanel{ display:none; }
   .tabpanel.on{ display:block; }
@@ -162,23 +164,23 @@
 
   .info-box{
     background:var(--white); border:1px solid rgba(11,35,55,0.08); border-radius:14px;
-    padding:13px 15px; font-size:12px; color:#5C7676; line-height:1.55; margin-bottom:16px;
+    padding:13px 15px; font-size:calc(12px*var(--ts,1)); color:#5C7676; line-height:1.55; margin-bottom:16px;
   }
 
   .add-card{
     background:var(--white); border-radius:16px; padding:16px; border:1px solid rgba(11,35,35,0.07);
   }
   .field-label{
-    font-family:'Poppins',sans-serif; font-size:12px; font-weight:600; color:var(--ink); margin-bottom:6px; display:block;
+    font-family:'Poppins',sans-serif; font-size:calc(12px*var(--ts,1)); font-weight:600; color:var(--ink); margin-bottom:6px; display:block;
   }
   .field-input{
     width:100%; padding:12px 14px; border-radius:12px; border:1.5px solid rgba(11,35,35,0.12);
-    font-family:'Inter',sans-serif; font-size:14px; background:var(--paper); margin-bottom:12px;
+    font-family:'Inter',sans-serif; font-size:calc(14px*var(--ts,1)); background:var(--paper); margin-bottom:12px;
   }
   .field-input:focus{ outline:2px solid var(--teal); outline-offset:1px; }
   .add-btn{
     width:100%; padding:13px; border-radius:12px; border:none; background:var(--teal-deep); color:white;
-    font-family:'Poppins',sans-serif; font-weight:600; font-size:13.5px; cursor:pointer;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:calc(13.5px*var(--ts,1)); cursor:pointer;
   }
   .add-btn:active{ background:var(--teal); }
 
@@ -188,17 +190,17 @@
   }
   .qty-btn{
     width:32px; height:32px; border-radius:9px; border:none; background:var(--teal-deep);
-    color:white; font-size:18px; font-weight:700; cursor:pointer; line-height:1;
+    color:white; font-size:calc(18px*var(--ts,1)); font-weight:700; cursor:pointer; line-height:1;
   }
   .qty-display{
-    font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; width:64px; text-align:center;
+    font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(15px*var(--ts,1)); width:64px; text-align:center;
     border:1.5px solid rgba(11,35,35,0.12); border-radius:9px; background:var(--white); color:var(--ink);
     padding:6px 4px; -moz-appearance:textfield; appearance:textfield;
   }
   .qty-display::-webkit-outer-spin-button, .qty-display::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
   .qty-display:focus{ outline:2px solid var(--teal); outline-offset:1px; }
   .form-badge{
-    display:inline-block; font-family:'Inter',sans-serif; font-size:9.5px; font-weight:700;
+    display:inline-block; font-family:'Inter',sans-serif; font-size:calc(9.5px*var(--ts,1)); font-weight:700;
     letter-spacing:0.03em; color:var(--teal-deep); background:rgba(15,139,141,0.12);
     padding:2px 7px; border-radius:8px; margin-left:6px; text-transform:uppercase; vertical-align:middle;
   }
@@ -208,13 +210,13 @@
   .sbar{ display:flex; align-items:center; gap:2px; background:var(--white); border:1.5px solid var(--teal-deep); border-radius:999px; padding:0 6px 0 14px; min-height:54px; margin-top:4px; }
   .sbar:focus-within{ box-shadow:0 0 0 3px rgba(15,139,141,0.25); }
   .sbar > svg{ flex:0 0 auto; color:var(--teal-deep); }
-  .sbar-in{ flex:1 1 auto; min-width:0; border:none; outline:none; background:transparent; font-family:'Inter',sans-serif; font-size:16px; color:var(--ink); padding:13px 6px; }
+  .sbar-in{ flex:1 1 auto; min-width:0; border:none; outline:none; background:transparent; font-family:'Inter',sans-serif; font-size:calc(16px*var(--ts,1)); color:var(--ink); padding:13px 6px; }
   .sbar-btn{ flex:0 0 44px; width:44px; height:44px; border:none; border-radius:50%; background:transparent; color:var(--teal-deep); display:flex; align-items:center; justify-content:center; cursor:pointer; }
   .sbar-btn:active{ background:rgba(15,139,141,0.14); }
   .sbar-btn:focus-visible{ outline:3px solid var(--teal); outline-offset:-3px; }
   .sbar-btn.on{ background:#F27B54; color:#0B2323; }
   .sbar-wrap .suggest-box{ margin-top:6px; border-top:1.5px solid rgba(11,35,35,0.12); border-radius:12px; }
-  .mic-msg{ margin:8px 6px 0; font-size:12.5px; line-height:1.4; color:#3F5A5A; }
+  .mic-msg{ margin:8px 6px 0; font-size:calc(12.5px*var(--ts,1)); line-height:1.4; color:#3F5A5A; }
   .mic-msg:empty{ display:none; }
   .suggest-box{
     display:none; position:absolute; left:0; right:0; top:100%; margin-top:-8px; z-index:20;
@@ -228,50 +230,50 @@
   }
   .suggest-row:last-child{ border-bottom:none; }
   .suggest-row:active{ background:var(--paper); }
-  .suggest-row .sname{ font-size:13px; font-weight:600; color:var(--ink); }
-  .suggest-row .scomp{ font-size:11px; color:#1B7A43; margin-top:2px; }
-  .suggest-row .smeta{ font-size:10.5px; color:#5F7878; margin-top:2px; }
-  .suggest-note{ padding:8px 14px; font-size:11.5px; color:#5C7676; background:var(--paper); border-bottom:1px solid rgba(11,35,35,0.06); }
+  .suggest-row .sname{ font-size:calc(13px*var(--ts,1)); font-weight:600; color:var(--ink); }
+  .suggest-row .scomp{ font-size:calc(11px*var(--ts,1)); color:#1B7A43; margin-top:2px; }
+  .suggest-row .smeta{ font-size:calc(10.5px*var(--ts,1)); color:#5F7878; margin-top:2px; }
+  .suggest-note{ padding:8px 14px; font-size:calc(11.5px*var(--ts,1)); color:#5C7676; background:var(--paper); border-bottom:1px solid rgba(11,35,35,0.06); }
   .suggest-note b{ color:var(--ink); }
-  .suggest-empty{ padding:12px 14px; font-size:12px; color:#5F7878; }
+  .suggest-empty{ padding:12px 14px; font-size:calc(12px*var(--ts,1)); color:#5F7878; }
   .selected-tag{
     display:none; align-items:center; justify-content:space-between; gap:8px;
     background:rgba(30,160,90,0.08); border:1px solid rgba(30,160,90,0.25); border-radius:10px;
-    padding:8px 11px; margin-bottom:12px; font-size:11.5px;
+    padding:8px 11px; margin-bottom:12px; font-size:calc(11.5px*var(--ts,1));
   }
   .selected-tag.show{ display:flex; }
-  .selected-tag button{ background:none; border:none; color:var(--red); font-weight:700; font-size:11px; cursor:pointer; }
-  .ci-composition{ font-size:11px; color:#1B7A43; margin-top:2px; }
-  .ci-mfr{ font-size:11px; color:#5F7878; margin-top:1px; }
+  .selected-tag button{ background:none; border:none; color:var(--red); font-weight:700; font-size:calc(11px*var(--ts,1)); cursor:pointer; }
+  .ci-composition{ font-size:calc(11px*var(--ts,1)); color:#1B7A43; margin-top:2px; }
+  .ci-mfr{ font-size:calc(11px*var(--ts,1)); color:#5F7878; margin-top:1px; }
 
   .list-wrap{ margin-top:18px; }
-  .list-wrap h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:10px; }
+  .list-wrap h2{ font-family:'Poppins',sans-serif; font-size:calc(13.5px*var(--ts,1)); font-weight:700; margin-bottom:10px; }
   .req-row{
     display:flex; align-items:center; justify-content:space-between; gap:10px;
     background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:12px;
     padding:11px 13px; margin-bottom:8px;
   }
-  .req-row .rname{ font-size:13px; font-weight:600; }
-  .req-row .rpack{ font-size:11.5px; color:#5C7676; margin-top:2px; }
+  .req-row .rname{ font-size:calc(13px*var(--ts,1)); font-weight:600; }
+  .req-row .rpack{ font-size:calc(11.5px*var(--ts,1)); color:#5C7676; margin-top:2px; }
   .req-row button{
     flex:0 0 auto; background:rgba(193,39,45,0.08); color:var(--red); border:none;
-    padding:7px 12px; border-radius:9px; font-size:11.5px; font-weight:700; cursor:pointer;
+    padding:7px 12px; border-radius:9px; font-size:calc(11.5px*var(--ts,1)); font-weight:700; cursor:pointer;
   }
-  .empty-note{ text-align:center; color:#5F7878; font-size:12.5px; padding:14px 0; }
+  .empty-note{ text-align:center; color:#5F7878; font-size:calc(12.5px*var(--ts,1)); padding:14px 0; }
 
 
-  .quick-hint{ font-size:11.5px; color:#5C7676; margin:-6px 0 12px; line-height:1.5; }
+  .quick-hint{ font-size:calc(11.5px*var(--ts,1)); color:#5C7676; margin:-6px 0 12px; line-height:1.5; }
 
 
   .footer-note{
-    text-align:center; font-size:11px; color:#5F7878; padding:24px 18px 90px; line-height:1.6;
+    text-align:center; font-size:calc(11px*var(--ts,1)); color:#5F7878; padding:24px 18px 90px; line-height:1.6;
   }
 
   /* ---- Quick add shop (category tiles, frequently bought, product cards) ---- */
   .shop{ display:none; margin-top:18px; }
-  .shop h2{ font-family:'Poppins',sans-serif; font-size:13.5px; font-weight:700; margin-bottom:2px; }
-  .shop h3{ font-family:'Poppins',sans-serif; font-size:12.5px; font-weight:700; margin:16px 0 8px; }
-  .shop-sub{ font-size:12px; color:#5C7676; margin:2px 0 12px; line-height:1.5; }
+  .shop h2{ font-family:'Poppins',sans-serif; font-size:calc(13.5px*var(--ts,1)); font-weight:700; margin-bottom:2px; }
+  .shop h3{ font-family:'Poppins',sans-serif; font-size:calc(12.5px*var(--ts,1)); font-weight:700; margin:16px 0 8px; }
+  .shop-sub{ font-size:calc(12px*var(--ts,1)); color:#5C7676; margin:2px 0 12px; line-height:1.5; }
   .pgrid{ display:flex; flex-wrap:wrap; gap:10px; }
   .pgrid .pcard{ width:calc(50% - 5px); }
   .pcard{
@@ -280,57 +282,57 @@
   }
   .pimg{ position:relative; width:100%; padding-top:100%; background:#E9F5F4; border-radius:10px; overflow:hidden; margin-bottom:8px; }
   .pimg .ph, .pimg img{ position:absolute; top:0; left:0; width:100%; height:100%; }
-  .pimg .ph{ display:flex; align-items:center; justify-content:center; font-size:36px; }
+  .pimg .ph{ display:flex; align-items:center; justify-content:center; font-size:calc(36px*var(--ts,1)); }
   .pimg img{ object-fit:contain; background:#FFFFFF; }
-  .pname{ font-size:12.5px; font-weight:600; color:var(--ink); line-height:1.35; min-height:34px; }
-  .pcomp{ font-size:10.5px; color:#1B7A43; margin-top:2px; line-height:1.35; max-height:28px; overflow:hidden; }
+  .pname{ font-size:calc(12.5px*var(--ts,1)); font-weight:600; color:var(--ink); line-height:1.35; min-height:34px; }
+  .pcomp{ font-size:calc(10.5px*var(--ts,1)); color:#1B7A43; margin-top:2px; line-height:1.35; max-height:28px; overflow:hidden; }
   .poster{ position:relative; overflow:hidden; border-radius:22px; margin-top:16px; padding:22px 16px 18px; color:#FBF1E1; text-align:center; background:linear-gradient(170deg, #0A0F24 0%, #111B3F 100%); border:1.5px solid rgba(245,166,35,0.45); }
   .poster::before{ content:""; position:absolute; width:30px; height:84px; top:92px; right:-4px; border-radius:15px; background:linear-gradient(#F27B54 50%, #FBF1E1 50%); transform:rotate(35deg); opacity:0.3; }
   .poster::after{ content:""; position:absolute; width:78px; height:78px; border-radius:50%; bottom:70px; left:-30px; background:#FBF1E1; opacity:0.1; }
   .poster > *{ position:relative; z-index:1; }
-  .po-chip{ display:inline-block; background:#F27B54; color:#0A0F24; font-family:'Poppins',sans-serif; font-weight:700; font-size:11px; line-height:1.35; letter-spacing:0.05em; padding:6px 14px; border-radius:999px; box-shadow:0 0 0 3px #0A0F24, 0 0 0 4.5px rgba(245,166,35,0.6); }
-  .po-title{ font-family:'Poppins',sans-serif; font-weight:800; font-size:27px; line-height:1.14; margin-top:18px; color:#FBF1E1; }
-  .po-sub{ margin-top:8px; font-size:14px; font-weight:600; line-height:1.3; color:#D5D9EA; }
+  .po-chip{ display:inline-block; background:#F27B54; color:#0A0F24; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(11px*var(--ts,1)); line-height:1.35; letter-spacing:0.05em; padding:6px 14px; border-radius:999px; box-shadow:0 0 0 3px #0A0F24, 0 0 0 4.5px rgba(245,166,35,0.6); }
+  .po-title{ font-family:'Poppins',sans-serif; font-weight:800; font-size:calc(27px*var(--ts,1)); line-height:1.14; margin-top:18px; color:#FBF1E1; }
+  .po-sub{ margin-top:8px; font-size:calc(14px*var(--ts,1)); font-weight:600; line-height:1.3; color:#D5D9EA; }
   .po-title span{ display:block; color:#F27B54; }
   .po-tiers{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:18px; align-items:stretch; }
   .po-tier{ display:flex; flex-direction:column; align-items:center; background:#FBF1E1; color:#0A0F24; border:1.5px solid #F5A623; border-radius:14px; padding:11px 4px 10px; }
-  .po-k{ font-size:11px; font-weight:600; line-height:1.2; }
-  .po-r{ font-size:12.5px; font-weight:700; line-height:1.25; min-height:32px; margin-top:2px; display:flex; align-items:center; justify-content:center; }
-  .po-pct{ margin-top:6px; padding-top:7px; width:80%; border-top:1.5px solid rgba(10,15,36,0.18); font-family:'Poppins',sans-serif; font-weight:800; font-size:33px; line-height:1; color:#C8440F; }
-  .po-pct em{ font-style:normal; font-size:19px; margin-left:1px; }
-  .po-off{ margin-top:3px; font-family:'Poppins',sans-serif; font-weight:800; font-size:13px; letter-spacing:0.08em; }
+  .po-k{ font-size:calc(11px*var(--ts,1)); font-weight:600; line-height:1.2; }
+  .po-r{ font-size:calc(12.5px*var(--ts,1)); font-weight:700; line-height:1.25; min-height:32px; margin-top:2px; display:flex; align-items:center; justify-content:center; }
+  .po-pct{ margin-top:6px; padding-top:7px; width:80%; border-top:1.5px solid rgba(10,15,36,0.18); font-family:'Poppins',sans-serif; font-weight:800; font-size:calc(33px*var(--ts,1)); line-height:1; color:#C8440F; }
+  .po-pct em{ font-style:normal; font-size:calc(19px*var(--ts,1)); margin-left:1px; }
+  .po-off{ margin-top:3px; font-family:'Poppins',sans-serif; font-weight:800; font-size:calc(13px*var(--ts,1)); letter-spacing:0.08em; }
   .po-tier.top{ background:#F5A623; border-color:#FFD27A; box-shadow:0 0 18px rgba(245,166,35,0.45); transform:scale(1.04); }
   .po-tier.top .po-pct{ color:#0A0F24; border-top-color:rgba(10,15,36,0.35); }
   .po-gen{ display:flex; align-items:center; gap:12px; margin-top:16px; padding:12px 12px; border:1.5px solid #F5A623; border-radius:14px; text-align:left; background:rgba(245,166,35,0.08); }
   .po-gen svg{ flex:0 0 46px; }
-  .po-gen-t{ font-size:14px; font-weight:600; line-height:1.3; color:#FBF1E1; }
+  .po-gen-t{ font-size:calc(14px*var(--ts,1)); font-weight:600; line-height:1.3; color:#FBF1E1; }
   .po-gen-p{ margin-top:2px; font-family:'Poppins',sans-serif; font-weight:800; color:#F5A623; line-height:1; white-space:nowrap; }
-  .po-gen-p small{ font-size:12px; letter-spacing:0.06em; }
-  .po-gen-p b{ font-size:32px; margin:0 3px; }
-  .po-cta{ width:100%; margin-top:16px; padding:13px; border:none; border-radius:12px; background:#F5A623; color:#0A0F24; font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; }
+  .po-gen-p small{ font-size:calc(12px*var(--ts,1)); letter-spacing:0.06em; }
+  .po-gen-p b{ font-size:calc(32px*var(--ts,1)); margin:0 3px; }
+  .po-cta{ width:100%; margin-top:16px; padding:13px; border:none; border-radius:12px; background:#F5A623; color:#0A0F24; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(15px*var(--ts,1)); cursor:pointer; }
   .po-cta:active{ background:#E09512; }
   .po-cta:focus-visible{ outline:3px solid #FBF1E1; outline-offset:2px; }
-  .po-soon{ display:flex; align-items:center; gap:10px; margin-top:16px; font-size:12.5px; line-height:1.3; color:#D5D9EA; }
+  .po-soon{ display:flex; align-items:center; gap:10px; margin-top:16px; font-size:calc(12.5px*var(--ts,1)); line-height:1.3; color:#D5D9EA; }
   .po-soon::before, .po-soon::after{ content:""; flex:1 1 0; height:1px; background:rgba(245,166,35,0.55); }
   .req-act{ display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
   .req-row .qty{ display:flex; align-items:center; gap:4px; }
-  .req-row .qty button{ width:34px; height:34px; padding:0; border-radius:50%; border:1.5px solid var(--teal-deep); background:#FFFFFF; color:var(--teal-deep); font-size:18px; font-weight:700; cursor:pointer; }
+  .req-row .qty button{ width:34px; height:34px; padding:0; border-radius:50%; border:1.5px solid var(--teal-deep); background:#FFFFFF; color:var(--teal-deep); font-size:calc(18px*var(--ts,1)); font-weight:700; cursor:pointer; }
   .req-row .qty span{ min-width:24px; text-align:center; font-weight:700; }
   .cart-addr{ display:flex; align-items:center; gap:10px; background:#FFFFFF; border:1px solid rgba(11,35,35,0.1); border-radius:14px; padding:10px 6px 10px 14px; margin-bottom:14px; }
   .ca-t{ flex:1 1 auto; min-width:0; }
-  .ca-l{ font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; }
-  .ca-a{ font-size:12px; color:#4F6868; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .ca-c{ flex:0 0 auto; background:none; border:none; color:var(--teal-deep); font-weight:700; font-size:13px; cursor:pointer; padding:10px; }
-  .pprice{ font-size:11.5px; font-weight:600; color:var(--teal-deep); margin-top:3px; }
+  .ca-l{ font-family:'Poppins',sans-serif; font-weight:600; font-size:calc(13px*var(--ts,1)); }
+  .ca-a{ font-size:calc(12px*var(--ts,1)); color:#4F6868; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ca-c{ flex:0 0 auto; background:none; border:none; color:var(--teal-deep); font-weight:700; font-size:calc(13px*var(--ts,1)); cursor:pointer; padding:10px; }
+  .pprice{ font-size:calc(11.5px*var(--ts,1)); font-weight:600; color:var(--teal-deep); margin-top:3px; }
   .pctl{ margin-top:auto; padding-top:8px; }
   .padd{
     width:100%; padding:8px; border-radius:10px; border:1.5px solid var(--teal-deep); background:var(--white);
-    color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer;
+    color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(12.5px*var(--ts,1)); cursor:pointer;
   }
   .padd:active{ background:var(--paper); }
   .pstep{ display:flex; align-items:center; justify-content:space-between; background:var(--teal-deep); border-radius:10px; padding:3px; }
-  .pstep button{ width:32px; height:30px; border:none; border-radius:8px; background:transparent; color:#FFFFFF; font-size:18px; font-weight:700; cursor:pointer; }
-  .pstep span{ color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; }
+  .pstep button{ width:32px; height:30px; border:none; border-radius:8px; background:transparent; color:#FFFFFF; font-size:calc(18px*var(--ts,1)); font-weight:700; cursor:pointer; }
+  .pstep span{ color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(13px*var(--ts,1)); }
 
   /* ---- Select Your Location page ---- */
   .locpage{ position:fixed; top:0; right:0; bottom:0; left:0; z-index:100; background:var(--paper); display:none; overflow-y:auto; overscroll-behavior:contain; }
@@ -340,11 +342,11 @@
   .lp-bar{ display:flex; align-items:center; gap:8px; padding:10px 12px; background:var(--white); border-bottom:1px solid rgba(11,35,35,0.1); position:-webkit-sticky; position:sticky; top:0; z-index:2; }
   .lp-back{ flex:0 0 40px; width:40px; height:40px; border-radius:50%; border:none; background:transparent; color:var(--ink); display:flex; align-items:center; justify-content:center; cursor:pointer; }
   .lp-back:focus-visible, .addr-dots:focus-visible, .lp-act:focus-visible, .addr-pick:focus-visible{ outline:2px solid var(--teal); outline-offset:-2px; }
-  .lp-title{ font-family:'Poppins',sans-serif; font-weight:600; font-size:17px; }
+  .lp-title{ font-family:'Poppins',sans-serif; font-weight:600; font-size:calc(17px*var(--ts,1)); }
   .lp-body{ padding:14px 16px 28px; }
   .lp-search{ position:relative; }
   .lp-search svg{ position:absolute; left:13px; top:14px; color:#4F6868; }
-  .lp-search input, .fm-input{ width:100%; border:1.5px solid #7A9090; border-radius:12px; font-size:16px; font-family:'Inter',sans-serif; background:var(--white); color:var(--ink); }
+  .lp-search input, .fm-input{ width:100%; border:1.5px solid #7A9090; border-radius:12px; font-size:calc(16px*var(--ts,1)); font-family:'Inter',sans-serif; background:var(--white); color:var(--ink); }
   .lp-search input{ height:46px; padding:0 14px 0 40px; }
   .fm-input{ padding:12px 14px; line-height:1.45; }
   textarea.fm-input{ min-height:104px; resize:vertical; }
@@ -354,75 +356,95 @@
   .lp-act{ flex:1 1 auto; min-width:0; display:flex; align-items:center; gap:12px; padding:13px 14px; background:var(--white); border:none; text-align:left; cursor:pointer; font-family:inherit; color:var(--ink); -webkit-appearance:none; appearance:none; }
   .lp-act .ic, .addr-pin{ flex:0 0 36px; width:36px; height:36px; border-radius:50%; background:#E3F3F1; color:var(--teal-deep); display:flex; align-items:center; justify-content:center; }
   .lp-act .tx{ flex:1 1 auto; min-width:0; }
-  .lp-act .tt{ display:block; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; }
-  .lp-act .st{ display:block; font-size:12px; color:#5F7878; margin-top:2px; line-height:1.4; }
+  .lp-act .tt{ display:block; font-family:'Poppins',sans-serif; font-weight:600; font-size:calc(14px*var(--ts,1)); }
+  .lp-act .st{ display:block; font-size:calc(12px*var(--ts,1)); color:#5F7878; margin-top:2px; line-height:1.4; }
   .lp-act .chev{ flex:0 0 auto; color:#5F7878; }
-  .lp-rm{ flex:0 0 auto; margin-right:12px; background:none; border:none; color:var(--red); font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer; padding:8px; }
-  .lp-h{ font-family:'Poppins',sans-serif; font-size:11.5px; font-weight:600; letter-spacing:.06em; color:#4F6868; margin:20px 2px 8px; text-transform:uppercase; }
-  .lp-note{ font-size:12px; color:#4F6868; margin:6px 2px 0; line-height:1.5; }
+  .lp-rm{ flex:0 0 auto; margin-right:12px; background:none; border:none; color:var(--red); font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(12.5px*var(--ts,1)); cursor:pointer; padding:8px; }
+  .lp-h{ font-family:'Poppins',sans-serif; font-size:calc(11.5px*var(--ts,1)); font-weight:600; letter-spacing:.06em; color:#4F6868; margin:20px 2px 8px; text-transform:uppercase; }
+  .lp-note{ font-size:calc(12px*var(--ts,1)); color:#4F6868; margin:6px 2px 0; line-height:1.5; }
   .addr-card{ background:var(--white); border:1.5px solid rgba(11,35,35,0.08); border-radius:14px; margin-bottom:10px; overflow:hidden; }
   .addr-card.sel{ border-color:var(--teal-deep); }
   .addr-main{ display:flex; align-items:flex-start; padding:13px 4px 13px 14px; }
   .addr-pick{ flex:1 1 auto; min-width:0; display:flex; align-items:flex-start; gap:12px; background:none; border:none; text-align:left; cursor:pointer; font-family:inherit; color:var(--ink); padding:0; }
-  .addr-name{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; }
-  .addr-tag{ background:var(--teal-deep); color:#FFFFFF; font-family:'Inter',sans-serif; font-size:10.5px; font-weight:700; border-radius:6px; padding:1px 7px; }
-  .addr-text{ display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; font-size:12.5px; color:#4F6868; margin-top:3px; line-height:1.45; white-space:pre-line; word-break:break-word; }
+  .addr-name{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-family:'Poppins',sans-serif; font-weight:600; font-size:calc(14px*var(--ts,1)); }
+  .addr-tag{ background:var(--teal-deep); color:#FFFFFF; font-family:'Inter',sans-serif; font-size:calc(10.5px*var(--ts,1)); font-weight:700; border-radius:6px; padding:1px 7px; }
+  .addr-text{ display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; font-size:calc(12.5px*var(--ts,1)); color:#4F6868; margin-top:3px; line-height:1.45; white-space:pre-line; word-break:break-word; }
   .addr-dots{ flex:0 0 40px; width:40px; height:40px; background:none; border:none; color:var(--ink); display:flex; align-items:center; justify-content:center; cursor:pointer; }
   .addr-menu{ display:none; border-top:1px solid rgba(11,35,35,0.08); }
   .addr-menu.on{ display:flex; }
-  .addr-menu button{ flex:1 1 0; padding:11px; border:none; background:none; font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; cursor:pointer; color:var(--teal-deep); }
+  .addr-menu button{ flex:1 1 0; padding:11px; border:none; background:none; font-family:'Poppins',sans-serif; font-weight:600; font-size:calc(13px*var(--ts,1)); cursor:pointer; color:var(--teal-deep); }
   .addr-menu button + button{ border-left:1px solid rgba(11,35,35,0.08); color:var(--red); }
-  .fm-lbl{ display:block; font-family:'Poppins',sans-serif; font-size:12px; font-weight:600; margin:16px 0 6px; }
+  .fm-lbl{ display:block; font-family:'Poppins',sans-serif; font-size:calc(12px*var(--ts,1)); font-weight:600; margin:16px 0 6px; }
   .fm-chips{ display:flex; gap:8px; margin-top:8px; }
-  .fm-chip{ padding:8px 16px; border-radius:999px; border:1.5px solid #7A9090; background:var(--white); color:var(--ink); font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; cursor:pointer; }
-  .fm-err{ display:none; color:var(--red); font-size:12.5px; margin-top:6px; }
-  .fm-save{ width:100%; margin-top:20px; padding:14px; border:none; border-radius:12px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; cursor:pointer; }
+  .fm-chip{ padding:8px 16px; border-radius:999px; border:1.5px solid #7A9090; background:var(--white); color:var(--ink); font-family:'Poppins',sans-serif; font-weight:600; font-size:calc(13px*var(--ts,1)); cursor:pointer; }
+  .fm-chip.on{ background:var(--teal-deep); border-color:var(--teal-deep); color:#FFFFFF; }
+  .ts-chips{ flex-wrap:wrap; }
+  .ig-ov{ display:none; position:fixed; top:0; right:0; bottom:0; left:0; z-index:300; background:rgba(11,35,35,0.55); align-items:flex-end; justify-content:center; }
+  .ig-card{ width:100%; max-width:480px; background:var(--white); border-radius:18px 18px 0 0; padding:20px 18px 22px; }
+  .ig-h{ font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(16px*var(--ts,1)); margin-bottom:12px; }
+  .ig-step{ display:flex; gap:10px; margin-bottom:10px; font-size:calc(14px*var(--ts,1)); line-height:1.5; }
+  .ig-n{ flex:0 0 24px; width:24px; height:24px; border-radius:50%; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(12px*var(--ts,1)); display:flex; align-items:center; justify-content:center; }
+  .ig-note{ font-size:calc(12.5px*var(--ts,1)); color:#4F6868; line-height:1.5; margin-bottom:10px; }
+  .ig-ok{ width:100%; margin-top:8px; padding:13px; border:none; border-radius:12px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(14px*var(--ts,1)); cursor:pointer; }
+  .fm-err{ display:none; color:var(--red); font-size:calc(12.5px*var(--ts,1)); margin-top:6px; }
+  .fm-save{ width:100%; margin-top:20px; padding:14px; border:none; border-radius:12px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(15px*var(--ts,1)); cursor:pointer; }
   /* ---- Saved lists (family medicine lists) ---- */
   .lists-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin:2px 0 6px; }
-  .lists-new{ background:var(--teal-deep); color:#FFFFFF; border:none; border-radius:999px; padding:9px 15px; font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer; }
+  .lists-new{ background:var(--teal-deep); color:#FFFFFF; border:none; border-radius:999px; padding:9px 15px; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(12.5px*var(--ts,1)); cursor:pointer; }
   .list-card{ background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:14px; padding:13px 14px; margin-bottom:10px; }
   .lc-top{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
-  .lc-name{ font-family:'Poppins',sans-serif; font-weight:700; font-size:14.5px; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .lc-count{ flex:0 0 auto; font-size:12px; color:#4F6868; }
-  .lc-prev{ font-size:12px; color:#5C7676; margin-top:4px; line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .lc-name{ font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(14.5px*var(--ts,1)); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .lc-count{ flex:0 0 auto; font-size:calc(12px*var(--ts,1)); color:#4F6868; }
+  .lc-prev{ font-size:calc(12px*var(--ts,1)); color:#5C7676; margin-top:4px; line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   .lc-act{ display:flex; gap:8px; margin-top:11px; }
-  .lc-add{ flex:1 1 auto; padding:10px; border:none; border-radius:10px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; cursor:pointer; }
-  .lc-edit{ flex:0 0 auto; padding:10px 20px; border:1.5px solid var(--teal-deep); border-radius:10px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; cursor:pointer; }
+  .lc-add{ flex:1 1 auto; padding:10px; border:none; border-radius:10px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(13px*var(--ts,1)); cursor:pointer; }
+  .lc-edit{ flex:0 0 auto; padding:10px 20px; border:1.5px solid var(--teal-deep); border-radius:10px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(13px*var(--ts,1)); cursor:pointer; }
   .le-addrow{ display:flex; gap:8px; }
   .le-addrow .fm-input{ flex:1 1 auto; min-width:0; }
-  .le-addbtn{ flex:0 0 auto; padding:0 20px; border:none; border-radius:12px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; cursor:pointer; }
-  .le-sec{ width:100%; margin-top:12px; padding:12px; border:1.5px solid var(--teal-deep); border-radius:12px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; cursor:pointer; }
-  .le-del{ display:block; margin:18px auto 0; background:none; border:none; color:var(--red); font-weight:700; font-size:13px; text-decoration:underline; cursor:pointer; padding:10px; }
-  .le-rm{ display:block; width:100%; margin-top:6px; background:none; border:none; color:var(--red); font-size:12px; font-weight:700; cursor:pointer; padding:6px 0; }
-  .req-row button.save-link{ display:inline-block; margin-top:8px; padding:7px 12px; border-radius:9px; background:rgba(15,139,141,0.12); color:var(--teal-deep); font-size:12px; font-weight:700; }
-  .cart-saveall{ display:block; margin:0 0 12px auto; padding:9px 16px; border:1.5px solid var(--teal-deep); border-radius:999px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; cursor:pointer; }
+  .le-addbtn{ flex:0 0 auto; padding:0 20px; border:none; border-radius:12px; background:var(--teal-deep); color:#FFFFFF; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(14px*var(--ts,1)); cursor:pointer; }
+  .le-sec{ width:100%; margin-top:12px; padding:12px; border:1.5px solid var(--teal-deep); border-radius:12px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(14px*var(--ts,1)); cursor:pointer; }
+  .le-del{ display:block; margin:18px auto 0; background:none; border:none; color:var(--red); font-weight:700; font-size:calc(13px*var(--ts,1)); text-decoration:underline; cursor:pointer; padding:10px; }
+  .le-rm{ display:block; width:100%; margin-top:6px; background:none; border:none; color:var(--red); font-size:calc(12px*var(--ts,1)); font-weight:700; cursor:pointer; padding:6px 0; }
+  .req-row button.save-link{ display:inline-block; margin-top:8px; padding:7px 12px; border-radius:9px; background:rgba(15,139,141,0.12); color:var(--teal-deep); font-size:calc(12px*var(--ts,1)); font-weight:700; }
+  .cart-saveall{ display:block; margin:0 0 12px auto; padding:9px 16px; border:1.5px solid var(--teal-deep); border-radius:999px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(12.5px*var(--ts,1)); cursor:pointer; }
   .sheet-bg{ display:none; position:fixed; top:0; right:0; bottom:0; left:0; z-index:140; background:rgba(11,35,35,0.5); }
   .sheet-bg.on{ display:block; }
   .sheet{ position:absolute; left:0; right:0; bottom:0; max-width:480px; margin:0 auto; background:var(--paper); border-radius:18px 18px 0 0; padding:18px 16px 20px; max-height:88%; overflow-y:auto; outline:none; }
-  .sh-h{ font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; }
-  .sh-sub{ font-size:12.5px; color:#4F6868; margin:3px 0 12px; line-height:1.45; }
-  .sh-list{ display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; padding:12px 14px; margin-bottom:8px; border:1.5px solid rgba(11,35,35,0.14); border-radius:12px; background:var(--white); font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; color:var(--ink); cursor:pointer; text-align:left; }
-  .sh-list span:last-child{ font-family:'Inter',sans-serif; font-weight:500; font-size:12px; color:#4F6868; flex:0 0 auto; }
-  .sh-cancel{ display:block; margin:10px auto 0; background:none; border:none; color:#4F6868; font-weight:700; font-size:13px; padding:10px; cursor:pointer; }
-  .toast{ display:none; position:fixed; left:50%; bottom:24px; transform:translateX(-50%); max-width:88%; background:#0B2323; color:#FFFFFF; padding:11px 16px; border-radius:12px; font-size:13px; line-height:1.4; text-align:center; z-index:150; box-shadow:0 8px 24px -6px rgba(11,35,35,0.5); }
+  .sh-h{ font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(16px*var(--ts,1)); }
+  .sh-sub{ font-size:calc(12.5px*var(--ts,1)); color:#4F6868; margin:3px 0 12px; line-height:1.45; }
+  .sh-list{ display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; padding:12px 14px; margin-bottom:8px; border:1.5px solid rgba(11,35,35,0.14); border-radius:12px; background:var(--white); font-family:'Poppins',sans-serif; font-weight:600; font-size:calc(14px*var(--ts,1)); color:var(--ink); cursor:pointer; text-align:left; }
+  .sh-list span:last-child{ font-family:'Inter',sans-serif; font-weight:500; font-size:calc(12px*var(--ts,1)); color:#4F6868; flex:0 0 auto; }
+  .sh-cancel{ display:block; margin:10px auto 0; background:none; border:none; color:#4F6868; font-weight:700; font-size:calc(13px*var(--ts,1)); padding:10px; cursor:pointer; }
+  .toast{ display:none; position:fixed; left:50%; bottom:24px; transform:translateX(-50%); max-width:88%; background:#0B2323; color:#FFFFFF; padding:11px 16px; border-radius:12px; font-size:calc(13px*var(--ts,1)); line-height:1.4; text-align:center; z-index:150; box-shadow:0 8px 24px -6px rgba(11,35,35,0.5); }
   .toast.on{ display:block; }
-  .logo-btn{ flex:0 0 40px; width:40px; height:40px; border-radius:50%; background:#FFFFFF; display:flex; align-items:center; justify-content:center; border:1.5px solid rgba(255,255,255,0.7); overflow:hidden; text-decoration:none; color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; }
+  .logo-btn{ flex:0 0 40px; width:40px; height:40px; border-radius:50%; background:#FFFFFF; display:flex; align-items:center; justify-content:center; border:1.5px solid rgba(255,255,255,0.7); overflow:hidden; text-decoration:none; color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(13px*var(--ts,1)); }
   .logo-btn img{ width:26px; height:auto; display:block; }
   .logo-btn:focus-visible{ outline:2px solid #FFFFFF; outline-offset:2px; }
-  .lc-due{ display:inline-block; margin-top:6px; padding:3px 10px; border-radius:999px; background:#FDEBC8; color:#6B4300; font-size:11.5px; font-weight:700; }
-  .lc-last{ font-size:11.5px; color:#4F6868; margin-top:6px; }
+  .lc-due{ display:inline-block; margin-top:6px; padding:3px 10px; border-radius:999px; background:#FDEBC8; color:#6B4300; font-size:calc(11.5px*var(--ts,1)); font-weight:700; }
+  .lc-last{ font-size:calc(11.5px*var(--ts,1)); color:#4F6868; margin-top:6px; }
   .reorder-card{ background:var(--white); border:1px solid rgba(11,35,35,0.07); border-radius:14px; padding:13px 14px; margin-top:10px; }
   .profile-btn{ position:relative; }
   .fav-dot{ position:absolute; top:-2px; right:-2px; width:11px; height:11px; border-radius:50%; background:#F5A623; border:2px solid #0D7072; display:none; }
   .fav-dot.on{ display:block; }
   .req-row button.save-link{ margin-right:8px; }
   .cart-note{ margin:14px 0 4px; }
+  #cartPage.pickup .cart-addr{ display:none; }
+  .cart-remind{ display:flex; align-items:center; gap:10px; margin:14px 0 4px; font-size:calc(14px*var(--ts,1)); font-weight:600; cursor:pointer; line-height:1.4; }
+  .cart-remind input{ flex:0 0 22px; width:22px; height:22px; accent-color:var(--teal-deep); margin:0; }
   .cart-note textarea{ resize:none; font-family:inherit; line-height:1.4; padding-top:11px; }
-  .cart-call{ display:flex; align-items:center; justify-content:center; gap:8px; margin-top:12px; padding:12px; border:1.5px solid var(--teal-deep); border-radius:12px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; text-decoration:none; }
-  .toast-undo{ margin-left:14px; padding:4px 10px; border:none; border-radius:8px; background:#FFFFFF; color:#0B2323; font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; cursor:pointer; }
-  .cart-priv{ font-size:12px; line-height:1.5; color:#4F6868; margin:10px 2px 0; text-align:center; }
-  .suggest-retry{ margin-left:6px; padding:4px 10px; border:1.5px solid var(--teal-deep); border-radius:8px; background:var(--white); color:var(--teal-deep); font-weight:700; font-size:12px; cursor:pointer; }
+  .cart-call{ display:flex; align-items:center; justify-content:center; gap:8px; margin-top:12px; padding:12px; border:1.5px solid var(--teal-deep); border-radius:12px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(14px*var(--ts,1)); text-decoration:none; }
+  .toast-undo{ margin-left:14px; padding:4px 10px; border:none; border-radius:8px; background:#FFFFFF; color:#0B2323; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(13px*var(--ts,1)); cursor:pointer; }
+  .cart-priv{ font-size:calc(12px*var(--ts,1)); line-height:1.5; color:#4F6868; margin:10px 2px 0; text-align:center; }
+  .suggest-retry{ margin-left:6px; padding:4px 10px; border:1.5px solid var(--teal-deep); border-radius:8px; background:var(--white); color:var(--teal-deep); font-weight:700; font-size:calc(12px*var(--ts,1)); cursor:pointer; }
 </style>
+<script>
+(function(){ try { var t = window.localStorage.getItem('huda_textsize_v1'); var m = { large: 1.15, xlarge: 1.3 }; if (m[t]) document.documentElement.style.setProperty('--ts', m[t]); } catch (e) {} })();
+</script>
+<script>
+window.__ip = null;
+window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); window.__ip = e; if (window.paintInstall) window.paintInstall(); });
+window.addEventListener('appinstalled', function(){ window.__ip = null; if (window.paintInstall) window.paintInstall(); });
+</script>
 </head>
 <body>
 
@@ -554,6 +576,12 @@
       <label class="fm-lbl" for="pfPhone">Phone number</label>
       <input type="tel" class="fm-input" id="pfPhone" inputmode="tel" maxlength="15" autocomplete="tel" oninput="saveProfile()">
       <p class="lp-note">Your name and number are added to your WhatsApp request, so we know who is asking.</p>
+      <h3 class="lp-h">Text size</h3>
+      <div class="fm-chips ts-chips" role="group" aria-label="Text size" style="margin-top:0"><button type="button" class="fm-chip" id="ts-normal" onclick="setTextSize('normal')" aria-pressed="false">Normal</button><button type="button" class="fm-chip" id="ts-large" onclick="setTextSize('large')" aria-pressed="false">Large</button><button type="button" class="fm-chip" id="ts-xlarge" onclick="setTextSize('xlarge')" aria-pressed="false">Extra large</button></div>
+      <div id="pfLang" style="display:none">
+        <h3 class="lp-h">Language</h3>
+        <div class="fm-chips ts-chips" role="group" aria-label="Language" style="margin-top:0"><button type="button" class="fm-chip" id="lg-en" onclick="setLang('en')" aria-pressed="true">English</button><button type="button" class="fm-chip" id="lg-ta" onclick="setLang('ta')" aria-pressed="false">தமிழ்</button><button type="button" class="fm-chip" id="lg-hi" onclick="setLang('hi')" aria-pressed="false">हिन्दी</button></div>
+      </div>
       <h3 class="lp-h">My things</h3>
       <div class="lp-actions" style="margin-top:0">
         <div class="lp-row"><button type="button" class="lp-act" onclick="pfGo('fav')"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="tx"><span class="tt">Last orders</span><span class="st" id="pfOrders"></span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
@@ -561,7 +589,27 @@
         <div class="lp-row"><button type="button" class="lp-act" onclick="pfGo(openLoc)"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span class="tx"><span class="tt">Saved addresses</span><span class="st" id="pfAddrs"></span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
         <div class="lp-row"><a class="lp-act" href="tel:+919962269992" style="text-decoration:none; color:inherit;"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.62a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.46-1.19a2 2 0 0 1 2.11-.45c.84.29 1.72.5 2.62.62A2 2 0 0 1 22 16.92z"/></svg></span><span class="tx"><span class="tt">Call Huda Medicals</span><span class="st">9962 269 992</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></div>
       </div>
+      <h3 class="lp-h">Share</h3>
+      <div class="lp-actions" style="margin-top:0"><div class="lp-row"><button type="button" class="lp-act" onclick="shareShop()"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4"/><path d="M8.6 13.5l6.8 4"/></svg></span><span class="tx"><span class="tt">Share with family</span><span class="st">Send the Huda Medicals link on WhatsApp</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
+      <div id="pfInstall" style="display:none">
+        <h3 class="lp-h">App</h3>
+        <div class="lp-actions" style="margin-top:0"><div class="lp-row"><button type="button" class="lp-act" onclick="installTap()"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M12 7v7"/><path d="M9 11.5l3 3 3-3"/></svg></span><span class="tx"><span class="tt">Install App</span><span class="st">Add Huda Medicals to your home screen</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
+      </div>
+      <h3 class="lp-h">Backup</h3>
+      <div class="lp-actions" style="margin-top:0">
+        <div class="lp-row"><button type="button" class="lp-act" onclick="backupSend()"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg></span><span class="tx"><span class="tt">Back up my data</span><span class="st">Send it to yourself on WhatsApp</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+        <div class="lp-row"><button type="button" class="lp-act" onclick="restoreToggle(true)"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></span><span class="tx"><span class="tt">Restore from backup</span><span class="st">Paste the backup message here</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+      </div>
+      <div id="restoreBox" style="display:none">
+        <label class="fm-lbl" for="restoreText">Paste your backup message</label>
+        <textarea class="fm-input" id="restoreText" placeholder="HUDA-BACKUP-1:..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+        <div class="fm-err" id="restoreErr" role="alert"></div>
+        <button type="button" class="fm-save" onclick="restoreRun()">Restore</button>
+        <button type="button" class="sh-cancel" onclick="restoreToggle(false)">Cancel</button>
+      </div>
+      <p class="lp-note">The backup holds your name, phone, addresses, lists and orders. Send it only to yourself. Restoring replaces what is on this phone.</p>
       <p class="lp-note">All of this is saved only on this phone. Clearing the browser data removes it.</p>
+      <button type="button" class="le-del" onclick="wipeData()">Remove my data from this phone</button>
     </div>
   </div>
 </div>
@@ -594,6 +642,11 @@
       <div class="cart-addr" id="cartAddr"></div>
       <button type="button" class="cart-saveall" id="cartSaveAll" onclick="openSave(-1)" style="display:none">Save all to a list</button>
       <div id="listWrap"><p class="empty-note">Nothing added yet.</p></div>
+      <div class="cart-note" id="cartFulfil" style="display:none">
+        <label class="fm-lbl" style="margin-top:0">How do you want it?</label>
+        <div class="fm-chips ts-chips" role="group" aria-label="Home delivery or pick up"><button type="button" class="fm-chip" id="fu-delivery" onclick="setFulfil('delivery')" aria-pressed="true">Home delivery</button><button type="button" class="fm-chip" id="fu-pickup" onclick="setFulfil('pickup')" aria-pressed="false">Pick up at shop</button></div>
+      </div>
+      <label class="cart-remind" id="cartRemindBox" style="display:none"><input type="checkbox" id="cartRemind"><span>Remind me to refill these every month</span></label>
       <div class="cart-note" id="cartNoteBox" style="display:none">
         <label class="fm-lbl" for="cartNote" style="margin-top:0">Anything else we should know? <span style="font-weight:500;">(optional)</span></label>
         <textarea class="fm-input" id="cartNote" rows="2" maxlength="200" placeholder="e.g. deliver after 6 PM, call before delivery" oninput="saveOrderNote()"></textarea>
@@ -674,10 +727,27 @@
 
   // catalogState: 'loading' | 'ready' | 'failed' (the search box tells the customer while suggestions are not ready)
   let catalogState = 'loading';
+  // Saved copy on the phone (Cache API): repeat opens show suggestions at once, even on slow data or offline.
+  // The saved copy is refreshed in the background, so a new catalog shows from the next open.
+  const CAT_URL = 'reference-catalog.json', CAT_CACHE = 'huda-catalog-v1';
+  function catFromNetwork(cache){
+    return fetch(CAT_URL).then(r => {
+      if (!r.ok) throw new Error('bad response');
+      if (cache) { try { cache.put(CAT_URL, r.clone()).catch(() => {}); } catch (e) {} }
+      return r.json();
+    });
+  }
+  function catGet(){
+    if (!('caches' in window)) return catFromNetwork(null);
+    return caches.open(CAT_CACHE).then(cache => cache.match(CAT_URL).then(hit => {
+      if (!hit) return catFromNetwork(cache);
+      fetch(CAT_URL, { cache: 'no-cache' }).then(r => { if (r.ok) cache.put(CAT_URL, r); }).catch(() => {});
+      return hit.json().then(d => (Array.isArray(d) && d.length) ? d : catFromNetwork(cache));
+    })).catch(() => catFromNetwork(null));
+  }
   function loadCatalog(){
     catalogState = 'loading';
-    fetch('reference-catalog.json')
-      .then(r => r.ok ? r.json() : Promise.reject(new Error('bad response')))
+    catGet()
       .then(data => {
         // normalise once, so each keystroke only does cheap comparisons across ~44,000 items
         data.forEach(r => { r._n = normalize(r.n); r._c = r.c ? normalize(r.c) : ''; });
@@ -1056,7 +1126,7 @@
     else if (a) { lab.textContent = a.label; ad.textContent = oneLine(a.text); }
     else if (gpsState === 'asking') { lab.textContent = 'Locating\u2026'; ad.textContent = 'Checking your location'; }
     else { lab.textContent = 'Select location'; ad.textContent = 'Tap to add your delivery address'; }
-    const none = lab.textContent === 'Select location';
+    const none = i18nEn(lab).trim() === 'Select location';
     document.getElementById('cartAddr').innerHTML = '<div class="ca-t"><div class="ca-l">' + (none ? 'No delivery address yet' : 'Deliver to ' + escapeHTML(lab.textContent)) + '</div>' + (none ? '' : '<div class="ca-a">' + escapeHTML(ad.textContent) + '</div>') + '</div><button type="button" class="ca-c" onclick="changeAddr()">' + (none ? 'Add' : 'Change') + '</button>';
   }
   function renderLoc(){ renderHeader(); if (locOpen) renderPage(); }
@@ -1104,7 +1174,7 @@
     if (act === 'pick') chooseAddr(id);
     else if (act === 'menu') { menuId = (menuId === id) ? null : id; renderPage(); }
     else if (act === 'edit') openForm(id);
-    else if (act === 'del' && window.confirm('Delete this address?')) {
+    else if (act === 'del' && askOK('Delete this address?')) {
       addrs = addrs.filter(a => a.id !== id); if (addrSel === id) addrSel = null; menuId = null; persistAddrs(); renderLoc();
     }
   });
@@ -1250,6 +1320,9 @@
     document.getElementById('cartSend').style.display = n ? '' : 'none';
     document.getElementById('cartSaveAll').style.display = items.length ? '' : 'none';
     document.getElementById('cartNoteBox').style.display = items.length ? '' : 'none';
+    document.getElementById('cartFulfil').style.display = items.length ? '' : 'none';
+    document.getElementById('cartRemindBox').style.display = items.length ? '' : 'none';
+    paintFulfil();
     document.getElementById('cartPriv').style.display = items.length ? '' : 'none';
     cartHint();
     syncHints();
@@ -1263,7 +1336,9 @@
     const wa = v => String(v).replace(/[*_~`]/g, '').trim();
     const out = [];
     if (items.length) {
-      out.push('*Medicine request #' + nextRequestNo() + '*', '');
+      const rno = nextRequestNo();
+      try { window.localStorage.setItem(LASTREQ_KEY, JSON.stringify({ no: rno, t: Date.now() })); } catch (e) {}
+      out.push('*Medicine request #' + rno + '*', '');
       items.forEach((it, i) => {
         out.push('*' + (i + 1) + '. ' + wa(it.name) + '*' + (isRxItem(it) ? ' [Rx]' : '') + ' \u00d7' + (it.qty || 1));
         if (it.pack && wa(it.pack)) out.push('_Note: ' + wa(it.pack) + '_');
@@ -1272,10 +1347,14 @@
       if (on) out.push('', '_Order note: ' + on + '_');
     }
     const info = [];
+    const pickup = getFulfil() === 'pickup';
+    info.push('*Order type:* ' + (pickup ? 'Pick up at shop' : 'Home delivery'));
+    if (document.getElementById('cartRemind').checked) info.push('*Refill reminder:* please remind me every month');
     if (profile.name) info.push('*Name:* ' + wa(profile.name));
     if (profile.phone) info.push('*Phone:* ' + wa(profile.phone));
     const dest = chosenAddr();
-    if (useGps && capturedLocation) info.push('*Location:* https://www.google.com/maps?q=' + capturedLocation.lat + ',' + capturedLocation.lng);
+    if (pickup) { /* no address needed for pickup */ }
+    else if (useGps && capturedLocation) info.push('*Location:* https://www.google.com/maps?q=' + capturedLocation.lat + ',' + capturedLocation.lng);
     else if (dest) info.push('*Deliver to (' + wa(dest.label) + '):*\n' + dest.text.replace(/[*_~`]/g, ''));
     if (info.length) out.push('', ...info);
     const text = out.join('\n');
@@ -1285,6 +1364,7 @@
     items.length = 0;
     dismissToast();
     document.getElementById('cartNote').value = ''; saveOrderNote();
+    document.getElementById('cartRemind').checked = false;
     render();
     closeCart();
   }
@@ -1524,7 +1604,7 @@
     render();
   }
   function clearHistory(){
-    if (!window.confirm('Remove all saved orders from this phone?')) return;
+    if (!askOK('Remove all saved orders from this phone?')) return;
     orderHist = [];
     try { window.localStorage.removeItem(HIST_KEY); } catch (e) {}
     renderFreq();
@@ -1641,7 +1721,7 @@
   function dismissToast(){ undoFn = null; clearTimeout(toastTimer); document.getElementById('toast').classList.remove('on'); }
   function toast(msg, undo){
     const t = document.getElementById('toast');
-    t.textContent = msg; undoFn = undo || null;
+    t.textContent = tr(msg); undoFn = undo || null;
     if (undo) {
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'toast-undo'; b.textContent = 'Undo';
@@ -1816,7 +1896,7 @@
   }
   function deleteList(){
     const l = getList(editListId); if (!l) return;
-    if (!window.confirm('Delete the list "' + l.name + '"?')) return;
+    if (!askOK('Delete the list "' + l.name + '"?')) return;
     lists = lists.filter(x => x.id !== l.id); persistLists();
     editListId = null; showFavView('main'); renderLists();
     toast('List deleted');
@@ -1838,7 +1918,257 @@
     profile = { name: pn.value.trim().slice(0, 40), phone: ph.trim().slice(0, 15) };
     try { window.localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); } catch (e) {}
   }
+  // Text size (bigger text for older customers): key huda_textsize_v1, scales every font through --ts
+  const TS_KEY = 'huda_textsize_v1', TS_MAP = { normal: 1, large: 1.15, xlarge: 1.3 };
+  function getTextSize(){ try { const t = window.localStorage.getItem(TS_KEY); return TS_MAP[t] ? t : 'normal'; } catch (e) { return 'normal'; } }
+  function paintTextSize(){
+    const cur = getTextSize();
+    ['normal', 'large', 'xlarge'].forEach(function(k){
+      const b = document.getElementById('ts-' + k);
+      if (!b) return;
+      b.classList.toggle('on', k === cur);
+      b.setAttribute('aria-pressed', k === cur ? 'true' : 'false');
+    });
+  }
+  function setTextSize(k){
+    if (!TS_MAP[k]) return;
+    document.documentElement.style.setProperty('--ts', TS_MAP[k]);
+    try { window.localStorage.setItem(TS_KEY, k); } catch (e) {}
+    paintTextSize();
+  }
+  // Backup and restore without a server: one WhatsApp-able text holding the phone's saved data
+  const BK_PREFIX = 'HUDA-BACKUP-1:';
+  const BK_KEYS = ['huda_profile_v1', 'huda_addresses_v1', 'huda_lists_v1', 'huda_later_v1', 'huda_prev_orders_v1', 'huda_cart_v1', 'huda_textsize_v1', 'huda_fulfil_v1', 'huda_lastreq_v1', 'huda_lang_v1'];
+  function bkEncode(str){
+    const bytes = new TextEncoder().encode(str);
+    let bin = '';
+    for (let i = 0; i < bytes.length; i += 8192) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192));
+    return btoa(bin);
+  }
+  function bkDecode(b64){
+    const bin = atob(b64);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+  function bkBuild(){
+    const data = {};
+    BK_KEYS.forEach(function(k){ try { const v = window.localStorage.getItem(k); if (v !== null) data[k] = v; } catch (e) {} });
+    return BK_PREFIX + bkEncode(JSON.stringify({ v: 1, t: Date.now(), d: data }));
+  }
+  function backupSend(){
+    let text = '';
+    try { text = bkBuild(); } catch (e) { toast('Could not make the backup on this phone.'); return; }
+    const msg = 'Huda Medicals backup. Keep this message safe.\n\n' + text;
+    if (navigator.share) {
+      navigator.share({ text: msg }).catch(function(err){ if (!err || err.name !== 'AbortError') bkCopyOrOpen(msg); });
+    } else { bkCopyOrOpen(msg); }
+  }
+  function bkCopyOrOpen(msg){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(msg).then(function(){ toast('Backup copied. Paste it in WhatsApp, in a chat with yourself.'); }, function(){ window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank'); });
+    } else { window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank'); }
+  }
+  function restoreToggle(show){
+    document.getElementById('restoreBox').style.display = show ? 'block' : 'none';
+    document.getElementById('restoreErr').style.display = 'none';
+    if (show) { const t = document.getElementById('restoreText'); t.value = ''; t.focus(); }
+  }
+  function restoreFail(msg){
+    const e = document.getElementById('restoreErr');
+    e.textContent = msg; e.style.display = 'block';
+  }
+  function restoreRun(){
+    const raw = document.getElementById('restoreText').value;
+    const at = raw.indexOf(BK_PREFIX);
+    if (at < 0) { restoreFail('This is not a Huda backup. Paste the whole backup message.'); return; }
+    const b64 = raw.slice(at + BK_PREFIX.length).replace(/[^A-Za-z0-9+\/=]/g, '');
+    let obj;
+    try { obj = JSON.parse(bkDecode(b64)); } catch (e) { restoreFail('The backup looks cut off. Copy the whole message and try again.'); return; }
+    if (!obj || obj.v !== 1 || !obj.d || typeof obj.d !== 'object') { restoreFail('The backup could not be read.'); return; }
+    if (!askOK('Replace what is saved on this phone with this backup?')) return;
+    try {
+      BK_KEYS.forEach(function(k){ if (typeof obj.d[k] === 'string') window.localStorage.setItem(k, obj.d[k]); });
+    } catch (e) { restoreFail('This phone would not save the backup.'); return; }
+    window.location.reload();
+  }
+  // Remove everything this site saved on the phone (all keys starting huda_), then reload
+  function wipeData(){
+    if (!askOK('Remove your name, phone, addresses, lists, orders and cart from this phone? This cannot be undone. Tip: use Back up my data first.')) return;
+    try {
+      const del = [];
+      for (let i = 0; i < window.localStorage.length; i++) { const k = window.localStorage.key(i); if (k && k.indexOf('huda_') === 0) del.push(k); }
+      del.forEach(function(k){ window.localStorage.removeItem(k); });
+    } catch (e) { toast('This phone would not let us remove the data.'); return; }
+    window.location.reload();
+  }
+  // Install App (Android: the browser's own prompt; iPhone/iPad: Apple allows no one-tap install, so a short guide)
+  const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent || '') || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const IS_STANDALONE = window.navigator.standalone === true || !!(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+  function iosKind(){
+    const ua = navigator.userAgent || '';
+    if (/FBAN|FBAV|Instagram|Line\/|MicroMessenger|Snapchat|Twitter|GSA\/|WhatsApp/i.test(ua) || !/Safari\//.test(ua)) return 'inapp';
+    if (/CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo|Brave/i.test(ua)) return 'other';
+    return 'safari';
+  }
+  window.paintInstall = function(){
+    const el = document.getElementById('pfInstall');
+    if (!el) return;
+    el.style.display = (!IS_STANDALONE && (window.__ip || IS_IOS)) ? '' : 'none';
+  };
+  function igStep(n, t){ return '<div class="ig-step"><span class="ig-n">' + n + '</span><div>' + t + '</div></div>'; }
+  function installTap(){
+    if (window.__ip) {
+      const ip = window.__ip;
+      ip.prompt();
+      ip.userChoice.then(function(){ window.__ip = null; window.paintInstall(); });
+      return;
+    }
+    if (!IS_IOS) return;
+    const k = iosKind();
+    let title = 'Add Huda Medicals to your Home Screen', body;
+    if (k === 'inapp') {
+      title = 'Open this page in Safari first';
+      body = '<div class="ig-note">Apps like WhatsApp cannot add websites to the Home Screen. Safari can.</div>' +
+        igStep(1, 'Find <b>Open in Safari</b>, usually under the Share icon, the compass icon or the \u2022\u2022\u2022 menu') +
+        igStep(2, 'In Safari, tap <b>Install App</b> in My profile again');
+    } else if (k === 'other') {
+      body = igStep(1, 'Tap the <b>Share</b> icon or the \u2022\u2022\u2022 menu in your browser') +
+        igStep(2, 'Choose <b>Add to Home Screen</b>, then tap <b>Add</b>') +
+        '<div class="ig-note">Cannot find it? Open this page in <b>Safari</b> and try again.</div>';
+    } else {
+      body = igStep(1, 'Tap the <b>Share</b> icon in Safari\'s toolbar. Not there? Tap the \u2022\u2022\u2022 menu next to the address bar first.') +
+        igStep(2, 'Scroll down and tap <b>Add to Home Screen</b>') +
+        igStep(3, 'Tap <b>Add</b> at the top right');
+    }
+    document.getElementById('igTitle').textContent = title;
+    document.getElementById('igBody').innerHTML = body;
+    document.getElementById('igOv').style.display = 'flex';
+  }
+  function closeIosGuide(){ document.getElementById('igOv').style.display = 'none'; }
+  if ('serviceWorker' in navigator) { try { navigator.serviceWorker.register('sw.js').catch(function(){}); } catch (e) {} }
+  // Share the shop link (phone's share menu, else WhatsApp)
+  function shareShop(){
+    const url = 'https://huda-medicals-sevenwells.github.io/';
+    const text = 'Huda Medicals: order medicines on WhatsApp, search, add to cart and send. ' + url;
+    if (navigator.share) {
+      navigator.share({ title: 'Huda Medicals', text: 'Huda Medicals: order medicines on WhatsApp.', url: url }).catch(function(err){ if (!err || err.name !== 'AbortError') window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener'); });
+    } else { window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener'); }
+  }
+  // ---- Language (English, Tamil, Hindi). Screen text is matched to a word list and swapped on the page;
+  // the WhatsApp message to the shop always stays in English. LANG_SWITCH_ON=false: the choice only shows to
+  // people who opened the test link (?lang=ta or ?lang=hi), until the translations are checked.
+  const I18N = {"ta":{"Select location":"இடத்தைத் தேர்ந்தெடுக்கவும்","Choose delivery location":"டெலிவரி இடத்தைத் தேர்ந்தெடுக்கவும்","Tap to add your delivery address":"டெலிவரி முகவரியைச் சேர்க்கத் தொடவும்","No delivery address yet":"டெலிவரி முகவரி இன்னும் இல்லை","My lists and frequent items":"என் பட்டியல்கள், அடிக்கடி வாங்குபவை","My profile":"என் சுயவிவரம்","Start typing to search...":"தேட தட்டச்சு செய்யவும்...","Product name":"பொருளின் பெயர்","Clear search and go back to categories":"தேடலை அழித்து வகைகளுக்குத் திரும்பவும்","Search by voice":"குரலில் தேடு","Send a photo of a prescription or product":"மருந்துச் சீட்டு அல்லது பொருளின் புகைப்படத்தை அனுப்பவும்","Categories":"வகைகள்","Categories and popular items":"வகைகள் மற்றும் பிரபலமான பொருட்கள்","Quick add — popular items":"விரைவாகச் சேர்க்க — பிரபலமான பொருட்கள்","Tap Add to put an item on your request list. We'll check availability and confirm the price on WhatsApp. Prices shown are reference prices, not a confirmed quote.":"பொருளை உங்கள் கோரிக்கைப் பட்டியலில் வைக்க \"சேர்க்க\" என்பதைத் தொடவும். கையிருப்பைப் பார்த்து, விலையை WhatsApp-இல் உறுதிசெய்வோம். காட்டப்படும் விலைகள் குறிப்புக்கான விலைகள் மட்டுமே, உறுதியான விலை அல்ல.","All items":"அனைத்துப் பொருட்கள்","Not sure we stock it? Type it anyway and we'll check.":"எங்களிடம் இருக்கிறதா என்று தெரியவில்லையா? தட்டச்சு செய்யுங்கள், நாங்கள் பார்க்கிறோம்.","Change":"மாற்று","Quantity":"எண்ணிக்கை","Decrease quantity":"எண்ணிக்கையைக் குறை","Increase quantity":"எண்ணிக்கையைக் கூட்டு","Anything specific we should know?":"நாங்கள் தெரிந்துகொள்ள வேண்டிய குறிப்பு ஏதேனும் உண்டா?","(optional)":"(விருப்பம்)","e.g. strip of 10, sugar-free, specific brand only...":"எ.கா. 10 மாத்திரை அட்டை, சர்க்கரை இல்லாதது, குறிப்பிட்ட பிராண்ட் மட்டும்...","Add to my list":"என் பட்டியலில் சேர்க்க","Add":"சேர்க்க","Added":"சேர்க்கப்பட்டது","Start typing and we'll suggest matching products with their composition and manufacturer, if we recognize them. Can't find it in suggestions? Just type it anyway — you don't need to know if we stock it, that's what we'll check for you. Any price shown while searching is a reference price, not a confirmed quote — we'll confirm the real price when we check.":"தட்டச்சு செய்யத் தொடங்குங்கள்; தெரிந்த பொருட்களின் கலவை மற்றும் தயாரிப்பாளருடன் பொருத்தமானவற்றைப் பரிந்துரைப்போம். பரிந்துரையில் இல்லையா? அப்படியே தட்டச்சு செய்யுங்கள் — எங்களிடம் இருக்கிறதா என்று நீங்கள் அறிய வேண்டியதில்லை, அதை நாங்கள் பார்ப்போம். தேடும்போது காட்டும் விலை குறிப்புக்கானது மட்டுமே; பார்த்த பிறகு உண்மையான விலையை உறுதிசெய்வோம்.","We'll reply on WhatsApp once we've checked stock and pricing — nothing is charged or confirmed until you agree.":"கையிருப்பையும் விலையையும் பார்த்த பிறகு WhatsApp-இல் பதில் அனுப்புவோம் — நீங்கள் ஒப்புக்கொள்ளும் வரை எதுவும் வசூலிக்கப்படாது, உறுதிசெய்யப்படாது.","Also showing results for":"இவற்றுக்கான முடிவுகளும் காட்டப்படுகின்றன","Matched from our reference list":"எங்கள் குறிப்புப் பட்டியலிலிருந்து பொருத்தப்பட்டது","Back":"பின்செல்","Offers":"சலுகைகள்","Cart, empty":"கார்ட், காலி","Fever & pain":"காய்ச்சல் & வலி","Cold & cough":"சளி & இருமல்","Baby care":"குழந்தை பராமரிப்பு","Skin & first aid":"தோல் & முதலுதவி","Listening... say the medicine name":"கேட்கிறேன்... மருந்தின் பெயரைச் சொல்லுங்கள்","Couldn't hear that. Please try again.":"கேட்க முடியவில்லை. மீண்டும் முயலுங்கள்.","Couldn't hear anything. Please try again.":"எதுவும் கேட்கவில்லை. மீண்டும் முயலுங்கள்.","The microphone is blocked. Allow it for this site, or type instead.":"மைக்ரோஃபோன் தடுக்கப்பட்டுள்ளது. இந்தத் தளத்திற்கு அனுமதி கொடுங்கள், அல்லது தட்டச்சு செய்யுங்கள்.","Voice search isn't available in this browser. Please type instead.":"இந்த பிரவுசரில் குரல் தேடல் இல்லை. தட்டச்சு செய்யுங்கள்.","Voice search isn't available in this browser. Please type, or use the mic on your keyboard.":"இந்த பிரவுசரில் குரல் தேடல் இல்லை. தட்டச்சு செய்யுங்கள், அல்லது கீபோர்டில் உள்ள மைக்கைப் பயன்படுத்துங்கள்.","Voice search didn't work. Please type instead.":"குரல் தேடல் வேலை செய்யவில்லை. தட்டச்சு செய்யுங்கள்.","Voice search didn't start. Please try again.":"குரல் தேடல் தொடங்கவில்லை. மீண்டும் முயலுங்கள்.","Lists & frequent items":"பட்டியல்கள் & அடிக்கடி வாங்குபவை","My lists":"என் பட்டியல்கள்","+ New list":"+ புதிய பட்டியல்","New list":"புதிய பட்டியல்","Save regular medicines under a name like Father or Mother, then add the whole list to your cart in one tap. Saved only on this phone.":"அப்பா அல்லது அம்மா போன்ற பெயரில் வழக்கமான மருந்துகளைச் சேமியுங்கள்; பிறகு ஒரே தொடுதலில் முழுப் பட்டியலையும் கார்ட்டில் சேர்க்கலாம். இந்த ஃபோனில் மட்டுமே சேமிக்கப்படும்.","No lists yet. Tap New list, or use Save to list in your cart.":"இன்னும் பட்டியல்கள் இல்லை. \"புதிய பட்டியல்\" என்பதைத் தொடவும், அல்லது கார்ட்டில் \"பட்டியலில் சேமி\" பயன்படுத்தவும்.","Your previous orders":"உங்கள் முந்தைய ஆர்டர்கள்","Your own earlier orders, saved only on this phone. Tap Add to put one on your request list.":"உங்கள் முந்தைய ஆர்டர்கள், இந்த ஃபோனில் மட்டும் சேமிக்கப்பட்டவை. ஒன்றை உங்கள் கோரிக்கைப் பட்டியலில் வைக்க \"சேர்க்க\" தொடவும்.","Clear saved orders":"சேமித்த ஆர்டர்களை அழி","Remove all saved orders from this phone?":"சேமித்த எல்லா ஆர்டர்களையும் இந்த ஃபோனிலிருந்து நீக்கவா?","Frequently bought":"அடிக்கடி வாங்குபவை","Your previous orders will show here, saved only on your phone.":"உங்கள் முந்தைய ஆர்டர்கள் இங்கே தெரியும்; உங்கள் ஃபோனில் மட்டுமே சேமிக்கப்படும்.","Back to my lists":"என் பட்டியல்களுக்குத் திரும்பு","Edit list":"பட்டியலைத் திருத்து","List name":"பட்டியலின் பெயர்","Please type a name for the list.":"பட்டியலுக்கு ஒரு பெயரை எழுதுங்கள்.","Medicines":"மருந்துகள்","Add a medicine":"மருந்தைச் சேர்க்க","Type the medicine name":"மருந்தின் பெயரை எழுதுங்கள்","Add items from my cart":"என் கார்ட்டிலிருந்து பொருட்களைச் சேர்க்க","Add all to cart":"அனைத்தையும் கார்ட்டில் சேர்க்க","Delete this list":"இந்தப் பட்டியலை நீக்கு","List deleted":"பட்டியல் நீக்கப்பட்டது","This list is empty":"இந்தப் பட்டியல் காலியாக உள்ளது","Save to list":"பட்டியலில் சேமி","Or start a new list":"அல்லது புதிய பட்டியலைத் தொடங்குங்கள்","For example: Father":"எடுத்துக்காட்டு: அப்பா","Create list and save":"பட்டியலை உருவாக்கிச் சேமி","Save all to a list":"அனைத்தையும் ஒரு பட்டியலில் சேமி","Nothing yet":"இன்னும் எதுவும் இல்லை","None yet":"இன்னும் இல்லை","Moved to Buy later":"பின்னர் வாங்க என்பதில் மாற்றப்பட்டது","Moved to cart":"கார்ட்டுக்கு மாற்றப்பட்டது","Removed from Buy later":"பின்னர் வாங்க என்பதிலிருந்து நீக்கப்பட்டது","Removed from cart":"கார்ட்டிலிருந்து நீக்கப்பட்டது","Already in your cart":"ஏற்கனவே உங்கள் கார்ட்டில் உள்ளது","Your cart is empty.":"உங்கள் கார்ட் காலியாக உள்ளது.","Your cart is full.":"உங்கள் கார்ட் நிரம்பிவிட்டது.","Your Cart":"உங்கள் கார்ட்","Nothing added yet.":"இன்னும் எதுவும் சேர்க்கப்படவில்லை.","How do you want it?":"எப்படிப் பெற விரும்புகிறீர்கள்?","Home delivery or pick up":"வீட்டு டெலிவரி அல்லது கடையில் வந்து வாங்குதல்","Home delivery":"வீட்டு டெலிவரி","Pick up at shop":"கடையில் வந்து வாங்குதல்","Remind me to refill these every month":"இவற்றை மாதந்தோறும் மீண்டும் வாங்க நினைவூட்டுங்கள்","Anything else we should know?":"வேறு ஏதேனும் நாங்கள் தெரிந்துகொள்ள வேண்டுமா?","e.g. deliver after 6 PM, call before delivery":"எ.கா. மாலை 6 மணிக்குப் பிறகு டெலிவரி, டெலிவரிக்கு முன் அழையுங்கள்","Send via WhatsApp":"WhatsApp மூலம் அனுப்புக","Sending opens WhatsApp with your list and, if you added them, your name, phone and delivery address. Your lists, addresses and past orders stay only on this phone.":"அனுப்பினால் WhatsApp திறந்து உங்கள் பட்டியல், நீங்கள் சேர்த்திருந்தால் பெயர், ஃபோன், டெலிவரி முகவரி ஆகியவற்றுடன் வரும். உங்கள் பட்டியல்கள், முகவரிகள், பழைய ஆர்டர்கள் இந்த ஃபோனில் மட்டுமே இருக்கும்.","Prefer to talk? Call 9962 269 992":"பேச விரும்புகிறீர்களா? 9962 269 992 அழையுங்கள்","Items marked Rx need a valid prescription. Send it in the WhatsApp chat so the medicine is ready for home delivery or store pickup.":"Rx குறியிட்ட பொருட்களுக்குச் செல்லுபடியாகும் மருந்துச் சீட்டு வேண்டும். WhatsApp உரையாடலில் அதை அனுப்புங்கள்; அப்போது மருந்து வீட்டு டெலிவரிக்கோ கடையில் எடுக்கவோ தயாராக இருக்கும்.","Where is my order?":"என் ஆர்டர் எங்கே?","Reorder: add all to cart":"மீண்டும் ஆர்டர்: அனைத்தையும் கார்ட்டில் சேர்க்க","Select Your Location":"உங்கள் இடத்தைத் தேர்ந்தெடுங்கள்","Search an area or address":"பகுதி அல்லது முகவரியைத் தேடுங்கள்","Use Current Location":"தற்போதைய இடத்தைப் பயன்படுத்து","Share your live position":"உங்கள் நேரடி இருப்பிடத்தைப் பகிருங்கள்","Checking your location":"உங்கள் இடத்தைச் சரிபார்க்கிறோம்","Current location":"தற்போதைய இடம்","Position shared with this request":"இருப்பிடம் இந்த கோரிக்கையுடன் பகிரப்பட்டது","Couldn't get your location. Allow it in browser settings, or add an address.":"உங்கள் இடத்தைப் பெற முடியவில்லை. பிரவுசர் அமைப்புகளில் அனுமதியுங்கள், அல்லது முகவரியைச் சேருங்கள்.","Not available in this browser. Add an address instead.":"இந்த பிரவுசரில் இது இல்லை. அதற்குப் பதிலாக முகவரியைச் சேருங்கள்.","Remove":"நீக்கு","Add New Address":"புதிய முகவரியைச் சேர்","Edit Address":"முகவரியைத் திருத்து","Type it once, saved on this phone":"ஒருமுறை எழுதுங்கள், இந்த ஃபோனில் சேமிக்கப்படும்","Request Address":"முகவரியைக் கேளுங்கள்","Send your address on WhatsApp":"உங்கள் முகவரியை WhatsApp-இல் அனுப்புங்கள்","Address":"முகவரி","House or flat no., street, area, landmark":"வீடு அல்லது குடியிருப்பு எண், தெரு, பகுதி, அடையாளம்","Please type your full address.":"உங்கள் முழு முகவரியையும் எழுதுங்கள்.","Save as":"இப்படிச் சேமி","Home":"வீடு","Work":"அலுவலகம்","Other":"மற்றவை","Save address":"முகவரியைச் சேமி","Saved only on this phone. It is added to your WhatsApp message when selected.":"இந்த ஃபோனில் மட்டுமே சேமிக்கப்படும். தேர்ந்தெடுத்தால் உங்கள் WhatsApp செய்தியில் சேரும்.","Saved only on this phone.":"இந்த ஃபோனில் மட்டுமே சேமிக்கப்படும்.","No saved addresses yet. Addresses you add are saved only on this phone.":"சேமித்த முகவரிகள் இன்னும் இல்லை. நீங்கள் சேர்க்கும் முகவரிகள் இந்த ஃபோனில் மட்டுமே சேமிக்கப்படும்.","Delete this address?":"இந்த முகவரியை நீக்கவா?","Saved addresses":"சேமித்த முகவரிகள்","Your name":"உங்கள் பெயர்","Phone number":"ஃபோன் எண்","Your name and number are added to your WhatsApp request, so we know who is asking.":"உங்கள் பெயரும் எண்ணும் WhatsApp கோரிக்கையில் சேர்க்கப்படும்; யார் கேட்கிறார்கள் என்று நாங்கள் அறிவோம்.","Text size":"எழுத்தின் அளவு","Normal":"சாதாரணம்","Large":"பெரியது","Extra large":"மிகப் பெரியது","My things":"என்னுடையவை","Last orders":"கடைசி ஆர்டர்கள்","Call Huda Medicals":"Huda Medicals-ஐ அழைக்க","Share":"பகிர்","Share with family":"குடும்பத்துடன் பகிர்","Send the Huda Medicals link on WhatsApp":"Huda Medicals இணைப்பை WhatsApp-இல் அனுப்புங்கள்","App":"ஆப்","Install App":"ஆப்பை நிறுவு","Add Huda Medicals to your home screen":"Huda Medicals-ஐ உங்கள் ஹோம் ஸ்கிரீனில் சேர்க்க","Backup":"காப்புப் பிரதி","Back up my data":"என் தரவுக்குக் காப்புப் பிரதி எடு","Send it to yourself on WhatsApp":"WhatsApp-இல் உங்களுக்கே அனுப்புங்கள்","Restore from backup":"காப்புப் பிரதியிலிருந்து மீட்டெடு","Paste the backup message here":"காப்புப் பிரதி செய்தியை இங்கே ஒட்டுங்கள்","Paste your backup message":"உங்கள் காப்புப் பிரதி செய்தியை ஒட்டுங்கள்","Restore":"மீட்டெடு","Cancel":"ரத்து","The backup holds your name, phone, addresses, lists and orders. Send it only to yourself. Restoring replaces what is on this phone.":"காப்புப் பிரதியில் உங்கள் பெயர், ஃபோன், முகவரிகள், பட்டியல்கள், ஆர்டர்கள் இருக்கும். அதை உங்களுக்கே மட்டும் அனுப்புங்கள். மீட்டெடுத்தால் இந்த ஃபோனில் உள்ளவை மாற்றப்படும்.","All of this is saved only on this phone. Clearing the browser data removes it.":"இவை அனைத்தும் இந்த ஃபோனில் மட்டுமே சேமிக்கப்படும். பிரவுசர் தரவை அழித்தால் இவை நீங்கிவிடும்.","Remove my data from this phone":"இந்த ஃபோனிலிருந்து என் தரவை நீக்கு","Remove your name, phone, addresses, lists, orders and cart from this phone? This cannot be undone. Tip: use Back up my data first.":"உங்கள் பெயர், ஃபோன், முகவரிகள், பட்டியல்கள், ஆர்டர்கள், கார்ட் ஆகியவற்றை இந்த ஃபோனிலிருந்து நீக்கவா? இதைத் திரும்பப் பெற முடியாது. குறிப்பு: முதலில் \"என் தரவுக்குக் காப்புப் பிரதி எடு\" பயன்படுத்துங்கள்.","Replace what is saved on this phone with this backup?":"இந்த ஃபோனில் சேமித்தவற்றை இந்தக் காப்புப் பிரதியால் மாற்றவா?","This is not a Huda backup. Paste the whole backup message.":"இது Huda காப்புப் பிரதி அல்ல. முழு காப்புப் பிரதி செய்தியையும் ஒட்டுங்கள்.","The backup looks cut off. Copy the whole message and try again.":"காப்புப் பிரதி பாதியில் நின்றுவிட்டது போல் உள்ளது. முழு செய்தியையும் நகலெடுத்து மீண்டும் முயலுங்கள்.","The backup could not be read.":"காப்புப் பிரதியைப் படிக்க முடியவில்லை.","Backup copied. Paste it in WhatsApp, in a chat with yourself.":"காப்புப் பிரதி நகலெடுக்கப்பட்டது. WhatsApp-இல் உங்களுடனான உரையாடலில் ஒட்டுங்கள்.","Got it":"சரி","Language":"மொழி","Undo":"செயல்தவிர்","Buy later":"பின்னர் வாங்க","Family lists like Father or Mother":"அப்பா அல்லது அம்மா போன்ற குடும்பப் பட்டியல்கள்","About Huda Medicals: shop info, hours and contact":"Huda Medicals பற்றி: கடை விவரம், நேரம், தொடர்பு","Search results and add to list":"தேடல் முடிவுகள், பட்டியலில் சேர்க்க"},"hi":{"Select location":"स्थान चुनें","Choose delivery location":"डिलीवरी का स्थान चुनें","Tap to add your delivery address":"डिलीवरी का पता जोड़ने के लिए छुएं","No delivery address yet":"अभी डिलीवरी का पता नहीं है","My lists and frequent items":"मेरी सूचियां और बार-बार मंगाई जाने वाली दवाएं","My profile":"मेरी प्रोफ़ाइल","Start typing to search...":"खोजने के लिए लिखना शुरू करें...","Product name":"दवा या सामान का नाम","Clear search and go back to categories":"खोज हटाकर श्रेणियों पर लौटें","Search by voice":"बोलकर खोजें","Send a photo of a prescription or product":"पर्चे या दवा की फोटो भेजें","Categories":"श्रेणियां","Categories and popular items":"श्रेणियां और लोकप्रिय सामान","Quick add — popular items":"जल्दी जोड़ें — लोकप्रिय सामान","Tap Add to put an item on your request list. We'll check availability and confirm the price on WhatsApp. Prices shown are reference prices, not a confirmed quote.":"किसी चीज़ को अपनी अनुरोध सूची में रखने के लिए \"जोड़ें\" दबाएं। हम उपलब्धता देखकर WhatsApp पर कीमत पक्की करेंगे। दिखाई गई कीमतें केवल संदर्भ के लिए हैं, पक्की कीमत नहीं।","All items":"सभी सामान","Not sure we stock it? Type it anyway and we'll check.":"पता नहीं हमारे पास है या नहीं? फिर भी लिखें, हम देख लेंगे।","Change":"बदलें","Quantity":"मात्रा","Decrease quantity":"मात्रा घटाएं","Increase quantity":"मात्रा बढ़ाएं","Anything specific we should know?":"क्या हमें कोई खास बात जाननी है?","(optional)":"(ज़रूरी नहीं)","e.g. strip of 10, sugar-free, specific brand only...":"जैसे 10 गोली का पत्ता, शुगर-फ्री, सिर्फ़ खास ब्रांड...","Add to my list":"मेरी सूची में जोड़ें","Add":"जोड़ें","Added":"जोड़ दिया","Start typing and we'll suggest matching products with their composition and manufacturer, if we recognize them. Can't find it in suggestions? Just type it anyway — you don't need to know if we stock it, that's what we'll check for you. Any price shown while searching is a reference price, not a confirmed quote — we'll confirm the real price when we check.":"लिखना शुरू करें, हम मिलती-जुलती दवाएं उनके साल्ट और निर्माता के साथ सुझाएंगे, अगर हम उन्हें पहचानते हैं। सुझाव में नहीं मिली? फिर भी पूरा लिख दें — आपको यह जानने की ज़रूरत नहीं कि हमारे पास है या नहीं, वह हम देखेंगे। खोज में दिखने वाली कीमत केवल संदर्भ के लिए है, पक्की कीमत नहीं — जांचने के बाद असली कीमत बताएंगे।","We'll reply on WhatsApp once we've checked stock and pricing — nothing is charged or confirmed until you agree.":"स्टॉक और कीमत जांचकर हम WhatsApp पर जवाब देंगे — आपकी सहमति के बिना न कोई पैसा लिया जाएगा, न कुछ पक्का होगा।","Also showing results for":"इनके नतीजे भी दिखा रहे हैं","Matched from our reference list":"हमारी संदर्भ सूची से मिलाया गया","Back":"वापस","Offers":"ऑफ़र","Cart, empty":"कार्ट, खाली","Fever & pain":"बुखार और दर्द","Cold & cough":"सर्दी और खांसी","Baby care":"बच्चों की देखभाल","Skin & first aid":"त्वचा और प्राथमिक उपचार","Listening... say the medicine name":"सुन रहे हैं... दवा का नाम बोलें","Couldn't hear that. Please try again.":"सुनाई नहीं दिया। कृपया फिर कोशिश करें।","Couldn't hear anything. Please try again.":"कुछ सुनाई नहीं दिया। कृपया फिर कोशिश करें।","The microphone is blocked. Allow it for this site, or type instead.":"माइक्रोफ़ोन बंद है। इस साइट के लिए चालू करें, या लिखकर खोजें।","Voice search isn't available in this browser. Please type instead.":"इस ब्राउज़र में बोलकर खोजना उपलब्ध नहीं है। कृपया लिखकर खोजें।","Voice search isn't available in this browser. Please type, or use the mic on your keyboard.":"इस ब्राउज़र में बोलकर खोजना उपलब्ध नहीं है। कृपया लिखें, या कीबोर्ड का माइक इस्तेमाल करें।","Voice search didn't work. Please type instead.":"बोलकर खोजना नहीं चला। कृपया लिखकर खोजें।","Voice search didn't start. Please try again.":"बोलकर खोजना शुरू नहीं हुआ। कृपया फिर कोशिश करें।","Lists & frequent items":"सूचियां और बार-बार मंगाई जाने वाली दवाएं","My lists":"मेरी सूचियां","+ New list":"+ नई सूची","New list":"नई सूची","Save regular medicines under a name like Father or Mother, then add the whole list to your cart in one tap. Saved only on this phone.":"पिताजी या माताजी जैसे नाम से नियमित दवाएं सहेजें, फिर एक टच में पूरी सूची कार्ट में जोड़ें। सिर्फ़ इसी फ़ोन में सहेजा जाता है।","No lists yet. Tap New list, or use Save to list in your cart.":"अभी कोई सूची नहीं है। \"नई सूची\" दबाएं, या कार्ट में \"सूची में सहेजें\" इस्तेमाल करें।","Your previous orders":"आपके पिछले ऑर्डर","Your own earlier orders, saved only on this phone. Tap Add to put one on your request list.":"आपके पिछले ऑर्डर, सिर्फ़ इसी फ़ोन में सहेजे गए। किसी को अपनी अनुरोध सूची में रखने के लिए \"जोड़ें\" दबाएं।","Clear saved orders":"सहेजे ऑर्डर हटाएं","Remove all saved orders from this phone?":"इस फ़ोन से सभी सहेजे ऑर्डर हटाएं?","Frequently bought":"बार-बार खरीदी गई","Your previous orders will show here, saved only on your phone.":"आपके पिछले ऑर्डर यहां दिखेंगे, सिर्फ़ आपके फ़ोन में सहेजे जाते हैं।","Back to my lists":"मेरी सूचियों पर वापस","Edit list":"सूची बदलें","List name":"सूची का नाम","Please type a name for the list.":"कृपया सूची का नाम लिखें।","Medicines":"दवाएं","Add a medicine":"दवा जोड़ें","Type the medicine name":"दवा का नाम लिखें","Add items from my cart":"मेरे कार्ट से सामान जोड़ें","Add all to cart":"सब कार्ट में जोड़ें","Delete this list":"यह सूची हटाएं","List deleted":"सूची हटा दी गई","This list is empty":"यह सूची खाली है","Save to list":"सूची में सहेजें","Or start a new list":"या नई सूची शुरू करें","For example: Father":"जैसे: पिताजी","Create list and save":"सूची बनाएं और सहेजें","Save all to a list":"सब एक सूची में सहेजें","Nothing yet":"अभी कुछ नहीं","None yet":"अभी कोई नहीं","Moved to Buy later":"बाद में खरीदें में भेजा","Moved to cart":"कार्ट में भेजा","Removed from Buy later":"बाद में खरीदें से हटाया","Removed from cart":"कार्ट से हटाया","Already in your cart":"पहले से आपके कार्ट में है","Your cart is empty.":"आपका कार्ट खाली है।","Your cart is full.":"आपका कार्ट भरा हुआ है।","Your Cart":"आपका कार्ट","Nothing added yet.":"अभी कुछ नहीं जोड़ा।","How do you want it?":"आप इसे कैसे लेना चाहेंगे?","Home delivery or pick up":"घर पर डिलीवरी या दुकान से लेना","Home delivery":"घर पर डिलीवरी","Pick up at shop":"दुकान से ले जाना","Remind me to refill these every month":"इन्हें हर महीने दोबारा मंगाने की याद दिलाएं","Anything else we should know?":"और कुछ जो हमें जानना चाहिए?","e.g. deliver after 6 PM, call before delivery":"जैसे शाम 6 बजे के बाद डिलीवरी, डिलीवरी से पहले फ़ोन करें","Send via WhatsApp":"WhatsApp से भेजें","Sending opens WhatsApp with your list and, if you added them, your name, phone and delivery address. Your lists, addresses and past orders stay only on this phone.":"भेजने पर WhatsApp खुलेगा जिसमें आपकी सूची और, अगर आपने जोड़ा हो, आपका नाम, फ़ोन और डिलीवरी का पता होगा। आपकी सूचियां, पते और पुराने ऑर्डर सिर्फ़ इसी फ़ोन में रहते हैं।","Prefer to talk? Call 9962 269 992":"बात करना चाहते हैं? 9962 269 992 पर फ़ोन करें","Items marked Rx need a valid prescription. Send it in the WhatsApp chat so the medicine is ready for home delivery or store pickup.":"Rx चिह्न वाली दवाओं के लिए सही डॉक्टर का पर्चा चाहिए। उसे WhatsApp चैट में भेजें, ताकि दवा घर पर डिलीवरी या दुकान से लेने के लिए तैयार रहे।","Where is my order?":"मेरा ऑर्डर कहां है?","Reorder: add all to cart":"दोबारा ऑर्डर: सब कार्ट में जोड़ें","Select Your Location":"अपना स्थान चुनें","Search an area or address":"इलाका या पता खोजें","Use Current Location":"मौजूदा स्थान इस्तेमाल करें","Share your live position":"अपना लाइव स्थान भेजें","Checking your location":"आपका स्थान जांच रहे हैं","Current location":"मौजूदा स्थान","Position shared with this request":"स्थान इस अनुरोध के साथ भेजा गया","Couldn't get your location. Allow it in browser settings, or add an address.":"आपका स्थान नहीं मिल पाया। ब्राउज़र सेटिंग में अनुमति दें, या पता जोड़ें।","Not available in this browser. Add an address instead.":"इस ब्राउज़र में उपलब्ध नहीं है। इसके बजाय पता जोड़ें।","Remove":"हटाएं","Add New Address":"नया पता जोड़ें","Edit Address":"पता बदलें","Type it once, saved on this phone":"एक बार लिखें, इसी फ़ोन में सहेजा जाएगा","Request Address":"पता मंगवाएं","Send your address on WhatsApp":"अपना पता WhatsApp पर भेजें","Address":"पता","House or flat no., street, area, landmark":"मकान या फ़्लैट नंबर, गली, इलाका, पहचान की जगह","Please type your full address.":"कृपया अपना पूरा पता लिखें।","Save as":"इस नाम से सहेजें","Home":"घर","Work":"दफ़्तर","Other":"अन्य","Save address":"पता सहेजें","Saved only on this phone. It is added to your WhatsApp message when selected.":"सिर्फ़ इसी फ़ोन में सहेजा जाता है। चुनने पर यह आपके WhatsApp संदेश में जुड़ जाएगा।","Saved only on this phone.":"सिर्फ़ इसी फ़ोन में सहेजा जाता है।","No saved addresses yet. Addresses you add are saved only on this phone.":"अभी कोई सहेजा पता नहीं है। आप जो पते जोड़ेंगे वे सिर्फ़ इसी फ़ोन में सहेजे जाएंगे।","Delete this address?":"यह पता हटाएं?","Saved addresses":"सहेजे हुए पते","Your name":"आपका नाम","Phone number":"फ़ोन नंबर","Your name and number are added to your WhatsApp request, so we know who is asking.":"आपका नाम और नंबर आपके WhatsApp अनुरोध में जुड़ जाते हैं, ताकि हमें पता रहे कि कौन पूछ रहा है।","Text size":"अक्षरों का आकार","Normal":"सामान्य","Large":"बड़ा","Extra large":"बहुत बड़ा","My things":"मेरी चीज़ें","Last orders":"पिछले ऑर्डर","Call Huda Medicals":"Huda Medicals को फ़ोन करें","Share":"शेयर","Share with family":"परिवार के साथ शेयर करें","Send the Huda Medicals link on WhatsApp":"Huda Medicals का लिंक WhatsApp पर भेजें","App":"ऐप","Install App":"ऐप इंस्टॉल करें","Add Huda Medicals to your home screen":"Huda Medicals को अपनी होम स्क्रीन पर जोड़ें","Backup":"बैकअप","Back up my data":"मेरे डेटा का बैकअप लें","Send it to yourself on WhatsApp":"WhatsApp पर खुद को भेजें","Restore from backup":"बैकअप से वापस लाएं","Paste the backup message here":"बैकअप वाला संदेश यहां चिपकाएं","Paste your backup message":"अपना बैकअप संदेश चिपकाएं","Restore":"वापस लाएं","Cancel":"रद्द करें","The backup holds your name, phone, addresses, lists and orders. Send it only to yourself. Restoring replaces what is on this phone.":"बैकअप में आपका नाम, फ़ोन, पते, सूचियां और ऑर्डर होते हैं। इसे सिर्फ़ खुद को भेजें। वापस लाने पर इस फ़ोन में मौजूद जानकारी बदल जाएगी।","All of this is saved only on this phone. Clearing the browser data removes it.":"यह सब सिर्फ़ इसी फ़ोन में सहेजा जाता है। ब्राउज़र का डेटा मिटाने पर यह हट जाएगा।","Remove my data from this phone":"इस फ़ोन से मेरा डेटा हटाएं","Remove your name, phone, addresses, lists, orders and cart from this phone? This cannot be undone. Tip: use Back up my data first.":"आपका नाम, फ़ोन, पते, सूचियां, ऑर्डर और कार्ट इस फ़ोन से हटाएं? इसे वापस नहीं किया जा सकता। सुझाव: पहले \"मेरे डेटा का बैकअप लें\" इस्तेमाल करें।","Replace what is saved on this phone with this backup?":"इस फ़ोन में सहेजी जानकारी को इस बैकअप से बदलें?","This is not a Huda backup. Paste the whole backup message.":"यह Huda का बैकअप नहीं है। पूरा बैकअप संदेश चिपकाएं।","The backup looks cut off. Copy the whole message and try again.":"बैकअप अधूरा लग रहा है। पूरा संदेश कॉपी करके फिर कोशिश करें।","The backup could not be read.":"बैकअप पढ़ा नहीं जा सका।","Backup copied. Paste it in WhatsApp, in a chat with yourself.":"बैकअप कॉपी हो गया। इसे WhatsApp में खुद की चैट में चिपकाएं।","Got it":"ठीक है","Language":"भाषा","Undo":"पहले जैसा करें","Buy later":"बाद में खरीदें","Family lists like Father or Mother":"पिताजी या माताजी जैसी परिवार की सूचियां","About Huda Medicals: shop info, hours and contact":"Huda Medicals के बारे में: दुकान की जानकारी, समय और संपर्क","Search results and add to list":"खोज के नतीजे और सूची में जोड़ें"}};
+  const LANG_KEY = 'huda_lang_v1', LANG_SWITCH_ON = false;
+  const I18N_ATTRS = ['placeholder', 'aria-label', 'title'];
+  const I18N_OBS = { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: I18N_ATTRS };
+  const I18N_TXT = new WeakMap(), I18N_ATTR = new WeakMap();
+  let LANG = 'en', i18nObs = null;
+  function readLang(){
+    let q = null;
+    try { q = new URLSearchParams(window.location.search).get('lang'); } catch (e) {}
+    if (q !== 'ta' && q !== 'hi' && q !== 'en') q = null;
+    try {
+      if (q === 'en') window.localStorage.removeItem(LANG_KEY);
+      else if (q) window.localStorage.setItem(LANG_KEY, q);
+      else { const v = window.localStorage.getItem(LANG_KEY); if (v === 'ta' || v === 'hi') q = v; }
+    } catch (e) {}
+    return (q === 'ta' || q === 'hi') ? q : 'en';
+  }
+  // lines with a changing part (times, counts, the typed word)
+  const I18N_PAT = [
+    [/^Open now \u00b7 closes (.+)$/, { ta: 'இப்போது திறந்துள்ளது \u00b7 மூடும் நேரம் $1', hi: 'अभी खुला है \u00b7 बंद होने का समय $1' }],
+    [/^Closed \u00b7 opens (.+)$/, { ta: 'மூடப்பட்டுள்ளது \u00b7 திறக்கும் நேரம் $1', hi: 'बंद है \u00b7 खुलने का समय $1' }],
+    [/^Search "(.+)"$/, { ta: 'தேடு "$1"', hi: 'खोजें "$1"' }],
+    [/^Cart, (\d+) items?$/, { ta: 'கார்ட், $1 பொருள்', hi: 'कार्ट, $1 सामान' }],
+    [/^Contains: (.+)$/, { ta: 'கலவை: $1', hi: 'साल्ट: $1' }],
+    [/^(.+) \u00b7 ref\. (\u20b9.+)$/, { ta: '$1 \u00b7 குறிப்பு விலை $2', hi: '$1 \u00b7 संदर्भ कीमत $2' }]
+  ];
+  function i18nLookup(en){
+    const d = I18N[LANG], key = en.replace(/\s+/g, ' ').trim();
+    if (!d || !key) return null;
+    if (Object.prototype.hasOwnProperty.call(d, key)) return d[key];
+    for (let i = 0; i < I18N_PAT.length; i++) { const m = key.match(I18N_PAT[i][0]); if (m) return I18N_PAT[i][1][LANG].replace('$1', m[1]).replace('$2', m[2] || ''); }
+    return null;
+  }
+  function tr(s){ const o = LANG !== 'en' ? i18nLookup(s) : null; return o === null ? s : o; }
+  function askOK(msg){ return window.confirm(tr(msg)); }
+  function i18nText(n){
+    const v = n.nodeValue, rec = I18N_TXT.get(n);
+    const en = (rec && rec.out === v) ? rec.en : v;
+    const out = LANG !== 'en' ? i18nLookup(en) : null;
+    if (out !== null) {
+      const nv = en.match(/^\s*/)[0] + out + en.match(/\s*$/)[0];
+      if (nv !== v) n.nodeValue = nv;
+      I18N_TXT.set(n, { en: en, out: nv });
+    } else {
+      if (rec && rec.out === v && en !== v) n.nodeValue = en;
+      if (rec) I18N_TXT.delete(n);
+    }
+  }
+  function i18nAttrs(el){
+    I18N_ATTRS.forEach(function(a){
+      if (!el.hasAttribute(a)) return;
+      const v = el.getAttribute(a), rec = I18N_ATTR.get(el) || {}, r = rec[a];
+      const en = (r && r.out === v) ? r.en : v;
+      const out = LANG !== 'en' ? i18nLookup(en) : null;
+      if (out !== null) { if (out !== v) el.setAttribute(a, out); rec[a] = { en: en, out: out }; I18N_ATTR.set(el, rec); }
+      else { if (r && r.out === v && en !== v) el.setAttribute(a, en); if (r) delete rec[a]; }
+    });
+  }
+  function i18nWalk(n){
+    if (n.nodeType === 3) { i18nText(n); return; }
+    if (n.nodeType !== 1 || n.tagName === 'SCRIPT' || n.tagName === 'STYLE') return;
+    i18nAttrs(n);
+    n.childNodes.forEach(i18nWalk);
+  }
+  function i18nEn(el){
+    let out = '';
+    (function w(n){
+      if (n.nodeType === 3) { const r = I18N_TXT.get(n); out += (r && r.out === n.nodeValue) ? r.en : n.nodeValue; }
+      else n.childNodes.forEach(w);
+    })(el);
+    return out;
+  }
+  function i18nStart(){
+    if (i18nObs || !window.MutationObserver) return;
+    i18nObs = new MutationObserver(function(muts){
+      i18nObs.disconnect();
+      try {
+        muts.forEach(function(m){
+          if (m.type === 'childList') m.addedNodes.forEach(i18nWalk);
+          else if (m.type === 'characterData') i18nText(m.target);
+          else if (m.type === 'attributes') i18nAttrs(m.target);
+        });
+      } catch (e) {}
+      i18nObs.observe(document.body, I18N_OBS);
+    });
+    i18nObs.observe(document.body, I18N_OBS);
+  }
+  function paintLang(){
+    const row = document.getElementById('pfLang');
+    if (row) row.style.display = (LANG_SWITCH_ON || LANG !== 'en') ? '' : 'none';
+    ['en', 'ta', 'hi'].forEach(function(k){
+      const b = document.getElementById('lg-' + k); if (!b) return;
+      b.classList.toggle('on', k === LANG); b.setAttribute('aria-pressed', k === LANG ? 'true' : 'false');
+    });
+  }
+  function applyLang(k){
+    LANG = (k === 'ta' || k === 'hi') ? k : 'en';
+    document.documentElement.lang = LANG;
+    if (i18nObs) i18nObs.disconnect();
+    i18nWalk(document.body);
+    if (i18nObs) i18nObs.observe(document.body, I18N_OBS);
+    paintLang();
+  }
+  function setLang(k){
+    try { if (k === 'en') window.localStorage.removeItem(LANG_KEY); else window.localStorage.setItem(LANG_KEY, k); } catch (e) {}
+    applyLang(k);
+  }
   function renderProfile(){
+    paintLang();
+    window.paintInstall();
+    paintTextSize();
     document.getElementById('pfName').value = profile.name;
     document.getElementById('pfPhone').value = profile.phone;
     const n = orderHist.length, l = lists.length, a = addrs.length;
@@ -1899,7 +2229,8 @@
     return '<div class="lc-top"><div class="lc-name">Your last order</div><div class="lc-count">' + n + (n === 1 ? ' item' : ' items') + '</div></div>'
       + '<div class="lc-prev">' + escapeHTML(lo.list.map(x => x.name).join(', ')) + '</div>'
       + '<div class="lc-last">Ordered ' + dt + '</div>'
-      + '<div class="lc-act"><button type="button" class="lc-add" onclick="reorderLast()">Reorder: add all to cart</button></div>';
+      + '<div class="lc-act"><button type="button" class="lc-add" onclick="reorderLast()">Reorder: add all to cart</button></div>'
+      + trackBtnHTML(lo);
   }
   function reorderCardHTML(){ const lo = lastOrder(); return lo ? '<div class="reorder-card">' + lastOrderBlock(lo) + '</div>' : ''; }
   function renderLastOrder(){
@@ -1971,6 +2302,35 @@
     toast('Removed from Buy later', function(){ later.splice(Math.min(i, later.length), 0, x); persistLater(); renderLater(); });
   }
 
+  // Pickup or delivery, and "Where is my order?" (opens WhatsApp with the request number filled in)
+  const FUL_KEY = 'huda_fulfil_v1', LASTREQ_KEY = 'huda_lastreq_v1';
+  function getFulfil(){ try { return window.localStorage.getItem(FUL_KEY) === 'pickup' ? 'pickup' : 'delivery'; } catch (e) { return 'delivery'; } }
+  function setFulfil(k){ try { window.localStorage.setItem(FUL_KEY, k === 'pickup' ? 'pickup' : 'delivery'); } catch (e) {} paintFulfil(); }
+  function paintFulfil(){
+    const k = getFulfil();
+    ['delivery', 'pickup'].forEach(function(x){
+      const b = document.getElementById('fu-' + x); if (!b) return;
+      b.classList.toggle('on', x === k); b.setAttribute('aria-pressed', x === k ? 'true' : 'false');
+    });
+    const cp = document.getElementById('cartPage'); if (cp) cp.classList.toggle('pickup', k === 'pickup');
+  }
+  function lastReq(lo){
+    try {
+      const r = JSON.parse(window.localStorage.getItem(LASTREQ_KEY) || 'null');
+      return (r && r.no && lo && Math.abs((r.t || 0) - lo.t) < 120000) ? r : null;
+    } catch (e) { return null; }
+  }
+  function trackBtnHTML(lo){
+    const r = lastReq(lo); if (!r) return '';
+    return '<button type="button" class="le-sec" style="margin:8px 0 0" onclick="trackOrder()">Where is my order? (#' + escapeHTML(r.no) + ')</button>';
+  }
+  function trackOrder(){
+    const lo = lastOrder(), r = lastReq(lo); if (!r) return;
+    const dt = new Date(r.t).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+    const text = 'Hi, where is my medicine request #' + r.no + '? (sent on ' + dt + ')';
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
+  }
+
   // ---- Request number: date plus the nth request sent today from this phone, for example #2511-1 ----
   const REQNO_KEY = 'huda_reqno_v1';
   function nextRequestNo(){
@@ -2000,10 +2360,15 @@
   renderLastOrder();
   updateFavDot();
   render();
+  i18nStart();
+  applyLang(readLang());
   syncSubTabs();
   loadAddrs();
   renderHeader();
   if (!addrSel) requestLocation(false);   // asked once, when the page opens, only if no address is saved
 </script>
+<div class="ig-ov" id="igOv" role="dialog" aria-modal="true" aria-labelledby="igTitle">
+  <div class="ig-card"><div class="ig-h" id="igTitle"></div><div id="igBody"></div><button type="button" class="ig-ok" onclick="closeIosGuide()">Got it</button></div>
+</div>
 </body>
 </html>
