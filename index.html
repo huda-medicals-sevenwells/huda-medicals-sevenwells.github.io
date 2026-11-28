@@ -434,6 +434,7 @@
   .cart-note textarea{ resize:none; font-family:inherit; line-height:1.4; padding-top:11px; }
   .cart-call{ display:flex; align-items:center; justify-content:center; gap:8px; margin-top:12px; padding:12px; border:1.5px solid var(--teal-deep); border-radius:12px; background:var(--white); color:var(--teal-deep); font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(14px*var(--ts,1)); text-decoration:none; }
   .toast-undo{ margin-left:14px; padding:4px 10px; border:none; border-radius:8px; background:#FFFFFF; color:#0B2323; font-family:'Poppins',sans-serif; font-weight:700; font-size:calc(13px*var(--ts,1)); cursor:pointer; }
+  .gb-off{ display:block; background:none; border:none; padding:8px 2px 2px; color:#0B5B5D; text-decoration:underline; font-family:inherit; font-size:calc(13px*var(--ts,1)); cursor:pointer; }
   .cart-priv{ font-size:calc(12px*var(--ts,1)); line-height:1.5; color:#4F6868; margin:10px 2px 0; text-align:center; }
   .suggest-retry{ margin-left:6px; padding:4px 10px; border:1.5px solid var(--teal-deep); border-radius:8px; background:var(--white); color:var(--teal-deep); font-weight:700; font-size:calc(12px*var(--ts,1)); cursor:pointer; }
 </style>
@@ -596,7 +597,12 @@ window.addEventListener('appinstalled', function(){ window.__ip = null; if (wind
         <div class="lp-actions" style="margin-top:0"><div class="lp-row"><button type="button" class="lp-act" onclick="installTap()"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M12 7v7"/><path d="M9 11.5l3 3 3-3"/></svg></span><span class="tx"><span class="tt">Install App</span><span class="st">Add Huda Medicals to your home screen</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
       </div>
       <h3 class="lp-h">Backup</h3>
-      <div class="lp-actions" style="margin-top:0">
+      <div class="lp-actions" id="gbBox" style="margin-top:0">
+        <div class="lp-row"><button type="button" class="lp-act" onclick="gbTap()"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 19a4.5 4.5 0 0 1-.7-8.95A6 6 0 0 1 17.8 9.6 4.5 4.5 0 0 1 17 19z"/><path d="M12 16v-5"/><path d="M9.5 13.5 12 11l2.5 2.5"/></svg></span><span class="tx"><span class="tt" id="gbT">Turn on Google backup</span><span class="st" id="gbS">Sign in once. Saved in your own Google Drive</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+        <div class="lp-row" id="gbRestoreRow" style="display:none"><button type="button" class="lp-act" onclick="gbRestoreTap()"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 19a4.5 4.5 0 0 1-.7-8.95A6 6 0 0 1 17.8 9.6 4.5 4.5 0 0 1 17 19z"/><path d="M12 11v5"/><path d="M9.5 13.5 12 16l2.5-2.5"/></svg></span><span class="tx"><span class="tt">Restore from Google</span><span class="st">Bring back your saved lists, addresses and orders</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+      </div>
+      <button type="button" class="gb-off" id="gbOff" style="display:none" onclick="gbOff()">Turn off Google backup</button>
+      <div class="lp-actions" style="margin-top:10px">
         <div class="lp-row"><button type="button" class="lp-act" onclick="backupSend()"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg></span><span class="tx"><span class="tt">Back up my data</span><span class="st">Send it to yourself on WhatsApp</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
         <div class="lp-row"><button type="button" class="lp-act" onclick="restoreToggle(true)"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12"/><path d="M7 11l5 5 5-5"/><path d="M5 20h14"/></svg></span><span class="tx"><span class="tt">Restore from backup</span><span class="st">Paste the backup message here</span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
       </div>
@@ -2000,8 +2006,180 @@ window.addEventListener('appinstalled', function(){ window.__ip = null; if (wind
       const del = [];
       for (let i = 0; i < window.localStorage.length; i++) { const k = window.localStorage.key(i); if (k && k.indexOf('huda_') === 0) del.push(k); }
       del.forEach(function(k){ window.localStorage.removeItem(k); });
+      try { window.sessionStorage.removeItem(GB_TOK_KEY); } catch (e) {}
     } catch (e) { toast('This phone would not let us remove the data.'); return; }
     window.location.reload();
+  }
+
+  // Google backup: a copy of the BK_KEYS data in the customer's own Google Drive (hidden app folder, drive.appdata only).
+  // No server: Google gives a sign-in that lasts about an hour. While it lasts, every save backs up by itself (gbSoon).
+  // Never tied to the Send button and never pops up by itself: only the rows in My profile open Google.
+  const GB_CLIENT = '625028790832-r5v1f9qnthjdmj84pghtn27q2c1kmqi8.apps.googleusercontent.com';
+  const GB_SCOPE = 'https://www.googleapis.com/auth/drive.appdata';
+  const GB_KEY = 'huda_gdrive_v1';      // {on, last, fid} on this phone (not in BK_KEYS)
+  const GB_TOK_KEY = 'huda_gtok_s';     // sessionStorage: {t, exp}, gone when the tab closes
+  const GB_FILE = 'huda-backup.json';
+  const GB_API = 'https://www.googleapis.com/';
+  let gbTok = null, gbExp = 0, gbClient = null, gbNext = '', gbBusy = false, gbAgain = false, gbTimer = 0, gbLoading = null, gbMute = false;
+  function gbState(){ try { return JSON.parse(window.localStorage.getItem(GB_KEY)) || {}; } catch (e) { return {}; } }
+  function gbSave(st){ try { window.localStorage.setItem(GB_KEY, JSON.stringify(st)); } catch (e) {} }
+  function gbValid(){ return !!gbTok && Date.now() < gbExp - 60000; }
+  try { const t = JSON.parse(window.sessionStorage.getItem(GB_TOK_KEY)); if (t && t.t && t.exp > Date.now() + 60000) { gbTok = t.t; gbExp = t.exp; } } catch (e) {}
+  // back up shortly after any saved data changes (only while signed in; otherwise nothing happens)
+  (function(){
+    try {
+      const raw = Storage.prototype.setItem;
+      Storage.prototype.setItem = function(k, v){
+        raw.call(this, k, v);
+        try { if (!gbMute && BK_KEYS.indexOf(k) >= 0 && this === window.localStorage) gbSoon(); } catch (e) {}
+      };
+    } catch (e) {}
+  })();
+  function gbSoon(){
+    if (!gbState().on || !gbValid()) return;
+    clearTimeout(gbTimer); gbTimer = setTimeout(function(){ gbUpload(false); }, 2500);
+  }
+  function gbInApp(){
+    const ua = navigator.userAgent || '';
+    return /FBAN|FBAV|Instagram|Line\/|MicroMessenger|Snapchat|WhatsApp|; wv\)/i.test(ua) || (IS_IOS && !IS_STANDALONE && iosKind() === 'inapp');
+  }
+  const GB_INAPP_MSG = 'Google sign-in does not work inside WhatsApp or other apps. Open this page in Chrome or Safari, then try again.';
+  function gbLoad(){
+    if (window.google && google.accounts && google.accounts.oauth2) return Promise.resolve();
+    if (gbLoading) return gbLoading;
+    gbLoading = new Promise(function(res, rej){
+      const sc = document.createElement('script');
+      sc.src = 'https://accounts.google.com/gsi/client'; sc.async = true;
+      sc.onload = res; sc.onerror = function(){ gbLoading = null; rej(new Error('load')); };
+      document.head.appendChild(sc);
+    });
+    return gbLoading;
+  }
+  function gbAsk(next){
+    if (gbInApp()) { toast(GB_INAPP_MSG); return; }
+    if (!(window.google && google.accounts && google.accounts.oauth2)) { toast('Google is still loading. Try again in a moment.'); gbLoad().catch(function(){}); return; }
+    if (!gbClient) gbClient = google.accounts.oauth2.initTokenClient({ client_id: GB_CLIENT, scope: GB_SCOPE, callback: gbOnToken, error_callback: gbOnErr });
+    gbNext = next;
+    gbClient.requestAccessToken({ prompt: gbState().on ? '' : 'consent' });
+  }
+  function gbOnErr(err){
+    const t = err && err.type;
+    if (t === 'popup_failed_to_open') toast(gbInApp() ? GB_INAPP_MSG : 'Google sign-in could not open. Allow pop-ups for this site and try again.');
+    else if (t !== 'popup_closed') toast('Google sign-in did not finish. Try again.');
+  }
+  function gbOnToken(resp){
+    if (!resp || resp.error || !resp.access_token) { gbOnErr(resp); return; }
+    if (!google.accounts.oauth2.hasGrantedAllScopes(resp, GB_SCOPE)) { toast('Google backup needs the Google Drive permission. Tap again and allow it.'); return; }
+    gbTok = resp.access_token; gbExp = Date.now() + (Number(resp.expires_in) || 3600) * 1000;
+    try { window.sessionStorage.setItem(GB_TOK_KEY, JSON.stringify({ t: gbTok, exp: gbExp })); } catch (e) {}
+    const next = gbNext; gbNext = '';
+    if (next === 'on') gbTurnOn();
+    else if (next === 'restore') gbRestoreFlow();
+    else gbUpload(true);
+  }
+  async function gbApi(path, opt){
+    opt = opt || {};
+    opt.headers = Object.assign({ Authorization: 'Bearer ' + gbTok }, opt.headers || {});
+    const r = await fetch(GB_API + path, opt);
+    if (r.status === 401) { gbTok = null; gbExp = 0; try { window.sessionStorage.removeItem(GB_TOK_KEY); } catch (e) {} throw new Error('auth'); }
+    if (!r.ok) throw new Error('http ' + r.status);
+    return r;
+  }
+  async function gbFind(){
+    const q = encodeURIComponent("name='" + GB_FILE + "' and trashed=false");
+    const r = await gbApi('drive/v3/files?spaces=appDataFolder&pageSize=1&fields=files(id%2CmodifiedTime)&orderBy=' + encodeURIComponent('modifiedTime desc') + '&q=' + q);
+    const j = await r.json();
+    return (j.files && j.files[0]) || null;
+  }
+  function gbBody(){
+    const data = {};
+    BK_KEYS.forEach(function(k){ try { const v = window.localStorage.getItem(k); if (v !== null) data[k] = v; } catch (e) {} });
+    return JSON.stringify({ v: 1, t: Date.now(), d: data });
+  }
+  async function gbWrite(body){
+    const keep = body.length < 60000;   // lets the save finish even if the page is closed
+    const patch = function(id){ return gbApi('upload/drive/v3/files/' + id + '?uploadType=media', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: keep }); };
+    const st = gbState();
+    if (st.fid) { try { await patch(st.fid); return st.fid; } catch (e) { if (e.message !== 'http 404') throw e; } }
+    const f = await gbFind();
+    if (f) { await patch(f.id); return f.id; }
+    const b = 'hudab' + Date.now();
+    const meta = JSON.stringify({ name: GB_FILE, parents: ['appDataFolder'], mimeType: 'application/json' });
+    const mp = '--' + b + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + meta + '\r\n--' + b + '\r\nContent-Type: application/json\r\n\r\n' + body + '\r\n--' + b + '--';
+    const r = await gbApi('upload/drive/v3/files?uploadType=multipart&fields=id', { method: 'POST', headers: { 'Content-Type': 'multipart/related; boundary=' + b }, body: mp });
+    return (await r.json()).id;
+  }
+  async function gbUpload(manual){
+    if (!gbValid()) return;
+    if (gbBusy) { gbAgain = true; return; }
+    gbBusy = true;
+    try {
+      const fid = await gbWrite(gbBody());
+      const st = gbState(); st.on = true; st.fid = fid; st.last = Date.now(); gbSave(st);
+      if (manual) toast('Backed up to your Google Drive.');
+    } catch (e) {
+      if (manual) toast(e.message === 'auth' ? 'Google sign-in has ended. Tap again to back up.' : 'Could not back up to Google. Check your internet and try again.');
+    } finally {
+      gbBusy = false; paintGb();
+      if (gbAgain) { gbAgain = false; gbSoon(); }
+    }
+  }
+  function gbPhoneHasData(){ return !!(profile.name || profile.phone || addrs.length || lists.length || later.length || orderHist.length || items.length); }
+  function gbWhen(t){ try { return new Date(t).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } }
+  async function gbApply(f){
+    const r = await gbApi('drive/v3/files/' + f.id + '?alt=media');
+    const obj = await r.json();
+    if (!obj || obj.v !== 1 || !obj.d || typeof obj.d !== 'object') throw new Error('bad');
+    gbMute = true;
+    BK_KEYS.forEach(function(k){ if (typeof obj.d[k] === 'string') window.localStorage.setItem(k, obj.d[k]); });
+    gbSave({ on: true, fid: f.id, last: Date.now() });
+    window.location.reload();
+  }
+  async function gbTurnOn(){
+    try {
+      const f = await gbFind();
+      const st = gbState(); st.on = true; if (f) st.fid = f.id; gbSave(st); paintGb();
+      if (f && !gbPhoneHasData()) { toast('Bringing back your saved data...'); await gbApply(f); return; }
+      if (f && askOK('We found your Google backup from ' + gbWhen(f.modifiedTime) + '. Bring it back to this phone? OK replaces the lists and orders on this phone. Cancel keeps this phone as it is and saves it to Google.')) { await gbApply(f); return; }
+      gbUpload(true);
+    } catch (e) {
+      toast(e.message === 'auth' ? 'Google sign-in has ended. Tap again.' : 'Could not reach Google. Check your internet and try again.');
+    }
+  }
+  async function gbRestoreFlow(){
+    try {
+      const f = await gbFind();
+      if (!f) { toast('No Google backup found yet.'); return; }
+      if (!askOK('Replace what is saved on this phone with your Google backup from ' + gbWhen(f.modifiedTime) + '?')) return;
+      await gbApply(f);
+    } catch (e) {
+      gbMute = false;
+      toast(e.message === 'auth' ? 'Google sign-in has ended. Tap again.' : 'Could not bring back the Google backup. Check your internet and try again.');
+    }
+  }
+  function gbTap(){
+    const st = gbState();
+    if (!st.on) { gbAsk('on'); return; }
+    if (gbValid()) gbUpload(true); else gbAsk('now');
+  }
+  function gbRestoreTap(){
+    if (gbValid()) gbRestoreFlow(); else gbAsk('restore');
+  }
+  function gbOff(){
+    if (!askOK('Turn off Google backup on this phone? Your last backup stays in your Google Drive.')) return;
+    try { if (gbTok && window.google && google.accounts && google.accounts.oauth2) google.accounts.oauth2.revoke(gbTok, function(){}); } catch (e) {}
+    gbTok = null; gbExp = 0; clearTimeout(gbTimer);
+    try { window.sessionStorage.removeItem(GB_TOK_KEY); window.localStorage.removeItem(GB_KEY); } catch (e) {}
+    paintGb(); toast('Google backup is off on this phone.');
+  }
+  function paintGb(){
+    const t = document.getElementById('gbT'); if (!t) return;
+    const st = gbState(), sub = document.getElementById('gbS');
+    document.getElementById('gbRestoreRow').style.display = st.on ? '' : 'none';
+    document.getElementById('gbOff').style.display = st.on ? '' : 'none';
+    if (!st.on) { t.textContent = 'Turn on Google backup'; sub.textContent = 'Sign in once. Saved in your own Google Drive'; return; }
+    t.textContent = 'Back up to Google now';
+    sub.textContent = st.last ? 'Last backed up: ' + gbWhen(st.last) : 'Not backed up yet';
   }
   // Install App (Android: the browser's own prompt; iPhone/iPad: Apple allows no one-tap install, so a short guide)
   const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent || '') || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -2176,6 +2354,8 @@ window.addEventListener('appinstalled', function(){ window.__ip = null; if (wind
     document.getElementById('pfOrders').textContent = n ? n + (n === 1 ? ' medicine you ordered before' : ' medicines you ordered before') : 'Nothing yet';
     document.getElementById('pfLists').textContent = l ? l + (l === 1 ? ' list' : ' lists') : 'Family lists like Father or Mother';
     document.getElementById('pfAddrs').textContent = a ? a + ' saved' : 'None yet';
+    paintGb();
+    gbLoad().catch(function(){});
   }
   // leave the profile page, then open another page once it has closed
   function pfGo(target){
